@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="css/admin-mature.css">
   </head>
   <body class="admin-login">
+    <script>
+      if (new URLSearchParams(location.search).has('enter')) {
+        document.body.classList.add('portal-splash');
+        try { history.replaceState({}, '', location.pathname); } catch (_) {}
+      }
+    </script>
     <main class="admin-shell">
       <section class="admin-heading">
         <a class="admin-logo" href="index.html">♢</a>

@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="css/transitions.css">
   </head>
   <body>
+    <script>
+      if (new URLSearchParams(location.search).has('enter')) {
+        document.body.classList.add('portal-splash');
+        try { history.replaceState({}, '', location.pathname); } catch (_) {}
+      }
+    </script>
     <header class="site-header">
       <a class="brand" href="index.html">
       <span class="brand-mark">☀</span>

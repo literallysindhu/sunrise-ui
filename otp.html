@@ -30,7 +30,7 @@
             <div class="login-badge">🔐 Mock verification</div>
             <h2>Enter your OTP</h2>
             <p>Type the six-digit code sent to <b>+91 98765 43210</b>.</p>
-            <form action="parent-dashboard.html?welcome=1"><label for="otp">6-digit verification code</label><input
+            <form onsubmit="event.preventDefault(); location.href='parent-dashboard.html?welcome=1'"><label for="otp">6-digit verification code</label><input
                     class="otp-input" id="otp" type="text" inputmode="numeric" maxlength="6" placeholder="• • • • • •"
                     aria-label="Six digit OTP"><button class="primary-cta" type="submit">Verify &amp; enter portal
                     <span>→</span></button></form>

@@ -1,4 +1,4 @@
-body.portal-page::before,body.portal-page::after {
+body.portal-page:not(.portal-splash)::before,body.portal-page:not(.portal-splash)::after {
   display:none!important
 }
 

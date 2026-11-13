@@ -10,9 +10,16 @@
     <link rel="stylesheet" href="css/super-admin.css">
     <link rel="stylesheet" href="css/notice.css">
     <link rel="stylesheet" href="css/admin-nav.css">
+    <link rel="stylesheet" href="css/transitions.css">
     <script src="js/admin-nav.js" defer></script>
   </head>
   <body class="super-admin">
+    <script>
+      if (new URLSearchParams(location.search).has('enter')) {
+        document.body.classList.add('portal-splash');
+        try { history.replaceState({}, '', location.pathname); } catch (_) {}
+      }
+    </script>
     <div class="sa-layout">
       <aside class="sa-sidebar">
         <a class="sa-brand" href="index.html">
