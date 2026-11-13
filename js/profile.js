@@ -3,7 +3,7 @@
   if (tabs && !tabs.querySelector('.logout-link')) {
     const wrap = document.createElement('div');
     wrap.className = 'nav-actions';
-    wrap.innerHTML = '<a class="logout-link" href="landing.html?logout=1">Log out →</a>';
+    wrap.innerHTML = '<a class="logout-link" href="index.html?logout=1">Log out →</a>';
     tabs.appendChild(wrap);
   }
 

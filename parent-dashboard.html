@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Static redesign prototype for the Sunrise School parent dashboard." />
+    <title>Sunrise School - Parent Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+  <link rel="stylesheet" href="css/transitions.css"><link rel="stylesheet" href="css/auth.css"></head>
+  <body class="portal-page">
+    <script>
+if (new URLSearchParams(location.search).has('welcome')) {
+        document.body.classList.add('portal-splash');
+        try { history.replaceState({}, '', 'parent-dashboard.html'); } catch(_) {}
+      }
+</script>
+    <div class="rainbow rainbow-top" aria-hidden="true"></div>
+    <div class="cloud cloud-one" aria-hidden="true"></div>
+    <div class="cloud cloud-two" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#overview" aria-label="Sunrise International School home">
+        <span class="brand-mark" aria-hidden="true">☀</span>
+        <span>Sunrise <small>International School</small></span>
+      </a>
+      <div class="header-actions">
+        <a class="year" href="index.html">Academic Year 2026-27</a>
+        <button class="icon-button" aria-label="Notifications">🔔<span class="notification-dot"></span></button>
+        <button class="parent-chip"><span class="mini-avatar">RK</span> Ramesh <span aria-hidden="true">⌄</span></button>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Parent portal sections">
+      <a class="active" href="#overview">Overview</a>
+      <a href="attendance.html">Attendance</a>
+      <a href="homework.html">Homework</a>
+      <a href="fees.html">Fees &amp; receipts</a>
+      <a href="examinations.html">Examinations</a>
+      <a href="timetable.html">Timetable</a>
+      <a href="circulars.html">Circulars</a>
+      <div class="nav-actions">
+        <label class="nav-switcher">Child: <select id="profileSelect" aria-label="Choose child profile"><option value="aarav">Aarav</option><option value="diya">Diya</option></select></label>
+        <a class="logout-link" href="index.html?logout=1">Log out →</a>
+      </div>
+    </nav>
+
+    <main id="overview" class="dashboard">
+      <section class="welcome">
+        <div>
+          <p class="eyebrow">Good morning, Ramesh!</p>
+          <h1>Here’s <span data-profile="first">Aarav</span>’s school day at a glance.</h1>
+        </div>
+      </section>
+
+      <section class="top-grid" aria-label="Student overview">
+        <article class="student-card card">
+          <div class="student-heading">
+            <div class="avatar" data-profile="initials" aria-label="Student initials">AK</div>
+            <div>
+              <p class="eyebrow">Your child</p>
+              <h2 data-profile="name">Aarav Krishnan</h2>
+              <p data-profile="class">Class 5-A · Roll no. 01</p>
+            </div>
+          </div>
+          <div class="student-id"><span>Admission no.</span><strong data-profile="admission">ADM2026-0501</strong></div>
+          <div class="result-box"><span>Latest result</span><strong>A+ <small>90.5%</small></strong><p>First Summative Assessment</p></div>
+        </article>
+
+        <div class="stats-grid">
+          <article id="attendance" class="stat-card blue"><span class="stat-icon">✓</span><p>Attendance</p><strong>92%</strong><small>23 of 25 school days</small></article>
+          <article id="homework" class="stat-card green"><span class="stat-icon">✎</span><p>Active homework</p><strong>3 tasks</strong><a href="homework.html">Open diary →</a></article>
+          <article id="fees" class="stat-card orange"><span class="stat-icon">₹</span><p>Pending fee</p><strong data-profile="fee">₹12,500</strong><a href="fees.html">View invoice →</a></article>
+          <article id="exams" class="stat-card pink"><span class="stat-icon">★</span><p>Next assessment</p><strong>12 Dec</strong><small>Science - Unit Test 2</small></article>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <article id="circulars" class="feature-card circular-card">
+          <div class="card-title"><div><p class="eyebrow">Stay informed</p><h2>Recent circular</h2></div><a href="circulars.html">View all →</a></div>
+          <div class="notice-board">
+            <span class="pin" aria-hidden="true"></span>
+            <p>The first-term PTM is scheduled for Saturday, 28 November, between 9:00 AM and 1:00 PM. Time slots for each roll number are now available.</p>
+          </div>
+          <div class="tags"><span>All school</span><span>6 Nov 2026</span></div>
+        </article>
+
+        <article id="homework-list" class="feature-card homework-card">
+          <div class="card-title"><div><p class="eyebrow">Due 8 Nov</p><h2>Mathematics</h2></div><a href="homework.html">Open diary →</a></div>
+          <div class="paper"><h3>Fractions worksheet · Chapter 4</h3><p>Solve problems 4.1 to 4.3 on textbook pages 58 to 61 in your homework notebook.</p></div>
+          <div class="task-progress"><span>Homework progress</span><strong>1 / 3 done</strong><div><i></i></div></div>
+        </article>
+
+      </section>
+    </main>
+    <script>
+const profiles = { aarav: { first: 'Aarav', initials: 'AK', name: 'Aarav Krishnan', class: 'Class 5-A · Roll no. 01', admission: 'ADM2026-0501', fee: '₹12,500' }, diya: { first: 'Diya', initials: 'DK', name: 'Diya Krishnan', class: 'Class 5-B · Roll no. 02', admission: 'ADM2026-0502', fee: '₹13,000' } };
+      const select = document.getElementById('profileSelect');
+      select.addEventListener('change', () => { const profile = profiles[select.value]; document.querySelectorAll('[data-profile]').forEach((node) => { node.textContent = profile[node.dataset.profile]; }); localStorage.setItem('sunrise-profile', select.value); });
+      const savedProfile = localStorage.getItem('sunrise-profile'); if (savedProfile && profiles[savedProfile]) { select.value = savedProfile; select.dispatchEvent(new Event('change')); }
+</script>
+  </body>
+</html>

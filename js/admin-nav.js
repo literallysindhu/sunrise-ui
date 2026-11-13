@@ -39,7 +39,7 @@
     ${item('Parent Feedback','admin-feedback.html','feedback','▢')}
     ${item('Notifications','admin-notifications.html','notifications','♧')}
     ${item('School Settings','admin-settings.html','settings','⚙')}
-    <a href="landing.html?logout=1" class="unified-logout"><i>↪</i>Log out →</a>
+    <a href="index.html?logout=1" class="unified-logout"><i>↪</i>Log out →</a>
     <div class="unified-footer">Sunrise Edu v2.4 <span>● Connected</span></div></aside>`;
   host.outerHTML = nav;
   const active = document.querySelector(`.unified-sidebar [data-key="${key}"]`);
@@ -47,7 +47,7 @@
   const topActions = document.querySelector('[class$="-top-actions"]');
   if (topActions && !topActions.querySelector('.admin-top-logout')) {
     const logoutBtn = document.createElement('a');
-    logoutBtn.href = 'landing.html?logout=1';
+    logoutBtn.href = 'index.html?logout=1';
     logoutBtn.className = 'admin-top-logout';
     logoutBtn.textContent = 'Log out →';
     topActions.appendChild(logoutBtn);

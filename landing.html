@@ -15,7 +15,7 @@
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="landing.html">
+      <a class="brand" href="index.html">
       <span class="brand-mark">☀</span>
       <span>Sunrise <small>International School</small>
     </span>
@@ -81,7 +81,7 @@
 </section>
 </main>
 <script>
-if(new URLSearchParams(location.search).has('logout')){document.body.classList.add('portal-splash');try{history.replaceState({},'','landing.html')}catch(_){}}
+if(new URLSearchParams(location.search).has('logout')){document.body.classList.add('portal-splash');try{history.replaceState({}, '', location.pathname)}catch(_){}}
 </script>
 </body>
 </html>
