@@ -1,0 +1,210 @@
+.student-summary {
+  border:4px solid #20242a;
+  border-radius:23px;
+  background:#83d2d2;
+  box-shadow:5px 5px 0 #20242a;
+  padding:19px 23px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:25px
+}
+
+.student-summary-main {
+  display:flex;
+  align-items:center;
+  gap:14px
+}
+
+.student-summary h2 {
+  font:800 26px/1 "Baloo 2";
+  margin:0
+}
+
+.student-summary p {
+  font-size:13px;
+  font-weight:800;
+  margin:7px 0 0
+}
+
+.active-pill {
+  display:inline-block;
+  background:#bff2bf;
+  border:2px solid #20242a;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:11px;
+  font-weight:900;
+  margin-top:7px
+}
+
+.privacy-chip {
+  border:3px solid #20242a;
+  border-radius:14px;
+  background:#fff;
+  padding:11px 14px;
+  font-size:12px;
+  font-weight:800
+}
+
+.fees-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:20px;
+  margin-bottom:21px
+}
+
+.fees-header h1 {
+  font:800 39px/1 "Baloo 2";
+  margin:0
+}
+
+.outstanding {
+  border:3px solid #20242a;
+  border-radius:16px;
+  background:#ffc9e6;
+  padding:10px 14px;
+  font-size:13px;
+  font-weight:900
+}
+
+.outstanding strong {
+  display:block;
+  font:800 25px/1 "Baloo 2"
+}
+
+.invoice-list {
+  display:grid;
+  gap:20px
+}
+
+.invoice-card {
+  border:4px solid #20242a;
+  border-radius:23px;
+  box-shadow:5px 5px 0 #20242a;
+  padding:22px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:16px
+}
+
+.invoice-card.paid {
+  background:#c6efa0
+}
+
+.invoice-card.pending {
+  background:#ffe090
+}
+
+.invoice-title {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap
+}
+
+.invoice-title h2 {
+  font:800 27px/1 "Baloo 2";
+  margin:0
+}
+
+.status {
+  border:2px solid #20242a;
+  border-radius:999px;
+  padding:5px 9px;
+  background:#fff;
+  font-size:11px;
+  font-weight:900
+}
+
+.status.paid-status {
+  background:#bff2bf
+}
+
+.status.pending-status {
+  background:#ffcbcb
+}
+
+.invoice-card p {
+  font-size:13px;
+  font-weight:800;
+  margin:12px 0 0
+}
+
+.receipt {
+  display:inline-block;
+  margin-top:9px;
+  color:#1c2634;
+  font-size:12px;
+  font-weight:900
+}
+
+.invoice-amount {
+  text-align:right;
+  align-self:center
+}
+
+.invoice-amount span {
+  display:block;
+  font-size:12px;
+  font-weight:800
+}
+
+.invoice-amount strong {
+  display:block;
+  font:800 31px/1 "Baloo 2"
+}
+
+.invoice-amount small {
+  font-weight:900;
+  font-size:12px
+}
+
+.pay-button {
+  border:3px solid #20242a;
+  background:#ff92d2;
+  border-radius:999px;
+  padding:10px 16px;
+  font:800 14px "Baloo 2";
+  box-shadow:3px 3px 0 #20242a;
+  cursor:pointer;
+  margin-top:11px
+}
+
+.payment-note {
+  margin-top:25px;
+  border:4px solid #20242a;
+  border-radius:19px;
+  background:#b5dffc;
+  box-shadow:5px 5px 0 #20242a;
+  padding:17px;
+  display:flex;
+  gap:13px;
+  align-items:center;
+  font-size:13px;
+  font-weight:700
+}
+
+.payment-note b {
+  display:block;
+  font:800 19px "Baloo 2"
+}
+
+@media(max-width:650px) {
+  .student-summary {
+    align-items:start;
+    flex-direction:column
+  }
+  .invoice-card {
+    grid-template-columns:1fr
+  }
+  .invoice-amount {
+    text-align:left
+  }
+  .fees-header {
+    align-items:start;
+    flex-direction:column
+  }
+}

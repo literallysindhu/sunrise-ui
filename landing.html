@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sunrise School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/screens.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/transitions.css">
+    <link rel="stylesheet" href="css/landing-premium.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="landing.html">
+      <span class="brand-mark">☀</span>
+      <span>Sunrise <small>International School</small>
+    </span>
+  </a>
+  <span class="year">Academic Year 2026-27</span>
+</header>
+<main class="landing">
+  <section class="hero">
+    <p class="eyebrow">A brighter digital campus</p>
+    <h1>Welcome to<br>
+      <span>Sunrise School!</span>
+    </h1>
+    <p class="hero-copy">Connecting parents, teachers and students through a simple, friendly school experience.</p>
+    <div class="portal-actions">
+      <a class="primary-cta" href="login.html">Parent portal <span>→</span>
+    </a>
+    <a class="admin-pill" href="admin.html">Admin portal <span>✦</span>
+  </a>
+</div>
+</section>
+<section class="sun-stage" aria-label="A smiling animated sun">
+  <div class="sun-rays">✦ ✧ ★ ✧ ✦
+  </div>
+  <div class="sun-face">
+    <span class="sun-eye left">
+  </span>
+  <span class="sun-eye right">
+</span>
+<span class="sun-smile">
+</span>
+<span class="sun-cheek left">
+</span>
+<span class="sun-cheek right">
+</span>
+</div>
+<div class="sun-caption">A happy day to learn!
+</div>
+</section>
+<section class="feature-panel">
+  <span class="sticker">Everything in one place</span>
+  <div class="landing-features">
+    <article class="feature blue">
+      <b>✓</b>
+      <h2>Real-time<br>attendance</h2>
+      <p>Know every school day.</p>
+    </article>
+    <article class="feature pink">
+      <b>★</b>
+      <h2>Academic<br>progress</h2>
+      <p>Results and assessments.</p>
+    </article>
+    <article class="feature green">
+      <b>₹</b>
+      <h2>Secure fee<br>payments</h2>
+      <p>Invoices and receipts.</p>
+    </article>
+    <article class="feature orange">
+      <b>✉</b>
+      <h2>School<br>updates</h2>
+      <p>Circulars and homework.</p>
+    </article>
+  </div>
+</section>
+</main>
+<script>
+if(new URLSearchParams(location.search).has('logout')){document.body.classList.add('portal-splash');try{history.replaceState({},'','landing.html')}catch(_){}}
+</script>
+</body>
+</html>

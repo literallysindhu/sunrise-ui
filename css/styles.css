@@ -1,0 +1,626 @@
+:root {
+  --ink:#1c2634;
+  --line:#20242a;
+  --yellow:#fff5a4;
+  --blue:#67c8f1;
+  --pink:#ff92d2;
+  --green:#8bdc86;
+  --orange:#ffbb66;
+  --paper:#fffdf6;
+  --shadow:5px 5px 0 var(--line)
+}
+
+* {
+  box-sizing:border-box
+}
+
+body {
+  margin:0;
+  background:var(--yellow);
+  color:var(--ink);
+  font-family:"Nunito Sans",sans-serif;
+  min-height:100vh
+}
+
+.site-header {
+  background:#fffbd0;
+  border-bottom:4px solid var(--line);
+  padding:18px clamp(20px,4vw,64px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  position:relative;
+  z-index:1
+}
+
+.brand {
+  color:#6c3e10;
+  text-decoration:none;
+  font-family:"Baloo 2",sans-serif;
+  font-size:31px;
+  font-weight:800;
+  line-height:.8;
+  display:flex;
+  align-items:center;
+  gap:10px
+}
+
+.brand small {
+  font-family:"Nunito Sans",sans-serif;
+  font-size:11px;
+  display:block;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+  margin:8px 0 0
+}
+
+.brand-mark {
+  border:3px solid currentColor;
+  border-radius:50%;
+  font-size:26px;
+  width:49px;
+  height:49px;
+  display:grid;
+  place-items:center
+}
+
+.header-actions {
+  display:flex;
+  align-items:center;
+  gap:12px
+}
+
+.year,.parent-chip,.switcher {
+  border:3px solid var(--line);
+  border-radius:999px;
+  background:#fffbea;
+  padding:9px 14px;
+  font:800 13px "Nunito Sans";
+  white-space:nowrap
+}
+
+.icon-button {
+  position:relative;
+  border:3px solid var(--line);
+  background:var(--pink);
+  height:39px;
+  width:39px;
+  border-radius:50%;
+  font-size:17px
+}
+
+.notification-dot {
+  position:absolute;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#f05151;
+  border:2px solid var(--line);
+  right:0;
+  top:-2px
+}
+
+.parent-chip {
+  display:flex;
+  align-items:center;
+  gap:7px
+}
+
+.mini-avatar {
+  font-size:10px;
+  background:var(--blue);
+  border:2px solid var(--line);
+  border-radius:50%;
+  padding:3px
+}
+
+.tabs {
+  display:flex;
+  overflow:auto;
+  background:#57c4ee;
+  border-bottom:4px solid var(--line);
+  position:relative;
+  z-index:1
+}
+
+.tabs a {
+  color:#fff;
+  text-decoration:none;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font:800 16px "Baloo 2";
+  padding:17px 22px;
+  white-space:nowrap;
+  border-right:4px solid var(--line)
+}
+
+.tabs a:first-child {
+  border-left:4px solid var(--line)
+}
+
+.tabs a.active,.tabs a:hover {
+  background:var(--pink);
+  color:var(--line)
+}
+
+.dashboard {
+  max-width:1280px;
+  margin:auto;
+  padding:34px clamp(18px,4vw,54px) 60px;
+  position:relative
+}
+
+.welcome {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:20px;
+  margin-bottom:26px
+}
+
+.eyebrow {
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:1.5px;
+  font-weight:900;
+  margin:0 0 4px
+}
+
+.welcome h1,h2,h3,p {
+  margin-top:0
+}
+
+.welcome h1 {
+  font:800 clamp(27px,3vw,42px)/1.05 "Baloo 2";
+  margin-bottom:0
+}
+
+.switcher {
+  background:#fff
+}
+
+.card,.feature-card,.stat-card {
+  border:4px solid var(--line);
+  border-radius:23px;
+  box-shadow:var(--shadow)
+}
+
+.top-grid {
+  display:grid;
+  grid-template-columns:.9fr 1.35fr;
+  gap:25px
+}
+
+.student-card {
+  padding:25px;
+  background:#83d2d2;
+  display:flex;
+  flex-direction:column;
+  gap:20px
+}
+
+.student-heading {
+  display:flex;
+  align-items:center;
+  gap:17px
+}
+
+.avatar {
+  width:79px;
+  height:79px;
+  border-radius:50%;
+  border:4px solid var(--line);
+  background:#fff;
+  display:grid;
+  place-items:center;
+  font:800 26px "Baloo 2"
+}
+
+.student-heading h2 {
+  font:800 28px/1 "Baloo 2";
+  margin:0
+}
+
+.student-heading p:not(.eyebrow) {
+  margin:5px 0 0;
+  font-weight:800
+}
+
+.student-id {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:10px 13px;
+  border:3px solid var(--line);
+  border-radius:14px;
+  background:linear-gradient(90deg,#62cce8,#fae169);
+  font-size:12px
+}
+
+.student-id strong {
+  font-size:13px
+}
+
+.result-box {
+  border:3px solid var(--line);
+  border-radius:17px;
+  background:#c7e969;
+  padding:14px
+}
+
+.result-box span {
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:11px
+}
+
+.result-box strong {
+  font:800 38px/1 "Baloo 2";
+  display:block
+}
+
+.result-box strong small {
+  font:700 19px "Nunito Sans"
+}
+
+.result-box p {
+  font-size:12px;
+  font-weight:800;
+  margin:3px 0 0
+}
+
+.stats-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px
+}
+
+.stat-card {
+  min-height:164px;
+  padding:18px;
+  position:relative
+}
+
+.stat-card p {
+  font-weight:900;
+  margin:10px 0 1px
+}
+
+.stat-card strong {
+  display:block;
+  font:800 31px/1.1 "Baloo 2"
+}
+
+.stat-card small,.stat-card a {
+  font-size:12px;
+  font-weight:800;
+  color:inherit
+}
+
+.stat-card a {
+  display:inline-block;
+  margin-top:8px
+}
+
+.stat-icon {
+  display:grid;
+  place-items:center;
+  width:31px;
+  height:31px;
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:50%;
+  font-weight:900
+}
+
+.blue {
+  background:var(--blue)
+}
+
+.green {
+  background:var(--green)
+}
+
+.orange {
+  background:var(--orange)
+}
+
+.pink {
+  background:var(--pink)
+}
+
+.content-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+  margin-top:25px
+}
+
+.feature-card {
+  background:#88da86;
+  padding:23px;
+  min-height:330px
+}
+
+.timetable-card {
+  grid-column:1/-1;
+  background:#b5dffc;
+  min-height:0
+}
+
+.card-title {
+  display:flex;
+  align-items:start;
+  justify-content:space-between;
+  gap:12px
+}
+
+.card-title h2 {
+  font:800 27px/1 "Baloo 2";
+  margin-bottom:15px
+}
+
+.card-title a {
+  font-weight:900;
+  color:var(--ink);
+  font-size:13px;
+  white-space:nowrap
+}
+
+.notice-board {
+  background:#215d2a;
+  border:5px solid #f4d944;
+  border-radius:15px;
+  color:#fff;
+  padding:27px 20px 18px;
+  min-height:150px;
+  position:relative;
+  text-align:center;
+  font:700 18px/1.45 "Baloo 2"
+}
+
+.notice-board p {
+  margin:0
+}
+
+.pin {
+  background:var(--pink);
+  border:3px solid var(--line);
+  border-radius:50%;
+  height:16px;
+  width:16px;
+  position:absolute;
+  top:9px;
+  left:calc(50% - 8px)
+}
+
+.tags {
+  display:flex;
+  gap:9px;
+  margin-top:14px
+}
+
+.tags span {
+  font-size:12px;
+  font-weight:900;
+  background:#d3ee74;
+  border:2px solid var(--line);
+  padding:6px 10px;
+  border-radius:999px
+}
+
+.tags span:first-child {
+  background:#ffd0ee
+}
+
+.paper {
+  background:var(--paper);
+  border:3px solid var(--line);
+  border-radius:14px;
+  padding:16px;
+  min-height:150px;
+  transform:rotate(-1deg)
+}
+
+.paper h3 {
+  font:800 20px "Baloo 2";
+  margin-bottom:7px
+}
+
+.paper p {
+  font-size:14px;
+  font-weight:700;
+  line-height:1.5;
+  margin:0
+}
+
+.task-progress {
+  margin-top:19px;
+  font-size:12px;
+  font-weight:900
+}
+
+.task-progress strong {
+  float:right
+}
+
+.task-progress div {
+  height:12px;
+  border:2px solid var(--line);
+  border-radius:99px;
+  background:#fff;
+  margin-top:7px;
+  overflow:hidden
+}
+
+.task-progress i {
+  display:block;
+  width:33%;
+  height:100%;
+  background:var(--pink);
+  border-right:2px solid var(--line)
+}
+
+.schedule {
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px
+}
+
+.schedule li {
+  border:3px solid var(--line);
+  border-radius:13px;
+  background:#fffde9;
+  padding:13px
+}
+
+.schedule time {
+  font-weight:900;
+  font-size:12px
+}
+
+.schedule span {
+  display:block;
+  font:800 19px "Baloo 2";
+  margin-top:5px
+}
+
+.schedule small {
+  font-weight:700
+}
+
+footer {
+  position:relative;
+  z-index:1;
+  background:#1c2634;
+  color:#fff;
+  padding:15px;
+  text-align:center;
+  font-size:12px;
+  font-weight:700
+}
+
+.rainbow {
+  position:fixed;
+  pointer-events:none;
+  border-radius:50%;
+  z-index:-1
+}
+
+.rainbow-top {
+  height:420px;
+  width:420px;
+  right:-220px;
+  top:100px;
+  border:38px solid #ffb947;
+  box-shadow:0 0 0 34px #f88480,0 0 0 70px #8dde90,0 0 0 106px #77cde9;
+  opacity:.45
+}
+
+.cloud {
+  position:fixed;
+  width:90px;
+  height:35px;
+  background:#fff;
+  border-radius:50px;
+  z-index:-1;
+  opacity:.7
+}
+
+.cloud:before,.cloud:after {
+  content:"";
+  position:absolute;
+  background:#fff;
+  border-radius:50%
+}
+
+.cloud:before {
+  width:42px;
+  height:42px;
+  left:15px;
+  top:-20px
+}
+
+.cloud:after {
+  width:32px;
+  height:32px;
+  right:13px;
+  top:-12px
+}
+
+.cloud-one {
+  left:3%;
+  top:33%
+}
+
+.cloud-two {
+  right:8%;
+  bottom:12%
+}
+
+@media(max-width:800px) {
+  .site-header {
+    align-items:flex-start
+  }
+  .header-actions {
+    flex-wrap:wrap;
+    justify-content:flex-end
+  }
+  .year {
+    display:none
+  }
+  .top-grid,.content-grid {
+    grid-template-columns:1fr
+  }
+  .timetable-card {
+    grid-column:auto
+  }
+  .welcome {
+    align-items:flex-start;
+    flex-direction:column
+  }
+  .schedule {
+    grid-template-columns:1fr 1fr
+  }
+  .dashboard {
+    padding-top:25px
+  }
+}
+
+@media(max-width:520px) {
+  .site-header {
+    padding:14px
+  }
+  .brand {
+    font-size:25px
+  }
+  .brand-mark {
+    width:42px;
+    height:42px
+  }
+  .parent-chip {
+    font-size:0;
+    padding:5px
+  }
+  .parent-chip .mini-avatar {
+    font-size:10px
+  }
+  .stats-grid {
+    grid-template-columns:1fr
+  }
+  .schedule {
+    grid-template-columns:1fr
+  }
+  .header-actions {
+    gap:7px
+  }
+  .student-id {
+    flex-direction:column;
+    align-items:flex-start
+  }
+}

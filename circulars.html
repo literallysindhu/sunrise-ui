@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>School Circulars</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/screens.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/circulars.css">__PROTECTED_BLOCK_0__
+    <link rel="stylesheet" href="css/transitions.css">
+    <link rel="stylesheet" href="css/auth.css">
+  </head>
+  <body class="portal-page">
+    <header class="site-header">
+      <a class="brand" href="landing.html">
+      <span class="brand-mark">☀</span>
+      <span>Sunrise <small>International School</small>
+    </span>
+  </a>
+  <div class="header-actions">
+    <span class="year">Academic Year 2026-27</span>
+    <a class="parent-chip" href="index.html">
+    <span class="mini-avatar">RK</span> Ramesh</a>
+  </div>
+</header>
+<nav class="tabs">
+  <a href="index.html">Overview</a>
+  <a href="attendance.html">Attendance</a>
+  <a href="homework.html">Homework</a>
+  <a href="fees.html">Fees &amp; receipts</a>
+  <a href="examinations.html">Examinations</a>
+  <a href="timetable.html">Timetable</a>
+  <a class="active" href="circulars.html">Circulars</a>
+</nav>
+<main class="dashboard">
+  <section class="circulars-intro">
+    <div>
+      <p class="eyebrow">School announcements</p>
+      <h1>Circulars for <span id="childName">Aarav</span>
+      </h1>
+      <p>Important updates shared with Aarav’s and Diya’s Class 5 families.</p>
+    </div>
+    <label class="switcher profile-switcher">Viewing:
+      <select id="profileSelect" aria-label="Choose child profile">
+        <option value="aarav">Aarav</option>
+        <option value="diya">Diya</option>
+      </select>
+    </label>
+  </section>
+  <section class="circular-list">
+    <article class="circular-item">
+      <div class="circular-icon">🏃
+      </div>
+      <div>
+        <span class="audience">All school</span>
+        <h2>Annual Sports Meet 2026 - registrations open</h2>
+        <p>Our 18th Annual Sports Meet will take place on 12 December at Nehru Stadium. Track and field selection trials begin next Monday.</p>
+      </div>
+      <span class="circular-date">4 Nov 2026</span>
+    </article>
+    <article class="circular-item">
+      <div class="circular-icon">🪐
+      </div>
+      <div>
+        <span class="audience">Class 5</span>
+        <h2>Class 5 educational field trip to Planetarium</h2>
+        <p>All Class 5 students will visit the Birla Planetarium on Friday. Transport and lunch are arranged by the school; signed parent consent slips are required.</p>
+      </div>
+      <span class="circular-date">5 Nov 2026</span>
+    </article>
+    <article class="circular-item">
+      <div class="circular-icon">📅
+      </div>
+      <div>
+        <span class="audience">All school</span>
+        <h2>Parent-Teacher Meeting - Term 1 review</h2>
+        <p>The first-term PTM is scheduled for Saturday, 28 November, between 9:00 AM and 1:00 PM. Time slots will be shared by class teachers.</p>
+      </div>
+      <span class="circular-date">6 Nov 2026</span>
+    </article>
+  </section>
+</main>
+<script>
+const select=document.getElementById('profileSelect'),name=document.getElementById('childName'),saved=localStorage.getItem('sunrise-profile')||'aarav';select.value=saved;name.textContent=saved==='diya'?'Diya':'Aarav';select.addEventListener('change',()=>{name.textContent=select.value==='diya'?'Diya':'Aarav';localStorage.setItem('sunrise-profile',select.value)});
+</script>
+</body>
+</html>

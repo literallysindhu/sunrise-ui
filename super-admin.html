@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Super Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/super-admin.css">
+    <link rel="stylesheet" href="css/notice.css">
+    <link rel="stylesheet" href="css/admin-nav.css">__PROTECTED_BLOCK_0__
+  </head>
+  <body class="super-admin">
+    <div class="sa-layout">
+      <aside class="sa-sidebar">
+        <a class="sa-brand" href="landing.html">
+        <b>☀</b>
+        <span>Sunrise School<small>Super admin</small>
+      </span>
+    </a>
+    <div class="sa-role">ACTIVE ROLE<strong>Super Admin</strong>
+    </div>
+    <nav class="sa-nav">
+      <a class="active" href="super-admin.html">▦ &nbsp; School dashboard</a>
+      <a href="people.html?tab=students">♙ &nbsp; People &amp; roles</a>
+      <a class="indent" href="people.html?tab=students">Students</a>
+      <a class="indent" href="people.html?tab=parents">Parents</a>
+      <a class="indent" href="people.html?tab=teachers">Staff &amp; teachers</a>
+      <a href="admin-attendance.html">▣ &nbsp; Attendance</a>
+      <a href="academic-sessions.html">✦ &nbsp; Academics</a>
+      <a class="indent" href="academic-sessions.html">Academic sessions</a>
+      <a class="indent" href="classes-sections.html">Classes &amp; sections</a>
+      <a class="indent" href="subjects-teachers.html">Subjects &amp; teachers</a>
+      <a class="indent" href="student-promotions.html">Student promotions</a>
+      <a class="indent" href="admin-timetable.html">Timetable</a>
+      <a class="indent" href="admin-examinations.html">Examinations</a>
+      <a class="indent" href="admin-study-materials.html">Study materials</a>
+      <a class="indent" href="admin-online-tests.html">Online tests</a>
+      <a href="#fees">₹ &nbsp; Fees &amp; billing</a>
+      <a href="#notice">✉ &nbsp; Notice board</a>
+      <a href="#settings">⚙ &nbsp; School settings</a>
+    </nav>
+    <footer>System online ●
+    </footer>
+  </aside>
+  <main class="sa-main">
+    <header class="sa-top">
+      <input class="sa-search" placeholder="⌕  Search students, admission no., circulars…">
+      <div class="sa-top-actions">
+        <span>Role: Super Admin ⌄</span>
+        <span>◌</span>
+        <span>SA</span>
+      </div>
+    </header>
+    <div class="sa-content">
+      <section class="sa-title">
+        <div>
+          <h1>School academic administration</h1>
+          <p>Sunrise International School · Academic Year 2026–2027</p>
+        </div>
+        <div class="circular-actions">
+          <button class="sa-new" id="newCircular" type="button">＋ New circular ⌄</button>
+          <div class="circular-menu" id="circularMenu">
+            <a href="notice-board.html?create=1">Create circular</a>
+            <a href="notice-board.html">View old circulars</a>
+          </div>
+        </div>
+      </section>
+      <section class="sa-kpis">
+        <article class="sa-kpi">
+          <i>♙</i>
+          <p>Total students</p>
+          <strong>3</strong>
+          <small>All active enrolments</small>
+        </article>
+        <article class="sa-kpi">
+          <i>♧</i>
+          <p>Total teachers</p>
+          <strong>2</strong>
+          <small>Assigned to sections</small>
+        </article>
+        <article class="sa-kpi">
+          <i>⌂</i>
+          <p>Parent accounts</p>
+          <strong>2</strong>
+          <small>Portal access enabled</small>
+        </article>
+        <article class="sa-kpi">
+          <i>✓</i>
+          <p>Present today</p>
+          <strong>2</strong>
+          <small>92.4% turnout</small>
+        </article>
+        <article class="sa-kpi">
+          <i>!</i>
+          <p>Absent today</p>
+          <strong>1</strong>
+          <small>Families notified</small>
+        </article>
+        <article class="sa-kpi">
+          <i>₹</i>
+          <p>Pending fees</p>
+          <strong>₹25.5K</strong>
+          <small>Two invoices due</small>
+        </article>
+        <article class="sa-kpi">
+          <i>★</i>
+          <p>Upcoming exams</p>
+          <strong>2</strong>
+          <small>Mid-term assessments</small>
+        </article>
+        <article class="sa-kpi">
+          <i>✉</i>
+          <p>Announcements</p>
+          <strong>3</strong>
+          <small>Delivered to families</small>
+        </article>
+      </section>
+      <section class="sa-data-grid">
+        <article class="sa-panel">
+          <h2>Daily student attendance trends</h2>
+          <p>Present vs absent · July to November</p>
+          <div class="bar-chart">
+            <div class="bar-pair">
+              <i class="bar present">
+            </i>
+            <i class="bar absent">
+          </i>
+        </div>
+        <div class="bar-pair">
+          <i class="bar present">
+        </i>
+        <i class="bar absent">
+      </i>
+    </div>
+    <div class="bar-pair">
+      <i class="bar present">
+    </i>
+    <i class="bar absent">
+  </i>
+</div>
+<div class="bar-pair">
+  <i class="bar present">
+</i>
+<i class="bar absent">
+</i>
+</div>
+<div class="bar-pair">
+  <i class="bar present">
+</i>
+<i class="bar absent">
+</i>
+</div>
+</div>
+<div class="chart-key">
+  <span>
+  <i style="background:#8cbcf3">
+</i>Present</span>
+<span>
+<i style="background:#ff9abf">
+</i>Absent</span>
+</div>
+</article>
+<article class="sa-panel">
+  <h2>Section enrolment</h2>
+  <p>Active students per section</p>
+  <div class="donut-wrap">
+    <div class="donut">
+    </div>
+    <div class="donut-list">
+      <span>
+      <i style="background:#8cbcf3">
+    </i>Class 5-A · 32</span>
+    <span>
+    <i style="background:#c8eca0">
+  </i>Class 5-B · 30</span>
+  <span>
+  <i style="background:#ff9abf">
+</i>Class 6-A · 28</span>
+<span>
+<i style="background:#d9c8ff">
+</i>Class 7-A · 35</span>
+</div>
+</div>
+</article>
+</section>
+<section class="bottom-grid">
+  <article class="sa-panel">
+    <h2>Recent announcements</h2>
+    <p>Published to staff and parent portal</p>
+    <div class="notice">Annual Sports Meet 2026 - Registrations open<small>2 days ago · School-wide</small>
+    </div>
+    <div class="notice">Class 5 field trip to Regional Science City<small>Yesterday · Class 5</small>
+    </div>
+    <div class="notice">Parent-Teacher Meeting (Term 1 feedback)<small>3 days ago · Classes 1–10</small>
+    </div>
+  </article>
+  <article class="sa-panel">
+    <h2>Daily management modules</h2>
+    <p>Quick operational access for Super Admin.</p>
+    <div class="modules">
+      <a href="#students">Student roster</a>
+      <a href="#staff">Faculty staff</a>
+      <a href="#parents">Parents directory</a>
+      <a href="#timetable">Weekly timetable</a>
+      <a href="#exams">Exams &amp; marks</a>
+      <a href="#feedback">Parent feedback</a>
+    </div>
+  </article>
+</section>
+</div>
+</main>
+</div>
+<script src="js/admin-actions.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+.landing .primary-cta,.landing .admin-pill,.landing .feature,.landing .brand {
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease,filter .28s ease
+}
+
+.landing .primary-cta:hover,.landing .admin-pill:hover {
+  transform:translateY(-5px) rotate(-1deg);
+  box-shadow:8px 10px 0 #20242a;
+  filter:saturate(1.1)
+}
+
+.landing .primary-cta:active,.landing .admin-pill:active {
+  transform:translateY(1px);
+  box-shadow:2px 3px 0 #20242a
+}
+
+.landing .feature:hover {
+  transform:translateY(-8px) rotate(-1.2deg);
+  box-shadow:5px 8px 0 #20242a;
+  filter:brightness(1.04)
+}
+
+.landing .feature:nth-child(even):hover {
+  transform:translateY(-8px) rotate(1.2deg)
+}
+
+.landing .brand:hover {
+  transform:translateX(4px) rotate(-1deg);
+  filter:brightness(1.08)
+}
+
+.landing .feature-panel {
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease
+}
+
+.landing .feature-panel:hover {
+  transform:translateY(-4px);
+  box-shadow:9px 11px 0 #20242a
+}
+
+.landing a:focus-visible {
+  outline:4px solid #ff92d2;
+  outline-offset:4px
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .landing .primary-cta,.landing .admin-pill,.landing .feature,.landing .brand,.landing .feature-panel {
+    transition:none!important
+  }
+}

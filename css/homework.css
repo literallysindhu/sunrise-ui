@@ -1,0 +1,149 @@
+.homework-subtitle {
+  font-weight:700;
+  margin:8px 0 0
+}
+
+.homework-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px
+}
+
+.homework-task {
+  border:4px solid #20242a;
+  border-radius:24px;
+  padding:20px;
+  box-shadow:5px 5px 0 #20242a;
+  display:flex;
+  flex-direction:column;
+  min-height:350px
+}
+
+.homework-task.math {
+  background:#8bdc86
+}
+
+.homework-task.english {
+  background:#ffbfe4
+}
+
+.homework-task.science {
+  background:#84d4ee
+}
+
+.task-top {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px
+}
+
+.subject-pill,.due {
+  border:2px solid #20242a;
+  border-radius:999px;
+  background:#fff;
+  padding:5px 9px;
+  font-size:11px;
+  font-weight:900
+}
+
+.due {
+  background:#fff7bc
+}
+
+.due.urgent {
+  background:#ffcfcd
+}
+
+.task-icon {
+  display:grid;
+  place-items:center;
+  margin:18px 0 13px;
+  width:52px;
+  height:52px;
+  border:3px solid #20242a;
+  border-radius:50%;
+  background:#fff;
+  font:800 25px "Baloo 2"
+}
+
+.homework-task h2 {
+  font:800 25px/1.05 "Baloo 2";
+  margin:0 0 12px
+}
+
+.homework-task>p {
+  border:2px solid #20242a;
+  border-radius:13px;
+  background:#fffdf4;
+  padding:13px;
+  font-size:14px;
+  line-height:1.45;
+  font-weight:700;
+  flex:1;
+  margin:0
+}
+
+.task-bottom {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:12px;
+  margin-top:15px;
+  font-size:11px;
+  font-weight:900
+}
+
+.task-bottom button {
+  border:2px solid #20242a;
+  border-radius:999px;
+  background:#fff;
+  padding:7px 10px;
+  font:800 11px "Nunito Sans";
+  cursor:pointer
+}
+
+.diary-tip {
+  margin-top:25px;
+  border:4px solid #20242a;
+  border-radius:19px;
+  background:#fff0a5;
+  box-shadow:5px 5px 0 #20242a;
+  padding:17px;
+  display:flex;
+  gap:13px;
+  align-items:center
+}
+
+.diary-tip>span {
+  font-size:30px
+}
+
+.diary-tip b {
+  font:800 19px "Baloo 2"
+}
+
+.diary-tip p {
+  font-size:13px;
+  font-weight:700;
+  margin:0
+}
+
+@media(max-width:900px) {
+  .homework-grid {
+    grid-template-columns:1fr
+  }
+  .homework-task {
+    min-height:0
+  }
+}
+
+@media(max-width:520px) {
+  .task-bottom {
+    align-items:start;
+    flex-direction:column
+  }
+  .task-bottom button {
+    width:100%
+  }
+}

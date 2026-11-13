@@ -1,0 +1,104 @@
+.circulars-intro {
+  border:4px solid #20242a;
+  border-radius:24px;
+  background:#b5dffc;
+  box-shadow:5px 5px 0 #20242a;
+  padding:24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:25px
+}
+
+.circulars-intro h1 {
+  font:800 39px/1 "Baloo 2";
+  margin:5px 0
+}
+
+.circulars-intro p {
+  font-weight:800;
+  margin:0
+}
+
+.circular-list {
+  display:grid;
+  gap:17px
+}
+
+.circular-item {
+  border:4px solid #20242a;
+  border-radius:21px;
+  box-shadow:5px 5px 0 #20242a;
+  padding:20px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:16px;
+  align-items:start
+}
+
+.circular-item:nth-child(1) {
+  background:#c8eca0
+}
+
+.circular-item:nth-child(2) {
+  background:#ffd0ec
+}
+
+.circular-item:nth-child(3) {
+  background:#ffe196
+}
+
+.circular-icon {
+  display:grid;
+  place-items:center;
+  width:48px;
+  height:48px;
+  border:3px solid #20242a;
+  border-radius:50%;
+  background:#fff;
+  font-size:23px
+}
+
+.circular-item h2 {
+  font:800 24px/1.05 "Baloo 2";
+  margin:7px 0
+}
+
+.circular-item p {
+  font-size:14px;
+  font-weight:700;
+  line-height:1.45;
+  margin:0
+}
+
+.audience {
+  display:inline-block;
+  border:2px solid #20242a;
+  border-radius:999px;
+  background:#fff;
+  padding:4px 8px;
+  font-size:10px;
+  font-weight:900
+}
+
+.circular-date {
+  font:800 12px "Nunito Sans";
+  white-space:nowrap
+}
+
+@media(max-width:600px) {
+  .circulars-intro {
+    align-items:start;
+    flex-direction:column
+  }
+  .circular-item {
+    grid-template-columns:auto 1fr
+  }
+  .circular-date {
+    grid-column:2
+  }
+  .circular-item h2 {
+    font-size:21px
+  }
+}

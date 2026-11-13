@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Parent Feedback &amp; Queries - Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin-nav.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/admin-feedback.css" />
+    <script src="js/admin-nav.js" defer></script>
+  </head>
+  <body class="feedback-admin">
+    <div class="fb-layout">
+
+      <aside data-admin-nav></aside>
+
+      <main class="fb-main">
+
+        <header class="fb-top">
+          <div class="fb-search-wrap">
+            <span class="fb-search-icon">⌕</span>
+            <input
+              id="fbSearchInput"
+              type="search"
+              placeholder="Search students, admission no., circulars…"
+              aria-label="Search parent feedback and queries"
+            />
+          </div>
+
+          <div class="fb-top-actions">
+            <button class="role-pill" type="button" aria-label="Current role selector">
+              <span>Role: School Administrator</span>
+              <span>⌄</span>
+            </button>
+
+            <button class="notify-bell" type="button" aria-label="Notifications">
+              <span>🔔</span>
+              <span class="bell-badge"></span>
+            </button>
+
+            <div class="user-profile-chip" title="Dr. K. Sundararajan (Principal)">
+              <div class="user-avatar-circle">KS</div>
+              <div class="user-info">
+                <strong>Dr. K. Sundararajan (Principal)</strong>
+                <small>admin@sunriseschool.edu.in ⌄</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="fb-content">
+
+          <div class="fb-heading-row">
+            <div class="fb-title-group">
+              <h1>Parent Feedback &amp; Queries</h1>
+              <p>Review parent questions, respond to concerns, and track resolution statuses</p>
+            </div>
+
+            <div class="fb-header-controls">
+              <div class="session-badge-wrap" title="Current Academic Cycle Scope">
+                <span>Cycle:</span>
+                <select id="fbSessionSelect" aria-label="Switch Academic Session">
+                  <option value="2026-2027">Session 2026–2027 (Active)</option>
+                  <option value="2025-2026">Session 2025–2026 (Archived)</option>
+                  <option value="2024-2025">Session 2024–2025 (Historical)</option>
+                  <option value="2027-2028">Session 2027–2028 (Upcoming)</option>
+                </select>
+              </div>
+
+              <select class="status-filter-select" id="fbStatusSelect" aria-label="Filter feedback by status">
+                <option value="ALL">All Statuses</option>
+                <option value="pending">Pending Only</option>
+                <option value="resolved">Resolved Only</option>
+              </select>
+            </div>
+          </div>
+
+          <section class="fb-stack" id="fbStackContainer">
+
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="respondModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="respondModalTitle">
+        <div class="modal-head">
+          <div>
+            <h3 id="respondModalTitle">Respond to Anitha Senthil</h3>
+            <p id="respondModalSubject">Subject: Science Olympiad Registration</p>
+          </div>
+          <button class="modal-close-btn" id="closeRespondModalBtn" type="button" aria-label="Close dialog">✕</button>
+        </div>
+
+        <form id="respondForm">
+          <div class="parent-msg-preview">
+            <strong>Parent's Message:</strong>
+            <p id="respondParentMsg">
+              Kindly let us know if the school is enrolling students for the upcoming National Science Olympiad (NSO) and the fee deadline.
+            </p>
+          </div>
+
+          <label class="reply-label" for="officialReplyInput">
+            SCHOOL RESPONSE
+            <textarea
+              id="officialReplyInput"
+              rows="4"
+              placeholder="Type your official reply here..."
+              required
+            ></textarea>
+          </label>
+
+          <div class="modal-actions">
+            <button class="btn-secondary" id="cancelRespondBtn" type="button">Cancel</button>
+            <button class="btn-primary btn-send-reply" type="submit">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              Send Official Reply
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="sessionWarnModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="warnTitle">
+        <div class="modal-head">
+          <h3 id="warnTitle" style="color:#e11d48">
+            <span>⚠</span> Warning: Switch Academic Session?
+          </h3>
+          <button class="modal-close-btn" id="closeWarnModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <p style="font-size:14px; font-weight:700; color:#1e293b; margin:0 0 14px; line-height:1.5;">
+          You are switching parent feedback &amp; query records to <b id="warnTargetName">Session 2025–2026</b>.
+        </p>
+        <div class="warning-callout">
+          • <strong>Everything will be reverted to that academic session.</strong><br />
+          • All current 2026–27 parent inquiries, suggestions, and official replies will be hidden.<br />
+          • Historical parent communication logs for the target cycle will be loaded.
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelWarnBtn" type="button">Cancel</button>
+          <button class="btn-primary danger" id="confirmWarnBtn" type="button">Revert &amp; Switch Session</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="fb-toast" id="fbToast">
+      <span>✓</span>
+      <span id="fbToastMsg">Official reply sent to parent.</span>
+    </div>
+
+    <script>
+const FEEDBACK_DATA = {
+        '2026-2027': {
+          sessionName: 'Session 2026–2027',
+          items: [
+            {
+              id: 'fb-1',
+              type: 'SUGGESTION',
+              title: 'Bus Route Timing Adjustment',
+              status: 'resolved',
+              date: '2026-11-04',
+              parentName: 'Ramesh Krishnan',
+              studentInfo: 'Aarav Krishnan (Class 5-A)',
+              message: 'Could the bus stop arrival time at Adyar Depot be reviewed? The morning bus arrives 10 minutes past 8:15 AM due to traffic near Madhya Kailash.',
+              response: 'The transport coordinator has adjusted route 14 schedule by 10 minutes starting Monday. Thank you for notifying us.'
+            },
+            {
+              id: 'fb-2',
+              type: 'QUERY',
+              title: 'Science Olympiad Registration',
+              status: 'pending',
+              date: '2026-11-06',
+              parentName: 'Anitha Senthil',
+              studentInfo: 'Karthik Senthil (Class 5-A)',
+              message: 'Kindly let us know if the school is enrolling students for the upcoming National Science Olympiad (NSO) and the fee deadline.',
+              response: ''
+            }
+          ]
+        },
+        '2025-2026': {
+          sessionName: 'Session 2025–2026',
+          items: [
+            {
+              id: 'fb-25-1',
+              type: 'QUERY',
+              title: 'Canteen Menu Nut-Free Options',
+              status: 'resolved',
+              date: '2025-09-14',
+              parentName: 'Suresh Natarajan',
+              studentInfo: 'Pranav Natarajan (Class 4-B)',
+              message: 'Please confirm whether afternoon snacks served in the junior canteen are strictly peanut-free.',
+              response: 'Yes, our school kitchen follows a strict nut-free policy across all junior and senior lunch counters.'
+            },
+            {
+              id: 'fb-25-2',
+              type: 'SUGGESTION',
+              title: 'Extended Library Reading Hours',
+              status: 'resolved',
+              date: '2025-11-19',
+              parentName: 'Meenakshi Sundaram',
+              studentInfo: 'Harini Sundaram (Class 6-A)',
+              message: 'Students preparing for the inter-school debate would benefit from 30 minutes of extra library access on Wednesdays.',
+              response: 'Approved. The central library now remains open until 4:15 PM every Wednesday and Friday.'
+            }
+          ]
+        },
+        '2024-2025': {
+          sessionName: 'Session 2024–2025',
+          items: [
+            {
+              id: 'fb-24-1',
+              type: 'SUGGESTION',
+              title: 'Water Cooler Filtration Maintenance',
+              status: 'resolved',
+              date: '2024-08-22',
+              parentName: 'Balaji Venkat',
+              studentInfo: 'Rohit Venkat (Class 3-A)',
+              message: 'Requesting periodic UV filter inspection logs near the primary wing corridor before monsoon.',
+              response: 'RO and UV maintenance certificates have been updated and posted on the notice board.'
+            }
+          ]
+        },
+        '2027-2028': {
+          sessionName: 'Session 2027–2028',
+          items: [
+            {
+              id: 'fb-27-1',
+              type: 'QUERY',
+              title: 'New Robotics Lab Elective Enrollment',
+              status: 'pending',
+              date: '2027-06-15',
+              parentName: 'Deepa Raghavan',
+              studentInfo: 'Nikhil Raghavan (Class 6-B)',
+              message: 'When will the consent forms for the 2027–28 AI & Robotics after-school club be shared with parents?',
+              response: ''
+            }
+          ]
+        }
+      };
+
+      let currentSession = localStorage.getItem('sunrise-academic-session') || '2026-2027';
+      if (!FEEDBACK_DATA[currentSession]) currentSession = '2026-2027';
+      let pendingSession = null;
+      let activeStatusFilter = 'ALL';
+      let activeRespondItemId = null;
+
+      const fbSessionSelect = document.getElementById('fbSessionSelect');
+      const fbStatusSelect = document.getElementById('fbStatusSelect');
+      const fbSearchInput = document.getElementById('fbSearchInput');
+      const fbStackContainer = document.getElementById('fbStackContainer');
+
+      const respondModal = document.getElementById('respondModal');
+      const respondModalTitle = document.getElementById('respondModalTitle');
+      const respondModalSubject = document.getElementById('respondModalSubject');
+      const respondParentMsg = document.getElementById('respondParentMsg');
+      const officialReplyInput = document.getElementById('officialReplyInput');
+      const respondForm = document.getElementById('respondForm');
+      const closeRespondModalBtn = document.getElementById('closeRespondModalBtn');
+      const cancelRespondBtn = document.getElementById('cancelRespondBtn');
+
+      const sessionWarnModal = document.getElementById('sessionWarnModal');
+      const warnTargetName = document.getElementById('warnTargetName');
+      const cancelWarnBtn = document.getElementById('cancelWarnBtn');
+      const confirmWarnBtn = document.getElementById('confirmWarnBtn');
+      const closeWarnModalBtn = document.getElementById('closeWarnModalBtn');
+
+      const fbToast = document.getElementById('fbToast');
+      const fbToastMsg = document.getElementById('fbToastMsg');
+
+      function showToast(msg) {
+        fbToastMsg.textContent = msg;
+        fbToast.classList.add('show');
+        setTimeout(() => fbToast.classList.remove('show'), 3500);
+      }
+
+      function renderFeedback() {
+        const sessionData = FEEDBACK_DATA[currentSession];
+        const items = sessionData.items || [];
+        const query = fbSearchInput.value.trim().toLowerCase();
+
+        const filtered = items.filter(item => {
+          const matchesStatus = activeStatusFilter === 'ALL' || item.status === activeStatusFilter;
+          const matchesQuery = !query || (
+            item.title.toLowerCase().includes(query) ||
+            item.parentName.toLowerCase().includes(query) ||
+            item.studentInfo.toLowerCase().includes(query) ||
+            item.message.toLowerCase().includes(query)
+          );
+          return matchesStatus && matchesQuery;
+        });
+
+        if (filtered.length === 0) {
+          fbStackContainer.innerHTML = `
+            <div class="empty-fb">
+              <span>💬</span>
+              <h3>No parent feedback entries found</h3>
+              <p style="margin:6px 0 0; font-size:13px">
+                No feedback or queries matching your filter were found in ${sessionData.sessionName}.
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        fbStackContainer.innerHTML = filtered.map(item => {
+          const isResolved = item.status === 'resolved';
+          const typeClass = item.type === 'SUGGESTION' ? 'suggestion' : 'query';
+          const statusBadge = isResolved
+            ? `<span class="fb-status-pill resolved">Resolved</span>`
+            : `<span class="fb-status-pill pending">Pending Response</span>`;
+
+          const bottomActionOrState = isResolved
+            ? `
+              <div class="fb-meta-row">
+                <div class="fb-author">
+                  <strong>${item.parentName}</strong>
+                  <span>• ${item.studentInfo}</span>
+                </div>
+                <span class="fb-addressed-tag">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                  Addressed
+                </span>
+              </div>
+              <div class="official-response-box">
+                <strong>Official School Response:</strong>
+                <p>${item.response}</p>
+              </div>
+            `
+            : `
+              <div class="fb-meta-row">
+                <div class="fb-author">
+                  <strong>${item.parentName}</strong>
+                  <span>• ${item.studentInfo}</span>
+                </div>
+                <button class="btn-respond-parent" type="button" onclick="openRespondModal('${item.id}')">
+                  Respond to Parent
+                </button>
+              </div>
+            `;
+
+          return `
+            <article class="fb-card" data-id="${item.id}">
+              <div class="fb-card-top">
+                <div class="fb-card-title-wrap">
+                  <span class="fb-type-badge ${typeClass}">${item.type}</span>
+                  <h2 class="fb-card-title">${item.title}</h2>
+                </div>
+                <div class="fb-card-right">
+                  ${statusBadge}
+                  <span class="fb-date">${item.date}</span>
+                </div>
+              </div>
+
+              <div class="fb-message-box">
+                ${item.message}
+              </div>
+
+              ${bottomActionOrState}
+            </article>
+          `;
+        }).join('');
+      }
+
+      fbStatusSelect.addEventListener('change', e => {
+        activeStatusFilter = e.target.value;
+        renderFeedback();
+      });
+
+      fbSearchInput.addEventListener('input', () => {
+        renderFeedback();
+      });
+
+      window.openRespondModal = function(itemId) {
+        const sessionData = FEEDBACK_DATA[currentSession];
+        const item = sessionData.items.find(i => i.id === itemId);
+        if (!item) return;
+
+        activeRespondItemId = itemId;
+        respondModalTitle.textContent = `Respond to ${item.parentName}`;
+        respondModalSubject.textContent = `Subject: ${item.title}`;
+        respondParentMsg.textContent = item.message;
+        officialReplyInput.value = item.response || '';
+        respondModal.classList.add('open');
+        setTimeout(() => officialReplyInput.focus(), 50);
+      };
+
+      function closeRespondModal() {
+        respondModal.classList.remove('open');
+        activeRespondItemId = null;
+        respondForm.reset();
+      }
+
+      closeRespondModalBtn.addEventListener('click', closeRespondModal);
+      cancelRespondBtn.addEventListener('click', closeRespondModal);
+
+      respondForm.addEventListener('submit', e => {
+        e.preventDefault();
+        if (!activeRespondItemId) return;
+
+        const replyText = officialReplyInput.value.trim();
+        if (!replyText) return;
+
+        const sessionData = FEEDBACK_DATA[currentSession];
+        const item = sessionData.items.find(i => i.id === activeRespondItemId);
+        if (item) {
+          item.response = replyText;
+          item.status = 'resolved';
+        }
+
+        const parentName = item ? item.parentName : 'Parent';
+        closeRespondModal();
+        renderFeedback();
+        showToast(`Official response sent to ${parentName} and marked as Resolved.`);
+      });
+
+      fbSessionSelect.addEventListener('change', e => {
+        const next = e.target.value;
+        if (next === currentSession) return;
+
+        pendingSession = next;
+        fbSessionSelect.value = currentSession;
+        warnTargetName.textContent = FEEDBACK_DATA[pendingSession].sessionName;
+        sessionWarnModal.classList.add('open');
+      });
+
+      function closeWarnModal() {
+        sessionWarnModal.classList.remove('open');
+        pendingSession = null;
+      }
+
+      cancelWarnBtn.addEventListener('click', closeWarnModal);
+      closeWarnModalBtn.addEventListener('click', closeWarnModal);
+
+      confirmWarnBtn.addEventListener('click', () => {
+        if (!pendingSession || !FEEDBACK_DATA[pendingSession]) {
+          closeWarnModal();
+          return;
+        }
+
+        currentSession = pendingSession;
+        fbSessionSelect.value = currentSession;
+        localStorage.setItem('sunrise-academic-session', currentSession);
+
+        closeWarnModal();
+        renderFeedback();
+        showToast(`Reverted and loaded parent feedback for ${FEEDBACK_DATA[currentSession].sessionName}.`);
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target === respondModal) closeRespondModal();
+        if (e.target === sessionWarnModal) closeWarnModal();
+      });
+
+      fbSessionSelect.value = currentSession;
+      renderFeedback();
+</script>
+  </body>
+</html>

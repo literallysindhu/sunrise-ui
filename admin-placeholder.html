@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sunrise School Admin</title>
+    <link rel="stylesheet" href="css/admin-nav.css">__PROTECTED_BLOCK_0____PROTECTED_BLOCK_1__
+  </head>
+  <body>
+    <div class="unified-layout">
+      <aside data-admin-nav>
+      </aside>
+      <main class="unified-main">
+        <section class="soon">
+          <p style="text-transform:uppercase;font-size:12px;font-weight:900;letter-spacing:.12em">Sunrise School Administration</p>
+          <h1 id="title">Module in progress</h1>
+          <p id="description">This workspace is being prepared. The navigation remains available, so you can continue to every completed module without losing your place.</p>
+          <a href="super-admin.html">Return to dashboard</a>
+        </section>
+      </main>
+    </div>
+    <script>
+const labels={subjects:'Subjects & Teachers',promotions:'Student Promotions',timetable:'Timetable',examinations:'Examinations',materials:'Study Materials',tests:'Online Tests',diary:'Diary & Homework',calendar:'School Calendar',feedback:'Parent Feedback',notifications:'Notifications',settings:'School Settings'};const n=new URLSearchParams(location.search).get('section');if(n==='promotions'){location.replace('student-promotions.html');}else if(n==='timetable'){location.replace('admin-timetable.html');}else if(n==='examinations'){location.replace('admin-examinations.html');}else if(n==='materials'){location.replace('admin-study-materials.html');}else if(n==='tests'){location.replace('admin-online-tests.html');}else if(n==='diary'){location.replace('admin-diary.html');}else if(n==='calendar'){location.replace('admin-calendar.html');}else if(n==='feedback'){location.replace('admin-feedback.html');}else if(n==='notifications'){location.replace('admin-notifications.html');}else if(n==='settings'){location.replace('admin-settings.html');}else if(n&&labels[n]){title.textContent=labels[n];description.textContent=labels[n]+' is the next administrator workspace to be added. This safe destination keeps the full sidebar available while the module is developed.'}
+</script>
+  </body>
+</html>

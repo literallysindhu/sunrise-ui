@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>School Calendar & Events - Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin-nav.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/admin-calendar.css" />
+    <script src="js/admin-nav.js" defer></script>
+  </head>
+  <body class="calendar-admin">
+    <div class="cal-layout">
+      <aside data-admin-nav></aside>
+
+      <main class="cal-main">
+
+        <header class="cal-top">
+          <div class="cal-search-wrap">
+            <span class="cal-search-icon">⌕</span>
+            <input
+              id="calSearchInput"
+              type="search"
+              placeholder="Search students, admission no., circulars…"
+              aria-label="Search calendar events"
+            />
+          </div>
+          <div class="cal-top-actions">
+            <button class="role-pill" type="button" aria-label="Current role selector">
+              <span>Role: School Administrator</span>
+              <span>⌄</span>
+            </button>
+            <button class="notify-bell" type="button" aria-label="Notifications">
+              <span>🔔</span>
+              <span class="bell-badge"></span>
+            </button>
+            <div class="user-profile-chip" title="Dr. K. Sundararajan (Principal)">
+              <div class="user-avatar-circle">KS</div>
+              <div class="user-info">
+                <strong>Dr. K. Sundararajan (Principal)</strong>
+                <small>admin@sunriseschool.edu.in ⌄</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="cal-content">
+          <div class="cal-heading-row">
+            <div class="cal-title-group">
+              <h1>School Calendar &amp; Events</h1>
+              <p>Manage academic terms, holidays, examination windows, and cultural activities</p>
+            </div>
+            <button class="btn-add-event" id="openAddEventBtn" type="button">
+              <span>＋</span> Add Calendar Event
+            </button>
+          </div>
+
+          <div class="cal-filters-wrap">
+            <div class="cal-filter-pills" role="tablist" aria-label="Category filter">
+              <button class="cal-pill active" data-cat="ALL" type="button">ALL</button>
+              <button class="cal-pill" data-cat="EXAM" type="button">EXAMS</button>
+              <button class="cal-pill" data-cat="HOLIDAY" type="button">HOLIDAYS</button>
+              <button class="cal-pill" data-cat="EVENT" type="button">EVENTS</button>
+              <button class="cal-pill" data-cat="ACTIVITY" type="button">ACTIVITIES</button>
+            </div>
+            <div class="cal-dropdowns-row">
+              <div class="session-badge-wrap" title="Current Academic Cycle Scope">
+                <span>Cycle:</span>
+                <select id="calSessionSelect" aria-label="Switch Academic Session">
+                  <option value="2026-2027">Session 2026–2027 (Active)</option>
+                  <option value="2025-2026">Session 2025–2026 (Archived)</option>
+                  <option value="2024-2025">Session 2024–2025 (Historical)</option>
+                  <option value="2027-2028">Session 2027–2028 (Upcoming)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <section class="events-grid" id="eventsGridContainer"></section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="addEventModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="addEventTitle">
+        <div class="modal-head">
+          <h3 id="addEventTitle">Schedule Calendar Event</h3>
+          <button class="modal-close-btn" id="closeAddEventBtn" type="button" aria-label="Close dialog">✕</button>
+        </div>
+        <form id="addEventForm" class="modal-form">
+          <label class="full">
+            EVENT NAME *
+            <input id="evtName" placeholder="e.g. Science Fair 2026" required />
+          </label>
+          <label class="full">
+            CATEGORY
+            <select id="evtCategory">
+              <option value="EVENT">School Event / Function</option>
+              <option value="EXAM">Examination</option>
+              <option value="HOLIDAY">Holiday / Vacation</option>
+              <option value="ACTIVITY">Activity / Programme</option>
+            </select>
+          </label>
+          <label>
+            START DATE *
+            <input type="date" id="evtStartDate" required />
+          </label>
+          <label>
+            END DATE *
+            <input type="date" id="evtEndDate" required />
+          </label>
+          <label class="full">
+            BRIEF DESCRIPTION *
+            <input id="evtDescription" placeholder="Details, timings, venue…" required />
+          </label>
+          <div class="modal-actions full">
+            <button class="btn-secondary" id="cancelAddEventBtn" type="button">Cancel</button>
+            <button class="btn-primary" type="submit">Add to Calendar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="sessionWarnModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="warnTitle">
+        <div class="modal-head">
+          <h3 id="warnTitle" style="color:#e11d48">
+            <span>⚠</span> Warning: Switch Academic Session?
+          </h3>
+          <button class="modal-close-btn" id="closeWarnModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <p style="font-size:14px; font-weight:700; color:#1e293b; margin:0 0 14px; line-height:1.5;">
+          You are switching calendar events to <b id="warnTargetName">Session 2025–2026</b>.
+        </p>
+        <div class="warning-callout">
+          • <strong>Everything will be reverted to that academic session.</strong><br />
+          • All current 2026–27 calendar events, holidays, and scheduled activities will be replaced.<br />
+          • Historical calendar data for the target cycle will be loaded.
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelWarnBtn" type="button">Cancel</button>
+          <button class="btn-primary danger" id="confirmWarnBtn" type="button">Revert &amp; Switch Session</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cal-toast" id="calToast">
+      <span>✓</span>
+      <span id="calToastMsg">Action completed successfully.</span>
+    </div>
+
+    <script>
+const CAL_DATA = {
+        '2026-2027': {
+          sessionName: 'Session 2026–2027',
+          events: [
+            {
+              id: 'ev-1',
+              title: 'Mid-Term Summative Assessments',
+              category: 'EXAM',
+              startDate: '2026-11-20',
+              endDate: '2026-11-27',
+              description: 'Quarterly examinations across all grades.'
+            },
+            {
+              id: 'ev-2',
+              title: 'Annual Sports Day 2026',
+              category: 'EVENT',
+              startDate: '2026-12-12',
+              endDate: '2026-12-12',
+              description: 'Inter-house athletic meet and track events at Nehru Stadium.'
+            },
+            {
+              id: 'ev-3',
+              title: 'Winter Vacation / Christmas Holidays',
+              category: 'HOLIDAY',
+              startDate: '2026-12-24',
+              endDate: '2027-01-02',
+              description: 'School reopens on Monday, January 4th.'
+            },
+            {
+              id: 'ev-4',
+              title: 'Science & Innovation Exhibition',
+              category: 'ACTIVITY',
+              startDate: '2027-01-18',
+              endDate: '2027-01-19',
+              description: 'Annual project showcase by middle and high school students.'
+            },
+            {
+              id: 'ev-5',
+              title: 'Republic Day Celebrations',
+              category: 'EVENT',
+              startDate: '2027-01-26',
+              endDate: '2027-01-26',
+              description: 'Flag hoisting, cultural programme, and patriotic songs by student choir.'
+            },
+            {
+              id: 'ev-6',
+              title: 'Final Term Board Examinations',
+              category: 'EXAM',
+              startDate: '2027-03-01',
+              endDate: '2027-03-15',
+              description: 'End-of-year summative assessment for all classes. Hall tickets issued by Feb 20.'
+            }
+          ]
+        },
+        '2025-2026': {
+          sessionName: 'Session 2025–2026',
+          events: [
+            {
+              id: 'ev-25-1',
+              title: 'Independence Day Programme',
+              category: 'EVENT',
+              startDate: '2025-08-15',
+              endDate: '2025-08-15',
+              description: 'Flag hoisting and special assembly conducted by Class 8 students.'
+            },
+            {
+              id: 'ev-25-2',
+              title: 'Diwali Vacation',
+              category: 'HOLIDAY',
+              startDate: '2025-10-20',
+              endDate: '2025-10-27',
+              description: 'School closed for Deepavali festival. Reopens October 28.'
+            },
+            {
+              id: 'ev-25-3',
+              title: 'Half-Yearly Examinations',
+              category: 'EXAM',
+              startDate: '2025-09-15',
+              endDate: '2025-09-25',
+              description: 'Mid-year comprehensive assessments for all grades.'
+            },
+            {
+              id: 'ev-25-4',
+              title: 'Annual Day & Cultural Fest',
+              category: 'ACTIVITY',
+              startDate: '2026-02-14',
+              endDate: '2026-02-15',
+              description: 'Two-day cultural extravaganza with drama, dance, and prize distribution.'
+            }
+          ]
+        },
+        '2024-2025': {
+          sessionName: 'Session 2024–2025',
+          events: [
+            {
+              id: 'ev-24-1',
+              title: 'Pongal Holidays',
+              category: 'HOLIDAY',
+              startDate: '2025-01-14',
+              endDate: '2025-01-17',
+              description: 'School closed for Pongal / Makar Sankranti festival.'
+            },
+            {
+              id: 'ev-24-2',
+              title: 'Inter-School Quiz Competition',
+              category: 'ACTIVITY',
+              startDate: '2024-11-22',
+              endDate: '2024-11-22',
+              description: 'District-level quiz bee hosted at Sunrise School auditorium.'
+            },
+            {
+              id: 'ev-24-3',
+              title: 'Annual Examinations 2024–25',
+              category: 'EXAM',
+              startDate: '2025-03-03',
+              endDate: '2025-03-14',
+              description: 'Final summative examinations for the 2024–25 academic cycle.'
+            }
+          ]
+        },
+        '2027-2028': {
+          sessionName: 'Session 2027–2028',
+          events: [
+            {
+              id: 'ev-27-1',
+              title: 'Orientation Day for New Admissions',
+              category: 'EVENT',
+              startDate: '2027-06-10',
+              endDate: '2027-06-10',
+              description: 'Welcome programme for newly admitted students and parents.'
+            },
+            {
+              id: 'ev-27-2',
+              title: 'Summer Vacation',
+              category: 'HOLIDAY',
+              startDate: '2027-04-15',
+              endDate: '2027-06-05',
+              description: 'School closed for summer. Academic session 2027–28 commences June 9.'
+            }
+          ]
+        }
+      };
+
+      const CAT_STYLES = {
+        'EXAM':     { bg: '#fee2e2', color: '#dc2626', border: '#fca5a5' },
+        'EVENT':    { bg: '#dcfce7', color: '#15803d', border: '#86efac' },
+        'HOLIDAY':  { bg: '#fff7ed', color: '#c2410c', border: '#fdba74' },
+        'ACTIVITY': { bg: '#eff6ff', color: '#1d4ed8', border: '#93c5fd' }
+      };
+
+      let currentSession = localStorage.getItem('sunrise-academic-session') || '2026-2027';
+      if (!CAL_DATA[currentSession]) currentSession = '2026-2027';
+      let pendingSession = null;
+      let activeCatFilter = 'ALL';
+
+      const calSessionSelect = document.getElementById('calSessionSelect');
+      const calSearchInput = document.getElementById('calSearchInput');
+      const catPills = document.querySelectorAll('.cal-pill');
+      const eventsGridContainer = document.getElementById('eventsGridContainer');
+
+      const addEventModal = document.getElementById('addEventModal');
+      const openAddEventBtn = document.getElementById('openAddEventBtn');
+      const closeAddEventBtn = document.getElementById('closeAddEventBtn');
+      const cancelAddEventBtn = document.getElementById('cancelAddEventBtn');
+      const addEventForm = document.getElementById('addEventForm');
+
+      const sessionWarnModal = document.getElementById('sessionWarnModal');
+      const warnTargetName = document.getElementById('warnTargetName');
+      const cancelWarnBtn = document.getElementById('cancelWarnBtn');
+      const confirmWarnBtn = document.getElementById('confirmWarnBtn');
+      const closeWarnModalBtn = document.getElementById('closeWarnModalBtn');
+
+      const calToast = document.getElementById('calToast');
+      const calToastMsg = document.getElementById('calToastMsg');
+
+      function showToast(msg) {
+        calToastMsg.textContent = msg;
+        calToast.classList.add('show');
+        setTimeout(() => calToast.classList.remove('show'), 3500);
+      }
+
+      function renderEvents() {
+        const sessionData = CAL_DATA[currentSession];
+        const events = sessionData.events || [];
+        const query = calSearchInput.value.trim().toLowerCase();
+
+        const filtered = events.filter(ev => {
+          const matchesCat = activeCatFilter === 'ALL' || ev.category === activeCatFilter;
+          const matchesQuery = !query || (
+            ev.title.toLowerCase().includes(query) ||
+            ev.description.toLowerCase().includes(query) ||
+            ev.category.toLowerCase().includes(query)
+          );
+          return matchesCat && matchesQuery;
+        });
+
+        if (filtered.length === 0) {
+          eventsGridContainer.innerHTML = `
+            <div class="empty-calendar">
+              <span>📅</span>
+              <h3>No calendar events found</h3>
+              <p style="margin:6px 0 0; font-size:13px">
+                No events matching your selected filters were found in ${sessionData.sessionName}. Click "+ Add Calendar Event" to schedule one.
+              </p>
+            </div>`;
+          return;
+        }
+
+        eventsGridContainer.innerHTML = filtered.map(ev => {
+          const s = CAT_STYLES[ev.category] || CAT_STYLES['EVENT'];
+          const isSingleDay = ev.startDate === ev.endDate;
+          const dateDisplay = isSingleDay ? ev.startDate : `${ev.startDate}  to  ${ev.endDate}`;
+          const isEvent = ev.category === 'EVENT';
+
+          return `
+            <article class="event-card${isEvent ? ' event-accent' : ''}" data-id="${ev.id}">
+              <div class="event-card-top">
+                <div class="event-icon-wrap">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </div>
+                <span class="event-cat-badge" style="background:${s.bg};color:${s.color};border-color:${s.border}">${ev.category}</span>
+                <span class="event-date-range">${dateDisplay}</span>
+              </div>
+              <h2 class="event-title">${ev.title}</h2>
+              <p class="event-desc">${ev.description}</p>
+            </article>`;
+        }).join('');
+      }
+
+      catPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          catPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          activeCatFilter = pill.dataset.cat;
+          renderEvents();
+        });
+      });
+
+      calSearchInput.addEventListener('input', () => renderEvents());
+
+      openAddEventBtn.addEventListener('click', () => addEventModal.classList.add('open'));
+
+      function closeAddModal() {
+        addEventModal.classList.remove('open');
+        addEventForm.reset();
+      }
+      closeAddEventBtn.addEventListener('click', closeAddModal);
+      cancelAddEventBtn.addEventListener('click', closeAddModal);
+
+      addEventForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const title = document.getElementById('evtName').value.trim();
+        const category = document.getElementById('evtCategory').value;
+        const startDate = document.getElementById('evtStartDate').value;
+        const endDate = document.getElementById('evtEndDate').value;
+        const description = document.getElementById('evtDescription').value.trim();
+
+        CAL_DATA[currentSession].events.unshift({
+          id: 'ev-' + Date.now(),
+          title,
+          category,
+          startDate,
+          endDate: endDate || startDate,
+          description
+        });
+
+        closeAddModal();
+        renderEvents();
+        showToast(`Calendar event "${title}" added successfully.`);
+      });
+
+      calSessionSelect.addEventListener('change', e => {
+        const next = e.target.value;
+        if (next === currentSession) return;
+        pendingSession = next;
+        calSessionSelect.value = currentSession;
+        warnTargetName.textContent = CAL_DATA[pendingSession].sessionName;
+        sessionWarnModal.classList.add('open');
+      });
+
+      function closeWarnModal() {
+        sessionWarnModal.classList.remove('open');
+        pendingSession = null;
+      }
+      cancelWarnBtn.addEventListener('click', closeWarnModal);
+      closeWarnModalBtn.addEventListener('click', closeWarnModal);
+
+      confirmWarnBtn.addEventListener('click', () => {
+        if (!pendingSession || !CAL_DATA[pendingSession]) { closeWarnModal(); return; }
+        currentSession = pendingSession;
+        calSessionSelect.value = currentSession;
+        localStorage.setItem('sunrise-academic-session', currentSession);
+        closeWarnModal();
+        renderEvents();
+        showToast(`Reverted and loaded calendar for ${CAL_DATA[currentSession].sessionName}.`);
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target === addEventModal) closeAddModal();
+        if (e.target === sessionWarnModal) closeWarnModal();
+      });
+
+      calSessionSelect.value = currentSession;
+      renderEvents();
+</script>
+  </body>
+</html>

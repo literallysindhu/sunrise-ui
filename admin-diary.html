@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Diary & Homework - Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin-nav.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/admin-diary.css" />
+    <script src="js/admin-nav.js" defer></script>
+  </head>
+  <body class="diary-admin">
+    <div class="dy-layout">
+
+      <aside data-admin-nav></aside>
+
+      <main class="dy-main">
+
+        <header class="dy-top">
+          <div class="dy-search-wrap">
+            <span class="dy-search-icon">⌕</span>
+            <input
+              id="diarySearchInput"
+              type="search"
+              placeholder="Search students, admission no., circulars…"
+              aria-label="Search diary entries"
+            />
+          </div>
+
+          <div class="dy-top-actions">
+            <button class="role-pill" type="button" aria-label="Current role selector">
+              <span>Role: School Administrator</span>
+              <span>⌄</span>
+            </button>
+
+            <button class="notify-bell" type="button" aria-label="Notifications">
+              <span>🔔</span>
+              <span class="bell-badge"></span>
+            </button>
+
+            <div class="user-profile-chip" title="Dr. K. Sundararajan (Principal)">
+              <div class="user-avatar-circle">KS</div>
+              <div class="user-info">
+                <strong>Dr. K. Sundararajan (Principal)</strong>
+                <small>admin@sunriseschool.edu.in ⌄</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="dy-content">
+
+          <div class="dy-heading-row">
+            <div class="dy-title-group">
+              <h1>Student Diary &amp; Homework</h1>
+              <p>Daily homework assignments, teacher observations, and task deadlines</p>
+            </div>
+
+            <button class="btn-assign-hw" id="openAssignBtn" type="button">
+              <span>＋</span> Assign Homework
+            </button>
+          </div>
+
+          <div class="dy-filters-wrap">
+            <div class="dy-filter-pills" role="tablist" aria-label="Status filter">
+              <button class="dy-pill active" data-status="ALL" type="button">ALL</button>
+              <button class="dy-pill" data-status="assigned" type="button">ASSIGNED</button>
+              <button class="dy-pill" data-status="submitted" type="button">SUBMITTED</button>
+              <button class="dy-pill" data-status="overdue" type="button">OVERDUE</button>
+            </div>
+
+            <div class="dy-dropdowns-row">
+              <select class="filter-select" id="dyClassFilter" aria-label="Filter by class">
+                <option value="ALL">All Classes</option>
+                <option value="Class 5-A" selected>Class 5-A</option>
+                <option value="Class 5-B">Class 5-B</option>
+                <option value="Class 6-A">Class 6-A</option>
+              </select>
+
+              <select class="filter-select" id="dySubjectFilter" aria-label="Filter by subject">
+                <option value="ALL">All Subjects</option>
+                <option value="MATHEMATICS">Mathematics</option>
+                <option value="ENGLISH">English</option>
+                <option value="SCIENCE">Science</option>
+                <option value="TAMIL">Tamil</option>
+                <option value="SOCIAL SCIENCE">Social Science</option>
+              </select>
+
+              <div class="session-badge-wrap" title="Current Academic Cycle Scope">
+                <span>Cycle:</span>
+                <select id="dySessionSelect" aria-label="Switch Academic Session">
+                  <option value="2026-2027">Session 2026–2027 (Active)</option>
+                  <option value="2025-2026">Session 2025–2026 (Archived)</option>
+                  <option value="2024-2025">Session 2024–2025 (Historical)</option>
+                  <option value="2027-2028">Session 2027–2028 (Upcoming)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <section class="hw-grid" id="hwGridContainer">
+
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="assignHwModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="assignModalTitle">
+        <div class="modal-head">
+          <div>
+            <h3 id="assignModalTitle">Assign Daily Homework</h3>
+            <p>Pushed immediately to parents on their daily diary tab</p>
+          </div>
+          <button class="modal-close-btn" id="closeAssignModalBtn" type="button" aria-label="Close dialog">✕</button>
+        </div>
+
+        <form id="assignHwForm" class="modal-form">
+          <label class="full">
+            HOMEWORK / ASSIGNMENT TITLE *
+            <input id="hwTitle" placeholder="e.g. Fractions Chapter 4 Exercises" required />
+          </label>
+
+          <label>
+            SUBJECT
+            <select id="hwSubject">
+              <option value="MATHEMATICS">Mathematics</option>
+              <option value="SCIENCE">Science</option>
+              <option value="ENGLISH">English</option>
+              <option value="TAMIL">Tamil</option>
+              <option value="SOCIAL SCIENCE">Social Science</option>
+            </select>
+          </label>
+
+          <label>
+            CLASS &amp; SECTION
+            <select id="hwClass">
+              <option value="Class 5-A">Class 5-A</option>
+              <option value="Class 5-B">Class 5-B</option>
+              <option value="Class 6-A">Class 6-A</option>
+            </select>
+          </label>
+
+          <label>
+            SUBMISSION DUE DATE *
+            <input type="date" id="hwDueDate" required />
+          </label>
+
+          <label>
+            ASSIGNED BY (FACULTY NAME) *
+            <input id="hwTeacher" placeholder="M. Saravanan" required />
+          </label>
+
+          <label class="full">
+            TASK INSTRUCTIONS &amp; EXERCISES
+            <textarea id="hwInstructions" rows="4" placeholder="Specify questions, notebook pages, or exercises…"></textarea>
+          </label>
+
+          <div class="modal-actions full">
+            <button class="btn-secondary" id="cancelAssignBtn" type="button">Cancel</button>
+            <button class="btn-primary" type="submit">Publish to Diary</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="sessionWarnModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="warnTitle">
+        <div class="modal-head">
+          <h3 id="warnTitle" style="color:#e11d48">
+            <span>⚠</span> Warning: Switch Academic Session?
+          </h3>
+          <button class="modal-close-btn" id="closeWarnModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <p style="font-size:14px; font-weight:700; color:#1e293b; margin:0 0 14px; line-height:1.5;">
+          You are switching diary &amp; homework records to <b id="warnTargetName">Session 2025–2026</b>.
+        </p>
+        <div class="warning-callout">
+          • <strong>Everything will be reverted to that academic session.</strong><br />
+          • All current 2026–27 homework assignments, diary entries, and submission statuses will be replaced.<br />
+          • Historical assignments for the target cycle will be loaded.
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelWarnBtn" type="button">Cancel</button>
+          <button class="btn-primary danger" id="confirmWarnBtn" type="button">Revert &amp; Switch Session</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="dy-toast" id="dyToast">
+      <span>✓</span>
+      <span id="dyToastMsg">Action completed successfully.</span>
+    </div>
+
+    <script>
+const DIARY_DATA = {
+        '2026-2027': {
+          sessionName: 'Session 2026–2027',
+          entries: [
+            {
+              id: 'hw-1',
+              title: 'Fractions Worksheet Chapter 4',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 5-A',
+              dueDate: '2026-11-08',
+              teacher: 'M. Saravanan',
+              status: 'assigned',
+              instructions: 'Solve problems 4.1 to 4.3 on textbook pages 58 to 61 in your homework notebook.'
+            },
+            {
+              id: 'hw-2',
+              title: 'The Road Not Taken – Stanza Reflection',
+              subject: 'ENGLISH',
+              targetClass: 'Class 5-A',
+              dueDate: '2026-11-07',
+              teacher: 'K. Malathi',
+              status: 'assigned',
+              instructions: 'Memorize the first three stanzas of the poem and write a 100-word paragraph on its underlying message.'
+            },
+            {
+              id: 'hw-3',
+              title: 'Plant Photosynthesis Diagram & Labeling',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5-A',
+              dueDate: '2026-11-09',
+              teacher: 'M. Saravanan',
+              status: 'assigned',
+              instructions: 'Draw a neat diagram of chloroplast with neat labels. Highlight light and dark reactions.'
+            },
+            {
+              id: 'hw-4',
+              title: 'Tamil Prose Comprehension – Chapter 6',
+              subject: 'TAMIL',
+              targetClass: 'Class 5-A',
+              dueDate: '2026-11-10',
+              teacher: 'S. Jayaraman',
+              status: 'assigned',
+              instructions: 'Read the prose passage on page 72 and answer questions 1–5 in your Tamil notebook.'
+            },
+            {
+              id: 'hw-5',
+              title: 'Map Work – Indian Rivers & Tributaries',
+              subject: 'SOCIAL SCIENCE',
+              targetClass: 'Class 5-A',
+              dueDate: '2026-11-06',
+              teacher: 'S. Jayaraman',
+              status: 'submitted',
+              instructions: 'Mark the origin and path of the Ganges, Yamuna, and Brahmaputra on the outline map provided.'
+            },
+            {
+              id: 'hw-6',
+              title: 'Multiplication Tables 12–20 Practice',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 5-B',
+              dueDate: '2026-11-08',
+              teacher: 'M. Saravanan',
+              status: 'assigned',
+              instructions: 'Write tables 12 to 20 twice each in the math practice notebook. Complete the speed drill on page 45.'
+            },
+            {
+              id: 'hw-7',
+              title: 'Letter Writing – Formal Complaint',
+              subject: 'ENGLISH',
+              targetClass: 'Class 6-A',
+              dueDate: '2026-11-05',
+              teacher: 'K. Malathi',
+              status: 'overdue',
+              instructions: 'Write a formal complaint letter to the Municipal Commissioner about irregular water supply in your area.'
+            }
+          ]
+        },
+        '2025-2026': {
+          sessionName: 'Session 2025–2026',
+          entries: [
+            {
+              id: 'hw-25-1',
+              title: 'Place Value & Number Sense Worksheet',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 5-A',
+              dueDate: '2025-10-15',
+              teacher: 'R. Venkatesh',
+              status: 'submitted',
+              instructions: 'Complete worksheet 3A covering expanded form and place value for 5-digit numbers.'
+            },
+            {
+              id: 'hw-25-2',
+              title: 'My Summer Vacation – Essay Writing',
+              subject: 'ENGLISH',
+              targetClass: 'Class 5-A',
+              dueDate: '2025-10-18',
+              teacher: 'P. Lakshmi',
+              status: 'submitted',
+              instructions: 'Write a 200-word essay on "My Most Memorable Summer Vacation Day" with neat handwriting.'
+            },
+            {
+              id: 'hw-25-3',
+              title: 'Living & Non-Living Things Classification',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5-A',
+              dueDate: '2025-10-20',
+              teacher: 'R. Venkatesh',
+              status: 'submitted',
+              instructions: 'Classify 20 items from your surroundings into living and non-living categories with reasons.'
+            }
+          ]
+        },
+        '2024-2025': {
+          sessionName: 'Session 2024–2025',
+          entries: [
+            {
+              id: 'hw-24-1',
+              title: 'Addition & Subtraction Word Problems',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 5-A',
+              dueDate: '2024-11-12',
+              teacher: 'A. Kumar',
+              status: 'submitted',
+              instructions: 'Solve word problems 1 through 10 on textbook page 34. Show all working steps.'
+            },
+            {
+              id: 'hw-24-2',
+              title: 'Picture Composition – Market Scene',
+              subject: 'ENGLISH',
+              targetClass: 'Class 5-A',
+              dueDate: '2024-11-14',
+              teacher: 'S. Meena',
+              status: 'submitted',
+              instructions: 'Write a 150-word composition describing a busy market scene using at least 5 adjectives.'
+            }
+          ]
+        },
+        '2027-2028': {
+          sessionName: 'Session 2027–2028',
+          entries: [
+            {
+              id: 'hw-27-1',
+              title: 'Algebra Basics – Variables & Expressions',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 6-A',
+              dueDate: '2027-07-20',
+              teacher: 'M. Saravanan',
+              status: 'assigned',
+              instructions: 'Simplify expressions 1–8 on worksheet 1A. Identify variables and constants in each.'
+            }
+          ]
+        }
+      };
+
+      let currentSession = localStorage.getItem('sunrise-academic-session') || '2026-2027';
+      if (!DIARY_DATA[currentSession]) currentSession = '2026-2027';
+
+      let pendingSession = null;
+      let activeStatusFilter = 'ALL';
+      let activeClassFilter = 'Class 5-A';
+      let activeSubjectFilter = 'ALL';
+
+      const dySessionSelect = document.getElementById('dySessionSelect');
+      const diarySearchInput = document.getElementById('diarySearchInput');
+      const dyClassFilter = document.getElementById('dyClassFilter');
+      const dySubjectFilter = document.getElementById('dySubjectFilter');
+      const statusPills = document.querySelectorAll('.dy-pill');
+      const hwGridContainer = document.getElementById('hwGridContainer');
+
+      const assignHwModal = document.getElementById('assignHwModal');
+      const openAssignBtn = document.getElementById('openAssignBtn');
+      const closeAssignModalBtn = document.getElementById('closeAssignModalBtn');
+      const cancelAssignBtn = document.getElementById('cancelAssignBtn');
+      const assignHwForm = document.getElementById('assignHwForm');
+
+      const sessionWarnModal = document.getElementById('sessionWarnModal');
+      const warnTargetName = document.getElementById('warnTargetName');
+      const cancelWarnBtn = document.getElementById('cancelWarnBtn');
+      const confirmWarnBtn = document.getElementById('confirmWarnBtn');
+      const closeWarnModalBtn = document.getElementById('closeWarnModalBtn');
+
+      const dyToast = document.getElementById('dyToast');
+      const dyToastMsg = document.getElementById('dyToastMsg');
+
+      const SUBJECT_COLORS = {
+        'MATHEMATICS': '#e11d48',
+        'ENGLISH': '#2563eb',
+        'SCIENCE': '#059669',
+        'TAMIL': '#7c3aed',
+        'SOCIAL SCIENCE': '#d97706'
+      };
+
+      function showToast(msg) {
+        dyToastMsg.textContent = msg;
+        dyToast.classList.add('show');
+        setTimeout(() => dyToast.classList.remove('show'), 3500);
+      }
+
+      function renderEntries() {
+        const sessionData = DIARY_DATA[currentSession];
+        const entries = sessionData.entries || [];
+        const query = diarySearchInput.value.trim().toLowerCase();
+
+        const filtered = entries.filter(e => {
+          const matchesStatus = activeStatusFilter === 'ALL' || e.status === activeStatusFilter;
+          const matchesClass = activeClassFilter === 'ALL' || e.targetClass === activeClassFilter;
+          const matchesSubject = activeSubjectFilter === 'ALL' || e.subject === activeSubjectFilter;
+          const matchesQuery = !query || (
+            e.title.toLowerCase().includes(query) ||
+            e.subject.toLowerCase().includes(query) ||
+            e.teacher.toLowerCase().includes(query)
+          );
+          return matchesStatus && matchesClass && matchesSubject && matchesQuery;
+        });
+
+        if (filtered.length === 0) {
+          hwGridContainer.innerHTML = `
+            <div class="empty-diary">
+              <span>📓</span>
+              <h3>No diary entries found</h3>
+              <p style="margin:6px 0 0; font-size:13px">
+                No homework assignments matching your selected filters were found in ${sessionData.sessionName}. Click "+ Assign Homework" to create one.
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        hwGridContainer.innerHTML = filtered.map(e => {
+          const subjectColor = SUBJECT_COLORS[e.subject] || '#334155';
+          const statusLabel = e.status.charAt(0).toUpperCase() + e.status.slice(1);
+          const statusClass = e.status;
+
+          return `
+            <article class="hw-card" data-id="${e.id}">
+              <div class="hw-card-header">
+                <span class="hw-class-badge">${e.targetClass}</span>
+                <span class="hw-due-date">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  Due: ${e.dueDate}
+                </span>
+              </div>
+
+              <div class="hw-subject-label" style="color:${subjectColor}">${e.subject}</div>
+              <h2 class="hw-title">${e.title}</h2>
+
+              <div class="hw-instructions">
+                ${e.instructions}
+              </div>
+
+              <div class="hw-card-footer">
+                <span class="hw-teacher">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  By ${e.teacher}
+                </span>
+                <span class="hw-status-badge ${statusClass}">${statusLabel}</span>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      statusPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          statusPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          activeStatusFilter = pill.dataset.status;
+          renderEntries();
+        });
+      });
+
+      dyClassFilter.addEventListener('change', e => {
+        activeClassFilter = e.target.value;
+        renderEntries();
+      });
+
+      dySubjectFilter.addEventListener('change', e => {
+        activeSubjectFilter = e.target.value;
+        renderEntries();
+      });
+
+      diarySearchInput.addEventListener('input', () => {
+        renderEntries();
+      });
+
+      openAssignBtn.addEventListener('click', () => {
+
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('hwDueDate').value = tomorrow.toISOString().slice(0, 10);
+        assignHwModal.classList.add('open');
+      });
+
+      function closeAssignModal() {
+        assignHwModal.classList.remove('open');
+        assignHwForm.reset();
+      }
+
+      closeAssignModalBtn.addEventListener('click', closeAssignModal);
+      cancelAssignBtn.addEventListener('click', closeAssignModal);
+
+      assignHwForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const title = document.getElementById('hwTitle').value.trim();
+        const subject = document.getElementById('hwSubject').value;
+        const targetClass = document.getElementById('hwClass').value;
+        const dueDate = document.getElementById('hwDueDate').value;
+        const teacher = document.getElementById('hwTeacher').value.trim();
+        const instructions = document.getElementById('hwInstructions').value.trim();
+
+        const sessionData = DIARY_DATA[currentSession];
+        sessionData.entries.unshift({
+          id: 'hw-' + Date.now(),
+          title,
+          subject,
+          targetClass,
+          dueDate,
+          teacher: teacher || 'Staff',
+          status: 'assigned',
+          instructions: instructions || 'Complete the assigned task before the due date.'
+        });
+
+        closeAssignModal();
+        renderEntries();
+        showToast(`Homework "${title}" published to diary successfully.`);
+      });
+
+      dySessionSelect.addEventListener('change', e => {
+        const next = e.target.value;
+        if (next === currentSession) return;
+
+        pendingSession = next;
+        dySessionSelect.value = currentSession;
+
+        warnTargetName.textContent = DIARY_DATA[pendingSession].sessionName;
+        sessionWarnModal.classList.add('open');
+      });
+
+      function closeWarnModal() {
+        sessionWarnModal.classList.remove('open');
+        pendingSession = null;
+      }
+
+      cancelWarnBtn.addEventListener('click', closeWarnModal);
+      closeWarnModalBtn.addEventListener('click', closeWarnModal);
+
+      confirmWarnBtn.addEventListener('click', () => {
+        if (!pendingSession || !DIARY_DATA[pendingSession]) {
+          closeWarnModal();
+          return;
+        }
+
+        currentSession = pendingSession;
+        dySessionSelect.value = currentSession;
+        localStorage.setItem('sunrise-academic-session', currentSession);
+
+        closeWarnModal();
+        renderEntries();
+        showToast(`Reverted and loaded diary entries for ${DIARY_DATA[currentSession].sessionName}.`);
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target === assignHwModal) closeAssignModal();
+        if (e.target === sessionWarnModal) closeWarnModal();
+      });
+
+      dySessionSelect.value = currentSession;
+      renderEntries();
+</script>
+  </body>
+</html>

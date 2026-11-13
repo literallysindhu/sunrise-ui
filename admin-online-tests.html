@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Online Tests &amp; MCQ Assessments - Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin-nav.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/admin-online-tests.css" />
+    <script src="js/admin-nav.js" defer></script>
+  </head>
+  <body class="online-tests-admin">
+    <div class="ot-layout">
+
+      <aside data-admin-nav></aside>
+
+      <main class="ot-main">
+
+        <header class="ot-top">
+          <div class="ot-search-wrap">
+            <span class="ot-search-icon">⌕</span>
+            <input
+              id="testSearchInput"
+              type="search"
+              placeholder="Search students, admission no., circulars…"
+              aria-label="Search online tests or questions"
+            />
+          </div>
+
+          <div class="ot-top-actions">
+            <button class="role-pill" type="button" aria-label="Current role selector">
+              <span>Role: School Administrator</span>
+              <span>⌄</span>
+            </button>
+
+            <button class="notify-bell" type="button" aria-label="Notifications">
+              <span>🔔</span>
+              <span class="bell-badge"></span>
+            </button>
+
+            <div class="user-profile-chip" title="Dr. K. Sundararajan (Principal)">
+              <div class="user-avatar-circle">KS</div>
+              <div class="user-info">
+                <strong>Dr. K. Sundararajan (Principal)</strong>
+                <small>admin@sunriseschool.edu.in ⌄</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="ot-content">
+
+          <div class="ot-heading-row">
+            <div class="ot-title-group">
+              <h1>Online Tests &amp; MCQ Assessments</h1>
+              <p>Create interactive multiple-choice tests, set timers, and analyze class performance</p>
+            </div>
+
+            <button class="btn-create-test" id="openCreateTestBtn" type="button">
+              <span>＋</span> Create Online Test
+            </button>
+          </div>
+
+          <div class="ot-filters-wrap">
+
+            <div class="status-pills-row" role="tablist" aria-label="Test status filter">
+              <button class="status-pill-btn active" data-status="ALL" type="button">ALL TESTS</button>
+              <button class="status-pill-btn" data-status="live" type="button">LIVE / ACTIVE</button>
+              <button class="status-pill-btn" data-status="completed" type="button">COMPLETED</button>
+              <button class="status-pill-btn" data-status="draft" type="button">DRAFT</button>
+            </div>
+
+            <div class="ot-dropdowns-row">
+              <select class="filter-select" id="classFilterSelect" aria-label="Filter by Class">
+                <option value="ALL">All Classes</option>
+                <option value="Class 5" selected>Class 5</option>
+                <option value="Class 6">Class 6</option>
+              </select>
+
+              <select class="filter-select" id="subjectFilterSelect" aria-label="Filter by Subject">
+                <option value="ALL">All Subjects</option>
+                <option value="MATHEMATICS">Mathematics</option>
+                <option value="SCIENCE">Science</option>
+                <option value="ENGLISH">English</option>
+                <option value="TAMIL">Tamil</option>
+                <option value="SOCIAL SCIENCE">Social Science</option>
+              </select>
+
+              <div class="session-badge-wrap" title="Current Academic Cycle Scope">
+                <span>Cycle:</span>
+                <select id="otSessionSelect" aria-label="Switch Academic Session">
+                  <option value="2026-2027">Session 2026–2027 (Active)</option>
+                  <option value="2025-2026">Session 2025–2026 (Archived)</option>
+                  <option value="2024-2025">Session 2024–2025 (Historical)</option>
+                  <option value="2027-2028">Session 2027–2028 (Upcoming)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <section class="tests-grid" id="testsGridContainer">
+
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="viewQuestionsModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="vqModalTitle">
+        <div class="modal-head">
+          <div>
+            <h3 id="vqModalTitle">Fractions &amp; Arithmetic Quick Quiz</h3>
+            <p id="vqModalSubtitle">Mathematics • 10 Questions • 25 Minutes</p>
+          </div>
+          <button class="modal-close-btn" id="closeVqModalBtn" type="button" aria-label="Close dialog">✕</button>
+        </div>
+
+        <div id="questionsContainer" style="margin-top: 10px;">
+
+        </div>
+
+        <div class="modal-actions" style="margin-top: 20px;">
+          <button class="btn-primary" id="doneVqBtn" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="sessionWarnModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="warnTitle">
+        <div class="modal-head">
+          <h3 id="warnTitle" style="color:#e11d48">
+            <span>⚠</span> Warning: Switch Academic Session?
+          </h3>
+          <button class="modal-close-btn" id="closeWarnModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <p style="font-size:14px; font-weight:700; color:#1e293b; margin:0 0 14px; line-height:1.5;">
+          You are switching online assessments to <b id="warnTargetName">Session 2025–2026</b>.
+        </p>
+        <div class="warning-callout">
+          • <strong>Everything will be reverted to that academic session.</strong><br />
+          • All current 2026–27 active quizzes, MCQ submissions, and student scores will be deactivated.<br />
+          • Historical online evaluations for the target cycle will be loaded.
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelWarnBtn" type="button">Cancel</button>
+          <button class="btn-primary danger" id="confirmWarnBtn" type="button">Revert &amp; Switch Session</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="createTestModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="createModalTitle">
+        <div class="modal-head">
+          <h3 id="createModalTitle">Create Online MCQ Assessment</h3>
+          <button class="modal-close-btn" id="closeCreateModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <form id="createTestForm" class="modal-form">
+          <label class="full">
+            Test Title *
+            <input id="newTestTitle" placeholder="e.g. Geometry &amp; Angles Speed Assessment" required />
+          </label>
+
+          <label>
+            Subject Category *
+            <select id="newTestSubject">
+              <option value="MATHEMATICS">Mathematics</option>
+              <option value="SCIENCE">Science</option>
+              <option value="ENGLISH">English</option>
+              <option value="TAMIL">Tamil</option>
+              <option value="SOCIAL SCIENCE">Social Science</option>
+            </select>
+          </label>
+
+          <label>
+            Target Class *
+            <select id="newTestClass">
+              <option value="Class 5">Class 5</option>
+              <option value="Class 6">Class 6</option>
+            </select>
+          </label>
+
+          <label>
+            Test Status
+            <select id="newTestStatus">
+              <option value="live">Live / Active</option>
+              <option value="draft">Draft / Scheduled</option>
+              <option value="completed">Completed</option>
+            </select>
+          </label>
+
+          <label>
+            Timer Duration
+            <input id="newTestDuration" placeholder="e.g. 25 Mins" value="25 Mins" required />
+          </label>
+
+          <label>
+            Questions Count
+            <input id="newTestQCount" placeholder="e.g. 10 MCQs" value="10 MCQs" required />
+          </label>
+
+          <label>
+            Total Marks
+            <input id="newTestMarks" placeholder="e.g. 20 Pts" value="20 Pts" required />
+          </label>
+
+          <div class="modal-actions full">
+            <button class="btn-secondary" id="cancelCreateBtn" type="button">Cancel</button>
+            <button class="btn-primary" type="submit">Create &amp; Publish Test</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="ot-toast" id="otToast">
+      <span>✓</span>
+      <span id="otToastMsg">Action completed successfully.</span>
+    </div>
+
+    <script>
+const TESTS_DATA = {
+        '2026-2027': {
+          sessionName: 'Session 2026–2027',
+          tests: [
+            {
+              id: 'test-1',
+              title: 'Fractions & Arithmetic Quick Quiz',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 5',
+              status: 'live',
+              duration: '25 Mins',
+              durationNum: 25,
+              qCount: '10 MCQs',
+              qCountNum: 10,
+              totalMarks: '20 Pts',
+              submissions: 32,
+              avgScore: '16.5/20',
+              activeOutline: true,
+              questions: [
+                {
+                  prompt: 'Q1. What is the sum of 3/4 and 2/4?',
+                  options: [
+                    { text: 'A) 5/8', correct: false },
+                    { text: 'B) 5/4 (Correct)', correct: true },
+                    { text: 'C) 6/4', correct: false },
+                    { text: 'D) 1/4', correct: false }
+                  ]
+                },
+                {
+                  prompt: 'Q2. Express 0.75 as a simplified fraction:',
+                  options: [
+                    { text: 'A) 3/4 (Correct)', correct: true },
+                    { text: 'B) 7/5', correct: false },
+                    { text: 'C) 75/10', correct: false },
+                    { text: 'D) 1/2', correct: false }
+                  ]
+                },
+                {
+                  prompt: 'Q3. Which of the following is an improper fraction?',
+                  options: [
+                    { text: 'A) 2/5', correct: false },
+                    { text: 'B) 7/9', correct: false },
+                    { text: 'C) 9/4 (Correct)', correct: true },
+                    { text: 'D) 1/3', correct: false }
+                  ]
+                },
+                {
+                  prompt: 'Q4. Calculate: (2/3) × (9/4):',
+                  options: [
+                    { text: 'A) 3/2 (Correct)', correct: true },
+                    { text: 'B) 18/7', correct: false },
+                    { text: 'C) 11/7', correct: false },
+                    { text: 'D) 4/3', correct: false }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 'test-2',
+              title: 'Plant Parts & Functions Assessment',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5',
+              status: 'completed',
+              duration: '30 Mins',
+              durationNum: 30,
+              qCount: '15 MCQs',
+              qCountNum: 15,
+              totalMarks: '30 Pts',
+              submissions: 45,
+              avgScore: '24.2/30',
+              activeOutline: false,
+              questions: [
+                {
+                  prompt: 'Q1. Which cell organelle is responsible for photosynthesis in green plants?',
+                  options: [
+                    { text: 'A) Mitochondria', correct: false },
+                    { text: 'B) Chloroplast (Correct)', correct: true },
+                    { text: 'C) Ribosome', correct: false },
+                    { text: 'D) Vacuole', correct: false }
+                  ]
+                },
+                {
+                  prompt: 'Q2. Tiny openings on plant leaves that allow gaseous exchange are called:',
+                  options: [
+                    { text: 'A) Stomata (Correct)', correct: true },
+                    { text: 'B) Xylem', correct: false },
+                    { text: 'C) Phloem', correct: false },
+                    { text: 'D) Cuticle', correct: false }
+                  ]
+                },
+                {
+                  prompt: 'Q3. What gas is released by plants during the light reaction of photosynthesis?',
+                  options: [
+                    { text: 'A) Carbon Dioxide', correct: false },
+                    { text: 'B) Nitrogen', correct: false },
+                    { text: 'C) Oxygen (Correct)', correct: true },
+                    { text: 'D) Hydrogen', correct: false }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 'test-3',
+              title: 'Grammar Mastery: Prepositions & Clauses',
+              subject: 'ENGLISH',
+              targetClass: 'Class 5',
+              status: 'live',
+              duration: '20 Mins',
+              durationNum: 20,
+              qCount: '10 MCQs',
+              qCountNum: 10,
+              totalMarks: '20 Pts',
+              submissions: 28,
+              avgScore: '17.8/20',
+              activeOutline: false,
+              questions: [
+                {
+                  prompt: 'Q1. Fill in the blank: The curious cat jumped _____ the low fence.',
+                  options: [
+                    { text: 'A) between', correct: false },
+                    { text: 'B) over (Correct)', correct: true },
+                    { text: 'C) into', correct: false },
+                    { text: 'D) among', correct: false }
+                  ]
+                },
+                {
+                  prompt: 'Q2. Identify the subordinate conjunction in: "We stayed indoors because it began to pour."',
+                  options: [
+                    { text: 'A) because (Correct)', correct: true },
+                    { text: 'B) stayed', correct: false },
+                    { text: 'C) indoors', correct: false },
+                    { text: 'D) pour', correct: false }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 'test-4',
+              title: 'Indus Valley & Ancient Civilizations Review',
+              subject: 'SOCIAL SCIENCE',
+              targetClass: 'Class 6',
+              status: 'draft',
+              duration: '40 Mins',
+              durationNum: 40,
+              qCount: '20 MCQs',
+              qCountNum: 20,
+              totalMarks: '40 Pts',
+              submissions: '0 (Scheduled)',
+              avgScore: '—',
+              activeOutline: false,
+              questions: [
+                {
+                  prompt: 'Q1. The Great Bath was unearthed in which prominent Harappan settlement?',
+                  options: [
+                    { text: 'A) Kalibangan', correct: false },
+                    { text: 'B) Mohenjo-daro (Correct)', correct: true },
+                    { text: 'C) Lothal', correct: false },
+                    { text: 'D) Dholavira', correct: false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        '2025-2026': {
+          sessionName: 'Session 2025–2026',
+          tests: [
+            {
+              id: 'test-25-1',
+              title: 'Mathematics Quarterly Review 2025',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 5',
+              status: 'completed',
+              duration: '35 Mins',
+              durationNum: 35,
+              qCount: '15 MCQs',
+              qCountNum: 15,
+              totalMarks: '30 Pts',
+              submissions: 42,
+              avgScore: '23.4/30',
+              activeOutline: false,
+              questions: [
+                {
+                  prompt: 'Q1. What is the place value of 7 in 4,789?',
+                  options: [
+                    { text: 'A) Tens', correct: false },
+                    { text: 'B) Hundreds (Correct)', correct: true },
+                    { text: 'C) Thousands', correct: false },
+                    { text: 'D) Ones', correct: false }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 'test-25-2',
+              title: 'Botany & Living Organisms Quiz',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5',
+              status: 'completed',
+              duration: '30 Mins',
+              durationNum: 30,
+              qCount: '12 MCQs',
+              qCountNum: 12,
+              totalMarks: '24 Pts',
+              submissions: 38,
+              avgScore: '19.1/24',
+              activeOutline: false,
+              questions: [
+                {
+                  prompt: 'Q1. Which part of the plant absorbs water and minerals from soil?',
+                  options: [
+                    { text: 'A) Stem', correct: false },
+                    { text: 'B) Root (Correct)', correct: true },
+                    { text: 'C) Leaf', correct: false },
+                    { text: 'D) Flower', correct: false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        '2024-2025': {
+          sessionName: 'Session 2024–2025',
+          tests: [
+            {
+              id: 'test-24-1',
+              title: 'EVS Wildlife & Ecosystems Challenge',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5',
+              status: 'completed',
+              duration: '25 Mins',
+              durationNum: 25,
+              qCount: '10 MCQs',
+              qCountNum: 10,
+              totalMarks: '20 Pts',
+              submissions: 40,
+              avgScore: '17.2/20',
+              activeOutline: false,
+              questions: [
+                {
+                  prompt: 'Q1. Animals that eat both plants and other animals are termed:',
+                  options: [
+                    { text: 'A) Herbivores', correct: false },
+                    { text: 'B) Carnivores', correct: false },
+                    { text: 'C) Omnivores (Correct)', correct: true },
+                    { text: 'D) Decomposers', correct: false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        '2027-2028': {
+          sessionName: 'Session 2027–2028',
+          tests: [
+            {
+              id: 'test-27-1',
+              title: 'Computational Logic & Algorithms MCQ',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 5',
+              status: 'draft',
+              duration: '30 Mins',
+              durationNum: 30,
+              qCount: '15 MCQs',
+              qCountNum: 15,
+              totalMarks: '30 Pts',
+              submissions: '0 (Upcoming)',
+              avgScore: '—',
+              activeOutline: false,
+              questions: [
+                {
+                  prompt: 'Q1. In computer algorithms, a step-by-step procedure to solve a problem is an:',
+                  options: [
+                    { text: 'A) Algorithm (Correct)', correct: true },
+                    { text: 'B) Array', correct: false },
+                    { text: 'C) Equation', correct: false },
+                    { text: 'D) Variable', correct: false }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      };
+
+      let currentSession = localStorage.getItem('sunrise-academic-session') || '2026-2027';
+      if (!TESTS_DATA[currentSession]) currentSession = '2026-2027';
+
+      let pendingSession = null;
+      let activeStatusFilter = 'ALL';
+      let activeClassFilter = 'Class 5';
+      let activeSubjectFilter = 'ALL';
+
+      const otSessionSelect = document.getElementById('otSessionSelect');
+      const testSearchInput = document.getElementById('testSearchInput');
+      const classFilterSelect = document.getElementById('classFilterSelect');
+      const subjectFilterSelect = document.getElementById('subjectFilterSelect');
+      const statusPillBtns = document.querySelectorAll('.status-pill-btn');
+      const testsGridContainer = document.getElementById('testsGridContainer');
+
+      const viewQuestionsModal = document.getElementById('viewQuestionsModal');
+      const vqModalTitle = document.getElementById('vqModalTitle');
+      const vqModalSubtitle = document.getElementById('vqModalSubtitle');
+      const questionsContainer = document.getElementById('questionsContainer');
+      const closeVqModalBtn = document.getElementById('closeVqModalBtn');
+      const doneVqBtn = document.getElementById('doneVqBtn');
+
+      const sessionWarnModal = document.getElementById('sessionWarnModal');
+      const warnTargetName = document.getElementById('warnTargetName');
+      const cancelWarnBtn = document.getElementById('cancelWarnBtn');
+      const confirmWarnBtn = document.getElementById('confirmWarnBtn');
+      const closeWarnModalBtn = document.getElementById('closeWarnModalBtn');
+
+      const createTestModal = document.getElementById('createTestModal');
+      const openCreateTestBtn = document.getElementById('openCreateTestBtn');
+      const cancelCreateBtn = document.getElementById('cancelCreateBtn');
+      const closeCreateModalBtn = document.getElementById('closeCreateModalBtn');
+      const createTestForm = document.getElementById('createTestForm');
+
+      const otToast = document.getElementById('otToast');
+      const otToastMsg = document.getElementById('otToastMsg');
+
+      function showToast(msg) {
+        otToastMsg.textContent = msg;
+        otToast.classList.add('show');
+        setTimeout(() => otToast.classList.remove('show'), 3500);
+      }
+
+      function renderTests() {
+        const sessionData = TESTS_DATA[currentSession];
+        const tests = sessionData.tests || [];
+        const query = testSearchInput.value.trim().toLowerCase();
+
+        const filtered = tests.filter(t => {
+          const matchesStatus = activeStatusFilter === 'ALL' || t.status.toLowerCase() === activeStatusFilter.toLowerCase();
+          const matchesClass = activeClassFilter === 'ALL' || t.targetClass === activeClassFilter;
+          const matchesSubject = activeSubjectFilter === 'ALL' || t.subject.toUpperCase() === activeSubjectFilter;
+          const matchesQuery = !query || (
+            t.title.toLowerCase().includes(query) ||
+            t.subject.toLowerCase().includes(query)
+          );
+          return matchesStatus && matchesClass && matchesSubject && matchesQuery;
+        });
+
+        if (filtered.length === 0) {
+          testsGridContainer.innerHTML = `
+            <div class="empty-tests">
+              <span>📝</span>
+              <h3>No online tests found</h3>
+              <p style="margin:6px 0 0; font-size:13px">
+                No assessments matching your selected filters were found in ${sessionData.sessionName}. Click "+ Create Online Test" above to build a test.
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        testsGridContainer.innerHTML = filtered.map(t => {
+          const isLive = t.status === 'live';
+          const isCompleted = t.status === 'completed';
+          const statusText = isLive ? 'Live / Active' : (isCompleted ? 'Completed' : 'Draft');
+          const statusClass = isLive ? 'live' : (isCompleted ? 'completed' : 'draft');
+
+          return `
+            <article class="test-card ${t.activeOutline ? 'active-outline' : ''}" data-id="${t.id}">
+              <div>
+                <div class="test-card-top">
+                  <span class="test-status-pill ${statusClass}">${statusText}</span>
+                  <span class="timer-indicator">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    ${t.duration}
+                  </span>
+                </div>
+
+                <div class="test-subject-class">${t.subject} • ${t.targetClass.toUpperCase()}</div>
+                <h2 class="test-title">${t.title}</h2>
+
+                <div class="stats-grid-box">
+                  <div class="stat-item">
+                    <span class="stat-item-label">Questions</span>
+                    <strong class="stat-item-val">${t.qCount}</strong>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-item-label">Total Marks</span>
+                    <strong class="stat-item-val">${t.totalMarks}</strong>
+                  </div>
+                </div>
+
+                <div class="submissions-row" style="margin-top:10px;">
+                  <span>Submissions: ${t.submissions}</span>
+                  <span>Avg: ${t.avgScore}</span>
+                </div>
+              </div>
+
+              <div class="test-card-footer">
+                <button
+                  class="btn-view-questions"
+                  onclick="openViewQuestionsModal('${t.id}')"
+                  type="button"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  View Questions
+                </button>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      statusPillBtns.forEach(pill => {
+        pill.addEventListener('click', () => {
+          statusPillBtns.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          activeStatusFilter = pill.dataset.status;
+          renderTests();
+        });
+      });
+
+      classFilterSelect.addEventListener('change', e => {
+        activeClassFilter = e.target.value;
+        renderTests();
+      });
+
+      subjectFilterSelect.addEventListener('change', e => {
+        activeSubjectFilter = e.target.value;
+        renderTests();
+      });
+
+      testSearchInput.addEventListener('input', () => {
+        renderTests();
+      });
+
+      window.openViewQuestionsModal = function(testId) {
+        const sessionData = TESTS_DATA[currentSession];
+        const test = sessionData.tests.find(t => t.id === testId);
+        if (!test) return;
+
+        vqModalTitle.textContent = test.title;
+        const subjCapitalized = test.subject.charAt(0) + test.subject.slice(1).toLowerCase();
+        vqModalSubtitle.textContent = `${subjCapitalized} • ${test.qCountNum || 10} Questions • ${test.durationNum || 25} Minutes`;
+
+        const qs = test.questions || [
+          {
+            prompt: 'Q1. Default question representation:',
+            options: [
+              { text: 'A) Option One', correct: false },
+              { text: 'B) Option Two (Correct)', correct: true },
+              { text: 'C) Option Three', correct: false },
+              { text: 'D) Option Four', correct: false }
+            ]
+          }
+        ];
+
+        questionsContainer.innerHTML = qs.map(q => `
+          <div class="question-block">
+            <div class="question-text">${q.prompt}</div>
+            <div class="options-grid">
+              ${q.options.map(opt => `
+                <div class="option-pill ${opt.correct ? 'correct' : ''}">
+                  ${opt.text}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+
+        viewQuestionsModal.classList.add('open');
+      };
+
+      function closeViewQuestionsModal() {
+        viewQuestionsModal.classList.remove('open');
+      }
+
+      closeVqModalBtn.addEventListener('click', closeViewQuestionsModal);
+      doneVqBtn.addEventListener('click', closeViewQuestionsModal);
+
+      otSessionSelect.addEventListener('change', e => {
+        const next = e.target.value;
+        if (next === currentSession) return;
+
+        pendingSession = next;
+
+        otSessionSelect.value = currentSession;
+
+        warnTargetName.textContent = TESTS_DATA[pendingSession].sessionName;
+        sessionWarnModal.classList.add('open');
+      });
+
+      function closeWarnModal() {
+        sessionWarnModal.classList.remove('open');
+        pendingSession = null;
+      }
+
+      cancelWarnBtn.addEventListener('click', closeWarnModal);
+      closeWarnModalBtn.addEventListener('click', closeWarnModal);
+
+      confirmWarnBtn.addEventListener('click', () => {
+        if (!pendingSession || !TESTS_DATA[pendingSession]) {
+          closeWarnModal();
+          return;
+        }
+
+        currentSession = pendingSession;
+        otSessionSelect.value = currentSession;
+        localStorage.setItem('sunrise-academic-session', currentSession);
+
+        closeWarnModal();
+        renderTests();
+        showToast(`Reverted and loaded online assessments for ${TESTS_DATA[currentSession].sessionName}.`);
+      });
+
+      openCreateTestBtn.addEventListener('click', () => {
+        createTestModal.classList.add('open');
+      });
+
+      function closeCreateModal() {
+        createTestModal.classList.remove('open');
+      }
+
+      cancelCreateBtn.addEventListener('click', closeCreateModal);
+      closeCreateModalBtn.addEventListener('click', closeCreateModal);
+
+      createTestForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const title = document.getElementById('newTestTitle').value.trim();
+        const subject = document.getElementById('newTestSubject').value;
+        const targetClass = document.getElementById('newTestClass').value;
+        const status = document.getElementById('newTestStatus').value;
+        const duration = document.getElementById('newTestDuration').value.trim();
+        const qCount = document.getElementById('newTestQCount').value.trim();
+        const totalMarks = document.getElementById('newTestMarks').value.trim();
+
+        const sessionData = TESTS_DATA[currentSession];
+        const newTest = {
+          id: 'test-' + Date.now(),
+          title,
+          subject,
+          targetClass,
+          status,
+          duration,
+          durationNum: parseInt(duration, 10) || 25,
+          qCount,
+          qCountNum: parseInt(qCount, 10) || 10,
+          totalMarks,
+          submissions: status === 'draft' ? '0 (Scheduled)' : 0,
+          avgScore: '—',
+          activeOutline: status === 'live',
+          questions: [
+            {
+              prompt: `Q1. Sample assessment problem for ${title}:`,
+              options: [
+                { text: 'A) Option Alpha', correct: false },
+                { text: 'B) Option Beta (Correct)', correct: true },
+                { text: 'C) Option Gamma', correct: false },
+                { text: 'D) Option Delta', correct: false }
+              ]
+            },
+            {
+              prompt: `Q2. Practical application question for ${subject.toLowerCase()}:`,
+              options: [
+                { text: 'A) Statement One (Correct)', correct: true },
+                { text: 'B) Statement Two', correct: false },
+                { text: 'C) Statement Three', correct: false },
+                { text: 'D) Statement Four', correct: false }
+              ]
+            }
+          ]
+        };
+
+        sessionData.tests.unshift(newTest);
+        closeCreateModal();
+        renderTests();
+        showToast(`New assessment "${title}" created successfully.`);
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target === sessionWarnModal) closeWarnModal();
+        if (e.target === viewQuestionsModal) closeViewQuestionsModal();
+        if (e.target === createTestModal) closeCreateModal();
+      });
+
+      otSessionSelect.value = currentSession;
+      renderTests();
+</script>
+  </body>
+</html>

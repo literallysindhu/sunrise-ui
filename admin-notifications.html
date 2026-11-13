@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Broadcast Notifications - Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin-nav.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/admin-notifications.css" />
+    <script src="js/admin-nav.js" defer></script>
+  </head>
+  <body class="notifications-admin">
+    <div class="nf-layout">
+
+      <aside data-admin-nav></aside>
+
+      <main class="nf-main">
+
+        <header class="nf-top">
+          <div class="nf-search-wrap">
+            <span class="nf-search-icon">⌕</span>
+            <input
+              id="nfSearchInput"
+              type="search"
+              placeholder="Search students, admission no., circulars…"
+              aria-label="Search broadcast notifications"
+            />
+          </div>
+
+          <div class="nf-top-actions">
+            <button class="role-pill" type="button" aria-label="Current role selector">
+              <span>Role: School Administrator</span>
+              <span>⌄</span>
+            </button>
+
+            <button class="notify-bell" type="button" aria-label="Notifications">
+              <span>🔔</span>
+              <span class="bell-badge"></span>
+            </button>
+
+            <div class="user-profile-chip" title="Dr. K. Sundararajan (Principal)">
+              <div class="user-avatar-circle">KS</div>
+              <div class="user-info">
+                <strong>Dr. K. Sundararajan (Principal)</strong>
+                <small>admin@sunriseschool.edu.in ⌄</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="nf-content">
+
+          <div class="nf-heading-row">
+            <div class="nf-title-group">
+              <h1>Broadcast Notifications</h1>
+              <p>Send real-time alerts, emergency updates, and fee reminders directly to parent phones</p>
+            </div>
+
+            <div class="nf-header-controls">
+              <div class="session-badge-wrap" title="Current Academic Cycle Scope">
+                <span>Cycle:</span>
+                <select id="nfSessionSelect" aria-label="Switch Academic Session">
+                  <option value="2026-2027">Session 2026–2027 (Active)</option>
+                  <option value="2025-2026">Session 2025–2026 (Archived)</option>
+                  <option value="2024-2025">Session 2024–2025 (Historical)</option>
+                  <option value="2027-2028">Session 2027–2028 (Upcoming)</option>
+                </select>
+              </div>
+
+              <button class="btn-send-alert" id="openBroadcastBtn" type="button">
+                <span>＋</span> Send Broadcast Alert
+              </button>
+            </div>
+          </div>
+
+          <section class="nf-list" id="nfListContainer">
+
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="broadcastModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="broadcastModalTitle">
+        <div class="modal-head">
+          <div>
+            <h3 id="broadcastModalTitle">Send Push Broadcast</h3>
+            <p>Delivered immediately via Supabase Realtime &amp; FCM push notifications</p>
+          </div>
+          <button class="modal-close-btn" id="closeBroadcastModalBtn" type="button" aria-label="Close dialog">✕</button>
+        </div>
+
+        <form id="broadcastForm" class="modal-form">
+          <label class="full">
+            ALERT HEADLINE *
+            <input
+              id="bcHeadline"
+              placeholder="e.g. Early Dismissal Today due to Heavy Rain"
+              required
+            />
+          </label>
+
+          <label class="full">
+            TARGET AUDIENCE
+            <select id="bcAudience">
+              <option value="All Parents">All Registered Parents (All School)</option>
+              <option value="Class 5 Parents">Class 5 Parents</option>
+              <option value="Class 6 Parents">Class 6 Parents</option>
+              <option value="Bus Route Parents">Transport / Bus Route Parents</option>
+            </select>
+          </label>
+
+          <label class="full">
+            MESSAGE BODY (MAX 250 CHARACTERS)
+            <textarea
+              id="bcMessage"
+              rows="4"
+              maxlength="250"
+              placeholder="Keep the message concise and actionable..."
+              required
+            ></textarea>
+          </label>
+
+          <div class="modal-actions full">
+            <button class="btn-secondary" id="cancelBroadcastBtn" type="button">Cancel</button>
+            <button class="btn-primary" type="submit">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              Send Broadcast Now
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="sessionWarnModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="warnTitle">
+        <div class="modal-head">
+          <h3 id="warnTitle" style="color:#e11d48">
+            <span>⚠</span> Warning: Switch Academic Session?
+          </h3>
+          <button class="modal-close-btn" id="closeWarnModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <p style="font-size:14px; font-weight:700; color:#1e293b; margin:0 0 14px; line-height:1.5;">
+          You are switching broadcast notification history to <b id="warnTargetName">Session 2025–2026</b>.
+        </p>
+        <div class="warning-callout">
+          • <strong>Everything will be reverted to that academic session.</strong><br />
+          • All current 2026–27 broadcast alerts, push delivery logs, and reminders will be hidden.<br />
+          • Historical broadcast dispatches for the target cycle will be loaded.
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelWarnBtn" type="button">Cancel</button>
+          <button class="btn-primary danger" id="confirmWarnBtn" type="button">Revert &amp; Switch Session</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nf-toast" id="nfToast">
+      <span>✓</span>
+      <span id="nfToastMsg">Broadcast push alert dispatched.</span>
+    </div>
+
+    <script>
+const NOTIFICATIONS_DATA = {
+        '2026-2027': {
+          sessionName: 'Session 2026–2027',
+          alerts: [
+            {
+              id: 'nf-1',
+              title: 'Term 1 Fee Payment Reminder',
+              audience: 'All Parents',
+              message: 'Friendly reminder: Term 1 tuition fees are due on November 20th. Please settle via the Fees section.',
+              timestamp: '2026-11-06 09:30 AM',
+              devices: '580 Devices Delivered'
+            },
+            {
+              id: 'nf-2',
+              title: 'Rain Alert: School Operational As Normal',
+              audience: 'All Parents',
+              message: 'Despite morning rainfall, all classes and bus routes are operating on normal schedule.',
+              timestamp: '2026-11-05 07:15 AM',
+              devices: '600 Devices Delivered'
+            }
+          ]
+        },
+        '2025-2026': {
+          sessionName: 'Session 2025–2026',
+          alerts: [
+            {
+              id: 'nf-25-1',
+              title: 'Annual Day Costume Rehearsal Notice',
+              audience: 'All Parents',
+              message: 'Participants in the 2025 Cultural Fest will stay back until 4:30 PM tomorrow for stage rehearsals.',
+              timestamp: '2025-12-10 10:15 AM',
+              devices: '545 Devices Delivered'
+            },
+            {
+              id: 'nf-25-2',
+              title: 'Cyclone Warning – School Closed Tomorrow',
+              audience: 'All Parents',
+              message: 'As per collectorate orders due to heavy coastal rain, school remains closed on November 28, 2025.',
+              timestamp: '2025-11-27 06:45 PM',
+              devices: '560 Devices Delivered'
+            }
+          ]
+        },
+        '2024-2025': {
+          sessionName: 'Session 2024–2025',
+          alerts: [
+            {
+              id: 'nf-24-1',
+              title: 'PTM Schedule for Second Term',
+              audience: 'All Parents',
+              message: 'Parent-Teacher Meeting for Classes 1 to 8 will be held this Saturday from 9:00 AM to 12:30 PM.',
+              timestamp: '2024-10-18 11:00 AM',
+              devices: '510 Devices Delivered'
+            }
+          ]
+        },
+        '2027-2028': {
+          sessionName: 'Session 2027–2028',
+          alerts: [
+            {
+              id: 'nf-27-1',
+              title: 'Welcome to 2027–28 Academic Year',
+              audience: 'All Parents',
+              message: 'Digital parent portal credentials and smart ID bus passes have been activated for the 2027–28 session.',
+              timestamp: '2027-06-01 08:30 AM',
+              devices: '620 Devices Delivered'
+            }
+          ]
+        }
+      };
+
+      let currentSession = localStorage.getItem('sunrise-academic-session') || '2026-2027';
+      if (!NOTIFICATIONS_DATA[currentSession]) currentSession = '2026-2027';
+      let pendingSession = null;
+
+      const nfSessionSelect = document.getElementById('nfSessionSelect');
+      const nfSearchInput = document.getElementById('nfSearchInput');
+      const nfListContainer = document.getElementById('nfListContainer');
+
+      const broadcastModal = document.getElementById('broadcastModal');
+      const openBroadcastBtn = document.getElementById('openBroadcastBtn');
+      const closeBroadcastModalBtn = document.getElementById('closeBroadcastModalBtn');
+      const cancelBroadcastBtn = document.getElementById('cancelBroadcastBtn');
+      const broadcastForm = document.getElementById('broadcastForm');
+
+      const sessionWarnModal = document.getElementById('sessionWarnModal');
+      const warnTargetName = document.getElementById('warnTargetName');
+      const cancelWarnBtn = document.getElementById('cancelWarnBtn');
+      const confirmWarnBtn = document.getElementById('confirmWarnBtn');
+      const closeWarnModalBtn = document.getElementById('closeWarnModalBtn');
+
+      const nfToast = document.getElementById('nfToast');
+      const nfToastMsg = document.getElementById('nfToastMsg');
+
+      function showToast(msg) {
+        nfToastMsg.textContent = msg;
+        nfToast.classList.add('show');
+        setTimeout(() => nfToast.classList.remove('show'), 3500);
+      }
+
+      function renderNotifications() {
+        const sessionData = NOTIFICATIONS_DATA[currentSession];
+        const alerts = sessionData.alerts || [];
+        const query = nfSearchInput.value.trim().toLowerCase();
+
+        const filtered = alerts.filter(a => {
+          return !query || (
+            a.title.toLowerCase().includes(query) ||
+            a.message.toLowerCase().includes(query) ||
+            a.audience.toLowerCase().includes(query)
+          );
+        });
+
+        if (filtered.length === 0) {
+          nfListContainer.innerHTML = `
+            <div class="empty-nf">
+              <span>🔔</span>
+              <h3>No broadcast alerts found</h3>
+              <p style="margin:6px 0 0; font-size:13px">
+                No push notifications matching your search were found in ${sessionData.sessionName}.
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        nfListContainer.innerHTML = filtered.map(a => `
+          <article class="nf-card" data-id="${a.id}">
+            <div class="nf-card-left">
+              <div class="nf-bell-box" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+              </div>
+              <div class="nf-body">
+                <div class="nf-title-row">
+                  <h2 class="nf-card-title">${a.title}</h2>
+                  <span class="nf-audience-pill">${a.audience}</span>
+                </div>
+                <p class="nf-card-msg">${a.message}</p>
+              </div>
+            </div>
+
+            <div class="nf-card-right">
+              <span class="nf-timestamp">${a.timestamp}</span>
+              <span class="nf-delivery-status">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                ${a.devices}
+              </span>
+            </div>
+          </article>
+        `).join('');
+      }
+
+      nfSearchInput.addEventListener('input', renderNotifications);
+
+      openBroadcastBtn.addEventListener('click', () => {
+        broadcastModal.classList.add('open');
+        setTimeout(() => document.getElementById('bcHeadline').focus(), 50);
+      });
+
+      function closeBroadcastModal() {
+        broadcastModal.classList.remove('open');
+        broadcastForm.reset();
+      }
+
+      closeBroadcastModalBtn.addEventListener('click', closeBroadcastModal);
+      cancelBroadcastBtn.addEventListener('click', closeBroadcastModal);
+
+      broadcastForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const title = document.getElementById('bcHeadline').value.trim();
+        const audience = document.getElementById('bcAudience').value;
+        const message = document.getElementById('bcMessage').value.trim();
+
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
+        const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+        const deviceCount = audience === 'All Parents' ? 600 : 145;
+
+        NOTIFICATIONS_DATA[currentSession].alerts.unshift({
+          id: 'nf-' + Date.now(),
+          title,
+          audience,
+          message,
+          timestamp: `${yyyy}-${mm}-${dd} ${timeStr}`,
+          devices: `${deviceCount} Devices Delivered`
+        });
+
+        closeBroadcastModal();
+        renderNotifications();
+        showToast(`Broadcast "${title}" delivered to ${deviceCount} parent devices.`);
+      });
+
+      nfSessionSelect.addEventListener('change', e => {
+        const next = e.target.value;
+        if (next === currentSession) return;
+        pendingSession = next;
+        nfSessionSelect.value = currentSession;
+        warnTargetName.textContent = NOTIFICATIONS_DATA[pendingSession].sessionName;
+        sessionWarnModal.classList.add('open');
+      });
+
+      function closeWarnModal() {
+        sessionWarnModal.classList.remove('open');
+        pendingSession = null;
+      }
+
+      cancelWarnBtn.addEventListener('click', closeWarnModal);
+      closeWarnModalBtn.addEventListener('click', closeWarnModal);
+
+      confirmWarnBtn.addEventListener('click', () => {
+        if (!pendingSession || !NOTIFICATIONS_DATA[pendingSession]) {
+          closeWarnModal();
+          return;
+        }
+        currentSession = pendingSession;
+        nfSessionSelect.value = currentSession;
+        localStorage.setItem('sunrise-academic-session', currentSession);
+        closeWarnModal();
+        renderNotifications();
+        showToast(`Reverted and loaded broadcast notifications for ${NOTIFICATIONS_DATA[currentSession].sessionName}.`);
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target === broadcastModal) closeBroadcastModal();
+        if (e.target === sessionWarnModal) closeWarnModal();
+      });
+
+      nfSessionSelect.value = currentSession;
+      renderNotifications();
+</script>
+  </body>
+</html>

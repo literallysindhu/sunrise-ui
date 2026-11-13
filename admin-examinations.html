@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Examinations &amp; Results - Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin-nav.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/admin-examinations.css" />
+    <script src="js/admin-nav.js" defer></script>
+  </head>
+  <body class="examinations-admin">
+    <div class="ex-layout">
+
+      <aside data-admin-nav></aside>
+
+      <main class="ex-main">
+
+        <header class="ex-top">
+          <div class="ex-search-wrap">
+            <span class="ex-search-icon">⌕</span>
+            <input
+              id="examSearchInput"
+              type="search"
+              placeholder="Search students, admission no., circulars…"
+              aria-label="Search examinations or marks"
+            />
+          </div>
+
+          <div class="ex-top-actions">
+            <button class="role-pill" type="button" aria-label="Current role selector">
+              <span>Role: School Administrator</span>
+              <span>⌄</span>
+            </button>
+
+            <button class="notify-bell" type="button" aria-label="Notifications">
+              <span>🔔</span>
+              <span class="bell-badge"></span>
+            </button>
+
+            <div class="user-profile-chip" title="Dr. K. Sundararajan (Principal)">
+              <div class="user-avatar-circle">KS</div>
+              <div class="user-info">
+                <strong>Dr. K. Sundararajan (Principal)</strong>
+                <small>admin@sunriseschool.edu.in ⌄</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="ex-content">
+
+          <div class="ex-heading-row">
+            <div class="ex-title-group">
+              <h1>Examinations &amp; Results</h1>
+              <p>Schedule exams, enter student test marks, and publish report cards</p>
+            </div>
+
+            <div class="ex-heading-actions">
+
+              <div class="session-filter-chip" title="Active Academic Session Scope">
+                <span>Cycle:</span>
+                <select id="examSessionSelect" aria-label="Academic Session Filter">
+                  <option value="2026-2027">Session 2026–2027 (Active)</option>
+                  <option value="2025-2026">Session 2025–2026 (Archived)</option>
+                  <option value="2024-2025">Session 2024–2025 (Historical)</option>
+                  <option value="2027-2028">Session 2027–2028 (Upcoming)</option>
+                </select>
+              </div>
+
+              <button class="btn-schedule-exam" id="openScheduleExamBtn" type="button">
+                <span>＋</span> Schedule New Exam
+              </button>
+            </div>
+          </div>
+
+          <section id="examsListContainer">
+
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="sessionWarnModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="warnTitle">
+        <div class="modal-head">
+          <h3 id="warnTitle" style="color:#e11d48">
+            <span>⚠</span> Warning: Switch Academic Session?
+          </h3>
+          <button class="modal-close-btn" id="closeWarnModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <p style="font-size:14px; font-weight:700; color:#1e293b; margin:0 0 14px; line-height:1.5;">
+          You are switching the academic session to <b id="warnTargetName">Session 2025–2026</b>.
+        </p>
+        <div class="warning-callout">
+          • <strong>Everything will be reverted to that academic session.</strong><br />
+          • All exam schedules, entered student marks, and published report cards from 2026–27 will be deactivated.<br />
+          • Historical evaluation records for the target cycle will be loaded.
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelWarnBtn" type="button">Cancel</button>
+          <button class="btn-primary danger" id="confirmWarnBtn" type="button">Revert &amp; Switch Session</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="scheduleExamModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="scheduleModalTitle">
+        <div class="modal-head">
+          <h3 id="scheduleModalTitle">Schedule New Examination</h3>
+          <button class="modal-close-btn" id="closeScheduleModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <form id="scheduleExamForm" class="modal-form">
+          <label class="full">
+            Examination Title *
+            <input id="newExamTitle" placeholder="e.g. Second Term Summative Assessment" required />
+          </label>
+
+          <label>
+            Assessment Category
+            <select id="newExamCategory">
+              <option value="Summative Assessment">Summative Assessment</option>
+              <option value="Formative Evaluation">Formative Evaluation</option>
+              <option value="Unit Test">Unit Test / Periodic Assessment</option>
+            </select>
+          </label>
+
+          <label>
+            Publication Status
+            <select id="newExamStatus">
+              <option value="draft">Draft / Internal</option>
+              <option value="published">Published to Parents</option>
+            </select>
+          </label>
+
+          <label>
+            Start Date *
+            <input type="date" id="newExamStartDate" required value="2026-12-01" />
+          </label>
+
+          <label>
+            End Date *
+            <input type="date" id="newExamEndDate" required value="2026-12-10" />
+          </label>
+
+          <label class="full">
+            Included Subject Papers
+            <input id="newExamSubjects" placeholder="Comma-separated: Mathematics, English, Science, Tamil" value="Mathematics, English, Science, Tamil" />
+          </label>
+
+          <div class="modal-actions full">
+            <button class="btn-secondary" id="cancelScheduleBtn" type="button">Cancel</button>
+            <button class="btn-primary" type="submit">Schedule Examination</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="enterMarksModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="marksModalTitle">
+        <div class="modal-head">
+          <div>
+            <h3 id="marksModalTitle">Enter Subject Marks</h3>
+            <p id="marksModalSubtitle" style="font-size:12.5px; font-weight:700; color:#64748b; margin:4px 0 0;">
+              Mathematics · Max: 100 · Pass: 35
+            </p>
+          </div>
+          <button class="modal-close-btn" id="closeMarksModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+
+        <form id="marksForm">
+          <div class="marks-table-wrap">
+            <table class="marks-table">
+              <thead>
+                <tr>
+                  <th>Adm No</th>
+                  <th>Student Name</th>
+                  <th>Roll</th>
+                  <th>Max</th>
+                  <th style="width:110px">Marks Scored</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody id="marksTableBody">
+
+              </tbody>
+            </table>
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-secondary" id="cancelMarksBtn" type="button">Cancel</button>
+            <button class="btn-primary" type="submit">Save &amp; Commit Marks</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="ex-toast" id="exToast">
+      <span>✓</span>
+      <span id="exToastMsg">Action completed successfully.</span>
+    </div>
+
+    <script>
+const EXAM_DATA = {
+        '2026-2027': {
+          sessionName: 'Session 2026–2027',
+          students: [
+            { id: 'ADM2026-0501', name: 'Aarav Krishnan', roll: '01' },
+            { id: 'ADM2026-0502', name: 'Diya Krishnan', roll: '02' },
+            { id: 'ADM2026-0503', name: 'Karthik Senthil', roll: '03' }
+          ],
+          exams: [
+            {
+              id: 'exam-2026-term1',
+              title: 'First Term Summative Assessment',
+              status: 'published',
+              startDate: '2026-10-15',
+              endDate: '2026-10-23',
+              sessionStr: 'Academic Year 2026–2027',
+              subjects: [
+                { name: 'Mathematics', date: '2026-10-15', max: 100, pass: 35, marks: { 'ADM2026-0501': 94.5, 'ADM2026-0502': 88.0, 'ADM2026-0503': 78.5 } },
+                { name: 'English', date: '2026-10-17', max: 100, pass: 35, marks: { 'ADM2026-0501': 88.0, 'ADM2026-0502': 91.5, 'ADM2026-0503': 82.0 } },
+                { name: 'Science', date: '2026-10-19', max: 100, pass: 35, marks: { 'ADM2026-0501': 91.5, 'ADM2026-0502': 86.5, 'ADM2026-0503': 79.0 } },
+                { name: 'Tamil', date: '2026-10-21', max: 100, pass: 35, marks: { 'ADM2026-0501': 88.0, 'ADM2026-0502': 89.0, 'ADM2026-0503': 81.0 } }
+              ]
+            },
+            {
+              id: 'exam-2026-midterm',
+              title: 'Mid-Term Evaluation (Formative)',
+              status: 'draft',
+              startDate: '2026-11-25',
+              endDate: '2026-11-30',
+              sessionStr: 'Academic Year 2026–2027',
+              subjects: [
+                { name: 'Mathematics', date: '2026-11-25', max: 50, pass: 18, marks: { 'ADM2026-0501': 47, 'ADM2026-0502': 44, 'ADM2026-0503': 39 } },
+                { name: 'English', date: '2026-11-27', max: 50, pass: 18, marks: { 'ADM2026-0501': 45, 'ADM2026-0502': 46, 'ADM2026-0503': 41 } }
+              ]
+            }
+          ]
+        },
+        '2025-2026': {
+          sessionName: 'Session 2025–2026',
+          students: [
+            { id: 'ADM2025-0511', name: 'Rohan Rajesh', roll: '01' },
+            { id: 'ADM2025-0512', name: 'Meera Subramaniam', roll: '02' },
+            { id: 'ADM2025-0513', name: 'Arjun Balakrishnan', roll: '03' },
+            { id: 'ADM2025-0514', name: 'Tanvi Nambiar', roll: '04' }
+          ],
+          exams: [
+            {
+              id: 'exam-2025-annual',
+              title: 'Annual Examination 2026',
+              status: 'published',
+              startDate: '2026-03-10',
+              endDate: '2026-03-24',
+              sessionStr: 'Academic Year 2025–2026',
+              subjects: [
+                { name: 'Mathematics', date: '2026-03-10', max: 100, pass: 35, marks: { 'ADM2025-0511': 89, 'ADM2025-0512': 96, 'ADM2025-0513': 75, 'ADM2025-0514': 88 } },
+                { name: 'General Science', date: '2026-03-13', max: 100, pass: 35, marks: { 'ADM2025-0511': 91, 'ADM2025-0512': 98, 'ADM2025-0513': 72, 'ADM2025-0514': 86 } },
+                { name: 'Hindi Language', date: '2026-03-17', max: 100, pass: 35, marks: { 'ADM2025-0511': 85, 'ADM2025-0512': 94, 'ADM2025-0513': 80, 'ADM2025-0514': 90 } },
+                { name: 'English Prose', date: '2026-03-20', max: 100, pass: 35, marks: { 'ADM2025-0511': 88, 'ADM2025-0512': 95, 'ADM2025-0513': 78, 'ADM2025-0514': 89 } }
+              ]
+            },
+            {
+              id: 'exam-2025-term1',
+              title: 'First Term Assessment 2025',
+              status: 'published',
+              startDate: '2025-10-14',
+              endDate: '2025-10-22',
+              sessionStr: 'Academic Year 2025–2026',
+              subjects: [
+                { name: 'Mathematics', date: '2025-10-14', max: 100, pass: 35, marks: { 'ADM2025-0511': 86, 'ADM2025-0512': 95, 'ADM2025-0513': 74, 'ADM2025-0514': 85 } },
+                { name: 'General Science', date: '2025-10-17', max: 100, pass: 35, marks: { 'ADM2025-0511': 88, 'ADM2025-0512': 96, 'ADM2025-0513': 71, 'ADM2025-0514': 84 } }
+              ]
+            }
+          ]
+        },
+        '2024-2025': {
+          sessionName: 'Session 2024–2025',
+          students: [
+            { id: 'ADM2024-0521', name: 'Ananya Swaminathan', roll: '01' },
+            { id: 'ADM2024-0522', name: 'Gautham Chandrasekar', roll: '02' },
+            { id: 'ADM2024-0523', name: 'Nithya Raghavan', roll: '03' }
+          ],
+          exams: [
+            {
+              id: 'exam-2024-final',
+              title: 'Final Board Pattern Evaluation',
+              status: 'published',
+              startDate: '2025-03-12',
+              endDate: '2025-03-22',
+              sessionStr: 'Academic Year 2024–2025',
+              subjects: [
+                { name: 'Environmental Studies (EVS)', date: '2025-03-12', max: 100, pass: 35, marks: { 'ADM2024-0521': 96, 'ADM2024-0522': 88, 'ADM2024-0523': 85 } },
+                { name: 'English Grammar', date: '2025-03-15', max: 100, pass: 35, marks: { 'ADM2024-0521': 94, 'ADM2024-0522': 86, 'ADM2024-0523': 82 } },
+                { name: 'Arithmetic & Geometry', date: '2025-03-18', max: 100, pass: 35, marks: { 'ADM2024-0521': 98, 'ADM2024-0522': 91, 'ADM2024-0523': 89 } },
+                { name: 'Second Language', date: '2025-03-21', max: 100, pass: 35, marks: { 'ADM2024-0521': 95, 'ADM2024-0522': 89, 'ADM2024-0523': 86 } }
+              ]
+            }
+          ]
+        },
+        '2027-2028': {
+          sessionName: 'Session 2027–2028',
+          students: [
+            { id: 'ADM2027-0531', name: 'Yashaswini Iyer', roll: '01' },
+            { id: 'ADM2027-0532', name: 'Sai Krishna', roll: '02' },
+            { id: 'ADM2027-0533', name: 'Rithika Anand', roll: '03' }
+          ],
+          exams: [
+            {
+              id: 'exam-2027-baseline',
+              title: 'Diagnostic Baseline Readiness Test',
+              status: 'draft',
+              startDate: '2027-07-15',
+              endDate: '2027-07-20',
+              sessionStr: 'Academic Year 2027–2028',
+              subjects: [
+                { name: 'AI & Computational Thinking', date: '2027-07-15', max: 50, pass: 20, marks: {} },
+                { name: 'Integrated STEM', date: '2027-07-17', max: 50, pass: 20, marks: {} },
+                { name: 'World Literature', date: '2027-07-19', max: 50, pass: 20, marks: {} }
+              ]
+            }
+          ]
+        }
+      };
+
+      let currentSession = localStorage.getItem('sunrise-academic-session') || '2026-2027';
+      if (!EXAM_DATA[currentSession]) currentSession = '2026-2027';
+
+      let pendingSession = null;
+      let activeExamId = null;
+      let activeSubjectIndex = null;
+
+      const examSessionSelect = document.getElementById('examSessionSelect');
+      const examsListContainer = document.getElementById('examsListContainer');
+      const examSearchInput = document.getElementById('examSearchInput');
+
+      const sessionWarnModal = document.getElementById('sessionWarnModal');
+      const warnTargetName = document.getElementById('warnTargetName');
+      const cancelWarnBtn = document.getElementById('cancelWarnBtn');
+      const confirmWarnBtn = document.getElementById('confirmWarnBtn');
+      const closeWarnModalBtn = document.getElementById('closeWarnModalBtn');
+
+      const scheduleExamModal = document.getElementById('scheduleExamModal');
+      const openScheduleExamBtn = document.getElementById('openScheduleExamBtn');
+      const cancelScheduleBtn = document.getElementById('cancelScheduleBtn');
+      const closeScheduleModalBtn = document.getElementById('closeScheduleModalBtn');
+      const scheduleExamForm = document.getElementById('scheduleExamForm');
+
+      const enterMarksModal = document.getElementById('enterMarksModal');
+      const cancelMarksBtn = document.getElementById('cancelMarksBtn');
+      const closeMarksModalBtn = document.getElementById('closeMarksModalBtn');
+      const marksForm = document.getElementById('marksForm');
+      const marksTableBody = document.getElementById('marksTableBody');
+      const marksModalTitle = document.getElementById('marksModalTitle');
+      const marksModalSubtitle = document.getElementById('marksModalSubtitle');
+
+      const exToast = document.getElementById('exToast');
+      const exToastMsg = document.getElementById('exToastMsg');
+
+      function showToast(msg) {
+        exToastMsg.textContent = msg;
+        exToast.classList.add('show');
+        setTimeout(() => exToast.classList.remove('show'), 3500);
+      }
+
+      function computeGrade(marks, max) {
+        if (marks === undefined || marks === null || isNaN(marks)) return '—';
+        const pct = (marks / max) * 100;
+        if (pct >= 90) return 'Grade A+';
+        if (pct >= 80) return 'Grade A';
+        if (pct >= 70) return 'Grade B+';
+        if (pct >= 60) return 'Grade B';
+        if (pct >= 50) return 'Grade C';
+        if (pct >= 35) return 'Grade D';
+        return 'Needs Support';
+      }
+
+      function renderExams() {
+        const sessionData = EXAM_DATA[currentSession];
+        const exams = sessionData.exams || [];
+        const query = examSearchInput.value.trim().toLowerCase();
+
+        const filteredExams = exams.filter(ex => {
+          if (!query) return true;
+          return (
+            ex.title.toLowerCase().includes(query) ||
+            ex.subjects.some(sub => sub.name.toLowerCase().includes(query))
+          );
+        });
+
+        if (filteredExams.length === 0) {
+          examsListContainer.innerHTML = `
+            <div style="background:#fff; border:3px solid var(--line); border-radius:18px; padding:48px 24px; text-align:center; box-shadow:var(--shadow);">
+              <span style="font-size:36px; display:block; margin-bottom:8px">📋</span>
+              <h3 style="font:800 22px 'Baloo 2'; color:#0f172a; margin:0">No examinations found</h3>
+              <p style="font-size:13px; font-weight:700; color:#64748b; margin:6px 0 0">
+                There are no scheduled evaluations matching your search query in ${sessionData.sessionName}.
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        examsListContainer.innerHTML = filteredExams.map((exam, examIdx) => {
+          const isPublished = exam.status === 'published';
+
+          return `
+            <article class="exam-card" data-exam-id="${exam.id}">
+              <header class="exam-card-header">
+                <div>
+                  <div class="exam-title-row">
+                    <h2>${exam.title}</h2>
+                    <span class="status-badge ${isPublished ? 'published' : 'draft'}">
+                      ${isPublished ? 'Published to Parents' : 'Draft / Internal'}
+                    </span>
+                  </div>
+                  <div class="exam-meta">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span>${exam.startDate} to ${exam.endDate} · ${exam.sessionStr}</span>
+                  </div>
+                </div>
+
+                <button
+                  class="btn-publish-toggle ${isPublished ? 'published-state' : 'draft-state'}"
+                  onclick="togglePublishStatus('${exam.id}')"
+                  type="button"
+                >
+                  ${isPublished ? 'Unpublish Results' : 'Publish Results to Parents'}
+                </button>
+              </header>
+
+              <div class="exam-section-label">EXAM SCHEDULE &amp; SUBJECT MARKS ENTRY</div>
+
+              <div class="subject-grid">
+                ${exam.subjects.map((sub, subIdx) => `
+                  <div class="subject-card">
+                    <div>
+                      <h3>${sub.name}</h3>
+                      <div class="subject-date">Date: ${sub.date}</div>
+                      <div class="subject-marks">Max: ${sub.max} · Pass: ${sub.pass}</div>
+                    </div>
+                    <button
+                      class="btn-enter-marks"
+                      onclick="openMarksModal('${exam.id}', ${subIdx})"
+                      type="button"
+                    >
+                      <span>✎</span> Enter Marks
+                    </button>
+                  </div>
+                `).join('')}
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      window.togglePublishStatus = function(examId) {
+        const sessionData = EXAM_DATA[currentSession];
+        const exam = sessionData.exams.find(e => e.id === examId);
+        if (!exam) return;
+
+        if (exam.status === 'published') {
+          exam.status = 'draft';
+          showToast(`Results for "${exam.title}" are now unpublished (Draft/Internal).`);
+        } else {
+          exam.status = 'published';
+          showToast(`Results for "${exam.title}" published! Parents can now review results in the portal.`);
+        }
+        renderExams();
+      };
+
+      window.openMarksModal = function(examId, subIdx) {
+        activeExamId = examId;
+        activeSubjectIndex = subIdx;
+
+        const sessionData = EXAM_DATA[currentSession];
+        const exam = sessionData.exams.find(e => e.id === examId);
+        if (!exam || !exam.subjects[subIdx]) return;
+
+        const sub = exam.subjects[subIdx];
+        marksModalTitle.textContent = `${sub.name} Marks Entry`;
+        marksModalSubtitle.textContent = `${exam.title} · Exam Date: ${sub.date} · Max Marks: ${sub.max} (Pass: ${sub.pass})`;
+
+        const students = sessionData.students || [];
+        marksTableBody.innerHTML = students.map(st => {
+          const scored = sub.marks && sub.marks[st.id] !== undefined ? sub.marks[st.id] : '';
+          const gradeText = computeGrade(scored !== '' ? Number(scored) : null, sub.max);
+
+          return `
+            <tr data-student-id="${st.id}">
+              <td style="font-family:monospace; color:#2563eb; font-weight:800">${st.id}</td>
+              <td style="font-weight:800">${st.name}</td>
+              <td style="color:#64748b; font-weight:800">${st.roll}</td>
+              <td style="color:#64748b; font-weight:800">${sub.max}</td>
+              <td>
+                <input
+                  type="number"
+                  step="0.5"
+                  min="0"
+                  max="${sub.max}"
+                  class="marks-input"
+                  value="${scored}"
+                  placeholder="—"
+                  oninput="handleMarkInput(this, ${sub.max})"
+                />
+              </td>
+              <td><span class="grade-badge-sm">${gradeText}</span></td>
+            </tr>
+          `;
+        }).join('');
+
+        enterMarksModal.classList.add('open');
+      };
+
+      window.handleMarkInput = function(inputEl, maxMarks) {
+        const row = inputEl.closest('tr');
+        const badge = row.querySelector('.grade-badge-sm');
+        const val = inputEl.value.trim();
+        if (val === '') {
+          badge.textContent = '—';
+          return;
+        }
+        const num = Number(val);
+        if (num > maxMarks) {
+          inputEl.style.borderColor = '#dc2626';
+          badge.textContent = 'Exceeds Max';
+          badge.style.color = '#dc2626';
+        } else {
+          inputEl.style.borderColor = 'var(--line)';
+          badge.textContent = computeGrade(num, maxMarks);
+          badge.style.color = '#7e22ce';
+        }
+      };
+
+      function closeMarksModal() {
+        enterMarksModal.classList.remove('open');
+        activeExamId = null;
+        activeSubjectIndex = null;
+      }
+
+      cancelMarksBtn.addEventListener('click', closeMarksModal);
+      closeMarksModalBtn.addEventListener('click', closeMarksModal);
+
+      marksForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const sessionData = EXAM_DATA[currentSession];
+        const exam = sessionData.exams.find(e => e.id === activeExamId);
+        if (!exam || !exam.subjects[activeSubjectIndex]) return;
+
+        const sub = exam.subjects[activeSubjectIndex];
+        if (!sub.marks) sub.marks = {};
+
+        marksTableBody.querySelectorAll('tr').forEach(tr => {
+          const stId = tr.dataset.studentId;
+          const input = tr.querySelector('.marks-input');
+          if (input && input.value.trim() !== '') {
+            sub.marks[stId] = Number(input.value.trim());
+          }
+        });
+
+        closeMarksModal();
+        renderExams();
+        showToast(`Marks for ${sub.name} committed successfully.`);
+      });
+
+      openScheduleExamBtn.addEventListener('click', () => {
+        scheduleExamModal.classList.add('open');
+      });
+
+      function closeScheduleModal() {
+        scheduleExamModal.classList.remove('open');
+      }
+
+      cancelScheduleBtn.addEventListener('click', closeScheduleModal);
+      closeScheduleModalBtn.addEventListener('click', closeScheduleModal);
+
+      scheduleExamForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const title = document.getElementById('newExamTitle').value.trim();
+        const category = document.getElementById('newExamCategory').value;
+        const status = document.getElementById('newExamStatus').value;
+        const startDate = document.getElementById('newExamStartDate').value;
+        const endDate = document.getElementById('newExamEndDate').value;
+        const subStr = document.getElementById('newExamSubjects').value.trim();
+
+        const subjectsList = subStr.split(',').map((name, i) => {
+          const trimmed = name.trim();
+          return {
+            name: trimmed,
+            date: startDate,
+            max: 100,
+            pass: 35,
+            marks: {}
+          };
+        }).filter(s => s.name);
+
+        const sessionData = EXAM_DATA[currentSession];
+        const newExam = {
+          id: 'exam-' + Date.now(),
+          title: `${title} (${category.split(' ')[0]})`,
+          status,
+          startDate,
+          endDate,
+          sessionStr: `Academic Year ${sessionData.sessionName.replace('Session ', '')}`,
+          subjects: subjectsList
+        };
+
+        sessionData.exams.unshift(newExam);
+        closeScheduleModal();
+        renderExams();
+        showToast(`New examination "${newExam.title}" scheduled successfully.`);
+      });
+
+      examSessionSelect.addEventListener('change', e => {
+        const next = e.target.value;
+        if (next === currentSession) return;
+
+        pendingSession = next;
+
+        examSessionSelect.value = currentSession;
+
+        warnTargetName.textContent = EXAM_DATA[pendingSession].sessionName;
+        sessionWarnModal.classList.add('open');
+      });
+
+      function closeWarnModal() {
+        sessionWarnModal.classList.remove('open');
+        pendingSession = null;
+      }
+
+      cancelWarnBtn.addEventListener('click', closeWarnModal);
+      closeWarnModalBtn.addEventListener('click', closeWarnModal);
+
+      confirmWarnBtn.addEventListener('click', () => {
+        if (!pendingSession || !EXAM_DATA[pendingSession]) {
+          closeWarnModal();
+          return;
+        }
+
+        currentSession = pendingSession;
+        examSessionSelect.value = currentSession;
+        localStorage.setItem('sunrise-academic-session', currentSession);
+
+        closeWarnModal();
+        renderExams();
+        showToast(`Reverted and loaded examination assessments for ${EXAM_DATA[currentSession].sessionName}.`);
+      });
+
+      examSearchInput.addEventListener('input', () => {
+        renderExams();
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target === sessionWarnModal) closeWarnModal();
+        if (e.target === scheduleExamModal) closeScheduleModal();
+        if (e.target === enterMarksModal) closeMarksModal();
+      });
+
+      examSessionSelect.value = currentSession;
+      renderExams();
+</script>
+  </body>
+</html>

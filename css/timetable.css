@@ -1,0 +1,166 @@
+.time-intro {
+  border:4px solid #20242a;
+  border-radius:24px;
+  background:#b5dffc;
+  box-shadow:5px 5px 0 #20242a;
+  padding:25px;
+  margin-bottom:25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px
+}
+
+.time-intro h1 {
+  font:800 40px/1 "Baloo 2";
+  margin:5px 0
+}
+
+.time-intro p {
+  font-weight:800;
+  margin:0
+}
+
+.day-pill {
+  border:3px solid #20242a;
+  border-radius:999px;
+  background:#fff0a5;
+  padding:10px 14px;
+  font:800 14px "Baloo 2";
+  white-space:nowrap
+}
+
+.weekly-board {
+  border:4px solid #20242a;
+  border-radius:25px;
+  background:#fffdf1;
+  box-shadow:5px 5px 0 #20242a;
+  padding:24px;
+  overflow:auto
+}
+
+.weekly-board h2 {
+  font:800 28px "Baloo 2";
+  margin:0 0 16px
+}
+
+.week-grid {
+  display:grid;
+  grid-template-columns:105px repeat(5,minmax(125px,1fr));
+  gap:9px;
+  min-width:820px
+}
+
+.week-grid>div {
+  border:3px solid #20242a;
+  border-radius:14px;
+  padding:10px;
+  min-height:82px
+}
+
+.week-grid .day-name {
+  min-height:auto;
+  text-align:center;
+  background:#ff92d2;
+  font:800 17px "Baloo 2"
+}
+
+.week-grid .time {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff0a5;
+  text-align:center;
+  font:800 12px "Nunito Sans"
+}
+
+.subject {
+  position:relative;
+  font:800 18px/1 "Baloo 2"
+}
+
+.subject small {
+  display:block;
+  font:700 10px "Nunito Sans";
+  margin-top:6px
+}
+
+.english {
+  background:#ffd0ec
+}
+
+.mathematics {
+  background:#c8eca0
+}
+
+.science {
+  background:#b5dffc
+}
+
+.tamil {
+  background:#ffe196
+}
+
+.social {
+  background:#ffc5a2
+}
+
+.art {
+  background:#d9c8ff
+}
+
+.pe {
+  background:#9ee6d0
+}
+
+.break {
+  background:#fff5a4;
+  color:#7b5a00;
+  text-align:center;
+  font:800 15px "Baloo 2";
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.today-class {
+  box-shadow:inset 0 0 0 3px #ff72bd
+}
+
+.today-class:after {
+  content:"Today";
+  position:absolute;
+  right:7px;
+  top:7px;
+  border:1.5px solid #20242a;
+  border-radius:99px;
+  background:#fff;
+  padding:2px 5px;
+  font:800 8px "Nunito Sans"
+}
+
+.time-note {
+  margin-top:22px;
+  border:4px solid #20242a;
+  border-radius:18px;
+  background:#8bdc86;
+  padding:15px;
+  display:flex;
+  gap:10px;
+  font-size:13px;
+  font-weight:700
+}
+
+.time-note b {
+  font:800 18px "Baloo 2"
+}
+
+@media(max-width:600px) {
+  .time-intro {
+    align-items:start;
+    flex-direction:column
+  }
+  .weekly-board {
+    padding:15px
+  }
+}

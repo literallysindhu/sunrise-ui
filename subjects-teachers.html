@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Subjects & Teachers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/academic.css">
+    <link rel="stylesheet" href="css/subjects.css">
+    <link rel="stylesheet" href="css/admin-nav.css">
+    <script src="js/admin-nav.js" defer></script>
+  </head>
+  <body class="academic">
+    <div class="a-layout">
+      <aside class="a-side">
+        <a class="a-brand" href="landing.html"><b>☀</b>Sunrise School</a>
+        <div class="a-role">ACTIVE ROLE · SUPER ADMIN</div>
+        <nav class="a-nav">
+          <a href="super-admin.html">▦ School dashboard</a>
+          <a href="people.html?tab=students">♙ People &amp; roles</a>
+          <a href="admin-attendance.html">▣ Attendance</a>
+          <a class="active" href="academic-sessions.html">✦ Academics</a>
+          <a class="indent" href="academic-sessions.html">Academic sessions</a>
+          <a class="indent" href="classes-sections.html">Classes &amp; sections</a>
+          <a class="indent active" href="subjects-teachers.html">Subjects &amp; teachers</a>
+          <a class="indent" href="student-promotions.html">Student promotions</a>
+          <a href="notice-board.html">✉ Notice board</a>
+        </nav>
+      </aside>
+      <main class="a-main">
+        <header class="a-top">
+          <input placeholder="⌕ Search students, admissions, circulars…">
+          <span>SA · Super Admin</span>
+        </header>
+        <div class="a-content">
+          <section class="a-heading">
+            <div>
+              <h1>Subject catalog &amp; teacher assignments <span class="badge">Curriculum mapping</span></h1>
+              <p>Map faculty instructors to grades, sections and academic subjects for the active session 2026–2027.</p>
+            </div>
+            <div class="heading-actions">
+              <button class="ghost" type="button" id="openSubject">＋ Add subject</button>
+              <button class="add" type="button" id="openAssign">＋ Assign teacher</button>
+            </div>
+          </section>
+          <section class="subjects-grid">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2>Curriculum catalog</h2>
+                  <p>Standardized course codes and syllabi</p>
+                </div>
+                <span class="catalog-count" id="catalogCount">0</span>
+              </div>
+              <div class="subject-list" id="catalog"></div>
+            </article>
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2>Assigned subject instructors</h2>
+                  <p>Faculty teaching roster for session 2026–2027</p>
+                </div>
+              </div>
+              <div class="roster-tools">
+                <input id="filterInput" placeholder="⌕ Filter teacher, class…">
+              </div>
+              <table class="roster-table">
+                <thead>
+                  <tr>
+                    <th>Faculty instructor</th>
+                    <th>Class &amp; section</th>
+                    <th>Assigned subject</th>
+                    <th>Role status</th>
+                  </tr>
+                </thead>
+                <tbody id="roster"></tbody>
+              </table>
+            </article>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal" id="subjectModal">
+      <form class="modal-card" id="subjectForm">
+        <header>
+          <h2>Add subject to catalog</h2>
+          <button class="close" type="button" data-close="subjectModal">×</button>
+        </header>
+        <div class="form">
+          <label class="full">Subject name *<input id="subjectName" required placeholder="e.g. Computer Science, Hindi, Environmental Science"></label>
+          <label class="full">Subject code<input id="subjectCode" placeholder="e.g. CS-06, HIN-02"></label>
+          <label class="full">Subject overview / syllabus<textarea id="subjectOverview" placeholder="Curriculum guidelines, weekly periods…"></textarea></label>
+        </div>
+        <div class="form-actions">
+          <button type="button" data-close="subjectModal">Cancel</button>
+          <button type="submit">Save subject</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal" id="assignModal">
+      <form class="modal-card" id="assignForm">
+        <header>
+          <h2>Assign faculty to class &amp; subject</h2>
+          <button class="close" type="button" data-close="assignModal">×</button>
+        </header>
+        <div class="form">
+          <label class="full">Select teacher *
+            <select id="teacherSelect" required></select>
+          </label>
+          <div class="split">
+            <label>Select class *
+              <select id="classSelect" required>
+                <option value="5">Class 5</option>
+                <option value="6">Class 6</option>
+              </select>
+            </label>
+            <label>Select section *
+              <select id="sectionSelect" required>
+                <option value="A">Section A</option>
+                <option value="B">Section B</option>
+              </select>
+            </label>
+          </div>
+          <label class="full">Select subject *
+            <select id="subjectSelect" required></select>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="button" data-close="assignModal">Cancel</button>
+          <button type="submit">Confirm assignment</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+const subjects = [
+        { name: 'English Language & Literature', code: 'ENG-01', overview: 'Core English grammar, prose, poetry and composition.' },
+        { name: 'Mathematics', code: 'MAT-02', overview: 'Arithmetic, Fractions, Geometry and Problem Solving.' },
+        { name: 'General Science', code: 'SCI-03', overview: 'Physics, Chemistry fundamentals, Botany and Zoology.' },
+        { name: 'Social Studies', code: 'SOC-04', overview: 'History, Civics, Geography and Indian Heritage.' },
+        { name: 'Tamil Language', code: 'TAM-05', overview: 'Tamil grammar, literature, poetry and reading fluency.' }
+      ];
+      const teachers = [
+        { name: 'M. Saravanan', creds: 'M.Sc, B.Ed' },
+        { name: 'K. Malathi', creds: 'M.A, B.Ed' },
+        { name: 'S. Jayaraman', creds: 'M.Sc, B.Ed' }
+      ];
+      const assignments = [
+        { teacher: 'M. Saravanan', className: '5', section: 'A', subject: 'Mathematics' },
+        { teacher: 'M. Saravanan', className: '5', section: 'A', subject: 'General Science' },
+        { teacher: 'K. Malathi', className: '5', section: 'A', subject: 'English Language & Literature' }
+      ];
+
+      const catalog = document.getElementById('catalog');
+      const roster = document.getElementById('roster');
+      const filterInput = document.getElementById('filterInput');
+      const teacherSelect = document.getElementById('teacherSelect');
+      const subjectSelect = document.getElementById('subjectSelect');
+
+      const initials = (name) => name.split(' ').filter(Boolean).map((part) => part[0]).join('').slice(0, 2).toUpperCase();
+
+      function fillSelects() {
+        teacherSelect.innerHTML = teachers.map((teacher) => `<option value="${teacher.name}">${teacher.name} (${teacher.creds})</option>`).join('');
+        subjectSelect.innerHTML = subjects.map((subject) => `<option value="${subject.name}">${subject.name} (${subject.code})</option>`).join('');
+      }
+
+      function renderCatalog() {
+        document.getElementById('catalogCount').textContent = subjects.length;
+        catalog.innerHTML = subjects.map((subject) => `
+          <article class="subject-row">
+            <div class="subject-row-top">
+              <h3>${subject.name}</h3>
+              <span class="subject-code">${subject.code}</span>
+            </div>
+            <p>${subject.overview}</p>
+          </article>`).join('');
+      }
+
+      function renderRoster() {
+        const needle = filterInput.value.trim().toLowerCase();
+        const rows = assignments.filter((row) => {
+          const haystack = `${row.teacher} class ${row.className} section ${row.section} ${row.subject}`.toLowerCase();
+          return !needle || haystack.includes(needle);
+        });
+        roster.innerHTML = rows.length ? rows.map((row) => `
+          <tr>
+            <td><span class="faculty"><span class="avatar-sm">${initials(row.teacher)}</span>${row.teacher}</span></td>
+            <td><span class="class-chip">Class ${row.className} · Section ${row.section}</span></td>
+            <td><span class="subject-link">${row.subject}</span></td>
+            <td><span class="pill">Assigned</span></td>
+          </tr>`).join('') : `<tr><td colspan="4" class="empty">No matching teacher assignments.</td></tr>`;
+      }
+
+      function openModal(id) { document.getElementById(id).classList.add('open'); }
+      function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+      document.getElementById('openSubject').onclick = () => openModal('subjectModal');
+      document.getElementById('openAssign').onclick = () => { fillSelects(); openModal('assignModal'); };
+      document.querySelectorAll('[data-close]').forEach((button) => {
+        button.onclick = () => closeModal(button.dataset.close);
+      });
+
+      document.getElementById('subjectForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const name = document.getElementById('subjectName').value.trim();
+        let code = document.getElementById('subjectCode').value.trim().toUpperCase();
+        const overview = document.getElementById('subjectOverview').value.trim() || 'Curriculum details to be published.';
+        if (!name) return;
+        if (subjects.some((subject) => subject.name.toLowerCase() === name.toLowerCase())) {
+          alert('That subject is already in the catalog.');
+          return;
+        }
+        if (!code) {
+          const prefix = name.replace(/[^A-Za-z]/g, '').slice(0, 3).toUpperCase() || 'SUB';
+          code = `${prefix}-${String(subjects.length + 1).padStart(2, '0')}`;
+        }
+        if (subjects.some((subject) => subject.code.toLowerCase() === code.toLowerCase())) {
+          alert('That subject code is already in use.');
+          return;
+        }
+        subjects.push({ name, code, overview });
+        document.getElementById('subjectForm').reset();
+        closeModal('subjectModal');
+        fillSelects();
+        renderCatalog();
+      });
+
+      document.getElementById('assignForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const teacher = teacherSelect.value;
+        const className = document.getElementById('classSelect').value;
+        const section = document.getElementById('sectionSelect').value;
+        const subject = subjectSelect.value;
+        const duplicate = assignments.some((row) => row.teacher === teacher && row.className === className && row.section === section && row.subject === subject);
+        if (duplicate) {
+          alert('This faculty member is already assigned to that class, section and subject.');
+          return;
+        }
+        assignments.unshift({ teacher, className, section, subject });
+        closeModal('assignModal');
+        renderRoster();
+      });
+
+      filterInput.addEventListener('input', renderRoster);
+      fillSelects();
+      renderCatalog();
+      renderRoster();
+</script>
+  </body>
+</html>

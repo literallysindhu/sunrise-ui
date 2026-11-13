@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Attendance Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin-attendance.css">
+    <link rel="stylesheet" href="css/admin-nav.css">__PROTECTED_BLOCK_0__
+  </head>
+  <body class="attendance-admin">
+    <div class="att-layout">
+      <aside class="att-side">
+        <a class="att-brand" href="landing.html">
+        <b>☀</b>Sunrise School</a>
+        <div class="att-role">ACTIVE ROLE · SUPER ADMIN
+        </div>
+        <nav class="att-nav">
+          <a href="super-admin.html">▦ School dashboard</a>
+          <a href="people.html?tab=students">♙ People &amp; roles</a>
+          <a class="indent" href="people.html?tab=students">Students</a>
+          <a class="indent" href="people.html?tab=parents">Parents</a>
+          <a class="indent" href="people.html?tab=teachers">Teachers</a>
+          <a class="active" href="admin-attendance.html">▣ Attendance</a>
+          <a href="#academics">✦ Academics</a>
+          <a href="notice-board.html">✉ Notice board</a>
+        </nav>
+      </aside>
+      <main class="att-main">
+        <header class="att-top">
+          <input placeholder="⌕ Search students, admission no., circulars…">
+          <span>SA · Super Admin</span>
+        </header>
+        <div class="att-content">
+          <section class="att-title">
+            <div>
+              <h1>Attendance register</h1>
+              <p>Daily roll call, late-arrival tracking, and monthly attendance computation.</p>
+            </div>
+            <button class="save" onclick="alert('Attendance records saved')">▣ Save attendance records</button>
+          </section>
+          <section class="att-filters">
+            <label>Class
+              <select id="classFilter">
+                <option value="5">Class 5</option>
+                <option value="6">Class 6</option>
+              </select>
+            </label>
+            <label>Section
+              <select id="sectionFilter">
+                <option value="A">Section A</option>
+                <option value="B">Section B</option>
+              </select>
+            </label>
+            <label>Attendance date<input type="date" value="2026-11-13">
+            </label>
+            <button id="allPresent" type="button">All present</button>
+            <button id="allAbsent" type="button">All absent</button>
+          </section>
+          <section class="att-kpis">
+            <article class="att-kpi">
+              <p>Total roll</p>
+              <strong id="total">0</strong>
+            </article>
+            <article class="att-kpi">
+              <p>Present</p>
+              <strong id="present">0</strong>
+            </article>
+            <article class="att-kpi">
+              <p>Absent</p>
+              <strong id="absent">0</strong>
+            </article>
+            <article class="att-kpi">
+              <p>Attendance %</p>
+              <strong id="percent">0%</strong>
+            </article>
+          </section>
+          <section class="roster">
+            <div class="roster-head">
+              <span id="rosterTitle">Roster</span>
+              <span>Click a status pill to toggle</span>
+            </div>
+            <div id="rosterRows">
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script>
+const students=[['Aarav Krishnan','ADM2026-0501','5','A','01'],['Diya Krishnan','ADM2026-0502','5','B','02'],['Karthik Senthil','ADM2026-0503','5','A','03'],['Sneha Murugan','ADM2026-0601','6','A','01'],['Varun Chakravarthy','ADM2026-0602','6','A','02']];let statuses={};const c=document.getElementById('classFilter'),s=document.getElementById('sectionFilter'),rows=document.getElementById('rosterRows');function filtered(){return students.filter(x=>x[2]===c.value&&x[3]===s.value)}function render(){let list=filtered();document.getElementById('rosterTitle').textContent='Roster: Class '+c.value+' - Section '+s.value+' (2026-11-13)';rows.innerHTML=list.length?list.map(x=>{let key=x[1],status=statuses[key]||'present';return '<div class="student-row"><span class="roll">'+x[4]+'</span><span><b>'+x[0]+'</b><small>'+x[1]+'</small></span><div class="status-set">'+['present','absent','late'].map(v=>'<button class="'+v+' '+(status===v?'active':'')+'" onclick="setStatus(\''+key+'\',\''+v+'\')">'+v[0].toUpperCase()+v.slice(1)+'</button>').join('')+'</div><input class="remark" placeholder="Optional remarks…"></div>'}).join(''):'<div class="student-row">No students in this section.</div>';let present=list.filter(x=>(statuses[x[1]]||'present')==='present').length,absent=list.filter(x=>statuses[x[1]]==='absent').length;document.getElementById('total').textContent=list.length;document.getElementById('present').textContent=present;document.getElementById('absent').textContent=absent;document.getElementById('percent').textContent=list.length?Math.round(present/list.length*100)+'%':'0%'}function setStatus(id,v){statuses[id]=v;render()}function allStatus(v){filtered().forEach(x=>statuses[x[1]]=v);render()}c.onchange=render;s.onchange=render;document.getElementById('allPresent').addEventListener('click',()=>allStatus('present'));document.getElementById('allAbsent').addEventListener('click',()=>allStatus('absent'));render()
+</script>
+  </body>
+</html>

@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Promotion & Progression - Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin-nav.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/promotions.css" />
+    <script src="js/admin-nav.js" defer></script>
+  </head>
+  <body class="promotions-body">
+    <div class="promo-layout">
+
+      <aside data-admin-nav></aside>
+
+      <main class="promo-main">
+
+        <header class="promo-top">
+          <div class="promo-search-wrap">
+            <span class="promo-search-icon">⌕</span>
+            <input
+              id="studentSearchInput"
+              type="search"
+              placeholder="Search students, admission no., circulars…"
+              aria-label="Search students or admission numbers"
+            />
+          </div>
+
+          <div class="promo-top-actions">
+            <button class="role-pill" type="button" aria-label="Current role selector">
+              <span>Role: School Administrator</span>
+              <span>⌄</span>
+            </button>
+
+            <button class="notify-bell" type="button" aria-label="Notifications">
+              <span>🔔</span>
+              <span class="bell-badge"></span>
+            </button>
+
+            <div class="user-profile-chip" title="Dr. K. Sundararajan (Principal)">
+              <div class="user-avatar-circle">KS</div>
+              <div class="user-info">
+                <strong>Dr. K. Sundararajan (Principal)</strong>
+                <small>admin@sunriseschool.edu.in ⌄</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="promo-content">
+
+          <section class="promo-header">
+            <div class="promo-title-row">
+              <h1>Student Promotion &amp; Progression</h1>
+              <span class="badge-year-end">Year-End Progression</span>
+            </div>
+            <p class="promo-subtitle">
+              Bulk-promote eligible students to their next grade while strictly preserving historical academic and attendance records.
+            </p>
+          </section>
+
+          <section class="promo-card">
+            <div class="card-header-block">
+              <h2>Progression Parameters Setup</h2>
+              <p>Specify the origin and destination classes for this batch</p>
+            </div>
+
+            <div class="parameters-bar">
+              <div class="param-col">
+                <label for="sourceSessionSelect">Source Session</label>
+                <select id="sourceSessionSelect" aria-label="Source academic session">
+                  <option value="2026-2027">Session 2026–2027</option>
+                  <option value="2025-2026">Session 2025–2026</option>
+                  <option value="2024-2025">Session 2024–2025</option>
+                  <option value="2027-2028">Session 2027–2028</option>
+                </select>
+              </div>
+
+              <div class="param-col">
+                <label for="sourceClassSelect">Source Class</label>
+                <select id="sourceClassSelect" aria-label="Source class grade">
+
+                </select>
+              </div>
+
+              <div class="arrow-divider" aria-hidden="true">→</div>
+
+              <div class="param-col">
+                <label for="destSessionSelect">Destination Session</label>
+                <select id="destSessionSelect" aria-label="Destination academic session">
+
+                </select>
+              </div>
+
+              <div class="param-col split-col">
+                <label>Destination Class &amp; Section</label>
+                <div class="split-dropdowns">
+                  <select id="destClassSelect" aria-label="Destination grade">
+
+                  </select>
+                  <select id="destSectionSelect" aria-label="Destination section">
+                    <option value="Section A">Section A</option>
+                    <option value="Section B">Section B</option>
+                    <option value="Section C">Section C</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="session-info-strip">
+              <span>Current Session Scope: <strong id="activeScopeLabel">Session 2026–2027 (Active Cycle)</strong></span>
+              <span class="switch-warning-pill">✦ Changes here dynamically switch historical student records</span>
+            </div>
+          </section>
+
+          <section class="promo-card">
+            <div class="roster-card-header">
+              <div class="card-header-block" style="margin-bottom:0">
+                <h2 id="rosterTitle">Eligible Students Roster (3)</h2>
+                <p>Select students individually or in bulk to promote</p>
+              </div>
+
+              <div class="roster-actions">
+                <span class="selected-count-label" id="selectionCount">Selected: 3 of 3</span>
+                <button class="promote-btn" id="promoteBtn" type="button">
+                  <span>✦</span> Promote Selected
+                </button>
+              </div>
+            </div>
+
+            <div class="promo-table-wrap">
+              <table class="promo-table" id="rosterTable">
+                <thead>
+                  <tr>
+                    <th style="width: 44px; text-align: center;">
+                      <input
+                        type="checkbox"
+                        id="selectAllCheckbox"
+                        class="table-checkbox"
+                        checked
+                        aria-label="Select all students"
+                      />
+                    </th>
+                    <th>Admission No</th>
+                    <th>Student Name</th>
+                    <th>Roll No</th>
+                    <th>Academic Performance</th>
+                    <th>Annual Attendance</th>
+                    <th>Eligibility</th>
+                  </tr>
+                </thead>
+                <tbody id="rosterTbody">
+
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="promo-card">
+            <div class="card-header-block">
+              <h2>
+                <i class="audit-header-icon">↺</i>
+                Promotion History &amp; Progression Audit
+              </h2>
+              <p>Verifiable log of previous student class movements across academic sessions</p>
+            </div>
+
+            <div class="promo-table-wrap">
+              <table class="promo-table audit-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Student Name</th>
+                    <th>From Cycle</th>
+                    <th>To Cycle</th>
+                    <th>Progression Details</th>
+                    <th>Remarks</th>
+                  </tr>
+                </thead>
+                <tbody id="auditTbody">
+
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="sessionSwitchModal">
+      <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="switchModalTitle">
+        <div class="modal-head">
+          <h3 id="switchModalTitle">
+            <span style="color:#e11d48">⚠</span> Warning: Switch Academic Session?
+          </h3>
+          <button class="modal-close-btn" id="closeSwitchModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <p class="modal-body-copy">
+          <b>Warning:</b> Switching the academic session to <b id="toSessionName">Session 2025–2026</b> will revert all student rosters, curriculum parameters, and grades to that academic session.
+        </p>
+        <div class="modal-detail-card" style="background:#fff1f2; border-color:#f43f5e; color:#881337;">
+          • All current 2026–27 content will be deactivated and replaced by historical records.<br />
+          • Mock data for the selected session does not include 2026–27 schedule content.<br />
+          • Any pending batch selections will be completely cleared.
+        </div>
+        <div class="modal-actions-row">
+          <button class="modal-btn modal-btn-cancel" id="cancelSwitchBtn" type="button">Cancel</button>
+          <button class="modal-btn modal-btn-confirm" id="confirmSwitchBtn" type="button">Proceed &amp; Switch Session</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="promoteConfirmModal">
+      <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="promoteModalTitle">
+        <div class="modal-head">
+          <h3 id="promoteModalTitle">
+            <span>✦</span> Confirm Student Progression
+          </h3>
+          <button class="modal-close-btn" id="closePromoteModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <p class="modal-body-copy">
+          You are about to execute progression promotion for <strong id="modalStudentCount">3 selected student(s)</strong>.
+        </p>
+        <div class="modal-detail-card" id="promotionSummaryCard">
+
+        </div>
+        <p class="modal-body-copy" style="font-size:12px; color:#64748b; margin-bottom:0">
+          This operation generates an immutable audit record and updates student enrolment records into the target session and grade.
+        </p>
+        <div class="modal-actions-row">
+          <button class="modal-btn modal-btn-cancel" id="cancelPromoteBtn" type="button">Cancel</button>
+          <button class="modal-btn modal-btn-confirm green" id="confirmPromoteBtn" type="button">Confirm &amp; Execute Promotion</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="promo-toast" id="promoToast">
+      <span class="toast-icon">✓</span>
+      <span id="toastMessage">Action completed successfully.</span>
+    </div>
+
+    <script>
+const SESSIONS = {
+        '2026-2027': {
+          name: 'Session 2026–2027',
+          scopeTag: 'Session 2026–2027 (Current Active Cycle)',
+          destOptions: ['2027-2028', '2026-2027'],
+          defaultDestSession: '2027-2028',
+          classes: {
+            'Class 5': {
+              defaultDestClass: 'Class 6',
+              availableDestClasses: ['Class 6', 'Class 7', 'Class 8'],
+              students: [
+                {
+                  id: 'ADM2026-0501',
+                  name: 'Aarav Krishnan',
+                  roll: '01',
+                  grade: 'Grade A+',
+                  gradeClass: 'grade-aplus',
+                  attendance: '95.6%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2026-0502',
+                  name: 'Diya Krishnan',
+                  roll: '02',
+                  grade: 'Grade A',
+                  gradeClass: 'grade-a',
+                  attendance: '92.4%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2026-0503',
+                  name: 'Karthik Senthil',
+                  roll: '03',
+                  grade: 'Grade B+',
+                  gradeClass: 'grade-bplus',
+                  attendance: '88.5%',
+                  eligible: true,
+                  promoted: false
+                }
+              ]
+            },
+            'Class 6': {
+              defaultDestClass: 'Class 7',
+              availableDestClasses: ['Class 7', 'Class 8'],
+              students: [
+                {
+                  id: 'ADM2026-0601',
+                  name: 'Sneha Murugan',
+                  roll: '01',
+                  grade: 'Grade A+',
+                  gradeClass: 'grade-aplus',
+                  attendance: '96.2%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2026-0602',
+                  name: 'Varun Chakravarthy',
+                  roll: '02',
+                  grade: 'Grade A',
+                  gradeClass: 'grade-a',
+                  attendance: '91.0%',
+                  eligible: true,
+                  promoted: false
+                }
+              ]
+            }
+          },
+          audit: [
+            {
+              date: '2026-04-12',
+              name: 'Aarav Krishnan',
+              from: 'Session 2025–2026 (Class 4-A)',
+              to: 'Session 2026–2027 (Class 5-A)',
+              details: 'Annual Assessment Clearance · 94.2%',
+              remarks: 'Batch Promotion · Regular'
+            },
+            {
+              date: '2026-04-12',
+              name: 'Diya Krishnan',
+              from: 'Session 2025–2026 (Class 4-B)',
+              to: 'Session 2026–2027 (Class 5-B)',
+              details: 'Annual Assessment Clearance · 91.0%',
+              remarks: 'Batch Promotion · Regular'
+            },
+            {
+              date: '2026-04-12',
+              name: 'Karthik Senthil',
+              from: 'Session 2025–2026 (Class 4-A)',
+              to: 'Session 2026–2027 (Class 5-A)',
+              details: 'Annual Assessment Clearance · 87.5%',
+              remarks: 'Batch Promotion · Regular'
+            }
+          ]
+        },
+        '2025-2026': {
+          name: 'Session 2025–2026',
+          scopeTag: 'Session 2025–2026 (Historical Archived Cycle)',
+          destOptions: ['2026-2027', '2025-2026'],
+          defaultDestSession: '2026-2027',
+          classes: {
+            'Class 5': {
+              defaultDestClass: 'Class 6',
+              availableDestClasses: ['Class 6', 'Class 7'],
+              students: [
+                {
+                  id: 'ADM2025-0511',
+                  name: 'Rohan Rajesh',
+                  roll: '01',
+                  grade: 'Grade A',
+                  gradeClass: 'grade-a',
+                  attendance: '94.2%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2025-0512',
+                  name: 'Meera Subramaniam',
+                  roll: '02',
+                  grade: 'Grade A+',
+                  gradeClass: 'grade-aplus',
+                  attendance: '97.8%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2025-0513',
+                  name: 'Arjun Balakrishnan',
+                  roll: '03',
+                  grade: 'Grade B',
+                  gradeClass: 'grade-b',
+                  attendance: '86.0%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2025-0514',
+                  name: 'Tanvi Nambiar',
+                  roll: '04',
+                  grade: 'Grade A',
+                  gradeClass: 'grade-a',
+                  attendance: '93.5%',
+                  eligible: true,
+                  promoted: false
+                }
+              ]
+            },
+            'Class 6': {
+              defaultDestClass: 'Class 7',
+              availableDestClasses: ['Class 7', 'Class 8'],
+              students: [
+                {
+                  id: 'ADM2025-0611',
+                  name: 'Vikramaditya Rao',
+                  roll: '01',
+                  grade: 'Grade A+',
+                  gradeClass: 'grade-aplus',
+                  attendance: '95.0%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2025-0612',
+                  name: 'Harini Venkatesh',
+                  roll: '02',
+                  grade: 'Grade A',
+                  gradeClass: 'grade-a',
+                  attendance: '90.8%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2025-0613',
+                  name: 'Pranav Sundaram',
+                  roll: '03',
+                  grade: 'Grade B+',
+                  gradeClass: 'grade-bplus',
+                  attendance: '89.2%',
+                  eligible: true,
+                  promoted: false
+                }
+              ]
+            },
+            'Class 4': {
+              defaultDestClass: 'Class 5',
+              availableDestClasses: ['Class 5', 'Class 6'],
+              students: [
+                {
+                  id: 'ADM2025-0401',
+                  name: 'Divya Ramesh',
+                  roll: '01',
+                  grade: 'Grade A+',
+                  gradeClass: 'grade-aplus',
+                  attendance: '96.0%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2025-0402',
+                  name: 'Siddharth Menon',
+                  roll: '02',
+                  grade: 'Grade A',
+                  gradeClass: 'grade-a',
+                  attendance: '91.5%',
+                  eligible: true,
+                  promoted: false
+                }
+              ]
+            }
+          },
+          audit: [
+            {
+              date: '2025-04-15',
+              name: 'Rohan Rajesh',
+              from: 'Session 2024–2025 (Class 4-A)',
+              to: 'Session 2025–2026 (Class 5-A)',
+              details: 'Annual Assessment Clearance · 89.0%',
+              remarks: 'Year-End Progression · Verified'
+            },
+            {
+              date: '2025-04-15',
+              name: 'Meera Subramaniam',
+              from: 'Session 2024–2025 (Class 4-A)',
+              to: 'Session 2025–2026 (Class 5-A)',
+              details: 'Academic Rank #1 · 96.5%',
+              remarks: 'Year-End Progression · Verified'
+            },
+            {
+              date: '2025-04-15',
+              name: 'Vikramaditya Rao',
+              from: 'Session 2024–2025 (Class 5-A)',
+              to: 'Session 2025–2026 (Class 6-A)',
+              details: 'Annual Assessment Clearance · 92.5%',
+              remarks: 'Year-End Progression · Verified'
+            }
+          ]
+        },
+        '2024-2025': {
+          name: 'Session 2024–2025',
+          scopeTag: 'Session 2024–2025 (Historical Cycle)',
+          destOptions: ['2025-2026', '2024-2025'],
+          defaultDestSession: '2025-2026',
+          classes: {
+            'Class 5': {
+              defaultDestClass: 'Class 6',
+              availableDestClasses: ['Class 6', 'Class 7'],
+              students: [
+                {
+                  id: 'ADM2024-0521',
+                  name: 'Ananya Swaminathan',
+                  roll: '01',
+                  grade: 'Grade A+',
+                  gradeClass: 'grade-aplus',
+                  attendance: '98.1%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2024-0522',
+                  name: 'Gautham Chandrasekar',
+                  roll: '02',
+                  grade: 'Grade A',
+                  gradeClass: 'grade-a',
+                  attendance: '91.0%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2024-0523',
+                  name: 'Nithya Raghavan',
+                  roll: '03',
+                  grade: 'Grade B+',
+                  gradeClass: 'grade-bplus',
+                  attendance: '89.4%',
+                  eligible: true,
+                  promoted: false
+                }
+              ]
+            },
+            'Class 6': {
+              defaultDestClass: 'Class 7',
+              availableDestClasses: ['Class 7', 'Class 8'],
+              students: [
+                {
+                  id: 'ADM2024-0621',
+                  name: 'Aditya Prakash',
+                  roll: '01',
+                  grade: 'Grade A',
+                  gradeClass: 'grade-a',
+                  attendance: '93.4%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2024-0622',
+                  name: 'Pooja Raman',
+                  roll: '02',
+                  grade: 'Grade A+',
+                  gradeClass: 'grade-aplus',
+                  attendance: '97.0%',
+                  eligible: true,
+                  promoted: false
+                }
+              ]
+            }
+          },
+          audit: [
+            {
+              date: '2024-04-18',
+              name: 'Ananya Swaminathan',
+              from: 'Session 2023–2024 (Class 4)',
+              to: 'Session 2024–2025 (Class 5-A)',
+              details: 'Annual Clearance · 95.0%',
+              remarks: 'Promoted with Honor'
+            },
+            {
+              date: '2024-04-18',
+              name: 'Aditya Prakash',
+              from: 'Session 2023–2024 (Class 5)',
+              to: 'Session 2024–2025 (Class 6-A)',
+              details: 'Annual Clearance · 89.2%',
+              remarks: 'General Promotion'
+            }
+          ]
+        },
+        '2027-2028': {
+          name: 'Session 2027–2028',
+          scopeTag: 'Session 2027–2028 (Upcoming Planning Cycle)',
+          destOptions: ['2028-2029', '2027-2028'],
+          defaultDestSession: '2028-2029',
+          classes: {
+            'Class 5': {
+              defaultDestClass: 'Class 6',
+              availableDestClasses: ['Class 6', 'Class 7'],
+              students: [
+                {
+                  id: 'ADM2027-0531',
+                  name: 'Yashaswini Iyer',
+                  roll: '01',
+                  grade: 'Grade A+',
+                  gradeClass: 'grade-aplus',
+                  attendance: '97.0%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2027-0532',
+                  name: 'Sai Krishna',
+                  roll: '02',
+                  grade: 'Grade A',
+                  gradeClass: 'grade-a',
+                  attendance: '93.0%',
+                  eligible: true,
+                  promoted: false
+                },
+                {
+                  id: 'ADM2027-0533',
+                  name: 'Rithika Anand',
+                  roll: '03',
+                  grade: 'Grade A',
+                  gradeClass: 'grade-a',
+                  attendance: '94.5%',
+                  eligible: true,
+                  promoted: false
+                }
+              ]
+            },
+            'Class 6': {
+              defaultDestClass: 'Class 7',
+              availableDestClasses: ['Class 7', 'Class 8'],
+              students: [
+                {
+                  id: 'ADM2027-0631',
+                  name: 'Dhruv Pillai',
+                  roll: '01',
+                  grade: 'Grade A+',
+                  gradeClass: 'grade-aplus',
+                  attendance: '95.5%',
+                  eligible: true,
+                  promoted: false
+                }
+              ]
+            }
+          },
+          audit: [
+            {
+              date: '2027-04-10',
+              name: 'Yashaswini Iyer',
+              from: 'Session 2026–2027 (Class 4)',
+              to: 'Session 2027–2028 (Class 5-A)',
+              details: 'Provisional Early Placement',
+              remarks: 'Advance Enrolment Roll'
+            }
+          ]
+        }
+      };
+
+      let currentSessionKey = localStorage.getItem('sunrise-academic-session') || '2026-2027';
+      if (!SESSIONS[currentSessionKey]) currentSessionKey = '2026-2027';
+
+      let pendingSessionKey = null;
+      let currentClassKey = 'Class 5';
+      let selectedStudentIds = new Set();
+      let searchQuery = '';
+
+      const sourceSessionSelect = document.getElementById('sourceSessionSelect');
+      const sourceClassSelect = document.getElementById('sourceClassSelect');
+      const destSessionSelect = document.getElementById('destSessionSelect');
+      const destClassSelect = document.getElementById('destClassSelect');
+      const destSectionSelect = document.getElementById('destSectionSelect');
+      const activeScopeLabel = document.getElementById('activeScopeLabel');
+
+      const rosterTitle = document.getElementById('rosterTitle');
+      const selectionCount = document.getElementById('selectionCount');
+      const promoteBtn = document.getElementById('promoteBtn');
+      const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+      const rosterTbody = document.getElementById('rosterTbody');
+      const auditTbody = document.getElementById('auditTbody');
+      const studentSearchInput = document.getElementById('studentSearchInput');
+
+      const sessionSwitchModal = document.getElementById('sessionSwitchModal');
+      const fromSessionName = document.getElementById('fromSessionName');
+      const toSessionName = document.getElementById('toSessionName');
+      const cancelSwitchBtn = document.getElementById('cancelSwitchBtn');
+      const confirmSwitchBtn = document.getElementById('confirmSwitchBtn');
+      const closeSwitchModalBtn = document.getElementById('closeSwitchModalBtn');
+
+      const promoteConfirmModal = document.getElementById('promoteConfirmModal');
+      const modalStudentCount = document.getElementById('modalStudentCount');
+      const promotionSummaryCard = document.getElementById('promotionSummaryCard');
+      const cancelPromoteBtn = document.getElementById('cancelPromoteBtn');
+      const confirmPromoteBtn = document.getElementById('confirmPromoteBtn');
+      const closePromoteModalBtn = document.getElementById('closePromoteModalBtn');
+
+      const promoToast = document.getElementById('promoToast');
+      const toastMessage = document.getElementById('toastMessage');
+
+      function showToast(msg) {
+        toastMessage.textContent = msg;
+        promoToast.classList.add('show');
+        setTimeout(() => promoToast.classList.remove('show'), 3500);
+      }
+
+      function initSessionView(sessionKey) {
+        currentSessionKey = sessionKey;
+        sourceSessionSelect.value = sessionKey;
+        const sessionData = SESSIONS[sessionKey];
+        activeScopeLabel.textContent = sessionData.scopeTag;
+
+        destSessionSelect.innerHTML = '';
+        const allDestYears = ['2027-2028', '2026-2027', '2025-2026', '2028-2029'];
+        allDestYears.forEach(year => {
+          const opt = document.createElement('option');
+          opt.value = year;
+          opt.textContent = `Session ${year.replace('-', '–')}`;
+          if (year === sessionData.defaultDestSession) opt.selected = true;
+          destSessionSelect.appendChild(opt);
+        });
+
+        sourceClassSelect.innerHTML = '';
+        const classKeys = Object.keys(sessionData.classes);
+        if (!classKeys.includes(currentClassKey)) {
+          currentClassKey = classKeys[0];
+        }
+        classKeys.forEach(cls => {
+          const opt = document.createElement('option');
+          opt.value = cls;
+          opt.textContent = cls;
+          if (cls === currentClassKey) opt.selected = true;
+          sourceClassSelect.appendChild(opt);
+        });
+
+        updateDestClassOptions();
+        renderRoster();
+        renderAuditLog();
+      }
+
+      function updateDestClassOptions() {
+        const sessionData = SESSIONS[currentSessionKey];
+        const classData = sessionData.classes[currentClassKey] || sessionData.classes[Object.keys(sessionData.classes)[0]];
+        destClassSelect.innerHTML = '';
+        if (classData && classData.availableDestClasses) {
+          classData.availableDestClasses.forEach(cls => {
+            const opt = document.createElement('option');
+            opt.value = cls;
+            opt.textContent = cls;
+            if (cls === classData.defaultDestClass) opt.selected = true;
+            destClassSelect.appendChild(opt);
+          });
+        }
+      }
+
+      function getFilteredStudents() {
+        const sessionData = SESSIONS[currentSessionKey];
+        const classData = sessionData.classes[currentClassKey];
+        if (!classData || !classData.students) return [];
+        return classData.students.filter(s => {
+          if (!searchQuery) return true;
+          const query = searchQuery.toLowerCase();
+          return (
+            s.name.toLowerCase().includes(query) ||
+            s.id.toLowerCase().includes(query) ||
+            s.roll.toLowerCase().includes(query)
+          );
+        });
+      }
+
+      function renderRoster() {
+        const students = getFilteredStudents();
+        const sessionData = SESSIONS[currentSessionKey];
+        const totalEligible = students.filter(s => !s.promoted).length;
+
+        rosterTitle.textContent = `Eligible Students Roster (${totalEligible})`;
+
+        selectedStudentIds.clear();
+        students.forEach(s => {
+          if (!s.promoted) selectedStudentIds.add(s.id);
+        });
+
+        if (students.length === 0) {
+          rosterTbody.innerHTML = `
+            <tr>
+              <td colspan="7">
+                <div class="empty-table-state">
+                  <span style="font-size:28px">⌕</span>
+                  <p>No eligible student records found matching this class or filter.</p>
+                </div>
+              </td>
+            </tr>
+          `;
+          updateSelectionState(0, 0);
+          return;
+        }
+
+        let html = '';
+        students.forEach(s => {
+          const isChecked = selectedStudentIds.has(s.id);
+          const isPromoted = s.promoted;
+
+          html += `
+            <tr data-id="${s.id}" class="${isPromoted ? 'promoted-row' : ''}">
+              <td style="text-align: center;">
+                <input
+                  type="checkbox"
+                  class="table-checkbox student-chk"
+                  data-student-id="${s.id}"
+                  ${isChecked && !isPromoted ? 'checked' : ''}
+                  ${isPromoted ? 'disabled' : ''}
+                  aria-label="Select ${s.name}"
+                />
+              </td>
+              <td><span class="adm-no">${s.id}</span></td>
+              <td class="student-name-cell">${s.name}</td>
+              <td class="roll-no">${s.roll}</td>
+              <td><span class="grade-pill ${s.gradeClass}">${s.grade}</span></td>
+              <td><span class="attendance-val">${s.attendance}</span></td>
+              <td>
+                ${
+                  isPromoted
+                    ? `<span class="eligibility-tag promoted">✓ Promoted</span>`
+                    : `<span class="eligibility-tag">✔ Eligible</span>`
+                }
+              </td>
+            </tr>
+          `;
+        });
+
+        rosterTbody.innerHTML = html;
+        updateSelectionState(selectedStudentIds.size, totalEligible);
+      }
+
+      function updateSelectionState(count, total) {
+        selectionCount.textContent = `Selected: ${count} of ${total}`;
+        selectAllCheckbox.checked = total > 0 && count === total;
+        selectAllCheckbox.indeterminate = count > 0 && count < total;
+        promoteBtn.disabled = count === 0;
+      }
+
+      function renderAuditLog() {
+        const sessionData = SESSIONS[currentSessionKey];
+        const audits = sessionData.audit || [];
+
+        if (audits.length === 0) {
+          auditTbody.innerHTML = `
+            <tr>
+              <td colspan="6" class="empty-table-state">
+                <p>No historical progression movements recorded for this cycle yet.</p>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        auditTbody.innerHTML = audits.map(a => `
+          <tr>
+            <td style="color:#64748b; font-family: monospace; font-weight:800">${a.date}</td>
+            <td style="font-weight:800; color:#0f172a">${a.name}</td>
+            <td><span class="audit-cycle-pill">${a.from}</span></td>
+            <td><span class="audit-cycle-pill" style="background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8">${a.to}</span></td>
+            <td>${a.details}</td>
+            <td><span style="color:#059669; font-weight:800">● ${a.remarks}</span></td>
+          </tr>
+        `).join('');
+      }
+
+      selectAllCheckbox.addEventListener('change', () => {
+        const shouldCheck = selectAllCheckbox.checked;
+        const students = getFilteredStudents();
+        const activeEligible = students.filter(s => !s.promoted);
+
+        selectedStudentIds.clear();
+        if (shouldCheck) {
+          activeEligible.forEach(s => selectedStudentIds.add(s.id));
+        }
+
+        rosterTbody.querySelectorAll('.student-chk:not(:disabled)').forEach(chk => {
+          chk.checked = shouldCheck;
+        });
+
+        updateSelectionState(selectedStudentIds.size, activeEligible.length);
+      });
+
+      rosterTbody.addEventListener('change', e => {
+        if (!e.target.classList.contains('student-chk')) return;
+        const id = e.target.dataset.studentId;
+        if (e.target.checked) {
+          selectedStudentIds.add(id);
+        } else {
+          selectedStudentIds.delete(id);
+        }
+        const students = getFilteredStudents();
+        const activeEligible = students.filter(s => !s.promoted);
+        updateSelectionState(selectedStudentIds.size, activeEligible.length);
+      });
+
+      studentSearchInput.addEventListener('input', e => {
+        searchQuery = e.target.value.trim();
+        renderRoster();
+      });
+
+      sourceClassSelect.addEventListener('change', e => {
+        currentClassKey = e.target.value;
+        updateDestClassOptions();
+        renderRoster();
+      });
+
+      sourceSessionSelect.addEventListener('change', e => {
+        const nextSession = e.target.value;
+        if (nextSession === currentSessionKey) return;
+
+        pendingSessionKey = nextSession;
+
+        sourceSessionSelect.value = currentSessionKey;
+
+        fromSessionName.textContent = SESSIONS[currentSessionKey].name;
+        toSessionName.textContent = SESSIONS[pendingSessionKey].name;
+        sessionSwitchModal.classList.add('open');
+      });
+
+      function closeSessionSwitchModal() {
+        sessionSwitchModal.classList.remove('open');
+        pendingSessionKey = null;
+      }
+
+      cancelSwitchBtn.addEventListener('click', closeSessionSwitchModal);
+      closeSwitchModalBtn.addEventListener('click', closeSessionSwitchModal);
+
+      confirmSwitchBtn.addEventListener('click', () => {
+        if (!pendingSessionKey || !SESSIONS[pendingSessionKey]) {
+          closeSessionSwitchModal();
+          return;
+        }
+
+        const switchedSessionName = SESSIONS[pendingSessionKey].name;
+        initSessionView(pendingSessionKey);
+        localStorage.setItem('sunrise-academic-session', pendingSessionKey);
+
+        closeSessionSwitchModal();
+        showToast(`Switched active context to ${switchedSessionName}. Roster updated.`);
+      });
+
+      promoteBtn.addEventListener('click', () => {
+        if (selectedStudentIds.size === 0) return;
+
+        const sessionData = SESSIONS[currentSessionKey];
+        const classData = sessionData.classes[currentClassKey];
+        const count = selectedStudentIds.size;
+        modalStudentCount.textContent = `${count} selected student${count > 1 ? 's' : ''}`;
+
+        const destSessionName = destSessionSelect.options[destSessionSelect.selectedIndex]?.text || destSessionSelect.value;
+        const destClassVal = destClassSelect.value;
+        const destSectionVal = destSectionSelect.value;
+
+        promotionSummaryCard.innerHTML = `
+          <div><b>Origin:</b> ${classData ? currentClassKey : 'Current Class'} · ${sessionData.name}</div>
+          <div><b>Destination:</b> ${destClassVal} - ${destSectionVal} · ${destSessionName}</div>
+          <div><b>Batch Size:</b> ${count} Student(s) to be promoted</div>
+        `;
+
+        promoteConfirmModal.classList.add('open');
+      });
+
+      function closePromoteModal() {
+        promoteConfirmModal.classList.remove('open');
+      }
+
+      cancelPromoteBtn.addEventListener('click', closePromoteModal);
+      closePromoteModalBtn.addEventListener('click', closePromoteModal);
+
+      confirmPromoteBtn.addEventListener('click', () => {
+        const sessionData = SESSIONS[currentSessionKey];
+        const classData = sessionData.classes[currentClassKey];
+        if (!classData) return;
+
+        const now = new Date();
+        const dateStr = now.toISOString().split('T')[0];
+        const destSessionName = destSessionSelect.options[destSessionSelect.selectedIndex]?.text || destSessionSelect.value;
+        const destClassVal = destClassSelect.value;
+        const destSectionVal = destSectionSelect.value;
+
+        let promotedCount = 0;
+        classData.students.forEach(student => {
+          if (selectedStudentIds.has(student.id) && !student.promoted) {
+            student.promoted = true;
+            promotedCount++;
+
+            sessionData.audit.unshift({
+              date: dateStr,
+              name: student.name,
+              from: `${sessionData.name} (${currentClassKey})`,
+              to: `${destSessionName} (${destClassVal} - ${destSectionVal})`,
+              details: `Year-End Progression Clearance (${student.grade})`,
+              remarks: 'Batch Promotion Executed · Verified'
+            });
+          }
+        });
+
+        closePromoteModal();
+        renderRoster();
+        renderAuditLog();
+        showToast(`Successfully promoted ${promotedCount} student(s) to ${destClassVal} - ${destSectionVal}!`);
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target === sessionSwitchModal) closeSessionSwitchModal();
+        if (e.target === promoteConfirmModal) closePromoteModal();
+      });
+
+      initSessionView(currentSessionKey);
+</script>
+  </body>
+</html>

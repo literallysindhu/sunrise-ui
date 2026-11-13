@@ -1,0 +1,159 @@
+.landing {
+  grid-template-columns:1fr .62fr 1fr
+}
+
+.portal-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px
+}
+
+.admin-pill {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:4px solid #20242a;
+  border-radius:999px;
+  background:#b5dffc;
+  box-shadow:4px 4px 0 #20242a;
+  padding:12px 18px;
+  color:#20242a;
+  text-decoration:none;
+  font:800 17px "Baloo 2"
+}
+
+.sun-stage {
+  position:relative;
+  display:grid;
+  place-items:center;
+  min-height:340px
+}
+
+.sun-face {
+  position:relative;
+  width:185px;
+  height:185px;
+  border:5px solid #20242a;
+  border-radius:50%;
+  background:#ffd21a;
+  box-shadow:7px 7px 0 #f29b22;
+  animation:sun-bob 3.5s ease-in-out infinite
+}
+
+.sun-rays {
+  position:absolute;
+  color:#ffac1b;
+  font-size:31px;
+  letter-spacing:12px;
+  text-shadow:2px 2px 0 #20242a;
+  animation:sun-spin 14s linear infinite
+}
+
+.sun-eye {
+  position:absolute;
+  top:68px;
+  width:15px;
+  height:25px;
+  background:#20242a;
+  border-radius:50%
+}
+
+.sun-eye.left {
+  left:54px
+}
+
+.sun-eye.right {
+  right:54px
+}
+
+.sun-smile {
+  position:absolute;
+  left:65px;
+  top:105px;
+  width:48px;
+  height:25px;
+  border:5px solid #20242a;
+  border-top:0;
+  border-radius:0 0 50px 50px
+}
+
+.sun-cheek {
+  position:absolute;
+  top:111px;
+  width:22px;
+  height:12px;
+  background:#ff8d5b;
+  border-radius:50%;
+  opacity:.9
+}
+
+.sun-cheek.left {
+  left:30px
+}
+
+.sun-cheek.right {
+  right:30px
+}
+
+.sun-caption {
+  position:absolute;
+  bottom:25px;
+  border:3px solid #20242a;
+  border-radius:999px;
+  background:#fffdf1;
+  padding:7px 11px;
+  font:800 12px "Nunito Sans";
+  animation:caption-pop 3.5s ease-in-out infinite
+}
+
+@keyframes sun-bob {
+  50% {
+    transform:translateY(-12px) rotate(4deg)
+  }
+}
+
+@keyframes sun-spin {
+  to {
+    transform:rotate(360deg)
+  }
+}
+
+@keyframes caption-pop {
+  50% {
+    transform:scale(1.06)
+  }
+}
+
+@media(max-width:950px) {
+  .landing {
+    grid-template-columns:1fr 1fr
+  }
+  .sun-stage {
+    min-height:230px
+  }
+  .feature-panel {
+    grid-column:1/-1
+  }
+}
+
+@media(max-width:620px) {
+  .landing {
+    grid-template-columns:1fr
+  }
+  .sun-stage {
+    order:-1;
+    min-height:220px
+  }
+  .sun-face {
+    transform:scale(.78)
+  }
+  .sun-rays {
+    font-size:23px
+  }
+  .feature-panel {
+    grid-column:auto
+  }
+  .admin-pill,.primary-cta {
+    width:100%
+  }
+}

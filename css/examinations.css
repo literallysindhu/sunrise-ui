@@ -1,0 +1,254 @@
+.exam-hero {
+  position:relative;
+  overflow:hidden;
+  border:4px solid #20242a;
+  border-radius:26px;
+  background:#b5dffc;
+  box-shadow:5px 5px 0 #20242a;
+  padding:29px 30px;
+  margin-bottom:25px
+}
+
+.exam-hero h1 {
+  font:800 43px/1 "Baloo 2";
+  margin:5px 0 9px
+}
+
+.exam-hero p {
+  font-weight:800;
+  margin:0
+}
+
+.star-spray {
+  position:absolute;
+  right:22px;
+  top:12px;
+  color:#ffba21;
+  font-size:29px;
+  letter-spacing:6px;
+  text-shadow:2px 2px 0 #20242a;
+  transform:rotate(10deg)
+}
+
+.star-spray:after {
+  content:"✦ ✧ ★";
+  display:block;
+  font-size:19px;
+  margin-left:35px;
+  margin-top:3px
+}
+
+.report-card {
+  border:4px solid #20242a;
+  border-radius:26px;
+  background:#fffdf1;
+  box-shadow:5px 5px 0 #20242a;
+  padding:25px;
+  position:relative;
+  overflow:hidden
+}
+
+.report-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:start;
+  gap:18px;
+  border-bottom:3px dashed #20242a;
+  padding-bottom:18px
+}
+
+.report-heading h2 {
+  font:800 31px/1 "Baloo 2";
+  margin:4px 0
+}
+
+.grade-badge {
+  border:4px solid #20242a;
+  border-radius:20px;
+  background:#8bdc86;
+  padding:14px 18px;
+  text-align:center;
+  box-shadow:3px 3px 0 #20242a;
+  min-width:160px
+}
+
+.grade-badge span {
+  display:block;
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase
+}
+
+.grade-badge strong {
+  font:800 38px/1 "Baloo 2"
+}
+
+.grade-badge small {
+  display:block;
+  font-weight:900
+}
+
+.subject-grades {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-top:23px
+}
+
+.subject-grade {
+  border:3px solid #20242a;
+  border-radius:18px;
+  background:#fff;
+  padding:16px;
+  text-align:center;
+  position:relative
+}
+
+.subject-grade:nth-child(1) {
+  background:#c8eca0
+}
+
+.subject-grade:nth-child(2) {
+  background:#ffd0ec
+}
+
+.subject-grade:nth-child(3) {
+  background:#b5dffc
+}
+
+.subject-grade:nth-child(4) {
+  background:#ffe196
+}
+
+.subject-grade .tiny-stars {
+  color:#f59d15;
+  font-size:16px;
+  letter-spacing:2px;
+  text-shadow:1px 1px 0 #20242a
+}
+
+.subject-grade h3 {
+  font:800 19px "Baloo 2";
+  margin:6px 0 3px
+}
+
+.subject-grade strong {
+  font:800 26px/1 "Baloo 2"
+}
+
+.subject-grade small {
+  font-size:11px;
+  font-weight:900
+}
+
+.performance-row {
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:20px;
+  margin-top:24px
+}
+
+.performance-card,.teacher-note {
+  border:4px solid #20242a;
+  border-radius:21px;
+  padding:20px
+}
+
+.performance-card {
+  background:#ffcadf
+}
+
+.teacher-note {
+  background:#d3efa5
+}
+
+.performance-card h2,.teacher-note h2 {
+  font:800 25px "Baloo 2";
+  margin:0 0 10px
+}
+
+.score-bar {
+  height:18px;
+  border:3px solid #20242a;
+  border-radius:99px;
+  background:#fff;
+  overflow:hidden
+}
+
+.score-bar i {
+  display:block;
+  height:100%;
+  width:90.5%;
+  background:#ffb528;
+  border-right:3px solid #20242a
+}
+
+.performance-card p,.teacher-note p {
+  font-size:13px;
+  font-weight:700;
+  line-height:1.45;
+  margin:10px 0 0
+}
+
+.achievement-stars {
+  font-size:26px;
+  color:#f4a515;
+  text-shadow:2px 2px 0 #20242a;
+  letter-spacing:4px;
+  margin-top:10px
+}
+
+.teacher-note b {
+  font-size:13px
+}
+
+.corner-star {
+  position:absolute;
+  color:#ffb528;
+  font-size:65px;
+  text-shadow:3px 3px 0 #20242a;
+  opacity:.7
+}
+
+.corner-star.one {
+  left:-8px;
+  bottom:-17px;
+  transform:rotate(-17deg)
+}
+
+.corner-star.two {
+  right:20px;
+  bottom:15px;
+  font-size:35px;
+  transform:rotate(17deg)
+}
+
+@media(max-width:800px) {
+  .subject-grades {
+    grid-template-columns:1fr 1fr
+  }
+  .performance-row {
+    grid-template-columns:1fr
+  }
+}
+
+@media(max-width:520px) {
+  .report-heading {
+    flex-direction:column
+  }
+  .grade-badge {
+    width:100%
+  }
+  .subject-grades {
+    grid-template-columns:1fr
+  }
+  .exam-hero {
+    padding:24px 20px
+  }
+  .exam-hero h1 {
+    font-size:36px
+  }
+  .star-spray {
+    opacity:.4
+  }
+}

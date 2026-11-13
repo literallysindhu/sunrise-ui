@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/transitions.css">
+    <link rel="stylesheet" href="css/admin-mature.css">
+  </head>
+  <body class="admin-login">
+    <main class="admin-shell">
+      <section class="admin-heading">
+        <a class="admin-logo" href="landing.html">♢</a>
+        <h1>Sunrise School Management</h1>
+        <p>Admin &amp; Teacher Web Portal</p>
+      </section>
+      <section class="admin-card">
+        <form>
+          <label>Official email address<input type="email" value="admin@sunriseschool.edu.in" aria-label="Official email address">
+          </label>
+          <label>Account password<span class="password-wrap">
+            <input type="password" value="Sunrise2026" aria-label="Account password">
+            <button type="button" aria-label="Show password">◉</button>
+          </span>
+        </label>
+        <button class="admin-submit" type="button" onclick="location.href='super-admin.html?enter=1'">Sign in to portal</button>
+      </form>
+      <div class="role-divider">Quick test credentials by role
+      </div>
+      <div class="role-grid" role="group" aria-label="Choose sign-in role">
+        <button class="role active" data-role="Super Admin">Super Admin</button>
+        <button class="role" data-role="School Admin">School<br>Admin</button>
+        <button class="role" data-role="Teacher">Teacher</button>
+        <button class="role" data-role="Accountant">Accountant</button>
+      </div>
+      <a class="parent-access" href="login.html">
+      <span>♙</span>
+      <div>
+        <b>Access Parent Mobile &amp; Web Portal</b>
+        <small>Sign in with registered mobile number &amp; OTP</small>
+      </div>
+      <i>→</i>
+    </a>
+  </section>
+  <p class="admin-footer">⌾ Role-based access protected by school security</p>
+</main>
+<script>
+document.querySelectorAll('.role').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.role').forEach(item=>item.classList.remove('active'));button.classList.add('active');document.querySelector('.admin-submit').textContent='Sign in as '+button.dataset.role;}));
+</script>
+</body>
+</html>

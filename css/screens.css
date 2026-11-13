@@ -1,0 +1,404 @@
+.landing {
+  max-width:1180px;
+  margin:auto;
+  min-height:calc(100vh - 127px);
+  padding:70px 36px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:58px
+}
+
+.hero h1,.login-copy h1 {
+  font:800 clamp(52px,7vw,84px)/.86 "Baloo 2";
+  margin:8px 0 25px
+}
+
+.hero h1 span,.login-copy h1 span {
+  color:#9b4c13
+}
+
+.hero-copy {
+  font-weight:700;
+  font-size:18px;
+  line-height:1.55;
+  max-width:460px
+}
+
+.primary-cta {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  border:4px solid #20242a;
+  border-radius:999px;
+  padding:12px 20px;
+  color:#1c2634;
+  background:#ff92d2;
+  font:800 18px "Baloo 2";
+  box-shadow:4px 4px 0 #20242a;
+  text-decoration:none;
+  cursor:pointer
+}
+
+.primary-cta span {
+  font-size:24px
+}
+
+.feature-panel {
+  position:relative;
+  background:#edf9ff;
+  border:4px solid #20242a;
+  border-radius:28px;
+  padding:42px 20px 20px;
+  box-shadow:5px 5px 0 #20242a
+}
+
+.sticker {
+  position:absolute;
+  left:-15px;
+  top:-18px;
+  background:#ff92d2;
+  border:3px solid #20242a;
+  border-radius:9px;
+  padding:6px 12px;
+  font:800 12px "Baloo 2";
+  transform:rotate(-8deg)
+}
+
+.landing-features {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px
+}
+
+.feature {
+  border:3px solid #20242a;
+  border-radius:17px;
+  padding:15px;
+  min-height:143px
+}
+
+.feature b {
+  display:grid;
+  place-items:center;
+  border:2px solid #20242a;
+  border-radius:50%;
+  background:#fff;
+  width:29px;
+  height:29px
+}
+
+.feature h2 {
+  font:800 20px/1.04 "Baloo 2";
+  margin:9px 0 4px
+}
+
+.feature p {
+  font-size:11px;
+  font-weight:800;
+  margin:0
+}
+
+.back-link {
+  color:#1c2634;
+  font-size:13px;
+  font-weight:900
+}
+
+.login-layout {
+  max-width:1050px;
+  margin:auto;
+  min-height:calc(100vh - 127px);
+  display:grid;
+  grid-template-columns:.85fr 1fr;
+  align-items:center;
+  gap:65px;
+  padding:55px 34px
+}
+
+.login-copy>p:not(.eyebrow) {
+  font-size:18px;
+  line-height:1.6;
+  font-weight:700
+}
+
+.login-card {
+  background:#82d4d1;
+  border:4px solid #20242a;
+  border-radius:27px;
+  box-shadow:5px 5px 0 #20242a;
+  padding:30px
+}
+
+.login-card h2 {
+  font:800 37px "Baloo 2";
+  margin:13px 0 0
+}
+
+.login-card>p {
+  font-weight:700;
+  line-height:1.45
+}
+
+.login-badge {
+  display:inline-block;
+  border:2px solid #20242a;
+  border-radius:999px;
+  padding:6px 11px;
+  background:#fff4a5;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase
+}
+
+.login-card form {
+  margin-top:24px
+}
+
+.login-card label {
+  display:block;
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+  margin-bottom:7px
+}
+
+.phone-field {
+  display:flex;
+  border:3px solid #20242a;
+  border-radius:13px;
+  overflow:hidden;
+  background:#fff;
+  margin-bottom:17px
+}
+
+.phone-field span {
+  padding:13px 10px;
+  border-right:3px solid #20242a;
+  font-weight:900;
+  white-space:nowrap
+}
+
+.phone-field input {
+  border:0;
+  outline:0;
+  width:100%;
+  padding:12px;
+  font:700 16px "Nunito Sans"
+}
+
+.login-card .primary-cta {
+  width:100%;
+  border-radius:13px
+}
+
+.form-note {
+  font-size:11px;
+  text-align:center;
+  margin:13px 0!important
+}
+
+.help-box {
+  border-top:2px dashed #20242a;
+  padding-top:16px;
+  display:flex;
+  flex-direction:column;
+  font-size:12px;
+  gap:2px
+}
+
+.attendance-summary {
+  display:grid;
+  grid-template-columns:1.35fr repeat(3,1fr);
+  gap:18px;
+  margin-bottom:25px
+}
+
+.attendance-score,.count-card,.attendance-detail {
+  border:4px solid #20242a;
+  border-radius:23px
+}
+
+.attendance-score {
+  background:#83d2d2;
+  padding:21px;
+  min-height:165px
+}
+
+.attendance-score strong {
+  font:800 67px/.8 "Baloo 2";
+  display:block
+}
+
+.attendance-score strong span {
+  font-size:27px
+}
+
+.attendance-score p:last-child {
+  font-weight:800;
+  margin:10px 0 0
+}
+
+.count-card {
+  padding:17px;
+  display:flex;
+  align-items:center;
+  gap:11px
+}
+
+.count-card>span {
+  display:grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  border:2px solid #20242a;
+  border-radius:50%;
+  background:#fff;
+  font-size:20px;
+  font-weight:900
+}
+
+.count-card b {
+  font:800 33px/1 "Baloo 2"
+}
+
+.count-card p {
+  font-size:11px;
+  font-weight:900;
+  margin:4px 0 0
+}
+
+.present {
+  background:#8bdc86
+}
+
+.absent {
+  background:#ff92d2
+}
+
+.late {
+  background:#ffbb66
+}
+
+.attendance-detail {
+  background:#fffdf1;
+  box-shadow:5px 5px 0 #20242a;
+  padding:24px
+}
+
+.legend {
+  display:flex;
+  gap:11px;
+  flex-wrap:wrap;
+  font-size:11px;
+  font-weight:800
+}
+
+.legend span:nth-child(1) {
+  color:#34873e
+}
+
+.legend span:nth-child(2) {
+  color:#d93692
+}
+
+.legend span:nth-child(3) {
+  color:#bc6c00
+}
+
+.weekdays,.days {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px
+}
+
+.weekdays {
+  font-size:11px;
+  font-weight:900;
+  text-align:center;
+  margin-bottom:7px
+}
+
+.days span {
+  border:3px solid #20242a;
+  border-radius:12px;
+  min-height:68px;
+  padding:8px;
+  font:800 22px/1 "Baloo 2"
+}
+
+.days small {
+  display:block;
+  font:800 9px "Nunito Sans";
+  margin-top:7px
+}
+
+.present-day {
+  background:#c8eca0
+}
+
+.absent-day {
+  background:#ffc4e7
+}
+
+.late-day {
+  background:#ffe196
+}
+
+.attendance-note {
+  border-top:2px dashed #20242a;
+  padding-top:14px;
+  margin:18px 0 0;
+  font-size:12px;
+  font-weight:700
+}
+
+@media(max-width:800px) {
+  .landing,.login-layout {
+    grid-template-columns:1fr;
+    padding:45px 24px
+  }
+  .attendance-summary {
+    grid-template-columns:1fr 1fr
+  }
+  .attendance-score {
+    grid-column:1/-1
+  }
+}
+
+@media(max-width:520px) {
+  .landing {
+    padding:42px 18px
+  }
+  .hero h1,.login-copy h1 {
+    font-size:53px
+  }
+  .attendance-summary {
+    grid-template-columns:1fr
+  }
+  .attendance-score {
+    grid-column:auto
+  }
+  .weekdays,.days {
+    gap:4px
+  }
+  .days span {
+    min-height:61px;
+    padding:6px;
+    font-size:18px
+  }
+  .days small {
+    font-size:8px
+  }
+  .attendance-detail {
+    padding:16px
+  }
+  .login-layout {
+    padding:35px 18px
+  }
+  .login-copy {
+    display:none
+  }
+}

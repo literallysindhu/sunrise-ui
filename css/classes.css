@@ -1,0 +1,213 @@
+.class-layout {
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:22px;
+  margin-top:27px
+}
+
+.class-list,.class-detail {
+  border:4px solid #20242a;
+  border-radius:20px;
+  background:#fffdf1;
+  box-shadow:5px 5px 0 #20242a;
+  padding:20px
+}
+
+.class-list h2,.class-detail h2 {
+  font:800 23px "Baloo 2";
+  margin:0
+}
+
+.class-search {
+  box-sizing:border-box;
+  width:100%;
+  margin:13px 0;
+  border:3px solid #20242a;
+  border-radius:10px;
+  padding:10px
+}
+
+.class-choice {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  margin-top:10px;
+  border:3px solid #20242a;
+  border-radius:14px;
+  background:#fff;
+  padding:12px;
+  text-align:left;
+  font-weight:900
+}
+
+.class-choice.active {
+  background:#b5dffc;
+  box-shadow:3px 3px 0 #20242a
+}
+
+.grade {
+  display:grid;
+  place-items:center;
+  width:39px;
+  height:39px;
+  border:2px solid #20242a;
+  border-radius:12px;
+  background:#ffd0ec
+}
+
+.detail-top {
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:center
+}
+
+.detail-top h1 {
+  font:800 34px "Baloo 2";
+  margin:0
+}
+
+.greenbtn {
+  border:3px solid #20242a;
+  border-radius:11px;
+  background:#c8eca0;
+  box-shadow:3px 3px 0 #20242a;
+  padding:9px 12px;
+  font-weight:900
+}
+
+.section-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  margin-top:18px
+}
+
+.section-card,.subjects {
+  border:3px solid #20242a;
+  border-radius:15px;
+  background:#fff;
+  padding:16px
+}
+
+.section-card h3 {
+  font:800 20px "Baloo 2";
+  margin:0
+}
+
+.section-card p {
+  font-size:12px;
+  font-weight:700
+}
+
+.cap {
+  float:right;
+  border:2px solid #20242a;
+  border-radius:999px;
+  background:#ffe196;
+  padding:4px 7px;
+  font-size:10px;
+  font-weight:900
+}
+
+.subjects {
+  margin-top:18px
+}
+
+.subject-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:12px
+}
+
+.subject {
+  border:2px solid #20242a;
+  border-radius:11px;
+  background:#d9c8ff;
+  padding:10px;
+  font-size:12px;
+  font-weight:900
+}
+
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:30;
+  background:#1c2634a8;
+  backdrop-filter:blur(5px);
+  align-items:center;
+  justify-content:center;
+  padding:18px
+}
+
+.modal.open {
+  display:flex
+}
+
+.mcard {
+  width:min(590px,100%);
+  border:4px solid #20242a;
+  border-radius:21px;
+  background:#fffdf1;
+  box-shadow:8px 8px 0 #20242a;
+  padding:22px
+}
+
+.mcard h2 {
+  font:800 26px "Baloo 2";
+  margin:0
+}
+
+.mcard label {
+  display:block;
+  margin-top:14px;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase
+}
+
+.mcard input,.mcard textarea {
+  box-sizing:border-box;
+  width:100%;
+  margin-top:6px;
+  border:3px solid #20242a;
+  border-radius:10px;
+  padding:10px
+}
+
+.mcard textarea {
+  min-height:75px
+}
+
+.mcard footer {
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  border-top:3px dashed #20242a;
+  margin-top:17px;
+  padding-top:15px
+}
+
+.mcard button {
+  border:3px solid #20242a;
+  border-radius:10px;
+  background:#fff;
+  padding:9px 12px;
+  font-weight:900
+}
+
+.mcard button:last-child {
+  background:#ff92d2
+}
+
+@media(max-width:950px) {
+  .class-layout {
+    grid-template-columns:1fr
+  }
+  .section-grid,.subject-grid {
+    grid-template-columns:1fr
+  }
+}

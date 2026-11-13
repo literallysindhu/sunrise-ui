@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>People Directory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/people.css">
+    <link rel="stylesheet" href="css/admin-nav.css">__PROTECTED_BLOCK_0__
+  </head>
+  <body class="people">
+    <div class="people-layout">
+      <aside class="people-sidebar">
+        <a class="people-brand" href="landing.html">
+        <b>☀</b>Sunrise School</a>
+        <div class="people-role">ACTIVE ROLE · SUPER ADMIN
+        </div>
+        <nav class="people-nav">
+          <a href="super-admin.html">▦ School dashboard</a>
+          <a class="active" href="people.html?tab=students">♙ People &amp; roles</a>
+          <a class="indent" href="people.html?tab=students">Students</a>
+          <a class="indent" href="people.html?tab=parents">Parents</a>
+          <a class="indent" href="people.html?tab=teachers">Teachers</a>
+          <a href="#attendance">▣ Attendance</a>
+          <a href="#academics">✦ Academics</a>
+          <a href="notice-board.html">✉ Notice board</a>
+          <a href="#settings">⚙ School settings</a>
+        </nav>
+      </aside>
+      <main class="people-main">
+        <header class="people-top">
+          <input placeholder="⌕ Search students, admission no., circulars…">
+          <span>SA · Super Admin</span>
+        </header>
+        <div class="people-content" id="app">
+        </div>
+      </main>
+    </div>
+    <div class="modal" id="modal">
+      <div class="modal-card" id="modalCard">
+      </div>
+    </div>
+    <script src="js/people.js"></script>
+  </body>
+</html>

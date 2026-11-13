@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Classes & Sections</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/academic.css">
+    <link rel="stylesheet" href="css/classes.css">
+    <link rel="stylesheet" href="css/admin-nav.css">__PROTECTED_BLOCK_0__
+  </head>
+  <body class="academic">
+    <div class="a-layout">
+      <aside class="a-side">
+        <a class="a-brand" href="landing.html">
+        <b>☀</b>Sunrise School</a>
+        <div class="a-role">ACTIVE ROLE · SUPER ADMIN
+        </div>
+        <nav class="a-nav">
+          <a href="super-admin.html">▦ School dashboard</a>
+          <a href="people.html?tab=students">♙ People &amp; roles</a>
+          <a href="admin-attendance.html">▣ Attendance</a>
+          <a class="active" href="academic-sessions.html">✦ Academics</a>
+          <a class="indent" href="academic-sessions.html">Academic sessions</a>
+          <a class="indent active" href="classes-sections.html">Classes &amp; sections</a>
+          <a class="indent" href="subjects-teachers.html">Subjects &amp; teachers</a>
+          <a class="indent" href="student-promotions.html">Student promotions</a>
+          <a class="indent" href="admin-timetable.html">Timetable</a>
+          <a class="indent" href="admin-examinations.html">Examinations</a>
+          <a class="indent" href="admin-study-materials.html">Study materials</a>
+          <a class="indent" href="admin-online-tests.html">Online tests</a>
+          <a href="notice-board.html">✉ Notice board</a>
+        </nav>
+      </aside>
+      <main class="a-main">
+        <header class="a-top">
+          <input placeholder="⌕ Search classes, sections, students…">
+          <span>SA · Super Admin</span>
+        </header>
+        <div class="a-content">
+          <section class="a-heading">
+            <div>
+              <h1>Class &amp; section architecture <span class="badge">Academic master</span>
+              </h1>
+              <p>Dynamic grades, section capacities, class-teacher allocations, and curriculum catalogs.</p>
+            </div>
+            <button class="add" onclick="openModal('class')">＋ Add class</button>
+          </section>
+          <section class="class-layout">
+            <aside class="class-list">
+              <h2>Configured classes (2)</h2>
+              <input class="class-search" placeholder="⌕ Search class by name or code…">
+              <button class="class-choice active" onclick="pick('5',this)">
+              <span class="grade">5</span>
+              <span>Class 5<small class="sub">CLS-05</small>
+            </span>
+          </button>
+          <button class="class-choice" onclick="pick('6',this)">
+          <span class="grade">6</span>
+          <span>Class 6<small class="sub">CLS-06</small>
+        </span>
+      </button>
+    </aside>
+    <section class="class-detail">
+      <div class="detail-top">
+        <div>
+          <h1 id="className">Class 5</h1>
+          <p id="classDesc">Code: CLS-05 · Order: 5 · Middle primary curriculum</p>
+        </div>
+        <button class="greenbtn" onclick="openModal('section')">＋ Add section</button>
+      </div>
+      <div id="sectionArea">
+      </div>
+    </section>
+  </section>
+</div>
+</main>
+</div>
+<div class="modal" id="modal">
+  <form class="mcard">
+    <h2 id="modalTitle">Add class</h2>
+    <div id="fields">
+    </div>
+    <footer>
+      <button type="button" onclick="closeModal()">Cancel</button>
+      <button type="button" onclick="closeModal()">Create</button>
+    </footer>
+  </form>
+</div>
+<script>
+const info={5:{name:'Class 5',desc:'Code: CLS-05 · Order: 5 · Middle primary curriculum',sections:[['Section A','Room 204','M. Saravanan','Aarav Krishnan, Karthik Senthil'],['Section B','Room 205','K. Malathi','Diya Krishnan']],subjects:['English Language & Literature','Mathematics','General Science','Social Studies','Tamil Language']},6:{name:'Class 6',desc:'Code: CLS-06 · Order: 6 · Secondary foundation curriculum',sections:[['Section A','Room 302','M. Saravanan','Sneha Murugan, Varun Chakravarthy']],subjects:['English Language & Literature','Mathematics','General Science','Social Studies','Tamil Language']}};let current='5';function pick(k,el){current=k;document.querySelectorAll('.class-choice').forEach(x=>x.classList.remove('active'));el.classList.add('active');render()}function render(){let d=info[current];document.getElementById('className').textContent=d.name;document.getElementById('classDesc').textContent=d.desc;document.getElementById('sectionArea').innerHTML='<div class="section-grid">'+d.sections.map(x=>'<article class="section-card"><span class="cap">Cap: 40</span><h3>'+d.name+' - '+x[0]+'</h3><p>'+x[1]+' · Class teacher: '+x[2]+'</p><p><b>Students:</b> '+x[3]+'</p></article>').join('')+'</div><section class="subjects"><h2>Curriculum subjects</h2><div class="subject-grid">'+d.subjects.map(x=>'<span class="subject">▧ '+x+'</span>').join('')+'</div></section>'}function openModal(type){document.getElementById('modal').classList.add('open');document.getElementById('modalTitle').textContent=type==='class'?'Add new custom class':'Add section to '+info[current].name;document.getElementById('fields').innerHTML=type==='class'?'<label>Class / grade name *<input placeholder="e.g. Grade 7, Pre-KG"></label><label>Class code<input placeholder="e.g. GR-07"></label><label>Sort / numeric order *<input value="7"></label><label>Description<textarea placeholder="Standard level, syllabus track…"></textarea></label>':'<label>Section name *<input placeholder="e.g. Section A, Section B"></label><label>Maximum student capacity *<input value="40"></label><label>Section remarks / room number<textarea placeholder="Room 102, Science block…"></textarea></label>'}function closeModal(){document.getElementById('modal').classList.remove('open')}render()
+</script>
+</body>
+</html>

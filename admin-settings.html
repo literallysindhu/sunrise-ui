@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>School Configuration - Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin-nav.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/admin-settings.css" />
+    <script src="js/admin-nav.js" defer></script>
+  </head>
+  <body class="settings-admin">
+    <div class="st-layout">
+
+      <aside data-admin-nav></aside>
+
+      <main class="st-main">
+
+        <header class="st-top">
+          <div class="st-search-wrap">
+            <span class="st-search-icon">⌕</span>
+            <input
+              id="stSearchInput"
+              type="search"
+              placeholder="Search students, admission no., circulars…"
+              aria-label="Search school configuration"
+            />
+          </div>
+
+          <div class="st-top-actions">
+            <button class="role-pill" type="button" aria-label="Current role selector">
+              <span>Role: School Administrator</span>
+              <span>⌄</span>
+            </button>
+
+            <button class="notify-bell" type="button" aria-label="Notifications">
+              <span>🔔</span>
+              <span class="bell-badge"></span>
+            </button>
+
+            <div class="user-profile-chip" title="Dr. K. Sundararajan (Principal)">
+              <div class="user-avatar-circle">KS</div>
+              <div class="user-info">
+                <strong>Dr. K. Sundararajan (Principal)</strong>
+                <small>admin@sunriseschool.edu.in ⌄</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="st-content">
+
+          <div class="st-heading-row">
+            <div class="st-title-group">
+              <h1>School Configuration</h1>
+              <p>Manage institutional profile, branding, academic sessions, and security parameters</p>
+            </div>
+
+            <div class="session-badge-wrap" title="Current Academic Cycle Scope">
+              <span>Cycle:</span>
+              <select id="stSessionSelect" aria-label="Switch Academic Session">
+                <option value="2026-2027">Session 2026–2027 (Active)</option>
+                <option value="2025-2026">Session 2025–2026 (Archived)</option>
+                <option value="2024-2025">Session 2024–2025 (Historical)</option>
+                <option value="2027-2028">Session 2027–2028 (Upcoming)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="st-grid">
+
+            <div class="st-col-main">
+
+              <section class="st-card">
+                <div class="st-card-header">
+                  <span class="st-icon-blue" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 21h18"></path>
+                      <path d="M5 21V7l7-4 7 4v14"></path>
+                      <path d="M9 21v-5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v5"></path>
+                      <line x1="9" y1="10" x2="9.01" y2="10"></line>
+                      <line x1="15" y1="10" x2="15.01" y2="10"></line>
+                    </svg>
+                  </span>
+                  <h2>School Profile &amp; Identity</h2>
+                </div>
+
+                <form id="schoolConfigForm" class="st-form">
+                  <label class="full">
+                    SCHOOL NAME
+                    <input
+                      id="cfgSchoolName"
+                      type="text"
+                      value="Sunrise International Matriculation Higher Secondary School"
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    AFFILIATION / BOARD CODE
+                    <input
+                      id="cfgBoardCode"
+                      type="text"
+                      value="TN-MATRIC-2014-9912"
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    OFFICIAL PHONE
+                    <input
+                      id="cfgPhone"
+                      type="text"
+                      value="+91 44 2852 9000"
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    OFFICIAL EMAIL
+                    <input
+                      id="cfgEmail"
+                      type="email"
+                      value="info@sunriseschool.edu.in"
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    ACTIVE ACADEMIC YEAR
+                    <input
+                      id="cfgAcademicYear"
+                      type="text"
+                      value="2026 - 2027"
+                      readonly
+                    />
+                  </label>
+
+                  <label class="full">
+                    CAMPUS POSTAL ADDRESS
+                    <input
+                      id="cfgAddress"
+                      type="text"
+                      value="142, Anna Salai, Chennai, Tamil Nadu 600002"
+                      required
+                    />
+                  </label>
+
+                  <div class="st-form-actions full">
+                    <button class="btn-save-config" type="submit">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                      </svg>
+                      Save Configuration
+                    </button>
+                  </div>
+                </form>
+              </section>
+
+              <section class="st-card">
+                <div class="st-card-header">
+                  <span class="st-icon-green" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                  </span>
+                  <h2>Localization &amp; Languages</h2>
+                </div>
+
+                <div class="localization-box">
+                  <div>
+                    <strong>Supported Parent App Languages</strong>
+                    <p id="cfgLanguageSub">English and Tamil (தமிழ்) dual-language support enabled</p>
+                  </div>
+                  <span class="i18n-badge">Active (i18n)</span>
+                </div>
+              </section>
+            </div>
+
+            <aside class="st-col-side">
+              <section class="st-card">
+                <div class="st-side-header">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <polyline points="9 12 11 14 15 10"></polyline>
+                  </svg>
+                  <h3>SECURITY ARCHITECTURE</h3>
+                </div>
+
+                <div class="sec-items-stack">
+                  <div class="sec-box">
+                    <span class="sec-label">Row Level Security (RLS)</span>
+                    <strong class="sec-val green" id="secRlsVal">Enforced on all 32 Tables</strong>
+                  </div>
+
+                  <div class="sec-box">
+                    <span class="sec-label">Parent Data Isolation</span>
+                    <strong class="sec-val blue" id="secIsolationVal">Strict Parent-Ward Boundary</strong>
+                  </div>
+
+                  <div class="sec-box">
+                    <span class="sec-label">Storage Buckets</span>
+                    <strong class="sec-val dark" id="secBucketsVal">6 Authenticated Buckets</strong>
+                  </div>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="sessionWarnModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="warnTitle">
+        <div class="modal-head">
+          <h3 id="warnTitle" style="color:#e11d48">
+            <span>⚠</span> Warning: Switch Academic Session?
+          </h3>
+          <button class="modal-close-btn" id="closeWarnModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <p style="font-size:14px; font-weight:700; color:#1e293b; margin:0 0 14px; line-height:1.5;">
+          You are switching school configuration parameters to <b id="warnTargetName">Session 2025–2026</b>.
+        </p>
+        <div class="warning-callout">
+          • <strong>Everything will be reverted to that academic session.</strong><br />
+          • Active academic year bindings and cycle-specific settings for 2026–27 will be replaced.<br />
+          • Historical configuration parameters for the target cycle will be loaded.
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelWarnBtn" type="button">Cancel</button>
+          <button class="btn-primary danger" id="confirmWarnBtn" type="button">Revert &amp; Switch Session</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="st-toast" id="stToast">
+      <span>✓</span>
+      <span id="stToastMsg">School configuration saved successfully.</span>
+    </div>
+
+    <script>
+const SETTINGS_DATA = {
+        '2026-2027': {
+          sessionName: 'Session 2026–2027',
+          schoolName: 'Sunrise International Matriculation Higher Secondary School',
+          boardCode: 'TN-MATRIC-2014-9912',
+          phone: '+91 44 2852 9000',
+          email: 'info@sunriseschool.edu.in',
+          academicYear: '2026 - 2027',
+          address: '142, Anna Salai, Chennai, Tamil Nadu 600002',
+          rls: 'Enforced on all 32 Tables',
+          isolation: 'Strict Parent-Ward Boundary',
+          buckets: '6 Authenticated Buckets'
+        },
+        '2025-2026': {
+          sessionName: 'Session 2025–2026',
+          schoolName: 'Sunrise International Matriculation Higher Secondary School',
+          boardCode: 'TN-MATRIC-2014-9912',
+          phone: '+91 44 2852 8800',
+          email: 'archive2025@sunriseschool.edu.in',
+          academicYear: '2025 - 2026 (Archived)',
+          address: '142, Anna Salai, Chennai, Tamil Nadu 600002',
+          rls: 'Enforced on 28 Archived Tables',
+          isolation: 'Read-Only Historical Boundary',
+          buckets: '5 Archived Storage Buckets'
+        },
+        '2024-2025': {
+          sessionName: 'Session 2024–2025',
+          schoolName: 'Sunrise Matriculation Higher Secondary School',
+          boardCode: 'TN-MATRIC-2014-9912',
+          phone: '+91 44 2852 8500',
+          email: 'records2024@sunriseschool.edu.in',
+          academicYear: '2024 - 2025 (Historical)',
+          address: '142, Anna Salai, Chennai, Tamil Nadu 600002',
+          rls: 'Enforced on 24 Legacy Tables',
+          isolation: 'Strict Legacy Snapshot',
+          buckets: '4 Legacy Buckets'
+        },
+        '2027-2028': {
+          sessionName: 'Session 2027–2028',
+          schoolName: 'Sunrise International Matriculation Higher Secondary School',
+          boardCode: 'TN-MATRIC-2014-9912',
+          phone: '+91 44 2852 9000',
+          email: 'admissions2027@sunriseschool.edu.in',
+          academicYear: '2027 - 2028 (Upcoming)',
+          address: '142, Anna Salai, Chennai, Tamil Nadu 600002',
+          rls: 'Pre-configured on 36 Tables',
+          isolation: 'Strict Next-Gen Boundary',
+          buckets: '8 Provisioned Buckets'
+        }
+      };
+
+      let currentSession = localStorage.getItem('sunrise-academic-session') || '2026-2027';
+      if (!SETTINGS_DATA[currentSession]) currentSession = '2026-2027';
+      let pendingSession = null;
+
+      const stSessionSelect = document.getElementById('stSessionSelect');
+      const schoolConfigForm = document.getElementById('schoolConfigForm');
+
+      const cfgSchoolName = document.getElementById('cfgSchoolName');
+      const cfgBoardCode = document.getElementById('cfgBoardCode');
+      const cfgPhone = document.getElementById('cfgPhone');
+      const cfgEmail = document.getElementById('cfgEmail');
+      const cfgAcademicYear = document.getElementById('cfgAcademicYear');
+      const cfgAddress = document.getElementById('cfgAddress');
+
+      const secRlsVal = document.getElementById('secRlsVal');
+      const secIsolationVal = document.getElementById('secIsolationVal');
+      const secBucketsVal = document.getElementById('secBucketsVal');
+
+      const sessionWarnModal = document.getElementById('sessionWarnModal');
+      const warnTargetName = document.getElementById('warnTargetName');
+      const cancelWarnBtn = document.getElementById('cancelWarnBtn');
+      const confirmWarnBtn = document.getElementById('confirmWarnBtn');
+      const closeWarnModalBtn = document.getElementById('closeWarnModalBtn');
+
+      const stToast = document.getElementById('stToast');
+      const stToastMsg = document.getElementById('stToastMsg');
+
+      function showToast(msg) {
+        stToastMsg.textContent = msg;
+        stToast.classList.add('show');
+        setTimeout(() => stToast.classList.remove('show'), 3500);
+      }
+
+      function renderSettings() {
+        const d = SETTINGS_DATA[currentSession];
+        cfgSchoolName.value = d.schoolName;
+        cfgBoardCode.value = d.boardCode;
+        cfgPhone.value = d.phone;
+        cfgEmail.value = d.email;
+        cfgAcademicYear.value = d.academicYear;
+        cfgAddress.value = d.address;
+
+        secRlsVal.textContent = d.rls;
+        secIsolationVal.textContent = d.isolation;
+        secBucketsVal.textContent = d.buckets;
+      }
+
+      schoolConfigForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const d = SETTINGS_DATA[currentSession];
+        d.schoolName = cfgSchoolName.value.trim();
+        d.boardCode = cfgBoardCode.value.trim();
+        d.phone = cfgPhone.value.trim();
+        d.email = cfgEmail.value.trim();
+        d.address = cfgAddress.value.trim();
+        showToast(`Configuration saved for ${d.sessionName}.`);
+      });
+
+      stSessionSelect.addEventListener('change', e => {
+        const next = e.target.value;
+        if (next === currentSession) return;
+        pendingSession = next;
+        stSessionSelect.value = currentSession;
+        warnTargetName.textContent = SETTINGS_DATA[pendingSession].sessionName;
+        sessionWarnModal.classList.add('open');
+      });
+
+      function closeWarnModal() {
+        sessionWarnModal.classList.remove('open');
+        pendingSession = null;
+      }
+
+      cancelWarnBtn.addEventListener('click', closeWarnModal);
+      closeWarnModalBtn.addEventListener('click', closeWarnModal);
+
+      confirmWarnBtn.addEventListener('click', () => {
+        if (!pendingSession || !SETTINGS_DATA[pendingSession]) {
+          closeWarnModal();
+          return;
+        }
+        currentSession = pendingSession;
+        stSessionSelect.value = currentSession;
+        localStorage.setItem('sunrise-academic-session', currentSession);
+        closeWarnModal();
+        renderSettings();
+        showToast(`Reverted configuration parameters to ${SETTINGS_DATA[currentSession].sessionName}.`);
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target === sessionWarnModal) closeWarnModal();
+      });
+
+      stSessionSelect.value = currentSession;
+      renderSettings();
+</script>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: page-out 0.25s ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: page-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+body.portal-splash::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    122deg,
+    #f787b6 0 11%,
+    #ffb76f 11% 22%,
+    #fff18a 22% 33%,
+    #8fdb9a 33% 44%,
+    #71c9e9 44% 55%,
+    #ae9cdb 55% 66%,
+    #f787b6 66% 77%
+  );
+  background-size: 160% 160%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  animation: paint-sweep 2.2s cubic-bezier(0.2, 0.7, 0.18, 1) forwards;
+}
+
+body.portal-splash::after {
+  content: "✦    ★    ✧";
+  position: fixed;
+  z-index: 10000;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  color: #fffdf1;
+  font: 800 clamp(30px, 5vw, 64px) "Baloo 2", sans-serif;
+  letter-spacing: 14px;
+  text-shadow: 4px 4px 0 #20242a;
+  animation: paint-stars 2s ease-in-out forwards;
+}
+
+body:not(.portal-splash)::before,
+body:not(.portal-splash)::after {
+  display: none !important;
+  animation: none !important;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes paint-sweep {
+  0%, 20% {
+    background-position: 0 0;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  55% {
+    background-position: 100% 40%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  100% {
+    background-position: 160% 90%;
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+  }
+}
+
+@keyframes paint-stars {
+  0%, 12% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7) rotate(-8deg);
+  }
+  25%, 72% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(80%, -50%) scale(0.9) rotate(12deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  body::before, body::after {
+    display: none !important;
+  }
+}

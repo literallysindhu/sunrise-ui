@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Parent Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/screens.css">
+    <link rel="stylesheet" href="css/transitions.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="landing.html">
+      <span class="brand-mark">☀</span>
+      <span>Sunrise <small>International School</small>
+    </span>
+  </a>
+  <a class="back-link" href="landing.html">← Back to welcome</a>
+</header>
+<main class="login-layout">
+  <section class="login-copy">
+    <p class="eyebrow">Parent portal</p>
+    <h1>Stay close to<br>
+      <span>every school day.</span>
+    </h1>
+    <p>Attendance, homework, results, invoices and school updates are all in one happy place.</p>
+  </section>
+  <section class="login-card">
+    <div class="login-badge">🔒 Secure parent access
+    </div>
+    <h2>Welcome back!</h2>
+    <p>Enter your registered mobile number to receive a one-time code.</p>
+    <form action="otp.html">
+      <label for="phone">Registered mobile number</label>
+      <div class="phone-field">
+        <span>🇮🇳 +91</span>
+        <input id="phone" type="tel" placeholder="98765 43210">
+      </div>
+      <button class="primary-cta" type="submit">Send 6-digit OTP <span>→</span>
+    </button>
+  </form>
+  <p class="form-note">Prototype only: this screen proceeds to a mock OTP verification step.</p>
+  <div class="help-box">
+    <b>Need help?</b>
+    <span>Contact the school office during working hours.</span>
+  </div>
+</section>
+</main>
+</body>
+</html>

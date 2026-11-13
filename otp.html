@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Verify OTP - Sunrise School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/screens.css">
+    <link rel="stylesheet" href="css/transitions.css">
+    <link rel="stylesheet" href="css/otp.css">
+</head>
+
+<body>
+    <header class="site-header"><a class="brand" href="landing.html"><span class="brand-mark">☀</span><span>Sunrise
+                <small>International School</small></span></a><a class="back-link" href="login.html">← Change mobile
+            number</a></header>
+    <main class="login-layout">
+        <section class="login-copy">
+            <p class="eyebrow">One more friendly step</p>
+            <h1>Let’s make sure<br><span>it’s you.</span></h1>
+            <p>We sent a six-digit sign-in code to your registered mobile number.</p>
+        </section>
+        <section class="login-card">
+            <div class="login-badge">🔐 Mock verification</div>
+            <h2>Enter your OTP</h2>
+            <p>Type the six-digit code sent to <b>+91 98765 43210</b>.</p>
+            <form action="index.html?welcome=1"><label for="otp">6-digit verification code</label><input
+                    class="otp-input" id="otp" type="text" inputmode="numeric" maxlength="6" placeholder="• • • • • •"
+                    aria-label="Six digit OTP"><button class="primary-cta" type="submit">Verify &amp; enter portal
+                    <span>→</span></button></form>
+            <p class="form-note">Prototype only: any code continues to the parent dashboard.</p>
+            <div class="help-box"><b>Didn’t receive the code?</b><span>Resend code in 00:28</span></div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Class Timetable - Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin-nav.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/admin-timetable.css" />
+    <script src="js/admin-nav.js" defer></script>
+  </head>
+  <body class="timetable-admin">
+    <div class="tt-layout">
+
+      <aside data-admin-nav></aside>
+
+      <main class="tt-main">
+
+        <header class="tt-top">
+          <div class="tt-search-wrap">
+            <span class="tt-search-icon">⌕</span>
+            <input
+              id="globalSearchInput"
+              type="search"
+              placeholder="Search students, admission no., circulars…"
+              aria-label="Search students or timetable"
+            />
+          </div>
+
+          <div class="tt-top-actions">
+            <button class="role-pill" type="button" aria-label="Current role selector">
+              <span>Role: School Administrator</span>
+              <span>⌄</span>
+            </button>
+
+            <button class="notify-bell" type="button" aria-label="Notifications">
+              <span>🔔</span>
+              <span class="bell-badge"></span>
+            </button>
+
+            <div class="user-profile-chip" title="Dr. K. Sundararajan (Principal)">
+              <div class="user-avatar-circle">KS</div>
+              <div class="user-info">
+                <strong>Dr. K. Sundararajan (Principal)</strong>
+                <small>admin@sunriseschool.edu.in ⌄</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="tt-content">
+
+          <div class="tt-heading-row">
+            <div class="tt-title-group">
+              <h1>Class Timetable</h1>
+              <p>Manage period slots, assign subject teachers, and prevent faculty scheduling overlaps</p>
+            </div>
+            <button class="btn-add-period" id="openAddSlotBtn" type="button">
+              <span>＋</span> Add Period Slot
+            </button>
+          </div>
+
+          <div class="tt-controls-card">
+            <div class="tt-selectors-left">
+              <select class="tt-select" id="classSelect" aria-label="Select Class Grade">
+                <option value="5" selected>Class 5</option>
+                <option value="6">Class 6</option>
+              </select>
+
+              <select class="tt-select" id="sectionSelect" aria-label="Select Class Section">
+                <option value="A" selected>Section A</option>
+                <option value="B">Section B</option>
+              </select>
+
+              <div class="session-badge-wrap" title="Current Academic Session Scope">
+                <span>Cycle:</span>
+                <select id="ttSessionSelect" aria-label="Switch Academic Session">
+                  <option value="2026-2027">Session 2026–2027 (Active)</option>
+                  <option value="2025-2026">Session 2025–2026 (Archived)</option>
+                  <option value="2024-2025">Session 2024–2025 (Historical)</option>
+                  <option value="2027-2028">Session 2027–2028 (Upcoming)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="tt-days-pills" role="tablist" aria-label="Day of week selector">
+              <button class="day-pill active" data-day="Monday" type="button">Monday</button>
+              <button class="day-pill" data-day="Tuesday" type="button">Tuesday</button>
+              <button class="day-pill" data-day="Wednesday" type="button">Wednesday</button>
+              <button class="day-pill" data-day="Thursday" type="button">Thursday</button>
+              <button class="day-pill" data-day="Friday" type="button">Friday</button>
+            </div>
+          </div>
+
+          <section class="slots-container" id="slotsContainer" aria-label="Period slots list">
+
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="sessionWarningModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="warnModalTitle">
+        <div class="modal-head">
+          <h3 id="warnModalTitle" style="color:#e11d48">
+            <span>⚠</span> Warning: Switch Academic Session?
+          </h3>
+          <button class="modal-close-btn" id="closeWarnModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <p style="font-size:14px; font-weight:700; color:#1e293b; margin:0 0 14px; line-height:1.5;">
+          You are switching the academic session to <b id="warnTargetSessionName">Session 2025–2026</b>.
+        </p>
+        <div class="warning-callout">
+          • <strong>Everything will be reverted to that academic session.</strong><br />
+          • All timetable period slots, faculty assignments, and room schedules from 2026–27 will be deactivated.<br />
+          • Historical records and schedule allocations for the target cycle will be loaded.
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelWarnBtn" type="button">Cancel</button>
+          <button class="btn-primary danger" id="confirmWarnBtn" type="button">Revert &amp; Switch Session</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="addSlotModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="addSlotModalTitle">
+        <div class="modal-head">
+          <h3 id="addSlotModalTitle">Add Period Slot</h3>
+          <button class="modal-close-btn" id="closeAddModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <form id="addSlotForm" class="modal-form">
+          <label class="full">
+            Slot Type
+            <select id="slotTypeSelect">
+              <option value="subject">Subject Teaching Period</option>
+              <option value="interval">Break / Recess Interval</option>
+            </select>
+          </label>
+
+          <label id="periodCodeLabel">
+            Period Identifier
+            <input id="periodCodeInput" value="P6" placeholder="e.g. P1, P2, P6" required />
+          </label>
+
+          <label id="subjectNameLabel">
+            Subject Name
+            <select id="subjectNameInput">
+              <option value="English">English</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Science">Science</option>
+              <option value="Tamil">Tamil</option>
+              <option value="Social Science">Social Science</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Physical Education">Physical Education</option>
+              <option value="Art & Craft">Art &amp; Craft</option>
+            </select>
+          </label>
+
+          <label class="full" id="teacherLabel">
+            Assigned Teacher
+            <select id="teacherInput">
+              <option value="K. Malathi">K. Malathi (English, Tamil)</option>
+              <option value="M. Saravanan">M. Saravanan (Mathematics, Science)</option>
+              <option value="S. Jayaraman">S. Jayaraman (Science, Computer)</option>
+              <option value="Coach Rajesh">Coach Rajesh (Physical Education)</option>
+              <option value="P. Geetha">P. Geetha (Art & Craft)</option>
+            </select>
+          </label>
+
+          <label>
+            Start Time
+            <input type="time" id="startTimeInput" value="13:45" required />
+          </label>
+
+          <label>
+            End Time
+            <input type="time" id="endTimeInput" value="14:30" required />
+          </label>
+
+          <div class="modal-actions full">
+            <button class="btn-secondary" id="cancelAddBtn" type="button">Cancel</button>
+            <button class="btn-primary" type="submit">Save Period Slot</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="editSlotModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="editSlotModalTitle">
+        <div class="modal-head">
+          <h3 id="editSlotModalTitle">Edit Period Slot</h3>
+          <button class="modal-close-btn" id="closeEditModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <form id="editSlotForm" class="modal-form">
+          <input type="hidden" id="editSlotIndex" />
+
+          <label class="full">
+            Subject / Slot Name
+            <input id="editSubjectInput" required />
+          </label>
+
+          <label class="full" id="editTeacherWrap">
+            Assigned Faculty Instructor
+            <input id="editTeacherInput" required />
+          </label>
+
+          <label>
+            Start Time
+            <input type="text" id="editStartTimeInput" placeholder="09:00" required />
+          </label>
+
+          <label>
+            End Time
+            <input type="text" id="editEndTimeInput" placeholder="09:45" required />
+          </label>
+
+          <div class="modal-actions full">
+            <button class="btn-secondary" id="cancelEditBtn" type="button">Cancel</button>
+            <button class="btn-primary" type="submit">Update Slot</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="tt-toast" id="ttToast">
+      <span>✓</span>
+      <span id="ttToastMsg">Period updated successfully.</span>
+    </div>
+
+    <script>
+const TIMETABLES = {
+        '2026-2027': {
+          name: 'Session 2026–2027',
+          schedule: {
+            '5-A': {
+              'Monday': [
+                { type: 'subject', code: 'P1', subject: 'English', teacher: 'Teacher: K. Malathi', start: '09:00', end: '09:45' },
+                { type: 'subject', code: 'P2', subject: 'Mathematics', teacher: 'Teacher: M. Saravanan', start: '09:45', end: '10:30', active: true },
+                { type: 'interval', code: '', subject: 'Morning Interval', icon: '☕', start: '10:30', end: '10:45' },
+                { type: 'subject', code: 'P3', subject: 'Science', teacher: 'Teacher: M. Saravanan', start: '10:45', end: '11:30' },
+                { type: 'subject', code: 'P4', subject: 'Tamil', teacher: 'Teacher: K. Malathi', start: '11:30', end: '12:15' },
+                { type: 'interval', code: '', subject: 'Lunch Break', icon: '🍱', start: '12:15', end: '13:00' },
+                { type: 'subject', code: 'P5', subject: 'Social Science', teacher: 'Teacher: S. Jayaraman', start: '13:00', end: '13:45' }
+              ],
+              'Tuesday': [
+                { type: 'subject', code: 'P1', subject: 'Mathematics', teacher: 'Teacher: M. Saravanan', start: '09:00', end: '09:45' },
+                { type: 'subject', code: 'P2', subject: 'Science', teacher: 'Teacher: M. Saravanan', start: '09:45', end: '10:30' },
+                { type: 'interval', code: '', subject: 'Morning Interval', icon: '☕', start: '10:30', end: '10:45' },
+                { type: 'subject', code: 'P3', subject: 'Tamil', teacher: 'Teacher: K. Malathi', start: '10:45', end: '11:30' },
+                { type: 'subject', code: 'P4', subject: 'English', teacher: 'Teacher: K. Malathi', start: '11:30', end: '12:15' },
+                { type: 'interval', code: '', subject: 'Lunch Break', icon: '🍱', start: '12:15', end: '13:00' },
+                { type: 'subject', code: 'P5', subject: 'Computer Science', teacher: 'Teacher: S. Jayaraman', start: '13:00', end: '13:45' }
+              ],
+              'Wednesday': [
+                { type: 'subject', code: 'P1', subject: 'Science', teacher: 'Teacher: M. Saravanan', start: '09:00', end: '09:45' },
+                { type: 'subject', code: 'P2', subject: 'English', teacher: 'Teacher: K. Malathi', start: '09:45', end: '10:30' },
+                { type: 'interval', code: '', subject: 'Morning Interval', icon: '☕', start: '10:30', end: '10:45' },
+                { type: 'subject', code: 'P3', subject: 'Mathematics', teacher: 'Teacher: M. Saravanan', start: '10:45', end: '11:30' },
+                { type: 'subject', code: 'P4', subject: 'Social Science', teacher: 'Teacher: S. Jayaraman', start: '11:30', end: '12:15' },
+                { type: 'interval', code: '', subject: 'Lunch Break', icon: '🍱', start: '12:15', end: '13:00' },
+                { type: 'subject', code: 'P5', subject: 'Art & Craft', teacher: 'Teacher: P. Geetha', start: '13:00', end: '13:45' }
+              ],
+              'Thursday': [
+                { type: 'subject', code: 'P1', subject: 'Tamil', teacher: 'Teacher: K. Malathi', start: '09:00', end: '09:45' },
+                { type: 'subject', code: 'P2', subject: 'Social Science', teacher: 'Teacher: S. Jayaraman', start: '09:45', end: '10:30' },
+                { type: 'interval', code: '', subject: 'Morning Interval', icon: '☕', start: '10:30', end: '10:45' },
+                { type: 'subject', code: 'P3', subject: 'English', teacher: 'Teacher: K. Malathi', start: '10:45', end: '11:30' },
+                { type: 'subject', code: 'P4', subject: 'Mathematics', teacher: 'Teacher: M. Saravanan', start: '11:30', end: '12:15' },
+                { type: 'interval', code: '', subject: 'Lunch Break', icon: '🍱', start: '12:15', end: '13:00' },
+                { type: 'subject', code: 'P5', subject: 'Physical Education', teacher: 'Teacher: Coach Rajesh', start: '13:00', end: '13:45' }
+              ],
+              'Friday': [
+                { type: 'subject', code: 'P1', subject: 'English', teacher: 'Teacher: K. Malathi', start: '09:00', end: '09:45' },
+                { type: 'subject', code: 'P2', subject: 'Mathematics', teacher: 'Teacher: M. Saravanan', start: '09:45', end: '10:30' },
+                { type: 'interval', code: '', subject: 'Morning Interval', icon: '☕', start: '10:30', end: '10:45' },
+                { type: 'subject', code: 'P3', subject: 'Moral Science & GK', teacher: 'Teacher: S. Jayaraman', start: '10:45', end: '11:30' },
+                { type: 'subject', code: 'P4', subject: 'Tamil', teacher: 'Teacher: K. Malathi', start: '11:30', end: '12:15' },
+                { type: 'interval', code: '', subject: 'Lunch Break', icon: '🍱', start: '12:15', end: '13:00' },
+                { type: 'subject', code: 'P5', subject: 'Library & Reading', teacher: 'Teacher: K. Malathi', start: '13:00', end: '13:45' }
+              ]
+            },
+            '5-B': {
+              'Monday': [
+                { type: 'subject', code: 'P1', subject: 'Mathematics', teacher: 'Teacher: M. Saravanan', start: '09:00', end: '09:45' },
+                { type: 'subject', code: 'P2', subject: 'Tamil', teacher: 'Teacher: K. Malathi', start: '09:45', end: '10:30' },
+                { type: 'interval', code: '', subject: 'Morning Interval', icon: '☕', start: '10:30', end: '10:45' },
+                { type: 'subject', code: 'P3', subject: 'English', teacher: 'Teacher: K. Malathi', start: '10:45', end: '11:30' },
+                { type: 'subject', code: 'P4', subject: 'Science', teacher: 'Teacher: M. Saravanan', start: '11:30', end: '12:15' },
+                { type: 'interval', code: '', subject: 'Lunch Break', icon: '🍱', start: '12:15', end: '13:00' },
+                { type: 'subject', code: 'P5', subject: 'Social Science', teacher: 'Teacher: S. Jayaraman', start: '13:00', end: '13:45' }
+              ]
+            }
+          }
+        },
+        '2025-2026': {
+          name: 'Session 2025–2026',
+          schedule: {
+            '5-A': {
+              'Monday': [
+                { type: 'subject', code: 'P1', subject: 'Mathematics', teacher: 'Teacher: Mrs. R. Vasanthi', start: '09:15', end: '10:00' },
+                { type: 'subject', code: 'P2', subject: 'General Science', teacher: 'Teacher: Mr. K. Natarajan', start: '10:00', end: '10:45' },
+                { type: 'interval', code: '', subject: 'Morning Recess', icon: '☕', start: '10:45', end: '11:00' },
+                { type: 'subject', code: 'P3', subject: 'Hindi Language', teacher: 'Teacher: Mrs. Sunita Verma', start: '11:00', end: '11:45' },
+                { type: 'subject', code: 'P4', subject: 'English Prose', teacher: 'Teacher: Mr. D. Joseph', start: '11:45', end: '12:30' },
+                { type: 'interval', code: '', subject: 'Midday Meal & Recess', icon: '🍱', start: '12:30', end: '13:15' },
+                { type: 'subject', code: 'P5', subject: 'Computer Basics', teacher: 'Teacher: Ms. Priya Menon', start: '13:15', end: '14:00' },
+                { type: 'subject', code: 'P6', subject: 'Moral Instruction', teacher: 'Teacher: Mr. D. Joseph', start: '14:00', end: '14:45' }
+              ],
+              'Tuesday': [
+                { type: 'subject', code: 'P1', subject: 'General Science', teacher: 'Teacher: Mr. K. Natarajan', start: '09:15', end: '10:00' },
+                { type: 'subject', code: 'P2', subject: 'Mathematics', teacher: 'Teacher: Mrs. R. Vasanthi', start: '10:00', end: '10:45' },
+                { type: 'interval', code: '', subject: 'Morning Recess', icon: '☕', start: '10:45', end: '11:00' },
+                { type: 'subject', code: 'P3', subject: 'English Poetry', teacher: 'Teacher: Mr. D. Joseph', start: '11:00', end: '11:45' },
+                { type: 'subject', code: 'P4', subject: 'Social Studies', teacher: 'Teacher: Mrs. R. Vasanthi', start: '11:45', end: '12:30' },
+                { type: 'interval', code: '', subject: 'Midday Meal', icon: '🍱', start: '12:30', end: '13:15' },
+                { type: 'subject', code: 'P5', subject: 'Physical Drill & Games', teacher: 'Teacher: Mr. Anand Raj', start: '13:15', end: '14:00' }
+              ],
+              'Wednesday': [
+                { type: 'subject', code: 'P1', subject: 'Hindi Grammar', teacher: 'Teacher: Mrs. Sunita Verma', start: '09:15', end: '10:00' },
+                { type: 'subject', code: 'P2', subject: 'Mathematics', teacher: 'Teacher: Mrs. R. Vasanthi', start: '10:00', end: '10:45' },
+                { type: 'interval', code: '', subject: 'Morning Recess', icon: '☕', start: '10:45', end: '11:00' },
+                { type: 'subject', code: 'P3', subject: 'General Science', teacher: 'Teacher: Mr. K. Natarajan', start: '11:00', end: '11:45' },
+                { type: 'subject', code: 'P4', subject: 'Social Studies', teacher: 'Teacher: Mrs. R. Vasanthi', start: '11:45', end: '12:30' },
+                { type: 'interval', code: '', subject: 'Midday Meal', icon: '🍱', start: '12:30', end: '13:15' },
+                { type: 'subject', code: 'P5', subject: 'Handwriting & Drawing', teacher: 'Teacher: Mrs. Sunita Verma', start: '13:15', end: '14:00' }
+              ],
+              'Thursday': [
+                { type: 'subject', code: 'P1', subject: 'English Composition', teacher: 'Teacher: Mr. D. Joseph', start: '09:15', end: '10:00' },
+                { type: 'subject', code: 'P2', subject: 'Mathematics', teacher: 'Teacher: Mrs. R. Vasanthi', start: '10:00', end: '10:45' },
+                { type: 'interval', code: '', subject: 'Morning Recess', icon: '☕', start: '10:45', end: '11:00' },
+                { type: 'subject', code: 'P3', subject: 'General Science', teacher: 'Teacher: Mr. K. Natarajan', start: '11:00', end: '11:45' },
+                { type: 'subject', code: 'P4', subject: 'Hindi Literature', teacher: 'Teacher: Mrs. Sunita Verma', start: '11:45', end: '12:30' },
+                { type: 'interval', code: '', subject: 'Midday Meal', icon: '🍱', start: '12:30', end: '13:15' },
+                { type: 'subject', code: 'P5', subject: 'Computer Lab Work', teacher: 'Teacher: Ms. Priya Menon', start: '13:15', end: '14:00' }
+              ],
+              'Friday': [
+                { type: 'subject', code: 'P1', subject: 'Social Studies', teacher: 'Teacher: Mrs. R. Vasanthi', start: '09:15', end: '10:00' },
+                { type: 'subject', code: 'P2', subject: 'General Science', teacher: 'Teacher: Mr. K. Natarajan', start: '10:00', end: '10:45' },
+                { type: 'interval', code: '', subject: 'Morning Recess', icon: '☕', start: '10:45', end: '11:00' },
+                { type: 'subject', code: 'P3', subject: 'Mathematics Revision', teacher: 'Teacher: Mrs. R. Vasanthi', start: '11:00', end: '11:45' },
+                { type: 'subject', code: 'P4', subject: 'English Recitation', teacher: 'Teacher: Mr. D. Joseph', start: '11:45', end: '12:30' },
+                { type: 'interval', code: '', subject: 'Midday Meal', icon: '🍱', start: '12:30', end: '13:15' },
+                { type: 'subject', code: 'P5', subject: 'Yoga & Aerobics', teacher: 'Teacher: Mr. Anand Raj', start: '13:15', end: '14:00' }
+              ]
+            }
+          }
+        },
+        '2024-2025': {
+          name: 'Session 2024–2025',
+          schedule: {
+            '5-A': {
+              'Monday': [
+                { type: 'subject', code: 'P1', subject: 'Environmental Studies (EVS)', teacher: 'Teacher: Mrs. Geetha Swaminathan', start: '09:00', end: '09:45' },
+                { type: 'subject', code: 'P2', subject: 'English Grammar', teacher: 'Teacher: Mr. Peter Fernandez', start: '09:45', end: '10:30' },
+                { type: 'interval', code: '', subject: 'Morning Interval', icon: '☕', start: '10:30', end: '10:45' },
+                { type: 'subject', code: 'P3', subject: 'Arithmetic & Geometry', teacher: 'Teacher: Mr. V. Raman', start: '10:45', end: '11:30' },
+                { type: 'subject', code: 'P4', subject: 'Second Language', teacher: 'Teacher: Mrs. Revathi S.', start: '11:30', end: '12:15' },
+                { type: 'interval', code: '', subject: 'Lunch Break', icon: '🍱', start: '12:15', end: '13:00' },
+                { type: 'subject', code: 'P5', subject: 'Arts & Handicrafts', teacher: 'Teacher: Mrs. Lakshmi Narayanan', start: '13:00', end: '13:45' }
+              ]
+            }
+          }
+        },
+        '2027-2028': {
+          name: 'Session 2027–2028',
+          schedule: {
+            '5-A': {
+              'Monday': [
+                { type: 'subject', code: 'P1', subject: 'AI & Computational Thinking', teacher: 'Teacher: Dr. Arun Kumar', start: '09:00', end: '09:45' },
+                { type: 'subject', code: 'P2', subject: 'Integrated STEM & Robotics', teacher: 'Teacher: Ms. Radhika Nair', start: '09:45', end: '10:30' },
+                { type: 'interval', code: '', subject: 'Morning Wellness Break', icon: '☕', start: '10:30', end: '10:45' },
+                { type: 'subject', code: 'P3', subject: 'World Literature', teacher: 'Teacher: Mr. Kevin Vance', start: '10:45', end: '11:30' },
+                { type: 'subject', code: 'P4', subject: 'Applied Mathematics', teacher: 'Teacher: Dr. Arun Kumar', start: '11:30', end: '12:15' },
+                { type: 'interval', code: '', subject: 'Nutrition Break', icon: '🍱', start: '12:15', end: '13:00' },
+                { type: 'subject', code: 'P5', subject: 'Innovation & Design Lab', teacher: 'Teacher: Mr. Vigneshwaran', start: '13:00', end: '13:45' }
+              ]
+            }
+          }
+        }
+      };
+
+      let currentSession = localStorage.getItem('sunrise-academic-session') || '2026-2027';
+      if (!TIMETABLES[currentSession]) currentSession = '2026-2027';
+
+      let pendingSession = null;
+      let currentClass = '5';
+      let currentSection = 'A';
+      let currentDay = 'Monday';
+
+      const ttSessionSelect = document.getElementById('ttSessionSelect');
+      const classSelect = document.getElementById('classSelect');
+      const sectionSelect = document.getElementById('sectionSelect');
+      const slotsContainer = document.getElementById('slotsContainer');
+      const dayPills = document.querySelectorAll('.day-pill');
+
+      const sessionWarningModal = document.getElementById('sessionWarningModal');
+      const warnTargetSessionName = document.getElementById('warnTargetSessionName');
+      const cancelWarnBtn = document.getElementById('cancelWarnBtn');
+      const confirmWarnBtn = document.getElementById('confirmWarnBtn');
+      const closeWarnModalBtn = document.getElementById('closeWarnModalBtn');
+
+      const addSlotModal = document.getElementById('addSlotModal');
+      const openAddSlotBtn = document.getElementById('openAddSlotBtn');
+      const cancelAddBtn = document.getElementById('cancelAddBtn');
+      const closeAddModalBtn = document.getElementById('closeAddModalBtn');
+      const addSlotForm = document.getElementById('addSlotForm');
+      const slotTypeSelect = document.getElementById('slotTypeSelect');
+
+      const editSlotModal = document.getElementById('editSlotModal');
+      const cancelEditBtn = document.getElementById('cancelEditBtn');
+      const closeEditModalBtn = document.getElementById('closeEditModalBtn');
+      const editSlotForm = document.getElementById('editSlotForm');
+
+      const ttToast = document.getElementById('ttToast');
+      const ttToastMsg = document.getElementById('ttToastMsg');
+
+      function showToast(msg) {
+        ttToastMsg.textContent = msg;
+        ttToast.classList.add('show');
+        setTimeout(() => ttToast.classList.remove('show'), 3500);
+      }
+
+      function renderTimetable() {
+        const sessionData = TIMETABLES[currentSession];
+        const key = `${currentClass}-${currentSection}`;
+        const classSchedule = sessionData.schedule[key] || sessionData.schedule['5-A'];
+        const daySlots = (classSchedule && classSchedule[currentDay]) ? classSchedule[currentDay] : (classSchedule && classSchedule['Monday'] ? classSchedule['Monday'] : []);
+
+        if (!daySlots || daySlots.length === 0) {
+          slotsContainer.innerHTML = `
+            <div class="empty-schedule">
+              <span>📅</span>
+              <h3>No period slots configured for Class ${currentClass}-${currentSection} on ${currentDay}</h3>
+              <p style="margin:6px 0 0; font-size:13px">Use the "+ Add Period Slot" button above to build this day's timetable.</p>
+            </div>
+          `;
+          return;
+        }
+
+        slotsContainer.innerHTML = daySlots.map((slot, index) => {
+          if (slot.type === 'interval') {
+            return `
+              <div class="interval-card">
+                <div class="interval-left">
+                  <span class="interval-icon">${slot.icon || '☕'}</span>
+                  <strong>${slot.subject}</strong>
+                </div>
+                <span class="interval-time">◷ ${slot.start} - ${slot.end}</span>
+              </div>
+            `;
+          }
+
+          return `
+            <article class="slot-card ${slot.active ? 'active-slot' : ''}">
+              <div class="slot-left">
+                <div class="period-badge">${slot.code}</div>
+                <div class="slot-info">
+                  <h2>${slot.subject}</h2>
+                  <p>${slot.teacher}</p>
+                </div>
+              </div>
+              <div class="slot-right">
+                <span class="slot-time">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  ${slot.start} - ${slot.end}
+                </span>
+                <button class="slot-edit-btn" onclick="openEditModal(${index})" type="button" aria-label="Edit ${slot.subject} period">
+                  ✎
+                </button>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      dayPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          dayPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          currentDay = pill.dataset.day;
+          renderTimetable();
+        });
+      });
+
+      classSelect.addEventListener('change', e => {
+        currentClass = e.target.value;
+        renderTimetable();
+      });
+
+      sectionSelect.addEventListener('change', e => {
+        currentSection = e.target.value;
+        renderTimetable();
+      });
+
+      ttSessionSelect.addEventListener('change', e => {
+        const next = e.target.value;
+        if (next === currentSession) return;
+
+        pendingSession = next;
+
+        ttSessionSelect.value = currentSession;
+
+        warnTargetSessionName.textContent = TIMETABLES[pendingSession].name;
+        sessionWarningModal.classList.add('open');
+      });
+
+      function closeWarningModal() {
+        sessionWarningModal.classList.remove('open');
+        pendingSession = null;
+      }
+
+      cancelWarnBtn.addEventListener('click', closeWarningModal);
+      closeWarnModalBtn.addEventListener('click', closeWarningModal);
+
+      confirmWarnBtn.addEventListener('click', () => {
+        if (!pendingSession || !TIMETABLES[pendingSession]) {
+          closeWarningModal();
+          return;
+        }
+
+        currentSession = pendingSession;
+        ttSessionSelect.value = currentSession;
+        localStorage.setItem('sunrise-academic-session', currentSession);
+
+        closeWarningModal();
+        renderTimetable();
+        showToast(`Reverted and loaded timetable for ${TIMETABLES[currentSession].name}.`);
+      });
+
+      openAddSlotBtn.addEventListener('click', () => {
+        addSlotModal.classList.add('open');
+      });
+
+      function closeAddModal() {
+        addSlotModal.classList.remove('open');
+      }
+
+      cancelAddBtn.addEventListener('click', closeAddModal);
+      closeAddModalBtn.addEventListener('click', closeAddModal);
+
+      slotTypeSelect.addEventListener('change', e => {
+        const isInterval = e.target.value === 'interval';
+        document.getElementById('periodCodeLabel').style.display = isInterval ? 'none' : 'block';
+        document.getElementById('teacherLabel').style.display = isInterval ? 'none' : 'block';
+      });
+
+      addSlotForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const type = slotTypeSelect.value;
+        const start = document.getElementById('startTimeInput').value;
+        const end = document.getElementById('endTimeInput').value;
+
+        const sessionData = TIMETABLES[currentSession];
+        const key = `${currentClass}-${currentSection}`;
+        if (!sessionData.schedule[key]) sessionData.schedule[key] = {};
+        if (!sessionData.schedule[key][currentDay]) sessionData.schedule[key][currentDay] = [];
+
+        if (type === 'interval') {
+          sessionData.schedule[key][currentDay].push({
+            type: 'interval',
+            code: '',
+            subject: 'Short Break',
+            icon: '☕',
+            start,
+            end
+          });
+        } else {
+          const code = document.getElementById('periodCodeInput').value || 'P6';
+          const subject = document.getElementById('subjectNameInput').value;
+          const teacher = 'Teacher: ' + document.getElementById('teacherInput').value;
+          sessionData.schedule[key][currentDay].push({
+            type: 'subject',
+            code,
+            subject,
+            teacher,
+            start,
+            end
+          });
+        }
+
+        closeAddModal();
+        renderTimetable();
+        showToast('New period slot added to timetable.');
+      });
+
+      window.openEditModal = function(index) {
+        const sessionData = TIMETABLES[currentSession];
+        const key = `${currentClass}-${currentSection}`;
+        const slots = (sessionData.schedule[key] && sessionData.schedule[key][currentDay])
+          ? sessionData.schedule[key][currentDay]
+          : sessionData.schedule['5-A']['Monday'];
+
+        const slot = slots[index];
+        if (!slot) return;
+
+        document.getElementById('editSlotIndex').value = index;
+        document.getElementById('editSubjectInput').value = slot.subject;
+        document.getElementById('editTeacherInput').value = slot.teacher ? slot.teacher.replace('Teacher: ', '') : '';
+        document.getElementById('editStartTimeInput').value = slot.start;
+        document.getElementById('editEndTimeInput').value = slot.end;
+
+        document.getElementById('editTeacherWrap').style.display = slot.type === 'interval' ? 'none' : 'block';
+        editSlotModal.classList.add('open');
+      };
+
+      function closeEditModal() {
+        editSlotModal.classList.remove('open');
+      }
+
+      cancelEditBtn.addEventListener('click', closeEditModal);
+      closeEditModalBtn.addEventListener('click', closeEditModal);
+
+      editSlotForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const index = parseInt(document.getElementById('editSlotIndex').value, 10);
+        const sessionData = TIMETABLES[currentSession];
+        const key = `${currentClass}-${currentSection}`;
+        const slots = (sessionData.schedule[key] && sessionData.schedule[key][currentDay])
+          ? sessionData.schedule[key][currentDay]
+          : sessionData.schedule['5-A']['Monday'];
+
+        if (slots[index]) {
+          slots[index].subject = document.getElementById('editSubjectInput').value;
+          if (slots[index].type !== 'interval') {
+            slots[index].teacher = 'Teacher: ' + document.getElementById('editTeacherInput').value;
+          }
+          slots[index].start = document.getElementById('editStartTimeInput').value;
+          slots[index].end = document.getElementById('editEndTimeInput').value;
+        }
+
+        closeEditModal();
+        renderTimetable();
+        showToast('Period slot updated successfully.');
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target === sessionWarningModal) closeWarningModal();
+        if (e.target === addSlotModal) closeAddModal();
+        if (e.target === editSlotModal) closeEditModal();
+      });
+
+      ttSessionSelect.value = currentSession;
+      renderTimetable();
+</script>
+  </body>
+</html>

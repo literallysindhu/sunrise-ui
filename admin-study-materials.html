@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Study Materials &amp; Digital Library - Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin-nav.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/admin-study-materials.css" />
+    <script src="js/admin-nav.js" defer></script>
+  </head>
+  <body class="study-materials-admin">
+    <div class="sm-layout">
+
+      <aside data-admin-nav></aside>
+
+      <main class="sm-main">
+
+        <header class="sm-top">
+          <div class="sm-search-wrap">
+            <span class="sm-search-icon">⌕</span>
+            <input
+              id="librarySearchInput"
+              type="search"
+              placeholder="Search documents, subjects, file names, authors…"
+              aria-label="Search study materials"
+            />
+          </div>
+
+          <div class="sm-top-actions">
+            <button class="role-pill" type="button" aria-label="Current role selector">
+              <span>Role: School Administrator</span>
+              <span>⌄</span>
+            </button>
+
+            <button class="notify-bell" type="button" aria-label="Notifications">
+              <span>🔔</span>
+              <span class="bell-badge"></span>
+            </button>
+
+            <div class="user-profile-chip" title="Dr. K. Sundararajan (Principal)">
+              <div class="user-avatar-circle">KS</div>
+              <div class="user-info">
+                <strong>Dr. K. Sundararajan (Principal)</strong>
+                <small>admin@sunriseschool.edu.in ⌄</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="sm-content">
+
+          <div class="sm-heading-row">
+            <div class="sm-title-group">
+              <h1>Study Materials &amp; Digital Library</h1>
+              <p>Upload and organize subject textbooks, worksheets, lecture videos, and audio notes</p>
+            </div>
+
+            <button class="btn-upload-material" id="openUploadBtn" type="button">
+              <span>＋</span> Upload Study Material
+            </button>
+          </div>
+
+          <div class="sm-filters-wrap">
+
+            <div class="type-pills-row" role="tablist" aria-label="File format filter">
+              <button class="type-pill active" data-type="ALL" type="button">ALL TYPES</button>
+              <button class="type-pill" data-type="PDF" type="button">PDF</button>
+              <button class="type-pill" data-type="VIDEO" type="button">VIDEO</button>
+              <button class="type-pill" data-type="AUDIO" type="button">AUDIO</button>
+              <button class="type-pill" data-type="IMAGE" type="button">IMAGE</button>
+            </div>
+
+            <div class="filter-dropdowns-row">
+              <select class="filter-select" id="classFilterSelect" aria-label="Filter by Class">
+                <option value="ALL">All Classes</option>
+                <option value="Class 5" selected>Class 5</option>
+                <option value="Class 6">Class 6</option>
+              </select>
+
+              <select class="filter-select" id="subjectFilterSelect" aria-label="Filter by Subject">
+                <option value="ALL">All Subjects</option>
+                <option value="MATHEMATICS">Mathematics</option>
+                <option value="SCIENCE">Science</option>
+                <option value="ENGLISH">English</option>
+                <option value="TAMIL">Tamil</option>
+                <option value="SOCIAL SCIENCE">Social Science</option>
+              </select>
+
+              <div class="session-badge-wrap" title="Current Academic Cycle Scope">
+                <span>Cycle:</span>
+                <select id="smSessionSelect" aria-label="Switch Academic Session">
+                  <option value="2026-2027">Session 2026–2027 (Active)</option>
+                  <option value="2025-2026">Session 2025–2026 (Archived)</option>
+                  <option value="2024-2025">Session 2024–2025 (Historical)</option>
+                  <option value="2027-2028">Session 2027–2028 (Upcoming)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <section class="materials-grid" id="materialsGrid">
+
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="sessionWarnModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="warnTitle">
+        <div class="modal-head">
+          <h3 id="warnTitle" style="color:#e11d48">
+            <span>⚠</span> Warning: Switch Academic Session?
+          </h3>
+          <button class="modal-close-btn" id="closeWarnModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <p style="font-size:14px; font-weight:700; color:#1e293b; margin:0 0 14px; line-height:1.5;">
+          You are switching the digital library to <b id="warnTargetName">Session 2025–2026</b>.
+        </p>
+        <div class="warning-callout">
+          • <strong>Everything will be reverted to that academic session.</strong><br />
+          • All uploaded textbooks, worksheets, and lecture media from 2026–27 will be deactivated.<br />
+          • Historical curriculum digital materials for the target cycle will be loaded.
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelWarnBtn" type="button">Cancel</button>
+          <button class="btn-primary danger" id="confirmWarnBtn" type="button">Revert &amp; Switch Session</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="uploadModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="uploadModalTitle">
+        <div class="modal-head">
+          <h3 id="uploadModalTitle">Upload Study Material</h3>
+          <button class="modal-close-btn" id="closeUploadModalBtn" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <form id="uploadForm" class="modal-form">
+          <label class="full">
+            Document / Lecture Title *
+            <input id="newTitle" placeholder="e.g. Chapter 5: Periodic Classification Notes" required />
+          </label>
+
+          <label>
+            Target Class Grade *
+            <select id="newClass">
+              <option value="Class 5">Class 5</option>
+              <option value="Class 6">Class 6</option>
+            </select>
+          </label>
+
+          <label>
+            Subject Category *
+            <select id="newSubject">
+              <option value="MATHEMATICS">Mathematics</option>
+              <option value="SCIENCE">Science</option>
+              <option value="ENGLISH">English</option>
+              <option value="TAMIL">Tamil</option>
+              <option value="SOCIAL SCIENCE">Social Science</option>
+            </select>
+          </label>
+
+          <label>
+            Media Format *
+            <select id="newType">
+              <option value="PDF">PDF Document</option>
+              <option value="VIDEO">Video Lecture (MP4)</option>
+              <option value="AUDIO">Audio Note (MP3)</option>
+              <option value="IMAGE">Diagram / Poster (PNG/JPG)</option>
+            </select>
+          </label>
+
+          <label>
+            Attachment File Name *
+            <input id="newFileName" placeholder="e.g. Science_Ch5_Notes.pdf" required />
+          </label>
+
+          <label>
+            File Size
+            <input id="newFileSize" placeholder="e.g. 3.4 MB" value="3.4 MB" />
+          </label>
+
+          <label>
+            Uploaded By (Teacher)
+            <select id="newAuthor">
+              <option value="M. Saravanan">M. Saravanan</option>
+              <option value="K. Malathi">K. Malathi</option>
+              <option value="S. Jayaraman">S. Jayaraman</option>
+            </select>
+          </label>
+
+          <div class="modal-actions full">
+            <button class="btn-secondary" id="cancelUploadBtn" type="button">Cancel</button>
+            <button class="btn-primary" type="submit">Upload Document</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="sm-toast" id="smToast">
+      <span>✓</span>
+      <span id="smToastMsg">Action completed successfully.</span>
+    </div>
+
+    <script>
+const LIBRARY_DATA = {
+        '2026-2027': {
+          sessionName: 'Session 2026–2027',
+          materials: [
+            {
+              id: 'mat-1',
+              type: 'PDF',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 5',
+              title: 'Chapter 4: Fractions and Decimals Revision Notes',
+              fileName: 'Math_Ch4_Fractions_Notes.pdf',
+              size: '2.4 MB',
+              date: '2026-11-03',
+              author: 'By M. Saravanan'
+            },
+            {
+              id: 'mat-2',
+              type: 'VIDEO',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5',
+              title: 'Plant Cells and Photosynthesis Animated Video Lecture',
+              fileName: 'Photosynthesis_Concept_Explainer.mp4',
+              size: '18.8 MB',
+              date: '2026-11-04',
+              author: 'By M. Saravanan'
+            },
+            {
+              id: 'mat-3',
+              type: 'AUDIO',
+              subject: 'ENGLISH',
+              targetClass: 'Class 5',
+              title: 'The Road Not Taken - Audio Pronunciation & Recitation',
+              fileName: 'Frost_Poem_Recitation.mp3',
+              size: '4.1 MB',
+              date: '2026-11-05',
+              author: 'By K. Malathi'
+            },
+            {
+              id: 'mat-4',
+              type: 'IMAGE',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5',
+              title: 'Digestive System Anatomical Diagram & Key Organs Map',
+              fileName: 'Digestive_System_HighRes_Chart.png',
+              size: '3.2 MB',
+              date: '2026-11-06',
+              author: 'By M. Saravanan'
+            },
+            {
+              id: 'mat-5',
+              type: 'PDF',
+              subject: 'SOCIAL SCIENCE',
+              targetClass: 'Class 6',
+              title: 'Early Civilizations of the Indus Valley Study Guide',
+              fileName: 'Indus_Valley_Grade6_Guide.pdf',
+              size: '5.6 MB',
+              date: '2026-11-07',
+              author: 'By S. Jayaraman'
+            },
+            {
+              id: 'mat-6',
+              type: 'AUDIO',
+              subject: 'TAMIL',
+              targetClass: 'Class 5',
+              title: 'Thirukkural Couplets Audio Recitation & Meaning Guide',
+              fileName: 'Thirukkural_Lesson_Pronunciation.mp3',
+              size: '6.8 MB',
+              date: '2026-11-08',
+              author: 'By K. Malathi'
+            },
+            {
+              id: 'mat-7',
+              type: 'VIDEO',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 6',
+              title: 'Introduction to Algebraic Expressions & Variables Demonstration',
+              fileName: 'Algebra_Fundamentals_Class6.mp4',
+              size: '24.5 MB',
+              date: '2026-11-09',
+              author: 'By M. Saravanan'
+            },
+            {
+              id: 'mat-8',
+              type: 'IMAGE',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 5',
+              title: 'Geometric Shapes, Vertices & Angles Infographic Chart',
+              fileName: 'Geometry_Formulae_Poster.jpg',
+              size: '1.8 MB',
+              date: '2026-11-10',
+              author: 'By M. Saravanan'
+            },
+            {
+              id: 'mat-9',
+              type: 'PDF',
+              subject: 'ENGLISH',
+              targetClass: 'Class 5',
+              title: 'Grammar Workbook: Tenses, Prepositions & Conjunctions',
+              fileName: 'English_Grammar_Practice_Vol2.pdf',
+              size: '3.9 MB',
+              date: '2026-11-11',
+              author: 'By K. Malathi'
+            }
+          ]
+        },
+        '2025-2026': {
+          sessionName: 'Session 2025–2026',
+          materials: [
+            {
+              id: 'mat-25-1',
+              type: 'PDF',
+              subject: 'MATHEMATICS',
+              targetClass: 'Class 5',
+              title: 'Arithmetic Practice Book & Word Problem Exercises (2025–26)',
+              fileName: 'Maths_WordProblems_2025.pdf',
+              size: '4.2 MB',
+              date: '2025-11-02',
+              author: 'By Mrs. R. Vasanthi'
+            },
+            {
+              id: 'mat-25-2',
+              type: 'VIDEO',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5',
+              title: 'Plant Respiration & Seed Germination Lab Demonstration',
+              fileName: 'Plant_Respiration_Demo.mp4',
+              size: '16.5 MB',
+              date: '2025-11-04',
+              author: 'By Mr. K. Natarajan'
+            },
+            {
+              id: 'mat-25-3',
+              type: 'AUDIO',
+              subject: 'ENGLISH',
+              targetClass: 'Class 5',
+              title: 'English Prose Narration: The Magic Paintbrush Audio',
+              fileName: 'Magic_Paintbrush_Story.mp3',
+              size: '5.2 MB',
+              date: '2025-11-06',
+              author: 'By Mr. D. Joseph'
+            },
+            {
+              id: 'mat-25-4',
+              type: 'IMAGE',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5',
+              title: 'Solar System Planetary Scale & Distances Diagram',
+              fileName: 'Planetary_System_Scale.png',
+              size: '2.9 MB',
+              date: '2025-11-08',
+              author: 'By Mr. K. Natarajan'
+            }
+          ]
+        },
+        '2024-2025': {
+          sessionName: 'Session 2024–2025',
+          materials: [
+            {
+              id: 'mat-24-1',
+              type: 'PDF',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5',
+              title: 'Environmental Studies (EVS) Field Study Notebook',
+              fileName: 'EVS_Field_Workbook_2024.pdf',
+              size: '4.8 MB',
+              date: '2024-11-05',
+              author: 'By Mrs. Geetha Swaminathan'
+            },
+            {
+              id: 'mat-24-2',
+              type: 'AUDIO',
+              subject: 'ENGLISH',
+              targetClass: 'Class 5',
+              title: 'Phonics & Pronunciation Recitation Drills',
+              fileName: 'Phonics_Drills_Class5.mp3',
+              size: '3.8 MB',
+              date: '2024-11-09',
+              author: 'By Mr. Peter Fernandez'
+            }
+          ]
+        },
+        '2027-2028': {
+          sessionName: 'Session 2027–2028',
+          materials: [
+            {
+              id: 'mat-27-1',
+              type: 'VIDEO',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5',
+              title: 'AI & Machine Learning Visual Primer for Middle Primary',
+              fileName: 'AI_Primer_For_Schools.mp4',
+              size: '32.0 MB',
+              date: '2027-08-10',
+              author: 'By Dr. Arun Kumar'
+            },
+            {
+              id: 'mat-27-2',
+              type: 'PDF',
+              subject: 'SCIENCE',
+              targetClass: 'Class 5',
+              title: 'Integrated STEM Robotics Starter Kit Manual',
+              fileName: 'Robotics_Starter_Manual.pdf',
+              size: '7.5 MB',
+              date: '2027-08-14',
+              author: 'By Ms. Radhika Nair'
+            }
+          ]
+        }
+      };
+
+      let currentSession = localStorage.getItem('sunrise-academic-session') || '2026-2027';
+      if (!LIBRARY_DATA[currentSession]) currentSession = '2026-2027';
+
+      let pendingSession = null;
+      let activeTypeFilter = 'ALL';
+      let activeClassFilter = 'Class 5';
+      let activeSubjectFilter = 'ALL';
+
+      const smSessionSelect = document.getElementById('smSessionSelect');
+      const librarySearchInput = document.getElementById('librarySearchInput');
+      const classFilterSelect = document.getElementById('classFilterSelect');
+      const subjectFilterSelect = document.getElementById('subjectFilterSelect');
+      const typePills = document.querySelectorAll('.type-pill');
+      const materialsGrid = document.getElementById('materialsGrid');
+
+      const sessionWarnModal = document.getElementById('sessionWarnModal');
+      const warnTargetName = document.getElementById('warnTargetName');
+      const cancelWarnBtn = document.getElementById('cancelWarnBtn');
+      const confirmWarnBtn = document.getElementById('confirmWarnBtn');
+      const closeWarnModalBtn = document.getElementById('closeWarnModalBtn');
+
+      const uploadModal = document.getElementById('uploadModal');
+      const openUploadBtn = document.getElementById('openUploadBtn');
+      const cancelUploadBtn = document.getElementById('cancelUploadBtn');
+      const closeUploadModalBtn = document.getElementById('closeUploadModalBtn');
+      const uploadForm = document.getElementById('uploadForm');
+
+      const smToast = document.getElementById('smToast');
+      const smToastMsg = document.getElementById('smToastMsg');
+
+      function showToast(msg) {
+        smToastMsg.textContent = msg;
+        smToast.classList.add('show');
+        setTimeout(() => smToast.classList.remove('show'), 3500);
+      }
+
+      function getTypeIcon(type) {
+        switch (type.toUpperCase()) {
+          case 'PDF':
+            return { icon: '📄', css: 'pdf' };
+          case 'VIDEO':
+            return { icon: '📹', css: 'video' };
+          case 'AUDIO':
+            return { icon: '🎵', css: 'audio' };
+          case 'IMAGE':
+            return { icon: '🖼️', css: 'image' };
+          default:
+            return { icon: '📁', css: 'pdf' };
+        }
+      }
+
+      function renderMaterials() {
+        const sessionData = LIBRARY_DATA[currentSession];
+        const materials = sessionData.materials || [];
+        const query = librarySearchInput.value.trim().toLowerCase();
+
+        const filtered = materials.filter(item => {
+          const matchesType = activeTypeFilter === 'ALL' || item.type.toUpperCase() === activeTypeFilter;
+          const matchesClass = activeClassFilter === 'ALL' || item.targetClass === activeClassFilter;
+          const matchesSubject = activeSubjectFilter === 'ALL' || item.subject.toUpperCase() === activeSubjectFilter;
+          const matchesQuery = !query || (
+            item.title.toLowerCase().includes(query) ||
+            item.subject.toLowerCase().includes(query) ||
+            item.fileName.toLowerCase().includes(query) ||
+            item.author.toLowerCase().includes(query)
+          );
+          return matchesType && matchesClass && matchesSubject && matchesQuery;
+        });
+
+        if (filtered.length === 0) {
+          materialsGrid.innerHTML = `
+            <div class="empty-library">
+              <span>📚</span>
+              <h3>No study materials found</h3>
+              <p style="margin:6px 0 0; font-size:13px">
+                No files matching your selected filters were found in ${sessionData.sessionName}. Try broadening your search or upload new content above.
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        materialsGrid.innerHTML = filtered.map(item => {
+          const typeInfo = getTypeIcon(item.type);
+
+          return `
+            <article class="material-card" data-id="${item.id}">
+              <div>
+                <div class="material-card-top">
+                  <div class="type-icon-box ${typeInfo.css}">
+                    ${typeInfo.icon}
+                  </div>
+                  <span class="class-tag">${item.targetClass}</span>
+                </div>
+
+                <div class="subject-label">${item.subject}</div>
+                <h2 class="material-title">${item.title}</h2>
+
+                <div class="attachment-box">
+                  <div class="attachment-name">${item.fileName}</div>
+                  <div class="attachment-meta">Size: ${item.size} • Date: ${item.date}</div>
+                </div>
+              </div>
+
+              <div class="material-card-footer">
+                <span>${item.author}</span>
+                <div class="card-actions">
+                  <button
+                    class="btn-card-action"
+                    onclick="downloadMaterial('${item.fileName}')"
+                    type="button"
+                    title="Download ${item.fileName}"
+                    aria-label="Download ${item.fileName}"
+                  >
+                    ⭳
+                  </button>
+                  <button
+                    class="btn-card-action delete"
+                    onclick="deleteMaterial('${item.id}', '${item.title.replace(/'/g, "\\'")}')"
+                    type="button"
+                    title="Delete ${item.title}"
+                    aria-label="Delete document"
+                  >
+                    🗑
+                  </button>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      typePills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          typePills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          activeTypeFilter = pill.dataset.type;
+          renderMaterials();
+        });
+      });
+
+      classFilterSelect.addEventListener('change', e => {
+        activeClassFilter = e.target.value;
+        renderMaterials();
+      });
+
+      subjectFilterSelect.addEventListener('change', e => {
+        activeSubjectFilter = e.target.value;
+        renderMaterials();
+      });
+
+      librarySearchInput.addEventListener('input', () => {
+        renderMaterials();
+      });
+
+      window.downloadMaterial = function(fileName) {
+        showToast(`Downloading file "${fileName}"...`);
+      };
+
+      window.deleteMaterial = function(id, title) {
+        if (!confirm(`Are you sure you want to delete "${title}" from the digital library?`)) return;
+
+        const sessionData = LIBRARY_DATA[currentSession];
+        sessionData.materials = sessionData.materials.filter(m => m.id !== id);
+        renderMaterials();
+        showToast(`"${title}" has been deleted.`);
+      };
+
+      smSessionSelect.addEventListener('change', e => {
+        const next = e.target.value;
+        if (next === currentSession) return;
+
+        pendingSession = next;
+
+        smSessionSelect.value = currentSession;
+
+        warnTargetName.textContent = LIBRARY_DATA[pendingSession].sessionName;
+        sessionWarnModal.classList.add('open');
+      });
+
+      function closeWarnModal() {
+        sessionWarnModal.classList.remove('open');
+        pendingSession = null;
+      }
+
+      cancelWarnBtn.addEventListener('click', closeWarnModal);
+      closeWarnModalBtn.addEventListener('click', closeWarnModal);
+
+      confirmWarnBtn.addEventListener('click', () => {
+        if (!pendingSession || !LIBRARY_DATA[pendingSession]) {
+          closeWarnModal();
+          return;
+        }
+
+        currentSession = pendingSession;
+        smSessionSelect.value = currentSession;
+        localStorage.setItem('sunrise-academic-session', currentSession);
+
+        closeWarnModal();
+        renderMaterials();
+        showToast(`Reverted and loaded study materials for ${LIBRARY_DATA[currentSession].sessionName}.`);
+      });
+
+      openUploadBtn.addEventListener('click', () => {
+        uploadModal.classList.add('open');
+      });
+
+      function closeUploadModal() {
+        uploadModal.classList.remove('open');
+      }
+
+      cancelUploadBtn.addEventListener('click', closeUploadModal);
+      closeUploadModalBtn.addEventListener('click', closeUploadModal);
+
+      uploadForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const title = document.getElementById('newTitle').value.trim();
+        const targetClass = document.getElementById('newClass').value;
+        const subject = document.getElementById('newSubject').value;
+        const type = document.getElementById('newType').value;
+        const fileName = document.getElementById('newFileName').value.trim();
+        const size = document.getElementById('newFileSize').value.trim() || '2.5 MB';
+        const author = 'By ' + document.getElementById('newAuthor').value;
+
+        const now = new Date().toISOString().split('T')[0];
+
+        const newDoc = {
+          id: 'mat-' + Date.now(),
+          type,
+          subject,
+          targetClass,
+          title,
+          fileName,
+          size,
+          date: now,
+          author
+        };
+
+        const sessionData = LIBRARY_DATA[currentSession];
+        sessionData.materials.unshift(newDoc);
+
+        closeUploadModal();
+        renderMaterials();
+        showToast(`"${title}" uploaded to library.`);
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target === sessionWarnModal) closeWarnModal();
+        if (e.target === uploadModal) closeUploadModal();
+      });
+
+      smSessionSelect.value = currentSession;
+      renderMaterials();
+</script>
+  </body>
+</html>

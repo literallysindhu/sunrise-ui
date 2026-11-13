@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Notice Board & Circulars</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/super-admin.css">
+    <link rel="stylesheet" href="css/notice.css">
+    <link rel="stylesheet" href="css/admin-nav.css">__PROTECTED_BLOCK_0__
+  </head>
+  <body class="super-admin notice-page">
+    <div class="sa-layout">
+      <aside class="sa-sidebar">
+        <a class="sa-brand" href="landing.html">
+        <b>☀</b>
+        <span>Sunrise School<small>Super admin</small>
+      </span>
+    </a>
+    <div class="sa-role">ACTIVE ROLE<strong>Super Admin</strong>
+    </div>
+    <nav class="sa-nav">
+      <a href="super-admin.html">▦ &nbsp; School dashboard</a>
+      <a href="#people">♙ &nbsp; People &amp; roles</a>
+      <a class="indent" href="#students">Students</a>
+      <a class="indent" href="#parents">Parents</a>
+      <a class="indent" href="#staff">Staff &amp; teachers</a>
+      <a href="#attendance">▣ &nbsp; Attendance</a>
+      <a href="#academics">✦ &nbsp; Academics</a>
+      <a class="indent" href="#sessions">Academic sessions</a>
+      <a class="indent" href="#classes">Classes &amp; sections</a>
+      <a class="indent" href="#exams">Examinations</a>
+      <a href="#fees">₹ &nbsp; Fees &amp; billing</a>
+      <a class="active" href="notice-board.html">✉ &nbsp; Notice board</a>
+      <a href="#settings">⚙ &nbsp; School settings</a>
+    </nav>
+    <footer>System online ●
+    </footer>
+  </aside>
+  <main class="sa-main">
+    <div class="notice-main">
+      <section class="notice-top">
+        <div>
+          <h1>Notice board &amp; circulars</h1>
+          <p>Broadcast official circulars, event notifications, and school updates.</p>
+        </div>
+        <button class="compose" id="composeButton">＋ Compose new circular</button>
+      </section>
+      <section class="notice-grid">
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="tag">All school</span>
+            <span>4 Nov 2026</span>
+          </div>
+          <h2>Annual Sports Meet 2026 - registrations open</h2>
+          <p>Our 18th Annual Sports Meet will take place on 12 December at Nehru Stadium. Track and field selection trials begin next Monday.</p>
+          <a class="attachment" href="#sports">▧ Sports_Schedule_2026.pdf</a>
+          <span class="status">Published</span>
+        </article>
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="tag">Class 5</span>
+            <span>5 Nov 2026</span>
+          </div>
+          <h2>Class 5 educational field trip to Planetarium</h2>
+          <p>All Class 5 students will visit the Birla Planetarium on Friday. Signed parent consent slips are required.</p>
+          <a class="attachment" href="#fieldtrip">▧ Consent_Form_FieldTrip.pdf</a>
+          <span class="status">Published</span>
+        </article>
+        <article class="notice-card">
+          <div class="notice-meta">
+            <span class="tag">All school</span>
+            <span>6 Nov 2026</span>
+          </div>
+          <h2>Parent-Teacher Meeting (Term 1 review)</h2>
+          <p>The first-term PTM is scheduled for Saturday, 28 November, between 9:00 AM and 1:00 PM. Time slots are now available.</p>
+          <span class="status">Published</span>
+        </article>
+      </section>
+    </div>
+  </main>
+</div>
+<div class="modal-backdrop" id="composeModal">
+  <form class="compose-card">
+    <header>
+      <div>
+        <h2>Compose official circular</h2>
+        <p>Notices appear instantly on the parent notice board.</p>
+      </div>
+      <button class="close" type="button" id="closeModal">×</button>
+    </header>
+    <label>Circular title *<input placeholder="e.g. Annual Sports Meet 2026 - Schedule">
+    </label>
+    <label>Target audience
+      <select>
+        <option>All parents &amp; students</option>
+        <option>Class 5 only</option>
+        <option>Staff only</option>
+      </select>
+    </label>
+    <label>Notice content<textarea placeholder="Write the full circular announcement…">
+    </textarea>
+  </label>
+  <label>Attachment document name (PDF/DOC)<input placeholder="e.g. Sports_Schedule_2026.pdf">
+  </label>
+  <div class="compose-actions">
+    <button type="button" id="cancelModal">Cancel</button>
+    <button type="button">Publish announcement</button>
+  </div>
+</form>
+</div>
+<script>
+const modal=document.getElementById('composeModal'),open=()=>modal.classList.add('open'),close=()=>modal.classList.remove('open');document.getElementById('composeButton').onclick=open;document.getElementById('closeModal').onclick=close;document.getElementById('cancelModal').onclick=close;if(new URLSearchParams(location.search).has('create'))open()
+</script>
+</body>
+</html>

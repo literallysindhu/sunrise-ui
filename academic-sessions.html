@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Academic Session Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/academic.css">
+    <link rel="stylesheet" href="css/admin-nav.css">__PROTECTED_BLOCK_0__
+  </head>
+  <body class="academic">
+    <div class="a-layout">
+      <aside class="a-side">
+        <a class="a-brand" href="landing.html">
+        <b>☀</b>Sunrise School</a>
+        <div class="a-role">ACTIVE ROLE · SUPER ADMIN
+        </div>
+        <nav class="a-nav">
+          <a href="super-admin.html">▦ School dashboard</a>
+          <a href="people.html?tab=students">♙ People &amp; roles</a>
+          <a href="admin-attendance.html">▣ Attendance</a>
+          <a class="active" href="academic-sessions.html">✦ Academics</a>
+          <a class="indent active" href="academic-sessions.html">Academic sessions</a>
+          <a class="indent" href="classes-sections.html">Classes &amp; sections</a>
+          <a class="indent" href="subjects-teachers.html">Subjects &amp; teachers</a>
+          <a class="indent" href="student-promotions.html">Student promotions</a>
+          <a class="indent" href="admin-timetable.html">Timetable</a>
+          <a class="indent" href="admin-examinations.html">Examinations</a>
+          <a class="indent" href="admin-study-materials.html">Study materials</a>
+          <a class="indent" href="admin-online-tests.html">Online tests</a>
+          <a href="#diary">✎ Diary &amp; homework</a>
+          <a href="notice-board.html">✉ Notice board</a>
+          <a href="#calendar">▣ School calendar</a>
+          <a href="#settings">⚙ School settings</a>
+        </nav>
+      </aside>
+      <main class="a-main">
+        <header class="a-top">
+          <input placeholder="⌕ Search students, admissions, circulars…">
+          <span>SA · Super Admin</span>
+        </header>
+        <div class="a-content">
+          <section class="a-heading">
+            <div>
+              <h1>Academic session management <span class="badge">Institutional cycles</span>
+              </h1>
+              <p>Configure academic years, maintain one active session, and archive historical periods.</p>
+            </div>
+            <button class="add" id="openModal">＋ Add academic session</button>
+          </section>
+          <section class="session-grid">
+            <article class="session active">
+              <div class="session-head">
+                <span class="badge">Active cycle</span>
+                <span class="badge" style="background:#bff2bf">Active</span>
+              </div>
+              <h2>Session 2026–2027</h2>
+              <p>Current active academic year for all school branches.</p>
+              <div class="dates">Starts: <b>2026-06-01</b>
+                <br>Ends: <b>2027-04-30</b>
+              </div>
+            </article>
+            <article class="session">
+              <div class="session-head">
+                <span class="badge">Historical</span>
+                <span class="badge">Archived</span>
+              </div>
+              <h2>Session 2025–2026</h2>
+              <p>Completed previous academic cycle, archived with full historical records.</p>
+              <div class="dates">Starts: <b>2025-06-01</b>
+                <br>Ends: <b>2026-04-30</b>
+              </div>
+              <button class="action" onclick="makeActive(this)">✓ Make active session</button>
+            </article>
+            <article class="session">
+              <div class="session-head">
+                <span class="badge">Planning</span>
+                <span class="badge">Upcoming</span>
+              </div>
+              <h2>Session 2027–2028</h2>
+              <p>Upcoming admissions and class-planning cycle.</p>
+              <div class="dates">Starts: <b>2027-06-01</b>
+                <br>Ends: <b>2028-04-30</b>
+              </div>
+              <button class="action">✓ Make active session</button>
+            </article>
+          </section>
+        </div>
+      </main>
+    </div>
+    <div class="modal" id="modal">
+      <form class="modal-card">
+        <header>
+          <h2>Add new academic session</h2>
+          <button class="close" type="button" id="closeModal">×</button>
+        </header>
+        <div class="form">
+          <label class="full">Session name *<input placeholder="e.g. 2027–2028">
+          </label>
+          <label>Start date *<input type="date">
+          </label>
+          <label>End date *<input type="date">
+          </label>
+          <label class="full">Description<textarea placeholder="Session notes, affiliation details, or admissions cycle…">
+          </textarea>
+        </label>
+        <label class="full">
+          <input type="checkbox" style="width:auto"> Set as active academic session immediately</label>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancelModal">Cancel</button>
+          <button type="button" id="createSession">Create session</button>
+        </div>
+      </form>
+    </div>
+    <script>
+const m=document.getElementById('modal'),open=()=>m.classList.add('open'),close=()=>m.classList.remove('open');document.getElementById('openModal').onclick=open;document.getElementById('closeModal').onclick=close;document.getElementById('cancelModal').onclick=close;document.getElementById('createSession').onclick=()=>{close();alert('Academic session created')};function makeActive(button){const card=button.closest('.session');const title=card.querySelector('h2').textContent;const key=title.includes('2025')?'2025-2026':title.includes('2027')?'2027-2028':'2026-2027';const proceed=confirm('Warning: Switching active academic session will revert all class timetables, student rosters, and subject allocations to '+title+'.\n\nAll content from 2026–27 will be deactivated and replaced by '+title+' records. Do you wish to proceed?');if(!proceed)return;document.querySelectorAll('.session').forEach(c=>{c.classList.remove('active');const tag=c.querySelector('.session-head span:last-child');if(tag)tag.textContent=tag.textContent==='Active'?'Archived':tag.textContent});card.classList.add('active');card.querySelector('.session-head span:last-child').textContent='Active';localStorage.setItem('sunrise-academic-session',key);button.remove();alert('Academic session successfully switched to '+title+'. All records have reverted to this session.')};
+</script>
+  </body>
+</html>
