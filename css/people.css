@@ -70,7 +70,7 @@
 }
 
 .people-heading h1 {
-  font: 800 clamp(28px, 3.4vw, 38px)/1.08 "Baloo 2", sans-serif;
+  font: 800 clamp(28px, 3.4vw, 38px)/1.08 "League Spartan", sans-serif;
   margin: 0;
 }
 
@@ -317,7 +317,7 @@ tr.data-row:nth-child(even) td {
 }
 
 .modal-card h2 {
-  font: 800 24px "Baloo 2", sans-serif;
+  font: 800 24px "League Spartan", sans-serif;
   margin: 0;
 }
 

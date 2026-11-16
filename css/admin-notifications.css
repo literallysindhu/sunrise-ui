@@ -180,7 +180,7 @@ body.notifications-admin {
 }
 
 .nf-title-group h1 {
-  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "Baloo 2", sans-serif;
+  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
   letter-spacing: -0.5px;
@@ -301,7 +301,7 @@ body.notifications-admin {
 }
 
 .nf-card-title {
-  font: 800 17px/1.25 "Baloo 2", sans-serif;
+  font: 800 17px/1.25 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -364,7 +364,7 @@ body.notifications-admin {
 }
 
 .empty-nf h3 {
-  font: 800 22px "Baloo 2", sans-serif;
+  font: 800 22px "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -404,7 +404,7 @@ body.notifications-admin {
 }
 
 .modal-head h3 {
-  font: 800 22px/1.2 "Baloo 2", sans-serif;
+  font: 800 22px/1.2 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
 }

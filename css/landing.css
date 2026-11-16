@@ -93,7 +93,7 @@ body.navy-landing .eyebrow {
 }
 
 .two-line-heading {
-  font-family: "Baloo 2", sans-serif;
+  font-family: "League Spartan", sans-serif;
   font-weight: 800;
   font-size: clamp(40px, 4.1vw, 60px);
   line-height: 1.06;
@@ -182,7 +182,7 @@ body.navy-landing .hero-copy {
 }
 
 .portal-box strong {
-  font: 800 22px/1.15 "Baloo 2", sans-serif;
+  font: 800 22px/1.15 "League Spartan", sans-serif;
   color: var(--navy-dark);
 }
 
@@ -218,7 +218,7 @@ body.navy-landing .primary-cta {
   padding: 11px 18px;
   color: var(--navy-dark);
   text-decoration: none;
-  font: 800 16px "Baloo 2", sans-serif;
+  font: 800 16px "League Spartan", sans-serif;
 }
 
 .notebook-stage {
@@ -291,7 +291,7 @@ body.navy-landing .primary-cta {
 
 .nb-header strong {
   display: block;
-  font: 800 12px/1.1 "Baloo 2", sans-serif;
+  font: 800 12px/1.1 "League Spartan", sans-serif;
   letter-spacing: 0.04em;
 }
 

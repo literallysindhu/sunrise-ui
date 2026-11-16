@@ -185,7 +185,7 @@ body.timetable-admin {
 }
 
 .tt-title-group h1 {
-  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "Baloo 2", sans-serif;
+  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
   letter-spacing: -0.5px;
@@ -348,7 +348,7 @@ body.timetable-admin {
 }
 
 .slot-info h2 {
-  font: 800 18px/1.2 "Baloo 2", sans-serif;
+  font: 800 18px/1.2 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -420,7 +420,7 @@ body.timetable-admin {
 }
 
 .interval-left strong {
-  font: 800 15px "Baloo 2", sans-serif;
+  font: 800 15px "League Spartan", sans-serif;
   color: #92400e;
 }
 
@@ -446,7 +446,7 @@ body.timetable-admin {
 }
 
 .empty-schedule h3 {
-  font: 800 20px "Baloo 2", sans-serif;
+  font: 800 20px "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -486,7 +486,7 @@ body.timetable-admin {
 }
 
 .modal-head h3 {
-  font: 800 24px/1.2 "Baloo 2", sans-serif;
+  font: 800 24px/1.2 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
 }

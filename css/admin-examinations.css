@@ -189,7 +189,7 @@ body.examinations-admin {
 }
 
 .ex-title-group h1 {
-  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "Baloo 2", sans-serif;
+  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
   letter-spacing: -0.5px;
@@ -279,7 +279,7 @@ body.examinations-admin {
 }
 
 .exam-title-row h2 {
-  font: 800 22px/1.2 "Baloo 2", sans-serif;
+  font: 800 22px/1.2 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -382,7 +382,7 @@ body.examinations-admin {
 }
 
 .subject-card h3 {
-  font: 800 17px/1.2 "Baloo 2", sans-serif;
+  font: 800 17px/1.2 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -461,7 +461,7 @@ body.examinations-admin {
 }
 
 .modal-head h3 {
-  font: 800 24px/1.2 "Baloo 2", sans-serif;
+  font: 800 24px/1.2 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
 }

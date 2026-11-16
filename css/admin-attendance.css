@@ -35,7 +35,7 @@
   gap:9px;
   text-decoration:none;
   color:var(--ink);
-  font:800 20px "Baloo 2"
+  font:800 20px "League Spartan"
 }
 
 .att-brand b {
@@ -127,7 +127,7 @@
 }
 
 .att-title h1 {
-  font:800 41px/1 "Baloo 2";
+  font:800 41px/1 "League Spartan";
   margin:0
 }
 
@@ -225,7 +225,7 @@
 }
 
 .att-kpi strong {
-  font:800 32px/1 "Baloo 2";
+  font:800 32px/1 "League Spartan";
   display:block;
   margin-top:8px
 }

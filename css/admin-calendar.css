@@ -180,7 +180,7 @@ body.calendar-admin {
 }
 
 .cal-title-group h1 {
-  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "Baloo 2", sans-serif;
+  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
   letter-spacing: -0.5px;
@@ -345,7 +345,7 @@ body.calendar-admin {
 }
 
 .event-title {
-  font: 800 18px/1.3 "Baloo 2", sans-serif;
+  font: 800 18px/1.3 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 4px 0 0;
 }
@@ -376,7 +376,7 @@ body.calendar-admin {
 }
 
 .empty-calendar h3 {
-  font: 800 22px "Baloo 2", sans-serif;
+  font: 800 22px "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -418,7 +418,7 @@ body.calendar-admin {
 }
 
 .modal-head h3 {
-  font: 800 22px/1.2 "Baloo 2", sans-serif;
+  font: 800 22px/1.2 "League Spartan", sans-serif;
   color: #0f172a;
   margin: 0;
 }
