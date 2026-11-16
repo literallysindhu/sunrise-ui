@@ -23,7 +23,7 @@ body.portal-page:not(.portal-splash)::after {
   border: 2.5px solid #0f172a !important;
   border-radius: 999px;
   padding: 7px 13px !important;
-  font: 800 12px "Nunito Sans", sans-serif !important;
+  font: 800 12px "Plus Jakarta Sans", sans-serif !important;
   letter-spacing: 0 !important;
   text-transform: none !important;
   text-decoration: none !important;

@@ -9,7 +9,7 @@
   outline: 0;
   background: transparent;
   color: #0f172a;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
 }
 
@@ -45,7 +45,7 @@
   background: #ffffff;
   color: #0f172a;
   padding: 7px 12px;
-  font: 800 12px "Nunito Sans", sans-serif;
+  font: 800 12px "Plus Jakarta Sans", sans-serif;
   box-shadow: 2px 2px 0 #0f172a;
 }
 
@@ -54,7 +54,7 @@
   outline: 0;
   background: transparent;
   color: #1e3a8a;
-  font: 800 12px "Nunito Sans", sans-serif;
+  font: 800 12px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
 }
 
@@ -64,7 +64,7 @@
   border: 2.5px solid #0f172a !important;
   border-radius: 999px;
   padding: 7px 13px !important;
-  font: 800 12px "Nunito Sans", sans-serif !important;
+  font: 800 12px "Plus Jakarta Sans", sans-serif !important;
   letter-spacing: 0 !important;
   text-transform: none !important;
   box-shadow: 2px 2px 0 #0f172a;

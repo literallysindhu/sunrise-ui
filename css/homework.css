@@ -76,11 +76,11 @@
   border-radius: 14px;
   background: #1e3a8a;
   color: #ffffff;
-  font: 800 22px "League Spartan", sans-serif;
+  font: 800 22px "Outfit", sans-serif;
 }
 
 .homework-task h2 {
-  font: 800 24px/1.1 "League Spartan", sans-serif;
+  font: 800 24px/1.1 "Outfit", sans-serif;
   margin: 0 0 12px;
   color: #0f172a;
 }
@@ -115,7 +115,7 @@
   background: #1e3a8a;
   color: #ffffff;
   padding: 7px 14px;
-  font: 800 11.5px "Nunito Sans", sans-serif;
+  font: 800 11.5px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: 2px 2px 0 #0f172a;
 }
@@ -141,7 +141,7 @@
 }
 
 .diary-tip b {
-  font: 800 19px "League Spartan", sans-serif;
+  font: 800 19px "Outfit", sans-serif;
 }
 
 .diary-tip p {

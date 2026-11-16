@@ -25,7 +25,7 @@ body.promotions-body {
   margin: 0;
   background: var(--bg-page);
   color: var(--ink);
-  font-family: "Nunito Sans", Inter, -apple-system, sans-serif;
+  font-family: "Plus Jakarta Sans", Inter, -apple-system, sans-serif;
   min-height: 100vh;
 }
 
@@ -66,7 +66,7 @@ body.promotions-body {
   border-radius: 999px;
   background: #f8fafc;
   padding: 9px 16px 9px 38px;
-  font: 700 13px "Nunito Sans", sans-serif;
+  font: 700 13px "Plus Jakarta Sans", sans-serif;
   color: var(--ink);
   outline: none;
   transition: all 0.2s ease;
@@ -199,7 +199,7 @@ body.promotions-body {
 }
 
 .promo-header h1 {
-  font: 800 clamp(26px, 3vw, 36px)/1.1 "League Spartan", sans-serif;
+  font: 800 clamp(26px, 3vw, 36px)/1.1 "Outfit", sans-serif;
   color: #0f172a;
   margin: 0;
   letter-spacing: -0.5px;
@@ -244,7 +244,7 @@ body.promotions-body {
 }
 
 .card-header-block h2 {
-  font: 800 22px/1.2 "League Spartan", sans-serif;
+  font: 800 22px/1.2 "Outfit", sans-serif;
   color: #0f172a;
   margin: 0;
   display: flex;
@@ -294,7 +294,7 @@ body.promotions-body {
   border-radius: 10px;
   background: #ffffff;
   padding: 10px 14px;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   color: #0f172a;
   cursor: pointer;
   outline: none;
@@ -391,7 +391,7 @@ body.promotions-body {
   background: var(--emerald);
   color: #ffffff;
   padding: 10px 20px;
-  font: 900 13.5px "Nunito Sans", sans-serif;
+  font: 900 13.5px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: all 0.15s ease;
@@ -624,7 +624,7 @@ body.promotions-body {
 }
 
 .modal-head h3 {
-  font: 800 24px/1.2 "League Spartan", sans-serif;
+  font: 800 24px/1.2 "Outfit", sans-serif;
   color: #0f172a;
   margin: 0;
   display: flex;
@@ -682,7 +682,7 @@ body.promotions-body {
   border: 2px solid var(--line);
   border-radius: 10px;
   padding: 9px 18px;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--line);
   transition: all 0.15s ease;

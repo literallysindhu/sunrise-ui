@@ -34,7 +34,7 @@
 }
 
 .admin-heading h1 {
-  font-family: "League Spartan", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-size: 38px;
   letter-spacing: -0.8px;
   color: #0f172a;
@@ -92,7 +92,7 @@
 }
 
 .admin-card label {
-  font-family: "Nunito Sans", Inter, sans-serif;
+  font-family: "Plus Jakarta Sans", Inter, sans-serif;
   color: #0f172a;
   font-size: 12px;
   font-weight: 900;
@@ -102,7 +102,7 @@
   border: 3px solid #0f172a;
   border-radius: 13px;
   background: #eff6ff;
-  font: 700 15px "Nunito Sans", Inter, sans-serif;
+  font: 700 15px "Plus Jakarta Sans", Inter, sans-serif;
   color: #0f172a;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
@@ -123,7 +123,7 @@
   background: #dbeafe;
   color: #1e3a8a;
   padding: 4px 10px;
-  font: 800 11px "Nunito Sans", sans-serif;
+  font: 800 11px "Plus Jakarta Sans", sans-serif;
 }
 
 .staff-validation {
@@ -151,7 +151,7 @@
   background: #1e3a8a;
   color: #ffffff;
   box-shadow: 4px 4px 0 #0f172a;
-  font-family: "League Spartan", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-size: 19px;
 }
 
@@ -184,7 +184,7 @@
 .role-divider {
   border-top: 2.5px dashed #cbd5e1;
   color: #475569;
-  font-family: "Nunito Sans", Inter, sans-serif;
+  font-family: "Plus Jakarta Sans", Inter, sans-serif;
 }
 
 .role {
@@ -192,7 +192,7 @@
   border-radius: 12px;
   background: #eff6ff;
   color: #0f172a;
-  font: 800 12.5px "Nunito Sans", Inter, sans-serif;
+  font: 800 12.5px "Plus Jakarta Sans", Inter, sans-serif;
   transition: transform 0.15s ease, background 0.15s ease;
 }
 

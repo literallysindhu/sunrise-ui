@@ -1,7 +1,7 @@
 .notice-page {
   margin:0;
   background:#eef4ff;
-  font-family:"Nunito Sans",sans-serif;
+  font-family:"Plus Jakarta Sans",sans-serif;
   color:#1c2634
 }
 
@@ -20,7 +20,7 @@
 }
 
 .notice-top h1 {
-  font:800 40px/1 "League Spartan";
+  font:800 40px/1 "Outfit";
   margin:0
 }
 
@@ -79,7 +79,7 @@
 }
 
 .notice-card h2 {
-  font:800 24px/1.08 "League Spartan";
+  font:800 24px/1.08 "Outfit";
   margin:18px 0 10px
 }
 
@@ -149,7 +149,7 @@
 }
 
 .compose-card h2 {
-  font:800 29px "League Spartan";
+  font:800 29px "Outfit";
   margin:0
 }
 
@@ -183,7 +183,7 @@
   border-radius:11px;
   padding:11px;
   background:#fff;
-  font:14px "Nunito Sans"
+  font:14px "Plus Jakarta Sans"
 }
 
 .compose-card textarea {

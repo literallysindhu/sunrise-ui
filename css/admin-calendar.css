@@ -15,7 +15,7 @@ body.calendar-admin {
   margin: 0;
   background: var(--yellow-bg);
   color: var(--ink);
-  font-family: "Nunito Sans", Inter, -apple-system, sans-serif;
+  font-family: "Plus Jakarta Sans", Inter, -apple-system, sans-serif;
   min-height: 100vh;
 }
 
@@ -56,7 +56,7 @@ body.calendar-admin {
   border-radius: 999px;
   background: #ffffff;
   padding: 9px 16px 9px 38px;
-  font: 700 13px "Nunito Sans", sans-serif;
+  font: 700 13px "Plus Jakarta Sans", sans-serif;
   color: var(--ink);
   outline: none;
 }
@@ -180,7 +180,7 @@ body.calendar-admin {
 }
 
 .cal-title-group h1 {
-  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "League Spartan", sans-serif;
+  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "Outfit", sans-serif;
   color: #0f172a;
   margin: 0;
   letter-spacing: -0.5px;
@@ -202,7 +202,7 @@ body.calendar-admin {
   background: var(--blue-primary);
   color: #fff;
   padding: 10px 20px;
-  font: 800 13.5px "Nunito Sans", sans-serif;
+  font: 800 13.5px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: all 0.15s ease;
@@ -236,7 +236,7 @@ body.calendar-admin {
   background: #ffffff;
   color: #334155;
   padding: 8px 18px;
-  font: 900 12px "Nunito Sans", sans-serif;
+  font: 900 12px "Plus Jakarta Sans", sans-serif;
   letter-spacing: 0.5px;
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--line);
@@ -277,7 +277,7 @@ body.calendar-admin {
 .session-badge-wrap select {
   border: 0;
   background: transparent;
-  font: 800 12px "Nunito Sans", sans-serif;
+  font: 800 12px "Plus Jakarta Sans", sans-serif;
   color: #1e40af;
   cursor: pointer;
   outline: none;
@@ -345,7 +345,7 @@ body.calendar-admin {
 }
 
 .event-title {
-  font: 800 18px/1.3 "League Spartan", sans-serif;
+  font: 800 18px/1.3 "Outfit", sans-serif;
   color: #0f172a;
   margin: 4px 0 0;
 }
@@ -376,7 +376,7 @@ body.calendar-admin {
 }
 
 .empty-calendar h3 {
-  font: 800 22px "League Spartan", sans-serif;
+  font: 800 22px "Outfit", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -418,7 +418,7 @@ body.calendar-admin {
 }
 
 .modal-head h3 {
-  font: 800 22px/1.2 "League Spartan", sans-serif;
+  font: 800 22px/1.2 "Outfit", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -459,7 +459,7 @@ body.calendar-admin {
   border-radius: 10px;
   padding: 10px 12px;
   background: #fff;
-  font: 700 13px "Nunito Sans", sans-serif;
+  font: 700 13px "Plus Jakarta Sans", sans-serif;
   outline: none;
 }
 
@@ -484,7 +484,7 @@ body.calendar-admin {
   background: var(--blue-primary);
   color: #fff;
   padding: 9px 22px;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--line);
 }
@@ -499,7 +499,7 @@ body.calendar-admin {
   background: #ffffff;
   color: #334155;
   padding: 9px 16px;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--line);
 }

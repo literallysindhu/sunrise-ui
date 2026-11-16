@@ -20,7 +20,7 @@ body.timetable-admin {
   margin: 0;
   background: var(--yellow-bg);
   color: var(--ink);
-  font-family: "Nunito Sans", Inter, -apple-system, sans-serif;
+  font-family: "Plus Jakarta Sans", Inter, -apple-system, sans-serif;
   min-height: 100vh;
 }
 
@@ -61,7 +61,7 @@ body.timetable-admin {
   border-radius: 999px;
   background: #fff;
   padding: 9px 16px 9px 38px;
-  font: 700 13px "Nunito Sans", sans-serif;
+  font: 700 13px "Plus Jakarta Sans", sans-serif;
   color: var(--ink);
   outline: none;
 }
@@ -185,7 +185,7 @@ body.timetable-admin {
 }
 
 .tt-title-group h1 {
-  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "League Spartan", sans-serif;
+  font: 800 clamp(28px, 3.5vw, 38px)/1.1 "Outfit", sans-serif;
   color: #0f172a;
   margin: 0;
   letter-spacing: -0.5px;
@@ -207,7 +207,7 @@ body.timetable-admin {
   background: var(--blue-primary);
   color: #fff;
   padding: 10px 20px;
-  font: 800 13.5px "Nunito Sans", sans-serif;
+  font: 800 13.5px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: all 0.15s ease;
@@ -245,7 +245,7 @@ body.timetable-admin {
   border-radius: 10px;
   background: #fff;
   padding: 9px 14px;
-  font: 800 13.5px "Nunito Sans", sans-serif;
+  font: 800 13.5px "Plus Jakarta Sans", sans-serif;
   color: #0f172a;
   cursor: pointer;
   outline: none;
@@ -269,7 +269,7 @@ body.timetable-admin {
 .session-badge-wrap select {
   border: 0;
   background: transparent;
-  font: 800 12.5px "Nunito Sans", sans-serif;
+  font: 800 12.5px "Plus Jakarta Sans", sans-serif;
   color: #1e40af;
   cursor: pointer;
   outline: none;
@@ -288,7 +288,7 @@ body.timetable-admin {
   background: #f8fafc;
   color: #334155;
   padding: 8px 18px;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -340,7 +340,7 @@ body.timetable-admin {
   border-radius: 12px;
   background: #eff6ff;
   color: #2563eb;
-  font: 900 15px "Nunito Sans", sans-serif;
+  font: 900 15px "Plus Jakarta Sans", sans-serif;
   display: grid;
   place-items: center;
   flex-shrink: 0;
@@ -348,7 +348,7 @@ body.timetable-admin {
 }
 
 .slot-info h2 {
-  font: 800 18px/1.2 "League Spartan", sans-serif;
+  font: 800 18px/1.2 "Outfit", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -420,7 +420,7 @@ body.timetable-admin {
 }
 
 .interval-left strong {
-  font: 800 15px "League Spartan", sans-serif;
+  font: 800 15px "Outfit", sans-serif;
   color: #92400e;
 }
 
@@ -446,7 +446,7 @@ body.timetable-admin {
 }
 
 .empty-schedule h3 {
-  font: 800 20px "League Spartan", sans-serif;
+  font: 800 20px "Outfit", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -486,7 +486,7 @@ body.timetable-admin {
 }
 
 .modal-head h3 {
-  font: 800 24px/1.2 "League Spartan", sans-serif;
+  font: 800 24px/1.2 "Outfit", sans-serif;
   color: #0f172a;
   margin: 0;
 }
@@ -527,7 +527,7 @@ body.timetable-admin {
   border-radius: 10px;
   padding: 10px 12px;
   background: #fff;
-  font: 700 13px "Nunito Sans", sans-serif;
+  font: 700 13px "Plus Jakarta Sans", sans-serif;
   outline: none;
 }
 
@@ -552,7 +552,7 @@ body.timetable-admin {
   background: #fff;
   color: #334155;
   padding: 9px 16px;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--line);
 }
@@ -563,7 +563,7 @@ body.timetable-admin {
   background: var(--blue-primary);
   color: #fff;
   padding: 9px 18px;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--line);
 }

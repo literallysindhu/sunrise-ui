@@ -12,7 +12,7 @@
   margin:0;
   background:#eef4ff;
   color:var(--ink);
-  font-family:"Nunito Sans",sans-serif
+  font-family:"Plus Jakarta Sans",sans-serif
 }
 
 .att-layout {
@@ -35,7 +35,7 @@
   gap:9px;
   text-decoration:none;
   color:var(--ink);
-  font:800 20px "League Spartan"
+  font:800 20px "Outfit"
 }
 
 .att-brand b {
@@ -127,7 +127,7 @@
 }
 
 .att-title h1 {
-  font:800 41px/1 "League Spartan";
+  font:800 41px/1 "Outfit";
   margin:0
 }
 
@@ -172,7 +172,7 @@
   border-radius:11px;
   padding:9px;
   background:#fff;
-  font:14px "Nunito Sans"
+  font:14px "Plus Jakarta Sans"
 }
 
 .att-filters button {
@@ -225,7 +225,7 @@
 }
 
 .att-kpi strong {
-  font:800 32px/1 "League Spartan";
+  font:800 32px/1 "Outfit";
   display:block;
   margin-top:8px
 }

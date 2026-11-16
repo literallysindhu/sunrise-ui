@@ -1,6 +1,6 @@
 .hero h1,
 .login-copy h1 {
-  font: 800 clamp(38px, 4.2vw, 58px)/1.06 "League Spartan", sans-serif;
+  font: 800 clamp(38px, 4.2vw, 58px)/1.06 "Outfit", sans-serif;
   margin: 8px 0 20px;
   color: #0f172a;
 }
@@ -38,7 +38,7 @@
   padding: 13px 22px;
   color: #ffffff;
   background: #1e3a8a;
-  font: 800 17px "League Spartan", sans-serif;
+  font: 800 17px "Outfit", sans-serif;
   box-shadow: 4px 4px 0 #0f172a;
   text-decoration: none;
   cursor: pointer;
@@ -74,7 +74,7 @@
   border: 3px solid #0f172a;
   border-radius: 10px;
   padding: 6px 14px;
-  font: 800 12.5px "League Spartan", sans-serif;
+  font: 800 12.5px "Outfit", sans-serif;
   transform: rotate(-6deg);
   box-shadow: 3px 3px 0 #0f172a;
 }
@@ -103,7 +103,7 @@
 }
 
 .feature h2 {
-  font: 800 20px/1.08 "League Spartan", sans-serif;
+  font: 800 20px/1.08 "Outfit", sans-serif;
   margin: 10px 0 5px;
 }
 
@@ -216,7 +216,7 @@
 }
 
 .login-card h2 {
-  font: 800 34px/1.1 "League Spartan", sans-serif;
+  font: 800 34px/1.1 "Outfit", sans-serif;
   margin: 14px 0 6px;
   color: #0f172a;
 }
@@ -268,7 +268,7 @@
   background: #ffffff;
   color: #0f172a;
   padding: 4px 10px;
-  font: 800 11px "Nunito Sans", sans-serif;
+  font: 800 11px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: 2px 2px 0 #0f172a;
   transition: background 0.15s ease, transform 0.15s ease;
@@ -332,7 +332,7 @@
   width: 100%;
   padding: 13px 14px;
   background: transparent;
-  font: 800 17px "Nunito Sans", sans-serif;
+  font: 800 17px "Plus Jakarta Sans", sans-serif;
   color: #0f172a;
   letter-spacing: 0.5px;
 }
@@ -450,7 +450,7 @@
 }
 
 .attendance-score strong {
-  font: 800 64px/0.85 "League Spartan", sans-serif;
+  font: 800 64px/1.08 "Outfit", sans-serif;
   display: block;
 }
 
@@ -484,7 +484,7 @@
 }
 
 .count-card b {
-  font: 800 32px/1 "League Spartan", sans-serif;
+  font: 800 32px/1 "Outfit", sans-serif;
 }
 
 .count-card p {
@@ -550,12 +550,12 @@
   border-radius: 13px;
   min-height: 70px;
   padding: 10px;
-  font: 800 22px/1 "League Spartan", sans-serif;
+  font: 800 22px/1 "Outfit", sans-serif;
 }
 
 .days small {
   display: block;
-  font: 800 9.5px "Nunito Sans", sans-serif;
+  font: 800 9.5px "Plus Jakarta Sans", sans-serif;
   margin-top: 7px;
 }
 

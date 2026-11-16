@@ -53,7 +53,7 @@ body.navy-landing .year {
   border: 2.5px solid var(--navy-dark);
   border-radius: 999px;
   padding: 8px 16px;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   text-decoration: none;
   box-shadow: 2px 2px 0 var(--navy-dark);
   transition: transform 0.16s ease, box-shadow 0.16s ease;
@@ -93,7 +93,7 @@ body.navy-landing .eyebrow {
 }
 
 .two-line-heading {
-  font-family: "League Spartan", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-weight: 800;
   font-size: clamp(40px, 4.1vw, 60px);
   line-height: 1.06;
@@ -182,7 +182,7 @@ body.navy-landing .hero-copy {
 }
 
 .portal-box strong {
-  font: 800 22px/1.15 "League Spartan", sans-serif;
+  font: 800 22px/1.15 "Outfit", sans-serif;
   color: var(--navy-dark);
 }
 
@@ -218,7 +218,7 @@ body.navy-landing .primary-cta {
   padding: 11px 18px;
   color: var(--navy-dark);
   text-decoration: none;
-  font: 800 16px "League Spartan", sans-serif;
+  font: 800 16px "Outfit", sans-serif;
 }
 
 .notebook-stage {
@@ -291,7 +291,7 @@ body.navy-landing .primary-cta {
 
 .nb-header strong {
   display: block;
-  font: 800 12px/1.1 "League Spartan", sans-serif;
+  font: 800 12px/1.1 "Outfit", sans-serif;
   letter-spacing: 0.04em;
 }
 
@@ -425,7 +425,7 @@ body.navy-landing .primary-cta {
   background: var(--white);
   color: var(--navy-dark);
   padding: 8px 16px;
-  font: 800 12.5px "Nunito Sans", sans-serif;
+  font: 800 12.5px "Plus Jakarta Sans", sans-serif;
   box-shadow: 3px 3px 0 var(--navy-dark);
   animation: caption-pop 3.5s ease-in-out infinite;
 }

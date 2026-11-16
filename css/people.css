@@ -12,7 +12,7 @@
   margin: 0;
   background: #eef4ff;
   color: var(--p-ink);
-  font-family: "Nunito Sans", Inter, sans-serif;
+  font-family: "Plus Jakarta Sans", Inter, sans-serif;
 }
 
 .people-layout {
@@ -40,7 +40,7 @@
   border-radius: 999px;
   background: var(--p-ice);
   padding: 9px 16px;
-  font: 700 13px "Nunito Sans", sans-serif;
+  font: 700 13px "Plus Jakarta Sans", sans-serif;
   outline: none;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .people-heading h1 {
-  font: 800 clamp(28px, 3.4vw, 38px)/1.08 "League Spartan", sans-serif;
+  font: 800 clamp(28px, 3.4vw, 38px)/1.08 "Outfit", sans-serif;
   margin: 0;
 }
 
@@ -92,7 +92,7 @@
   background: var(--p-white);
   padding: 10px 16px;
   color: var(--p-ink);
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   text-decoration: none;
   cursor: pointer;
   box-shadow: 3px 3px 0 var(--p-line);
@@ -132,7 +132,7 @@
   border-radius: 10px;
   background: var(--p-ice);
   padding: 9px 13px;
-  font: 700 13px "Nunito Sans", sans-serif;
+  font: 700 13px "Plus Jakarta Sans", sans-serif;
   outline: none;
 }
 
@@ -259,7 +259,7 @@ tr.data-row:nth-child(even) td {
   background: var(--p-white);
   padding: 5px 10px;
   margin-right: 5px;
-  font: 800 11.5px "Nunito Sans", sans-serif;
+  font: 800 11.5px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--p-line);
 }
@@ -317,7 +317,7 @@ tr.data-row:nth-child(even) td {
 }
 
 .modal-card h2 {
-  font: 800 24px "League Spartan", sans-serif;
+  font: 800 24px "Outfit", sans-serif;
   margin: 0;
 }
 
@@ -352,7 +352,7 @@ tr.data-row:nth-child(even) td {
   border-radius: 10px;
   padding: 10px 12px;
   background: var(--p-ice);
-  font: 700 13px "Nunito Sans", sans-serif;
+  font: 700 13px "Plus Jakarta Sans", sans-serif;
 }
 
 .form-grid .full {
@@ -373,7 +373,7 @@ tr.data-row:nth-child(even) td {
   border-radius: 10px;
   padding: 9px 16px;
   background: var(--p-white);
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--p-line);
 }

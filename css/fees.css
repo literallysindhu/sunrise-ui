@@ -18,7 +18,7 @@
 }
 
 .student-summary h2 {
-  font: 800 26px/1.05 "League Spartan", sans-serif;
+  font: 800 26px/1.05 "Outfit", sans-serif;
   margin: 0;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .fees-header h1 {
-  font: 800 38px/1.05 "League Spartan", sans-serif;
+  font: 800 38px/1.05 "Outfit", sans-serif;
   margin: 0;
 }
 
@@ -76,7 +76,7 @@
 
 .outstanding strong {
   display: block;
-  font: 800 26px/1.05 "League Spartan", sans-serif;
+  font: 800 26px/1.05 "Outfit", sans-serif;
   color: #1e3a8a;
 }
 
@@ -112,7 +112,7 @@
 }
 
 .invoice-title h2 {
-  font: 800 26px/1.08 "League Spartan", sans-serif;
+  font: 800 26px/1.08 "Outfit", sans-serif;
   margin: 0;
 }
 
@@ -164,7 +164,7 @@
 
 .invoice-amount strong {
   display: block;
-  font: 800 32px/1.05 "League Spartan", sans-serif;
+  font: 800 32px/1.05 "Outfit", sans-serif;
 }
 
 .invoice-amount small {
@@ -179,7 +179,7 @@
   color: #ffffff;
   border-radius: 999px;
   padding: 10px 18px;
-  font: 800 14px "League Spartan", sans-serif;
+  font: 800 14px "Outfit", sans-serif;
   box-shadow: 3px 3px 0 #0f172a;
   cursor: pointer;
   margin-top: 12px;
@@ -205,7 +205,7 @@
 
 .payment-note b {
   display: block;
-  font: 800 19px "League Spartan", sans-serif;
+  font: 800 19px "Outfit", sans-serif;
 }
 
 @media (max-width: 650px) {

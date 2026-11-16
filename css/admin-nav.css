@@ -8,7 +8,7 @@
   color: #0f172a;
   padding: 18px 14px 86px;
   box-sizing: border-box;
-  font-family: "Nunito Sans", Inter, Arial, sans-serif;
+  font-family: "Plus Jakarta Sans", Inter, Arial, sans-serif;
   z-index: 20;
 }
 
@@ -37,7 +37,7 @@
 
 .unified-brand strong {
   display: block;
-  font-family: "League Spartan", sans-serif;
+  font-family: "Outfit", sans-serif;
   font-size: 18px;
   line-height: 1.05;
 }
@@ -173,7 +173,7 @@
   border: 2px solid #0f172a;
   border-radius: 999px;
   padding: 7px 14px;
-  font: 800 12px "Nunito Sans", Inter, sans-serif;
+  font: 800 12px "Plus Jakarta Sans", Inter, sans-serif;
   box-shadow: 2px 2px 0 #0f172a;
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
   white-space: nowrap;
@@ -252,7 +252,7 @@ header[class$="-top"] {
 }
 
 .global-confirm-card h3 {
-  font: 800 22px/1.15 "League Spartan", sans-serif;
+  font: 800 22px/1.15 "Outfit", sans-serif;
   margin: 0 0 8px;
   color: #0f172a;
 }
@@ -277,7 +277,7 @@ header[class$="-top"] {
   background: #ffffff;
   color: #0f172a;
   padding: 9px 16px;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: 2px 2px 0 #0f172a;
 }
@@ -288,7 +288,7 @@ header[class$="-top"] {
   background: #1e3a8a;
   color: #ffffff;
   padding: 9px 18px;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   cursor: pointer;
   box-shadow: 2px 2px 0 #0f172a;
 }
@@ -310,7 +310,7 @@ header[class$="-top"] {
   border: 2.5px solid #0f172a;
   border-radius: 12px;
   padding: 12px 20px;
-  font: 800 13px "Nunito Sans", sans-serif;
+  font: 800 13px "Plus Jakarta Sans", sans-serif;
   box-shadow: 4px 4px 0 #1e3a8a;
   opacity: 0;
   transform: translateY(20px);
