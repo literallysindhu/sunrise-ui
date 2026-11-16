@@ -3,253 +3,158 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sunrise International School — A Brighter Digital Campus</title>
+    <title>Sunrise International School — Digital Campus Portal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/screens.css" />
     <link rel="stylesheet" href="css/landing.css" />
     <link rel="stylesheet" href="css/transitions.css" />
     <link rel="stylesheet" href="css/landing-premium.css" />
   </head>
-  <body class="sunrise-home">
-    <div class="rainbow-ribbon" aria-hidden="true"></div>
+  <body class="navy-landing">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+          </svg>
+        </span>
+        <span>Sunrise <small>International School</small></span>
+      </a>
 
-    <header class="sh-header">
-      <div class="sh-container sh-header-inner">
-        <a class="sh-brand" href="index.html" aria-label="Sunrise International School Home">
-          <span class="sh-brand-mark" aria-hidden="true">☀</span>
-          <span class="sh-brand-title">
-            <strong>Sunrise</strong>
-            <small>INTERNATIONAL SCHOOL</small>
-          </span>
-        </a>
-
-        <nav class="sh-nav-links" aria-label="Homepage sections">
-          <a href="#portals">Portals</a>
-          <a href="#features">What’s Inside</a>
-          <a href="#preview">Live Preview</a>
-        </nav>
-
-        <div class="sh-header-actions">
-          <span class="sh-year-pill">
-            <span class="sh-live-dot"></span>
-            Academic Year 2026–27
-          </span>
-          <a class="sh-top-btn sh-top-parent" href="login.html?enter=1">Parent Login</a>
-          <a class="sh-top-btn sh-top-admin" href="admin.html?enter=1">Staff &amp; Admin</a>
-        </div>
+      <div class="header-right-group">
+        <span class="year">Academic Year 2026–27</span>
+        <a class="header-login-pill parent" href="login.html?enter=1">Parent Login</a>
+        <a class="header-login-pill staff" href="admin.html?enter=1">Staff Login</a>
       </div>
     </header>
 
-    <main class="sh-main">
-      <section class="sh-hero">
-        <div class="sh-container sh-hero-grid">
-          <div class="sh-hero-copy">
-            <div class="sh-eyebrow-pill">
-              <span>🌈 A BRIGHTER DIGITAL CAMPUS</span>
+    <main class="landing">
+      <section class="hero">
+        <p class="eyebrow">UNIFIED DIGITAL CAMPUS</p>
+        <h1>
+          Welcome to<br />
+          <span>Sunrise School.</span>
+        </h1>
+        <p class="hero-copy">
+          Connecting parents, teachers, and school administrators through a structured, modern academic management experience.
+        </p>
+
+        <div class="portal-login-grid">
+          <a class="portal-box parent-box" href="login.html?enter=1">
+            <div class="portal-box-top">
+              <span class="portal-box-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </span>
+              <span class="portal-box-tag">Mobile OTP</span>
             </div>
+            <strong>Parent Portal</strong>
+            <small>Attendance, diary, exams &amp; fee receipts</small>
+            <span class="primary-cta">Parent Login <span>→</span></span>
+          </a>
 
-            <h1>
-              Welcome to<br />
-              <span class="sh-highlight">Sunrise School!</span>
-            </h1>
-
-            <p class="sh-lead">
-              A warm, joyful, and smart school platform connecting parents, teachers, and students—making every school day easy to follow and celebrate.
-            </p>
-
-            <div id="portals" class="sh-portal-cards">
-              <a class="sh-portal-card parent-card" href="login.html?enter=1">
-                <div class="sh-pcard-head">
-                  <span class="sh-pcard-icon">🎒</span>
-                  <span class="sh-pcard-badge">Mobile OTP</span>
-                </div>
-                <h2>Parent Portal</h2>
-                <p>Daily attendance, homework diary, report cards, fee receipts &amp; school circulars.</p>
-                <span class="sh-pcard-cta primary-cta">
-                  Enter Parent Portal <span>→</span>
-                </span>
-              </a>
-
-              <a class="sh-portal-card admin-card" href="admin.html?enter=1">
-                <div class="sh-pcard-head">
-                  <span class="sh-pcard-icon">🏫</span>
-                  <span class="sh-pcard-badge admin-badge">Staff &amp; ERP</span>
-                </div>
-                <h2>Admin &amp; Teacher Portal</h2>
-                <p>Manage classes, attendance, exams, timetables, study materials &amp; parent updates.</p>
-                <span class="sh-pcard-cta admin-pill">
-                  Enter Staff Portal <span>✦</span>
-                </span>
-              </a>
+          <a class="portal-box staff-box" href="admin.html?enter=1">
+            <div class="portal-box-top">
+              <span class="portal-box-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+              </span>
+              <span class="portal-box-tag">Admin &amp; Faculty</span>
             </div>
-
-            <div class="sh-quick-stats">
-              <div class="sh-qstat">
-                <strong>95.6%</strong>
-                <span>Happy Daily Turnout</span>
-              </div>
-              <div class="sh-qstat-sep">✦</div>
-              <div class="sh-qstat">
-                <strong>18+</strong>
-                <span>Campus Modules</span>
-              </div>
-              <div class="sh-qstat-sep">✦</div>
-              <div class="sh-qstat">
-                <strong>100%</strong>
-                <span>Parent-Teacher Sync</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="sh-hero-centerpiece">
-            <div class="sun-stage" aria-label="A smiling animated sun">
-              <div class="sun-cloud cloud-left" aria-hidden="true">☁️</div>
-              <div class="sun-cloud cloud-right" aria-hidden="true">☁️</div>
-              <div class="sun-rays">✦ ✧ ★ ✧ ✦</div>
-              <div class="sun-face">
-                <span class="sun-eye left"></span>
-                <span class="sun-eye right"></span>
-                <span class="sun-smile"></span>
-                <span class="sun-cheek left"></span>
-                <span class="sun-cheek right"></span>
-              </div>
-              <div class="sun-caption">☀ A happy day to learn!</div>
-            </div>
-
-            <div id="features" class="feature-panel">
-              <span class="sticker">Everything in one place ✨</span>
-              <div class="landing-features">
-                <article class="feature blue">
-                  <b>✓</b>
-                  <h2>Real-time<br />attendance</h2>
-                  <p>Know every school day with instant morning updates.</p>
-                </article>
-                <article class="feature pink">
-                  <b>★</b>
-                  <h2>Academic<br />progress</h2>
-                  <p>Term report cards, grades, and online MCQ quizzes.</p>
-                </article>
-                <article class="feature green">
-                  <b>₹</b>
-                  <h2>Secure fee<br />payments</h2>
-                  <p>Clear term invoices and instant digital receipts.</p>
-                </article>
-                <article class="feature orange">
-                  <b>✉</b>
-                  <h2>Homework &amp;<br />circulars</h2>
-                  <p>Daily homework diary, study notes, and event alerts.</p>
-                </article>
-              </div>
-            </div>
-          </div>
+            <strong>Staff Portal</strong>
+            <small>Super Admin, Teachers &amp; Accounts ERP</small>
+            <span class="admin-pill">Staff Login <span>✦</span></span>
+          </a>
         </div>
       </section>
 
-      <section id="preview" class="sh-preview-section">
-        <div class="sh-container">
-          <div class="sh-section-header">
+      <section class="notebook-stage" aria-label="Academic ledger and pencil illustration">
+        <div class="academic-orbit">✦ ✧ ★ ✧ ✦</div>
+
+        <div class="notebook-art">
+          <div class="nb-rings" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="nb-header">
+            <span class="nb-crest">🎓</span>
             <div>
-              <span class="sh-sec-tag">PEEK INSIDE THE CAMPUS PORTAL</span>
-              <h2>Designed for Families &amp; Educators Alike</h2>
-              <p>Switch between the Parent Dashboard and School Admin Workspace below.</p>
-            </div>
-            <div class="sh-preview-tabs" role="tablist">
-              <button type="button" class="sh-ptab active" data-tab="parent">
-                🎒 Parent Portal View
-              </button>
-              <button type="button" class="sh-ptab" data-tab="admin">
-                🏫 School Admin View
-              </button>
+              <strong>CAMPUS LEDGER</strong>
+              <small>SESSION 2026–27</small>
             </div>
           </div>
 
-          <div class="sh-browser-frame">
-            <div class="sh-browser-top">
-              <div class="sh-dots">
-                <span class="dot-red"></span>
-                <span class="dot-yellow"></span>
-                <span class="dot-green"></span>
-              </div>
-              <div class="sh-address-bar" id="previewUrlText">
-                ☀ sunrise-school.edu.in/parent-dashboard · Aarav Krishnan (Class 5-A)
-              </div>
-              <span class="sh-verified-pill">✓ Verified Campus</span>
+          <div class="nb-lines">
+            <div class="nb-line">
+              <span class="nb-check">✓</span>
+              <span class="nb-bar w-80"></span>
+              <b class="nb-pill">95%</b>
             </div>
-
-            <div class="sh-browser-body" id="paneParent">
-              <div class="sh-mock-grid">
-                <div class="sh-mock-student-card">
-                  <div class="sh-student-top">
-                    <div class="sh-avatar-circle">AK</div>
-                    <div>
-                      <span class="sh-mini-eyebrow">YOUR CHILD</span>
-                      <h3>Aarav Krishnan</h3>
-                      <p>Class 5-A · Roll No. 01 · Adm #ADM2026-0501</p>
-                    </div>
-                  </div>
-                  <div class="sh-student-badges">
-                    <div class="sh-sbadge green">
-                      <span>Latest Result</span>
-                      <strong>Grade A+ (90.5%)</strong>
-                    </div>
-                    <div class="sh-sbadge blue">
-                      <span>Attendance</span>
-                      <strong>95.6% (23/24 Days)</strong>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="sh-mock-cards-right">
-                  <div class="sh-mini-card green-tint">
-                    <div class="sh-mc-head">
-                      <span class="sh-mc-tag">HOMEWORK DIARY · DUE NOV 8</span>
-                      <span>Mathematics</span>
-                    </div>
-                    <h4>Fractions Worksheet · Chapter 4</h4>
-                    <p>Solve problems 4.1 to 4.3 on textbook pages 58 to 61 in your homework notebook.</p>
-                  </div>
-
-                  <div class="sh-mini-card yellow-tint">
-                    <div class="sh-mc-head">
-                      <span class="sh-mc-tag">SCHOOL CIRCULAR · NOV 28</span>
-                      <span>All Parents</span>
-                    </div>
-                    <h4>Term 1 Parent-Teacher Meeting</h4>
-                    <p>Scheduled for Saturday between 9:00 AM and 1:00 PM. Roll-number time slots are open.</p>
-                  </div>
-                </div>
-              </div>
+            <div class="nb-line">
+              <span class="nb-check">✓</span>
+              <span class="nb-bar w-65"></span>
+              <b class="nb-pill navy">A+</b>
             </div>
-
-            <div class="sh-browser-body sh-hidden" id="paneAdmin">
-              <div class="sh-mock-admin-grid">
-                <div class="sh-admin-stat sky">
-                  <span>Total Students Active</span>
-                  <strong>Class 5 &amp; 6 Batches</strong>
-                  <small>✓ 94.8% Present Today</small>
-                </div>
-                <div class="sh-admin-stat pink">
-                  <span>Examinations &amp; Results</span>
-                  <strong>Term 1 Published</strong>
-                  <small>★ Class Average: 88.6%</small>
-                </div>
-                <div class="sh-admin-stat mint">
-                  <span>Digital Library &amp; MCQs</span>
-                  <strong>24 Study Resources</strong>
-                  <small>✎ Live Quizzes &amp; Video Notes</small>
-                </div>
-                <div class="sh-admin-stat sunny">
-                  <span>Parent Broadcasts</span>
-                  <strong>600 Devices Synced</strong>
-                  <small>🔔 Instant Push Notifications</small>
-                </div>
-              </div>
+            <div class="nb-line">
+              <span class="nb-check">✓</span>
+              <span class="nb-bar w-75"></span>
+              <b class="nb-pill">Paid</b>
             </div>
           </div>
+
+          <div class="pencil-float" aria-hidden="true">
+            <div class="pencil-eraser"></div>
+            <div class="pencil-ferrule"></div>
+            <div class="pencil-shaft"></div>
+            <div class="pencil-cone">
+              <div class="pencil-lead"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sun-caption">Structured for excellence</div>
+      </section>
+
+      <section class="feature-panel">
+        <span class="sticker">Everything in one place</span>
+        <div class="landing-features">
+          <article class="feature navy-card">
+            <b>✓</b>
+            <h2>Real-time<br />attendance</h2>
+            <p>Daily roll-call &amp; instant parent updates.</p>
+          </article>
+          <article class="feature sky-card">
+            <b>★</b>
+            <h2>Academic<br />progress</h2>
+            <p>Exam schedules, marks &amp; report cards.</p>
+          </article>
+          <article class="feature white-card">
+            <b>₹</b>
+            <h2>Secure fee<br />payments</h2>
+            <p>Term invoices &amp; downloadable receipts.</p>
+          </article>
+          <article class="feature slate-card">
+            <b>✉</b>
+            <h2>School<br />updates</h2>
+            <p>Circulars, homework diary &amp; alerts.</p>
+          </article>
         </div>
       </section>
     </main>
@@ -261,27 +166,6 @@
           history.replaceState({}, '', location.pathname);
         } catch (_) {}
       }
-
-      const ptabs = document.querySelectorAll('.sh-ptab');
-      const paneParent = document.getElementById('paneParent');
-      const paneAdmin = document.getElementById('paneAdmin');
-      const urlText = document.getElementById('previewUrlText');
-
-      ptabs.forEach(btn => {
-        btn.addEventListener('click', () => {
-          ptabs.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          if (btn.dataset.tab === 'admin') {
-            paneParent.classList.add('sh-hidden');
-            paneAdmin.classList.remove('sh-hidden');
-            urlText.textContent = '☀ sunrise-school.edu.in/super-admin · Dr. K. Sundararajan (Principal)';
-          } else {
-            paneAdmin.classList.add('sh-hidden');
-            paneParent.classList.remove('sh-hidden');
-            urlText.textContent = '☀ sunrise-school.edu.in/parent-dashboard · Aarav Krishnan (Class 5-A)';
-          }
-        });
-      });
     </script>
   </body>
 </html>
