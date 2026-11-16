@@ -1,43 +1,234 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Verify OTP - Sunrise School</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verify OTP — Sunrise International School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/screens.css">
-    <link rel="stylesheet" href="css/transitions.css">
-    <link rel="stylesheet" href="css/otp.css">
-</head>
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/screens.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/otp.css" />
+  </head>
+  <body class="navy-portal">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+          </svg>
+        </span>
+        <span>Sunrise <small>International School</small></span>
+      </a>
+      <a class="back-link-pill" href="login.html">← Change mobile number</a>
+    </header>
 
-<body>
-    <header class="site-header"><a class="brand" href="index.html"><span class="brand-mark">☀</span><span>Sunrise
-                <small>International School</small></span></a><a class="back-link" href="login.html">← Change mobile
-            number</a></header>
     <main class="login-layout">
-        <section class="login-copy">
-            <p class="eyebrow">One more friendly step</p>
-            <h1>Let’s make sure<br><span>it’s you.</span></h1>
-            <p>We sent a six-digit sign-in code to your registered mobile number.</p>
-        </section>
-        <section class="login-card">
-            <div class="login-badge">🔐 Mock verification</div>
-            <h2>Enter your OTP</h2>
-            <p>Type the six-digit code sent to <b>+91 98765 43210</b>.</p>
-            <form onsubmit="event.preventDefault(); location.href='parent-dashboard.html?welcome=1'"><label for="otp">6-digit verification code</label><input
-                    class="otp-input" id="otp" type="text" inputmode="numeric" maxlength="6" placeholder="• • • • • •"
-                    aria-label="Six digit OTP"><button class="primary-cta" type="submit">Verify &amp; enter portal
-                    <span>→</span></button></form>
-            <p class="form-note">Prototype only: any code continues to the parent dashboard.</p>
-            <div class="help-box"><b>Didn’t receive the code?</b><span>Resend code in 00:28</span></div>
-        </section>
-    </main>
-</body>
+      <section class="login-copy">
+        <p class="eyebrow">STEP 2 OF 2 · SECURITY VERIFICATION</p>
+        <h1 class="two-line-heading">
+          <span class="line-one">Let’s make sure</span>
+          <span class="line-two">it’s you.</span>
+        </h1>
+        <p>
+          We sent a 6-digit one-time verification code via SMS to your registered mobile number to keep your child’s academic records secure.
+        </p>
 
+        <div class="login-highlights">
+          <div class="lh-pill">
+            <span>🔐</span>
+            <div>
+              <strong>Strict Parent-Ward Isolation</strong>
+              <small>Encrypted session bound to your registered family profile</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="login-card">
+        <div class="login-card-top">
+          <span class="login-badge">🔐 6-Digit OTP Verification</span>
+          <button type="button" class="demo-chip" id="fillDemoOtpBtn">Auto-Fill Demo OTP (482910)</button>
+        </div>
+
+        <h2>Enter Verification Code</h2>
+        <p>
+          Sent to <b id="displayPhone">+91 98765 43210</b>
+          <a href="login.html" class="inline-edit-link">Edit</a>
+        </p>
+
+        <form id="otpVerifyForm" novalidate>
+          <label for="otpDigit0">6-Digit Verification Code *</label>
+          <div class="otp-boxes" id="otpBoxesGroup" role="group" aria-label="Six digit OTP code">
+            <input class="otp-box" id="otpDigit0" type="text" inputmode="numeric" maxlength="1" value="4" aria-label="Digit 1" />
+            <input class="otp-box" id="otpDigit1" type="text" inputmode="numeric" maxlength="1" value="8" aria-label="Digit 2" />
+            <input class="otp-box" id="otpDigit2" type="text" inputmode="numeric" maxlength="1" value="2" aria-label="Digit 3" />
+            <input class="otp-box" id="otpDigit3" type="text" inputmode="numeric" maxlength="1" value="9" aria-label="Digit 4" />
+            <input class="otp-box" id="otpDigit4" type="text" inputmode="numeric" maxlength="1" value="1" aria-label="Digit 5" />
+            <input class="otp-box" id="otpDigit5" type="text" inputmode="numeric" maxlength="1" value="0" aria-label="Digit 6" />
+          </div>
+
+          <div class="validation-msg success" id="otpFeedback" role="alert" aria-live="polite">
+            ✓ 6-digit OTP ready to verify.
+          </div>
+
+          <button class="primary-cta submit-btn" id="verifyOtpBtn" type="submit">
+            <span class="btn-label">Verify &amp; Enter Portal →</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <div class="resend-row">
+          <div class="resend-info">
+            <b>Didn’t receive the SMS code?</b>
+            <span id="resendTimerText">Resend available in <b>00:24</b></span>
+          </div>
+          <button type="button" class="resend-btn" id="resendOtpBtn">Resend OTP</button>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const savedPhone = sessionStorage.getItem('sunrise-login-phone');
+      if (savedPhone) {
+        document.getElementById('displayPhone').textContent = savedPhone;
+      }
+
+      const boxes = Array.from(document.querySelectorAll('.otp-box'));
+      const otpFeedback = document.getElementById('otpFeedback');
+      const otpForm = document.getElementById('otpVerifyForm');
+      const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+      const fillDemoOtpBtn = document.getElementById('fillDemoOtpBtn');
+      const resendOtpBtn = document.getElementById('resendOtpBtn');
+      const resendTimerText = document.getElementById('resendTimerText');
+
+      function getOtpValue() {
+        return boxes.map(b => b.value.trim()).join('');
+      }
+
+      function updateOtpState(showError) {
+        const val = getOtpValue();
+        boxes.forEach(b => {
+          b.classList.toggle('filled', b.value.trim().length === 1);
+          b.classList.remove('invalid');
+        });
+
+        if (val.length === 6 && /^\d{6}$/.test(val)) {
+          otpFeedback.textContent = '✓ 6-digit verification code entered.';
+          otpFeedback.className = 'validation-msg success';
+          return true;
+        }
+
+        if (showError) {
+          boxes.forEach(b => {
+            if (!b.value.trim()) b.classList.add('invalid');
+          });
+          otpFeedback.textContent = '⚠ Please enter all 6 digits of the verification code sent to your phone.';
+          otpFeedback.className = 'validation-msg error';
+        } else {
+          otpFeedback.textContent = '';
+          otpFeedback.className = 'validation-msg';
+        }
+        return false;
+      }
+
+      boxes.forEach((box, idx) => {
+        box.addEventListener('input', e => {
+          const digit = e.target.value.replace(/\D/g, '').slice(-1);
+          box.value = digit;
+          if (digit && idx < boxes.length - 1) {
+            boxes[idx + 1].focus();
+            boxes[idx + 1].select();
+          }
+          updateOtpState(false);
+        });
+
+        box.addEventListener('keydown', e => {
+          if (e.key === 'Backspace' && !box.value && idx > 0) {
+            boxes[idx - 1].focus();
+            boxes[idx - 1].value = '';
+            updateOtpState(false);
+          } else if (e.key === 'ArrowLeft' && idx > 0) {
+            boxes[idx - 1].focus();
+          } else if (e.key === 'ArrowRight' && idx < boxes.length - 1) {
+            boxes[idx + 1].focus();
+          }
+        });
+
+        box.addEventListener('paste', e => {
+          e.preventDefault();
+          const pasted = (e.clipboardData.getData('text') || '').replace(/\D/g, '').slice(0, 6);
+          if (!pasted) return;
+          pasted.split('').forEach((ch, i) => {
+            if (boxes[i]) boxes[i].value = ch;
+          });
+          const focusIdx = Math.min(pasted.length, boxes.length - 1);
+          boxes[focusIdx].focus();
+          updateOtpState(false);
+        });
+      });
+
+      fillDemoOtpBtn.addEventListener('click', () => {
+        '482910'.split('').forEach((d, i) => {
+          boxes[i].value = d;
+        });
+        updateOtpState(false);
+      });
+
+      let countdown = 24;
+      let timerId = null;
+
+      function startTimer(seconds) {
+        countdown = seconds;
+        clearInterval(timerId);
+        timerId = setInterval(() => {
+          if (countdown > 0) {
+            countdown--;
+            const ss = String(countdown).padStart(2, '0');
+            resendTimerText.innerHTML = `Resend available in <b>00:${ss}</b>`;
+          } else {
+            clearInterval(timerId);
+            resendTimerText.innerHTML = '<b style="color:#1e3a8a">You can request a new OTP code now.</b>';
+          }
+        }, 1000);
+      }
+
+      startTimer(24);
+
+      resendOtpBtn.addEventListener('click', () => {
+        '482910'.split('').forEach((d, i) => {
+          boxes[i].value = d;
+        });
+        updateOtpState(false);
+        otpFeedback.textContent = '✓ A fresh 6-digit OTP (482910) has been sent to your mobile number.';
+        otpFeedback.className = 'validation-msg success';
+        startTimer(30);
+      });
+
+      otpForm.addEventListener('submit', e => {
+        e.preventDefault();
+        if (!updateOtpState(true)) {
+          const firstEmpty = boxes.find(b => !b.value.trim()) || boxes[0];
+          firstEmpty.focus();
+          return;
+        }
+
+        verifyOtpBtn.classList.add('loading');
+        verifyOtpBtn.disabled = true;
+        verifyOtpBtn.querySelector('.btn-label').textContent = 'Verifying & Entering Portal...';
+
+        setTimeout(() => {
+          location.href = 'parent-dashboard.html?welcome=1';
+        }, 650);
+      });
+
+      updateOtpState(false);
+    </script>
+  </body>
 </html>

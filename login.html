@@ -1,59 +1,199 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Parent Login</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/screens.css">
-    <link rel="stylesheet" href="css/transitions.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Parent Portal Sign In — Sunrise International School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/screens.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
   </head>
-  <body>
+  <body class="navy-portal">
     <script>
       if (new URLSearchParams(location.search).has('enter')) {
         document.body.classList.add('portal-splash');
-        try { history.replaceState({}, '', location.pathname); } catch (_) {}
+        try {
+          history.replaceState({}, '', location.pathname);
+        } catch (_) {}
       }
     </script>
+
     <header class="site-header">
       <a class="brand" href="index.html">
-      <span class="brand-mark">☀</span>
-      <span>Sunrise <small>International School</small>
-    </span>
-  </a>
-  <a class="back-link" href="index.html">← Back to welcome</a>
-</header>
-<main class="login-layout">
-  <section class="login-copy">
-    <p class="eyebrow">Parent portal</p>
-    <h1>Stay close to<br>
-      <span>every school day.</span>
-    </h1>
-    <p>Attendance, homework, results, invoices and school updates are all in one happy place.</p>
-  </section>
-  <section class="login-card">
-    <div class="login-badge">🔒 Secure parent access
-    </div>
-    <h2>Welcome back!</h2>
-    <p>Enter your registered mobile number to receive a one-time code.</p>
-    <form action="otp.html">
-      <label for="phone">Registered mobile number</label>
-      <div class="phone-field">
-        <span>🇮🇳 +91</span>
-        <input id="phone" type="tel" placeholder="98765 43210">
-      </div>
-      <button class="primary-cta" type="submit">Send 6-digit OTP <span>→</span>
-    </button>
-  </form>
-  <p class="form-note">Prototype only: this screen proceeds to a mock OTP verification step.</p>
-  <div class="help-box">
-    <b>Need help?</b>
-    <span>Contact the school office during working hours.</span>
-  </div>
-</section>
-</main>
-</body>
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+          </svg>
+        </span>
+        <span>Sunrise <small>International School</small></span>
+      </a>
+      <a class="back-link-pill" href="index.html">← Back to homepage</a>
+    </header>
+
+    <main class="login-layout">
+      <section class="login-copy">
+        <p class="eyebrow">PARENT &amp; GUARDIAN PORTAL</p>
+        <h1 class="two-line-heading">
+          <span class="line-one">Stay close to</span>
+          <span class="line-two">every school day.</span>
+        </h1>
+        <p>
+          Access real-time attendance, daily homework diaries, examination report cards, fee invoices, and official school circulars in one secure place.
+        </p>
+
+        <div class="login-highlights">
+          <div class="lh-pill">
+            <span>✓</span>
+            <div>
+              <strong>Instant OTP Verification</strong>
+              <small>Passwordless sign-in via registered parent mobile</small>
+            </div>
+          </div>
+          <div class="lh-pill">
+            <span>★</span>
+            <div>
+              <strong>Multi-Child Profile Switcher</strong>
+              <small>Seamlessly switch between siblings in one account</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="login-card">
+        <div class="login-card-top">
+          <span class="login-badge">🔒 Verified Parent Access</span>
+          <span class="session-tag">Session 2026–27</span>
+        </div>
+
+        <h2>Parent Sign In</h2>
+        <p>Enter your 10-digit registered mobile number to receive a one-time verification code.</p>
+
+        <div class="demo-account-strip">
+          <span>Quick Demo Fill:</span>
+          <button type="button" class="demo-chip" data-phone="98765 43210">Ramesh (98765 43210)</button>
+          <button type="button" class="demo-chip" data-phone="98840 22334">Anitha (98840 22334)</button>
+        </div>
+
+        <form id="parentLoginForm" novalidate>
+          <label for="phone">Registered Mobile Number *</label>
+          <div class="phone-field" id="phoneFieldWrap">
+            <span>🇮🇳 +91</span>
+            <input
+              id="phone"
+              type="tel"
+              inputmode="numeric"
+              maxlength="11"
+              placeholder="98765 43210"
+              value="98765 43210"
+              aria-describedby="phoneFeedback"
+              required
+            />
+            <i class="field-status-icon" id="phoneValidIcon">✓</i>
+          </div>
+
+          <div class="validation-msg" id="phoneFeedback" role="alert" aria-live="polite"></div>
+
+          <button class="primary-cta submit-btn" id="sendOtpBtn" type="submit">
+            <span class="btn-label">Send 6-Digit OTP →</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <div class="help-box">
+          <div>
+            <b>Need assistance updating your number?</b>
+            <span>Contact the school office desk at +91 44 2852 9000</span>
+          </div>
+          <a class="staff-switch-link" href="admin.html?enter=1">Staff Login →</a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const phoneInput = document.getElementById('phone');
+      const phoneFieldWrap = document.getElementById('phoneFieldWrap');
+      const phoneFeedback = document.getElementById('phoneFeedback');
+      const phoneValidIcon = document.getElementById('phoneValidIcon');
+      const loginForm = document.getElementById('parentLoginForm');
+      const sendOtpBtn = document.getElementById('sendOtpBtn');
+
+      function formatPhoneDigits(raw) {
+        const digits = raw.replace(/\D/g, '').slice(0, 10);
+        if (digits.length > 5) {
+          return digits.slice(0, 5) + ' ' + digits.slice(5);
+        }
+        return digits;
+      }
+
+      function validatePhone(showError) {
+        const digits = phoneInput.value.replace(/\D/g, '');
+        if (digits.length === 10 && /^[6-9]\d{9}$/.test(digits)) {
+          phoneFieldWrap.classList.remove('invalid');
+          phoneFieldWrap.classList.add('valid');
+          phoneValidIcon.style.display = 'grid';
+          phoneFeedback.textContent = '✓ Registered parent number verified with school directory.';
+          phoneFeedback.className = 'validation-msg success';
+          return true;
+        }
+
+        phoneFieldWrap.classList.remove('valid');
+        phoneValidIcon.style.display = 'none';
+
+        if (showError) {
+          phoneFieldWrap.classList.add('invalid');
+          phoneFeedback.textContent = digits.length === 0
+            ? '⚠ Please enter your 10-digit registered mobile number.'
+            : '⚠ Please enter a valid 10-digit Indian mobile number starting with 6–9.';
+          phoneFeedback.className = 'validation-msg error';
+        } else {
+          phoneFieldWrap.classList.remove('invalid');
+          phoneFeedback.textContent = '';
+          phoneFeedback.className = 'validation-msg';
+        }
+        return false;
+      }
+
+      phoneInput.addEventListener('input', () => {
+        phoneInput.value = formatPhoneDigits(phoneInput.value);
+        validatePhone(false);
+      });
+
+      document.querySelectorAll('.demo-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          phoneInput.value = chip.dataset.phone;
+          validatePhone(true);
+        });
+      });
+
+      loginForm.addEventListener('submit', e => {
+        e.preventDefault();
+        if (!validatePhone(true)) {
+          phoneInput.focus();
+          return;
+        }
+
+        const formatted = '+91 ' + phoneInput.value.trim();
+        try {
+          sessionStorage.setItem('sunrise-login-phone', formatted);
+        } catch (_) {}
+
+        sendOtpBtn.classList.add('loading');
+        sendOtpBtn.disabled = true;
+        sendOtpBtn.querySelector('.btn-label').textContent = 'Sending 6-Digit OTP...';
+
+        setTimeout(() => {
+          location.href = 'otp.html';
+        }, 650);
+      });
+
+      validatePhone(false);
+    </script>
+  </body>
 </html>

@@ -15,7 +15,8 @@ body.navy-landing {
 
 body.navy-landing .site-header {
   background: var(--white);
-  border-bottom: 3px solid var(--navy-dark);
+  border-bottom: 3.5px solid var(--navy-dark);
+  padding: 20px clamp(24px, 4.5vw, 68px);
 }
 
 body.navy-landing .brand {
@@ -36,7 +37,7 @@ body.navy-landing .brand small {
 .header-right-group {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 body.navy-landing .year {
@@ -51,8 +52,8 @@ body.navy-landing .year {
   align-items: center;
   border: 2.5px solid var(--navy-dark);
   border-radius: 999px;
-  padding: 7px 14px;
-  font: 800 12.5px "Nunito Sans", sans-serif;
+  padding: 8px 16px;
+  font: 800 13px "Nunito Sans", sans-serif;
   text-decoration: none;
   box-shadow: 2px 2px 0 var(--navy-dark);
   transition: transform 0.16s ease, box-shadow 0.16s ease;
@@ -74,43 +75,67 @@ body.navy-landing .year {
 }
 
 .landing {
-  grid-template-columns: 1.05fr 0.65fr 1fr;
+  max-width: 1380px;
+  margin: 0 auto;
+  min-height: calc(100vh - 96px);
+  padding: clamp(48px, 6vw, 84px) clamp(28px, 4.5vw, 68px);
+  display: grid;
+  grid-template-columns: 1.16fr 0.64fr 1fr;
   align-items: center;
+  gap: clamp(32px, 4vw, 56px);
 }
 
 body.navy-landing .eyebrow {
   color: var(--blue-accent);
-  letter-spacing: 0.12em;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  margin-bottom: 10px;
 }
 
-body.navy-landing .hero h1 {
+.two-line-heading {
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+  font-size: clamp(40px, 4.1vw, 60px);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
   color: var(--navy-dark);
 }
 
-body.navy-landing .hero h1 span {
+.two-line-heading .line-one,
+.two-line-heading .line-two {
+  display: block;
+  white-space: nowrap;
+}
+
+.two-line-heading .line-two {
   color: var(--navy-main);
 }
 
 body.navy-landing .hero-copy {
   color: #334155;
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 520px;
+  margin-bottom: 28px;
 }
 
 .portal-login-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-top: 22px;
+  gap: 18px;
+  margin-top: 8px;
 }
 
 .portal-box {
   display: flex;
   flex-direction: column;
   border: 3.5px solid var(--navy-dark);
-  border-radius: 20px;
-  padding: 16px;
+  border-radius: 22px;
+  padding: 20px;
   text-decoration: none;
   color: var(--navy-dark);
-  box-shadow: 5px 5px 0 var(--navy-dark);
+  box-shadow: 6px 6px 0 var(--navy-dark);
   transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.22s ease;
 }
 
@@ -126,14 +151,14 @@ body.navy-landing .hero-copy {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .portal-box-icon {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border: 2.5px solid var(--navy-dark);
-  border-radius: 10px;
+  border-radius: 11px;
   background: var(--sky-soft);
   color: var(--navy-main);
   display: grid;
@@ -151,22 +176,22 @@ body.navy-landing .hero-copy {
   border-radius: 999px;
   background: var(--sky-soft);
   color: var(--navy-dark);
-  padding: 2px 9px;
+  padding: 3px 10px;
   font-size: 10.5px;
   font-weight: 900;
 }
 
 .portal-box strong {
-  font: 800 20px/1.15 "Baloo 2", sans-serif;
+  font: 800 22px/1.15 "Baloo 2", sans-serif;
   color: var(--navy-dark);
 }
 
 .portal-box small {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: #475569;
-  margin: 3px 0 14px;
-  line-height: 1.35;
+  margin: 4px 0 18px;
+  line-height: 1.45;
 }
 
 body.navy-landing .primary-cta {
@@ -176,7 +201,7 @@ body.navy-landing .primary-cta {
   color: var(--white);
   border: 3px solid var(--navy-dark);
   box-shadow: 3px 3px 0 var(--navy-dark);
-  padding: 10px 16px;
+  padding: 11px 18px;
   font-size: 16px;
 }
 
@@ -190,7 +215,7 @@ body.navy-landing .primary-cta {
   border-radius: 999px;
   background: var(--sky-soft);
   box-shadow: 3px 3px 0 var(--navy-dark);
-  padding: 10px 16px;
+  padding: 11px 18px;
   color: var(--navy-dark);
   text-decoration: none;
   font: 800 16px "Baloo 2", sans-serif;
@@ -200,12 +225,12 @@ body.navy-landing .primary-cta {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 350px;
+  min-height: 380px;
 }
 
 .academic-orbit {
   position: absolute;
-  top: 16px;
+  top: 14px;
   color: var(--blue-accent);
   font-size: 24px;
   letter-spacing: 12px;
@@ -215,12 +240,12 @@ body.navy-landing .primary-cta {
 
 .notebook-art {
   position: relative;
-  width: 204px;
+  width: 218px;
   background: var(--white);
   border: 4px solid var(--navy-dark);
-  border-radius: 18px;
+  border-radius: 20px;
   box-shadow: 8px 8px 0 var(--navy-main);
-  padding: 20px 16px 18px;
+  padding: 24px 18px 20px;
   animation: notebook-bob 3.6s ease-in-out infinite;
 }
 
@@ -291,7 +316,7 @@ body.navy-landing .primary-cta {
   background: var(--sky-pale);
   border: 2px solid var(--navy-dark);
   border-radius: 9px;
-  padding: 7px 9px;
+  padding: 8px 10px;
 }
 
 .nb-check {
@@ -315,22 +340,22 @@ body.navy-landing .primary-cta {
 }
 
 .nb-bar.w-80 {
-  width: 68px;
+  width: 72px;
 }
 
 .nb-bar.w-65 {
-  width: 54px;
+  width: 56px;
 }
 
 .nb-bar.w-75 {
-  width: 62px;
+  width: 64px;
 }
 
 .nb-pill {
   margin-left: auto;
   font-size: 10px;
   font-weight: 900;
-  padding: 2px 6px;
+  padding: 2px 7px;
   border-radius: 6px;
   background: var(--white);
   border: 1.5px solid var(--navy-dark);
@@ -394,13 +419,13 @@ body.navy-landing .primary-cta {
 
 .sun-caption {
   position: absolute;
-  bottom: 16px;
+  bottom: 14px;
   border: 3px solid var(--navy-dark);
   border-radius: 999px;
   background: var(--white);
   color: var(--navy-dark);
-  padding: 7px 14px;
-  font: 800 12px "Nunito Sans", sans-serif;
+  padding: 8px 16px;
+  font: 800 12.5px "Nunito Sans", sans-serif;
   box-shadow: 3px 3px 0 var(--navy-dark);
   animation: caption-pop 3.5s ease-in-out infinite;
 }
@@ -409,6 +434,7 @@ body.navy-landing .feature-panel {
   background: var(--white);
   border: 4px solid var(--navy-dark);
   box-shadow: 8px 8px 0 var(--navy-dark);
+  padding: 44px 24px 24px;
 }
 
 body.navy-landing .sticker {
@@ -416,6 +442,17 @@ body.navy-landing .sticker {
   color: var(--white);
   border: 3px solid var(--navy-dark);
   box-shadow: 3px 3px 0 var(--navy-dark);
+  font-size: 13px;
+  padding: 7px 14px;
+}
+
+body.navy-landing .landing-features {
+  gap: 16px;
+}
+
+body.navy-landing .feature {
+  padding: 18px;
+  min-height: 156px;
 }
 
 .feature.navy-card {
@@ -470,7 +507,7 @@ body.navy-landing .sticker {
   }
 }
 
-@media (max-width: 1020px) {
+@media (max-width: 1120px) {
   .landing {
     grid-template-columns: 1fr 1fr;
   }
@@ -483,6 +520,10 @@ body.navy-landing .sticker {
   .landing,
   .portal-login-grid {
     grid-template-columns: 1fr;
+  }
+  .two-line-heading .line-one,
+  .two-line-heading .line-two {
+    white-space: normal;
   }
   .notebook-stage {
     order: -1;

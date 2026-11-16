@@ -1,166 +1,179 @@
 .time-intro {
-  border:4px solid #20242a;
-  border-radius:24px;
-  background:#b5dffc;
-  box-shadow:5px 5px 0 #20242a;
-  padding:25px;
-  margin-bottom:25px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px
+  border: 3.5px solid #0f172a;
+  border-radius: 22px;
+  background: #1e3a8a;
+  color: #ffffff;
+  box-shadow: 5px 5px 0 #0f172a;
+  padding: 26px 28px;
+  margin-bottom: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.time-intro .eyebrow {
+  color: #93c5fd;
 }
 
 .time-intro h1 {
-  font:800 40px/1 "Baloo 2";
-  margin:5px 0
+  font: 800 38px/1.05 "Baloo 2", sans-serif;
+  margin: 5px 0;
 }
 
 .time-intro p {
-  font-weight:800;
-  margin:0
+  font-weight: 700;
+  color: #dbeafe;
+  margin: 0;
 }
 
 .day-pill {
-  border:3px solid #20242a;
-  border-radius:999px;
-  background:#fff0a5;
-  padding:10px 14px;
-  font:800 14px "Baloo 2";
-  white-space:nowrap
+  border: 2.5px solid #0f172a;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #0f172a;
+  padding: 10px 16px;
+  font: 800 14px "Baloo 2", sans-serif;
+  white-space: nowrap;
+  box-shadow: 2px 2px 0 #0f172a;
 }
 
 .weekly-board {
-  border:4px solid #20242a;
-  border-radius:25px;
-  background:#fffdf1;
-  box-shadow:5px 5px 0 #20242a;
-  padding:24px;
-  overflow:auto
+  border: 3.5px solid #0f172a;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 5px 5px 0 #0f172a;
+  padding: 24px;
+  overflow: auto;
 }
 
 .weekly-board h2 {
-  font:800 28px "Baloo 2";
-  margin:0 0 16px
+  font: 800 28px "Baloo 2", sans-serif;
+  margin: 0 0 16px;
 }
 
 .week-grid {
-  display:grid;
-  grid-template-columns:105px repeat(5,minmax(125px,1fr));
-  gap:9px;
-  min-width:820px
+  display: grid;
+  grid-template-columns: 105px repeat(5, minmax(125px, 1fr));
+  gap: 10px;
+  min-width: 820px;
 }
 
-.week-grid>div {
-  border:3px solid #20242a;
-  border-radius:14px;
-  padding:10px;
-  min-height:82px
+.week-grid > div {
+  border: 2.5px solid #0f172a;
+  border-radius: 14px;
+  padding: 11px;
+  min-height: 82px;
 }
 
 .week-grid .day-name {
-  min-height:auto;
-  text-align:center;
-  background:#ff92d2;
-  font:800 17px "Baloo 2"
+  min-height: auto;
+  text-align: center;
+  background: #1e3a8a;
+  color: #ffffff;
+  font: 800 16px "Baloo 2", sans-serif;
 }
 
 .week-grid .time {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#fff0a5;
-  text-align:center;
-  font:800 12px "Nunito Sans"
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eff6ff;
+  color: #1e3a8a;
+  text-align: center;
+  font: 800 12px "Nunito Sans", sans-serif;
 }
 
 .subject {
-  position:relative;
-  font:800 18px/1 "Baloo 2"
+  position: relative;
+  font: 800 17px/1.05 "Baloo 2", sans-serif;
 }
 
 .subject small {
-  display:block;
-  font:700 10px "Nunito Sans";
-  margin-top:6px
+  display: block;
+  font: 700 10.5px "Nunito Sans", sans-serif;
+  color: #475569;
+  margin-top: 6px;
 }
 
 .english {
-  background:#ffd0ec
+  background: #eff6ff;
 }
 
 .mathematics {
-  background:#c8eca0
+  background: #dbeafe;
 }
 
 .science {
-  background:#b5dffc
+  background: #e0e7ff;
 }
 
 .tamil {
-  background:#ffe196
+  background: #f1f5f9;
 }
 
 .social {
-  background:#ffc5a2
+  background: #eff6ff;
 }
 
 .art {
-  background:#d9c8ff
+  background: #dbeafe;
 }
 
 .pe {
-  background:#9ee6d0
+  background: #dcfce7;
 }
 
 .break {
-  background:#fff5a4;
-  color:#7b5a00;
-  text-align:center;
-  font:800 15px "Baloo 2";
-  display:flex;
-  align-items:center;
-  justify-content:center
+  background: #f8fafc;
+  color: #1e3a8a;
+  text-align: center;
+  font: 800 15px "Baloo 2", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .today-class {
-  box-shadow:inset 0 0 0 3px #ff72bd
+  box-shadow: inset 0 0 0 3px #2563eb;
 }
 
-.today-class:after {
-  content:"Today";
-  position:absolute;
-  right:7px;
-  top:7px;
-  border:1.5px solid #20242a;
-  border-radius:99px;
-  background:#fff;
-  padding:2px 5px;
-  font:800 8px "Nunito Sans"
+.today-class::after {
+  content: "Today";
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  border: 1.5px solid #0f172a;
+  border-radius: 99px;
+  background: #1e3a8a;
+  color: #ffffff;
+  padding: 2px 6px;
+  font: 800 8.5px "Nunito Sans", sans-serif;
 }
 
 .time-note {
-  margin-top:22px;
-  border:4px solid #20242a;
-  border-radius:18px;
-  background:#8bdc86;
-  padding:15px;
-  display:flex;
-  gap:10px;
-  font-size:13px;
-  font-weight:700
+  margin-top: 22px;
+  border: 3.5px solid #0f172a;
+  border-radius: 18px;
+  background: #dbeafe;
+  box-shadow: 5px 5px 0 #0f172a;
+  padding: 16px 20px;
+  display: flex;
+  gap: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
 }
 
 .time-note b {
-  font:800 18px "Baloo 2"
+  font: 800 18px "Baloo 2", sans-serif;
 }
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
   .time-intro {
-    align-items:start;
-    flex-direction:column
+    align-items: flex-start;
+    flex-direction: column;
   }
   .weekly-board {
-    padding:15px
+    padding: 15px;
   }
 }
