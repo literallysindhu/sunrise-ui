@@ -1,25 +1,28 @@
-@keyframes lp-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
+.feature:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  box-shadow: 6px 8px 0 #20242a;
+}
+
+.feature:nth-child(even):hover {
+  transform: translateY(-6px) rotate(1deg);
+}
+
+.sh-brand:hover {
+  transform: translateX(3px) rotate(-0.8deg);
+}
+
+.sh-portal-card:focus-visible,
+.sh-top-btn:focus-visible,
+.sh-ptab:focus-visible {
+  outline: 4px solid #ff92d2;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sun-face,
+  .sun-rays,
+  .sun-caption,
+  .sun-cloud {
+    animation: none !important;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.lp-hero-copy {
-  animation: lp-fade-up 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.lp-hero-visual {
-  animation: lp-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
-}
-
-.lp-portal-card:focus-visible,
-.lp-btn:focus-visible,
-.lp-wtab:focus-visible {
-  outline: 3px solid var(--blue-500);
-  outline-offset: 3px;
 }
