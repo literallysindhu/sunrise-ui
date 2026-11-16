@@ -1,87 +1,462 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Sunrise School</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/screens.css">
-    <link rel="stylesheet" href="css/landing.css">
-    <link rel="stylesheet" href="css/transitions.css">
-    <link rel="stylesheet" href="css/landing-premium.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sunrise International School — Digital Campus &amp; ERP Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/landing.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/landing-premium.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="index.html">
-      <span class="brand-mark">☀</span>
-      <span>Sunrise <small>International School</small>
-    </span>
-  </a>
-  <span class="year">Academic Year 2026-27</span>
-</header>
-<main class="landing">
-  <section class="hero">
-    <p class="eyebrow">A brighter digital campus</p>
-    <h1>Welcome to<br>
-      <span>Sunrise School!</span>
-    </h1>
-    <p class="hero-copy">Connecting parents, teachers and students through a simple, friendly school experience.</p>
-    <div class="portal-actions">
-      <a class="primary-cta" href="login.html?enter=1">Parent portal <span>→</span>
-    </a>
-    <a class="admin-pill" href="admin.html?enter=1">Admin portal <span>✦</span>
-  </a>
-</div>
-</section>
-<section class="sun-stage" aria-label="A smiling animated sun">
-  <div class="sun-rays">✦ ✧ ★ ✧ ✦
-  </div>
-  <div class="sun-face">
-    <span class="sun-eye left">
-  </span>
-  <span class="sun-eye right">
-</span>
-<span class="sun-smile">
-</span>
-<span class="sun-cheek left">
-</span>
-<span class="sun-cheek right">
-</span>
-</div>
-<div class="sun-caption">A happy day to learn!
-</div>
-</section>
-<section class="feature-panel">
-  <span class="sticker">Everything in one place</span>
-  <div class="landing-features">
-    <article class="feature blue">
-      <b>✓</b>
-      <h2>Real-time<br>attendance</h2>
-      <p>Know every school day.</p>
-    </article>
-    <article class="feature pink">
-      <b>★</b>
-      <h2>Academic<br>progress</h2>
-      <p>Results and assessments.</p>
-    </article>
-    <article class="feature green">
-      <b>₹</b>
-      <h2>Secure fee<br>payments</h2>
-      <p>Invoices and receipts.</p>
-    </article>
-    <article class="feature orange">
-      <b>✉</b>
-      <h2>School<br>updates</h2>
-      <p>Circulars and homework.</p>
-    </article>
-  </div>
-</section>
-</main>
-<script>
-if(new URLSearchParams(location.search).has('logout')){document.body.classList.add('portal-splash');try{history.replaceState({}, '', location.pathname)}catch(_){}}
-</script>
-</body>
+  <body class="saas-landing-body">
+    <header class="lp-navbar">
+      <div class="lp-container lp-nav-inner">
+        <a class="lp-brand" href="index.html" aria-label="Sunrise International School Home">
+          <div class="lp-brand-emblem">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+              <path d="M6 12v5c3 3 9 3 12 0v-5" />
+            </svg>
+          </div>
+          <div class="lp-brand-text">
+            <strong>Sunrise International School</strong>
+            <span>Digital Campus &amp; ERP Platform</span>
+          </div>
+        </a>
+
+        <nav class="lp-nav-links" aria-label="Primary navigation">
+          <a href="#portals">Portal Access</a>
+          <a href="#modules">Platform Modules</a>
+          <a href="#preview">Dashboard Preview</a>
+          <a href="#security">Architecture</a>
+        </nav>
+
+        <div class="lp-nav-actions">
+          <span class="lp-session-pill">
+            <span class="lp-dot"></span>
+            Session 2026–27
+          </span>
+          <a class="lp-btn lp-btn-outline" href="login.html?enter=1">Parent Login</a>
+          <a class="lp-btn lp-btn-navy" href="admin.html?enter=1">Staff Login</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="lp-hero">
+        <div class="lp-container lp-hero-grid">
+          <div class="lp-hero-copy">
+            <div class="lp-eyebrow-badge">
+              <span class="lp-badge-tag">ENTERPRISE EDU-CLOUD</span>
+              <span>Unified School Management &amp; Parent Engagement System</span>
+            </div>
+
+            <h1>
+              Modern Academic Operations &amp; Real-Time Parent Connectivity.
+            </h1>
+
+            <p class="lp-lead">
+              Sunrise International School’s integrated digital platform connects parents, faculty, and school leadership with live attendance tracking, examination analytics, digital homework, fee ledgering, and instant campus communications.
+            </p>
+
+            <div id="portals" class="lp-login-cards">
+              <a class="lp-portal-card lp-portal-parent" href="login.html?enter=1">
+                <div class="lp-portal-card-top">
+                  <div class="lp-portal-icon parent-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  </div>
+                  <span class="lp-portal-tag">Mobile OTP Access</span>
+                </div>
+                <h2>Parent &amp; Student Portal</h2>
+                <p>View daily attendance, homework diary, exam report cards, fee invoices, and official school circulars.</p>
+                <span class="lp-portal-cta">
+                  Sign in to Parent Portal
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </span>
+              </a>
+
+              <a class="lp-portal-card lp-portal-staff" href="admin.html?enter=1">
+                <div class="lp-portal-card-top">
+                  <div class="lp-portal-icon staff-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                      <line x1="8" y1="21" x2="16" y2="21" />
+                      <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
+                  </div>
+                  <span class="lp-portal-tag staff-tag">Role-Based ERP</span>
+                </div>
+                <h2>Staff &amp; Admin Login</h2>
+                <p>Dedicated workspace for Super Admin, School Admin, Faculty, and Accounts to manage school operations.</p>
+                <span class="lp-portal-cta">
+                  Access Staff Workspace
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </span>
+              </a>
+            </div>
+
+            <div class="lp-trust-metrics">
+              <div class="lp-metric-item">
+                <strong>99.4%</strong>
+                <span>Attendance Sync Accuracy</span>
+              </div>
+              <div class="lp-metric-divider"></div>
+              <div class="lp-metric-item">
+                <strong>18+</strong>
+                <span>Integrated ERP Modules</span>
+              </div>
+              <div class="lp-metric-divider"></div>
+              <div class="lp-metric-item">
+                <strong>32 Tables</strong>
+                <span>Row-Level Security (RLS)</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="preview" class="lp-hero-visual" aria-label="Interactive School ERP Dashboard Preview">
+            <div class="lp-preview-window">
+              <div class="lp-window-bar">
+                <div class="lp-window-dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="lp-window-url">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                  <span>erp.sunriseschool.edu.in · Live Telemetry</span>
+                </div>
+                <div class="lp-window-tabs" role="tablist">
+                  <button type="button" class="lp-wtab active" data-view="admin">Admin View</button>
+                  <button type="button" class="lp-wtab" data-view="parent">Parent View</button>
+                </div>
+              </div>
+
+              <div class="lp-window-body" id="previewAdminPane">
+                <div class="lp-mock-header">
+                  <div>
+                    <span class="lp-mock-sub">ACADEMIC SESSION 2026–2027</span>
+                    <h3>Executive Campus Overview</h3>
+                  </div>
+                  <span class="lp-status-live">● System Online</span>
+                </div>
+
+                <div class="lp-mock-kpis">
+                  <div class="lp-mkpi">
+                    <span class="lp-mkpi-label">Daily Attendance</span>
+                    <strong class="lp-mkpi-val">94.8%</strong>
+                    <span class="lp-mkpi-trend up">▲ +1.4% vs last week</span>
+                  </div>
+                  <div class="lp-mkpi">
+                    <span class="lp-mkpi-label">Term 1 Exam Avg</span>
+                    <strong class="lp-mkpi-val">88.6%</strong>
+                    <span class="lp-mkpi-trend up">▲ Published to Parents</span>
+                  </div>
+                  <div class="lp-mkpi">
+                    <span class="lp-mkpi-label">Fee Realization</span>
+                    <strong class="lp-mkpi-val">91.2%</strong>
+                    <span class="lp-mkpi-trend neutral">Term 1 Cycle Active</span>
+                  </div>
+                </div>
+
+                <div class="lp-mock-Panels">
+                  <div class="lp-mock-chart-card">
+                    <div class="lp-mock-card-head">
+                      <strong>Weekly Attendance Turnout (Classes 1–12)</strong>
+                      <span>Nov 2026</span>
+                    </div>
+                    <div class="lp-bars-wrap">
+                      <div class="lp-bar-col">
+                        <div class="lp-bar-track"><div class="lp-bar-fill" style="height: 92%"></div></div>
+                        <span>Mon</span>
+                      </div>
+                      <div class="lp-bar-col">
+                        <div class="lp-bar-track"><div class="lp-bar-fill" style="height: 95%"></div></div>
+                        <span>Tue</span>
+                      </div>
+                      <div class="lp-bar-col">
+                        <div class="lp-bar-track"><div class="lp-bar-fill" style="height: 91%"></div></div>
+                        <span>Wed</span>
+                      </div>
+                      <div class="lp-bar-col">
+                        <div class="lp-bar-track"><div class="lp-bar-fill" style="height: 96%"></div></div>
+                        <span>Thu</span>
+                      </div>
+                      <div class="lp-bar-col">
+                        <div class="lp-bar-track"><div class="lp-bar-fill active" style="height: 94%"></div></div>
+                        <span>Fri</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="lp-mock-feed-card">
+                    <div class="lp-mock-card-head">
+                      <strong>Recent Activity Stream</strong>
+                      <span>Real-Time</span>
+                    </div>
+                    <ul class="lp-activity-list">
+                      <li>
+                        <span class="lp-act-dot blue"></span>
+                        <div>
+                          <strong>Term 1 Report Cards Published</strong>
+                          <small>Class 5-A &amp; 5-B · 62 parent accounts notified</small>
+                        </div>
+                      </li>
+                      <li>
+                        <span class="lp-act-dot green"></span>
+                        <div>
+                          <strong>FCM Broadcast Dispatched</strong>
+                          <small>580 devices received Term 1 Fee Reminder</small>
+                        </div>
+                      </li>
+                      <li>
+                        <span class="lp-act-dot indigo"></span>
+                        <div>
+                          <strong>Online MCQ Quiz Live</strong>
+                          <small>Fractions &amp; Arithmetic · 32 submissions logged</small>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="lp-window-body lp-hidden" id="previewParentPane">
+                <div class="lp-mock-header">
+                  <div>
+                    <span class="lp-mock-sub">VERIFIED PARENT ACCOUNT · RAMESH KRISHNAN</span>
+                    <h3>Student Progress: Aarav Krishnan (Class 5-A)</h3>
+                  </div>
+                  <span class="lp-status-live">Admission #ADM2026-0501</span>
+                </div>
+
+                <div class="lp-mock-kpis">
+                  <div class="lp-mkpi">
+                    <span class="lp-mkpi-label">Monthly Attendance</span>
+                    <strong class="lp-mkpi-val">95.6%</strong>
+                    <span class="lp-mkpi-trend up">23 / 24 Days Present</span>
+                  </div>
+                  <div class="lp-mkpi">
+                    <span class="lp-mkpi-label">Summative Grade</span>
+                    <strong class="lp-mkpi-val">A+ (90.5%)</strong>
+                    <span class="lp-mkpi-trend up">Rank Top 5%</span>
+                  </div>
+                  <div class="lp-mkpi">
+                    <span class="lp-mkpi-label">Homework Diary</span>
+                    <strong class="lp-mkpi-val">3 Active</strong>
+                    <span class="lp-mkpi-trend neutral">Due Nov 8–9</span>
+                  </div>
+                </div>
+
+                <div class="lp-parent-preview-rows">
+                  <div class="lp-pp-row">
+                    <span class="lp-pp-tag">MATHEMATICS</span>
+                    <div>
+                      <strong>Fractions Worksheet · Chapter 4</strong>
+                      <small>Assigned by M. Saravanan · Due Nov 08, 2026</small>
+                    </div>
+                    <span class="lp-pp-status">Assigned</span>
+                  </div>
+                  <div class="lp-pp-row">
+                    <span class="lp-pp-tag">CIRCULAR</span>
+                    <div>
+                      <strong>Term 1 Parent-Teacher Meeting Schedule</strong>
+                      <small>Saturday, Nov 28 · 9:00 AM to 1:00 PM</small>
+                    </div>
+                    <span class="lp-pp-status green">Confirmed</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lp-floating-badge lp-float-top">
+              <div class="lp-float-icon green">✓</div>
+              <div>
+                <strong>Parent-Ward Isolation</strong>
+                <span>Strict Row-Level Security</span>
+              </div>
+            </div>
+
+            <div class="lp-floating-badge lp-float-bottom">
+              <div class="lp-float-icon blue">🔔</div>
+              <div>
+                <strong>Instant Push Alerts</strong>
+                <span>600+ Parent Devices Active</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="modules" class="lp-modules-section">
+        <div class="lp-container">
+          <div class="lp-section-head">
+            <span class="lp-section-eyebrow">COMPREHENSIVE ERP SUITE</span>
+            <h2>Engineered for Academic Excellence &amp; Transparency</h2>
+            <p>
+              Every department—from classroom faculty to the principal’s office and parent smartphones—operates on a single source of truth.
+            </p>
+          </div>
+
+          <div class="lp-modules-grid">
+            <article class="lp-module-card">
+              <div class="lp-mod-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                  <path d="m9 14 2 2 4-4" />
+                </svg>
+              </div>
+              <span class="lp-mod-tag">DAILY OPERATIONS</span>
+              <h3>Real-Time Attendance Tracking</h3>
+              <p>Section-wise morning roll call with instant parent absentee alerts, late-arrival logs, and monthly attendance heatmaps.</p>
+            </article>
+
+            <article class="lp-module-card">
+              <div class="lp-mod-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                </svg>
+              </div>
+              <span class="lp-mod-tag">ASSESSMENTS</span>
+              <h3>Examinations &amp; Digital Report Cards</h3>
+              <p>Schedule summative and formative exams, record subject-wise marks with automated grading, and publish verified results to parents.</p>
+            </article>
+
+            <article class="lp-module-card">
+              <div class="lp-mod-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                </svg>
+              </div>
+              <span class="lp-mod-tag">LEARNING</span>
+              <h3>Digital Diary, Study Library &amp; Online Tests</h3>
+              <p>Publish daily homework assignments, share PDF/video study materials, and conduct timed multiple-choice assessments.</p>
+            </article>
+
+            <article class="lp-module-card">
+              <div class="lp-mod-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="5" width="20" height="14" rx="2" />
+                  <line x1="2" y1="10" x2="22" y2="10" />
+                </svg>
+              </div>
+              <span class="lp-mod-tag">FINANCE</span>
+              <h3>Fee Ledger &amp; Instant Receipts</h3>
+              <p>Clear term-wise fee breakdowns, due-date reminders, online payment tracking, and downloadable official receipts.</p>
+            </article>
+
+            <article class="lp-module-card">
+              <div class="lp-mod-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </div>
+              <span class="lp-mod-tag">SCHEDULING</span>
+              <h3>Timetable &amp; Session Progression</h3>
+              <p>Manage conflict-free class timetables, academic calendars, year-end student promotions, and multi-session historical archives.</p>
+            </article>
+
+            <article class="lp-module-card">
+              <div class="lp-mod-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+              </div>
+              <span class="lp-mod-tag">COMMUNICATION</span>
+              <h3>Parent Helpdesk &amp; Push Broadcasts</h3>
+              <p>Two-way parent query resolution, official school circulars, and real-time emergency or fee broadcast alerts.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="security" class="lp-cta-banner">
+        <div class="lp-container lp-cta-inner">
+          <div class="lp-cta-text">
+            <span class="lp-cta-eyebrow">ROLE-BASED ACCESS &amp; DATA PRIVACY</span>
+            <h2>Ready to access the Sunrise School portal?</h2>
+            <p>
+              Sign in with your registered parent mobile number or official staff credentials to enter your workspace.
+            </p>
+          </div>
+          <div class="lp-cta-buttons">
+            <a class="lp-btn lp-btn-white" href="login.html?enter=1">
+              Parent Portal Login →
+            </a>
+            <a class="lp-btn lp-btn-glass" href="admin.html?enter=1">
+              Staff &amp; Admin Login →
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="lp-footer">
+      <div class="lp-container lp-footer-inner">
+        <div class="lp-footer-brand">
+          <strong>Sunrise International Matriculation Higher Secondary School</strong>
+          <span>142, Anna Salai, Chennai, Tamil Nadu 600002 · Affiliation Code: TN-MATRIC-2014-9912</span>
+        </div>
+        <div class="lp-footer-links">
+          <span>Helpdesk: +91 44 2852 9000</span>
+          <span>·</span>
+          <span>info@sunriseschool.edu.in</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      if (new URLSearchParams(location.search).has('logout')) {
+        document.body.classList.add('portal-splash');
+        try {
+          history.replaceState({}, '', location.pathname);
+        } catch (_) {}
+      }
+
+      const tabs = document.querySelectorAll('.lp-wtab');
+      const adminPane = document.getElementById('previewAdminPane');
+      const parentPane = document.getElementById('previewParentPane');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          if (tab.dataset.view === 'parent') {
+            adminPane.classList.add('lp-hidden');
+            parentPane.classList.remove('lp-hidden');
+          } else {
+            parentPane.classList.add('lp-hidden');
+            adminPane.classList.remove('lp-hidden');
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
