@@ -1,225 +1,640 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Super Admin Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/super-admin.css">
-    <link rel="stylesheet" href="css/notice.css">
-    <link rel="stylesheet" href="css/admin-nav.css">
-    <link rel="stylesheet" href="css/transitions.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Super Admin Dashboard — Sunrise School Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/super-admin.css" />
+    <link rel="stylesheet" href="css/notice.css" />
+    <link rel="stylesheet" href="css/admin-nav.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
     <script src="js/admin-nav.js" defer></script>
   </head>
   <body class="super-admin">
     <script>
       if (new URLSearchParams(location.search).has('enter')) {
         document.body.classList.add('portal-splash');
-        try { history.replaceState({}, '', location.pathname); } catch (_) {}
+        try {
+          history.replaceState({}, '', location.pathname);
+        } catch (_) {}
       }
     </script>
+
     <div class="sa-layout">
-      <aside class="sa-sidebar">
-        <a class="sa-brand" href="index.html">
-        <b>☀</b>
-        <span>Sunrise School<small>Super admin</small>
-      </span>
-    </a>
-    <div class="sa-role">ACTIVE ROLE<strong>Super Admin</strong>
-    </div>
-    <nav class="sa-nav">
-      <a class="active" href="super-admin.html">▦ &nbsp; School dashboard</a>
-      <a href="people.html?tab=students">♙ &nbsp; People &amp; roles</a>
-      <a class="indent" href="people.html?tab=students">Students</a>
-      <a class="indent" href="people.html?tab=parents">Parents</a>
-      <a class="indent" href="people.html?tab=teachers">Staff &amp; teachers</a>
-      <a href="admin-attendance.html">▣ &nbsp; Attendance</a>
-      <a href="academic-sessions.html">✦ &nbsp; Academics</a>
-      <a class="indent" href="academic-sessions.html">Academic sessions</a>
-      <a class="indent" href="classes-sections.html">Classes &amp; sections</a>
-      <a class="indent" href="subjects-teachers.html">Subjects &amp; teachers</a>
-      <a class="indent" href="student-promotions.html">Student promotions</a>
-      <a class="indent" href="admin-timetable.html">Timetable</a>
-      <a class="indent" href="admin-examinations.html">Examinations</a>
-      <a class="indent" href="admin-study-materials.html">Study materials</a>
-      <a class="indent" href="admin-online-tests.html">Online tests</a>
-      <a href="#fees">₹ &nbsp; Fees &amp; billing</a>
-      <a href="#notice">✉ &nbsp; Notice board</a>
-      <a href="#settings">⚙ &nbsp; School settings</a>
-    </nav>
-    <footer>System online ●
-    </footer>
-  </aside>
-  <main class="sa-main">
-    <header class="sa-top">
-      <input class="sa-search" placeholder="⌕  Search students, admission no., circulars…">
-      <div class="sa-top-actions">
-        <span>Role: Super Admin ⌄</span>
-        <span>◌</span>
-        <span>SA</span>
-      </div>
-    </header>
-    <div class="sa-content">
-      <section class="sa-title">
-        <div>
-          <h1>School academic administration</h1>
-          <p>Sunrise International School · Academic Year 2026–2027</p>
-        </div>
-        <div class="circular-actions">
-          <button class="sa-new" id="newCircular" type="button">＋ New circular ⌄</button>
-          <div class="circular-menu" id="circularMenu">
-            <a href="notice-board.html?create=1">Create circular</a>
-            <a href="notice-board.html">View old circulars</a>
+      <aside class="sa-sidebar" data-admin-nav></aside>
+
+      <main class="sa-main">
+        <header class="sa-top">
+          <div class="sa-search-wrap">
+            <span class="sa-search-icon">⌕</span>
+            <input
+              id="globalDashboardSearch"
+              class="sa-search"
+              type="search"
+              placeholder="Search students, admission no., circulars…"
+              aria-label="Search students or circulars"
+            />
           </div>
+
+          <div class="sa-top-actions">
+            <div class="sa-session-pill" title="Active Academic Cycle">
+              <span>Cycle:</span>
+              <select id="saSessionSelect" aria-label="Switch Academic Session">
+                <option value="2026-2027">Session 2026–2027 (Active)</option>
+                <option value="2025-2026">Session 2025–2026 (Archived)</option>
+                <option value="2024-2025">Session 2024–2025 (Historical)</option>
+                <option value="2027-2028">Session 2027–2028 (Upcoming)</option>
+              </select>
+            </div>
+
+            <span class="sa-role-chip" id="topRoleLabel">Role: Super Admin</span>
+
+            <div class="sa-profile-chip" title="Dr. K. Sundararajan (Principal)">
+              <span class="sa-avatar">KS</span>
+              <div class="sa-profile-text">
+                <strong>Dr. K. Sundararajan</strong>
+                <small>admin@sunriseschool.edu.in</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="sa-content" id="saDashboardContent">
+          <section class="sa-title">
+            <div>
+              <span class="sa-eyebrow" id="saCycleEyebrow">EXECUTIVE CAMPUS OVERVIEW · SESSION 2026–2027</span>
+              <h1>School Academic Administration</h1>
+              <p>Real-time attendance telemetry, academic performance analytics, and student operations</p>
+            </div>
+
+            <div class="sa-header-btns">
+              <button class="sa-sync-btn" id="refreshTelemetryBtn" type="button">
+                ↻ Sync Telemetry
+              </button>
+              <div class="circular-actions">
+                <button class="sa-new" id="newCircular" type="button">＋ New Circular ⌄</button>
+                <div class="circular-menu" id="circularMenu">
+                  <a href="notice-board.html?create=1">Create circular</a>
+                  <a href="notice-board.html">View old circulars</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="sa-skeleton-grid" id="saSkeletonLoader" aria-hidden="true">
+            <div class="sk-card"></div>
+            <div class="sk-card"></div>
+            <div class="sk-card"></div>
+            <div class="sk-card"></div>
+          </div>
+
+          <section class="sa-kpis" id="saKpisGrid"></section>
+
+          <section class="sa-charts-row">
+            <article class="sa-panel">
+              <div class="sa-panel-head">
+                <div>
+                  <h2>Monthly Student Attendance Trends</h2>
+                  <p>Present vs Absent turnout percentage · Academic Cycle</p>
+                </div>
+                <div class="chart-key">
+                  <span><i class="key-present"></i>Present</span>
+                  <span><i class="key-absent"></i>Absent</span>
+                </div>
+              </div>
+
+              <div class="bar-chart" id="attendanceBarChart"></div>
+            </article>
+
+            <article class="sa-panel">
+              <div class="sa-panel-head">
+                <div>
+                  <h2>Section Enrolment</h2>
+                  <p>Active students per classroom section</p>
+                </div>
+                <span class="status-badge status-active">Active</span>
+              </div>
+
+              <div class="donut-wrap">
+                <div class="donut">
+                  <div class="donut-hole">
+                    <strong id="donutTotalVal">125</strong>
+                    <small>Students</small>
+                  </div>
+                </div>
+                <div class="donut-list" id="donutLegendList">
+                  <span><i style="background:#1e3a8a"></i>Class 5-A · 32</span>
+                  <span><i style="background:#2563eb"></i>Class 5-B · 30</span>
+                  <span><i style="background:#60a5fa"></i>Class 6-A · 28</span>
+                  <span><i style="background:#93c5fd"></i>Class 7-A · 35</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="sa-panel">
+              <div class="sa-panel-head">
+                <div>
+                  <h2>Subject Academic Performance</h2>
+                  <p>Average summative score &amp; grade distribution</p>
+                </div>
+                <span class="status-badge status-completed">Completed</span>
+              </div>
+
+              <div class="perf-bars-list" id="subjectPerfList"></div>
+            </article>
+          </section>
+
+          <section class="sa-panel sa-table-panel">
+            <div class="sa-table-header">
+              <div>
+                <h2>Student Operations &amp; Fee Status Overview</h2>
+                <p>Filter, inspect, or update student account and fee statuses with verification</p>
+              </div>
+
+              <div class="sa-table-filters">
+                <input
+                  id="tableSearchInput"
+                  class="sa-filter-input"
+                  type="search"
+                  placeholder="Filter by name or ADM no.…"
+                  aria-label="Filter student table"
+                />
+                <select id="tableClassFilter" class="sa-filter-select" aria-label="Filter by class">
+                  <option value="ALL">All Classes</option>
+                  <option value="Class 5-A">Class 5-A</option>
+                  <option value="Class 5-B">Class 5-B</option>
+                  <option value="Class 6-A">Class 6-A</option>
+                </select>
+                <select id="tableStatusFilter" class="sa-filter-select" aria-label="Filter by status">
+                  <option value="ALL">All Statuses</option>
+                  <option value="Active">Active</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="sa-table-wrap">
+              <table class="sa-table">
+                <thead>
+                  <tr>
+                    <th>Admission No</th>
+                    <th>Student Name</th>
+                    <th>Class &amp; Sec</th>
+                    <th>Attendance</th>
+                    <th>Exam / Fee Status</th>
+                    <th>Account Status</th>
+                    <th class="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="saStudentTableBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="bottom-grid">
+            <article class="sa-panel">
+              <div class="sa-panel-head">
+                <div>
+                  <h2>Recent Campus Announcements</h2>
+                  <p>Published to staff and parent mobile portals</p>
+                </div>
+                <a class="panel-link" href="notice-board.html">View All →</a>
+              </div>
+              <div id="saNoticesContainer"></div>
+            </article>
+
+            <article class="sa-panel">
+              <div class="sa-panel-head">
+                <div>
+                  <h2>Daily Management Modules</h2>
+                  <p>Direct operational shortcuts for school administration</p>
+                </div>
+              </div>
+              <div class="modules">
+                <a href="people.html?tab=students">Student Roster</a>
+                <a href="people.html?tab=teachers">Faculty Staff</a>
+                <a href="people.html?tab=parents">Parents Directory</a>
+                <a href="admin-timetable.html">Weekly Timetable</a>
+                <a href="admin-examinations.html">Exams &amp; Marks</a>
+                <a href="admin-feedback.html">Parent Feedback</a>
+                <a href="admin-diary.html">Diary &amp; Homework</a>
+                <a href="admin-online-tests.html">Online MCQ Tests</a>
+                <a href="admin-settings.html">School Settings</a>
+              </div>
+            </article>
+          </section>
         </div>
-      </section>
-      <section class="sa-kpis">
-        <article class="sa-kpi">
-          <i>♙</i>
-          <p>Total students</p>
-          <strong>3</strong>
-          <small>All active enrolments</small>
-        </article>
-        <article class="sa-kpi">
-          <i>♧</i>
-          <p>Total teachers</p>
-          <strong>2</strong>
-          <small>Assigned to sections</small>
-        </article>
-        <article class="sa-kpi">
-          <i>⌂</i>
-          <p>Parent accounts</p>
-          <strong>2</strong>
-          <small>Portal access enabled</small>
-        </article>
-        <article class="sa-kpi">
-          <i>✓</i>
-          <p>Present today</p>
-          <strong>2</strong>
-          <small>92.4% turnout</small>
-        </article>
-        <article class="sa-kpi">
-          <i>!</i>
-          <p>Absent today</p>
-          <strong>1</strong>
-          <small>Families notified</small>
-        </article>
-        <article class="sa-kpi">
-          <i>₹</i>
-          <p>Pending fees</p>
-          <strong>₹25.5K</strong>
-          <small>Two invoices due</small>
-        </article>
-        <article class="sa-kpi">
-          <i>★</i>
-          <p>Upcoming exams</p>
-          <strong>2</strong>
-          <small>Mid-term assessments</small>
-        </article>
-        <article class="sa-kpi">
-          <i>✉</i>
-          <p>Announcements</p>
-          <strong>3</strong>
-          <small>Delivered to families</small>
-        </article>
-      </section>
-      <section class="sa-data-grid">
-        <article class="sa-panel">
-          <h2>Daily student attendance trends</h2>
-          <p>Present vs absent · July to November</p>
-          <div class="bar-chart">
+      </main>
+    </div>
+
+    <div class="sa-modal-backdrop" id="saSessionWarnModal">
+      <div class="sa-modal-card" role="dialog" aria-modal="true" aria-labelledby="saWarnTitle">
+        <div class="sa-modal-head">
+          <h3 id="saWarnTitle" style="color:#dc2626">⚠ Warning: Switch Academic Session?</h3>
+          <button type="button" class="sa-modal-close" id="closeSaWarnBtn">✕</button>
+        </div>
+        <p class="sa-modal-copy">
+          You are switching the entire administration dashboard to <b id="saWarnTargetName">Session 2025–2026</b>.
+        </p>
+        <div class="sa-warn-box">
+          • <strong>Everything will be reverted to that academic session.</strong><br />
+          • All current 2026–27 KPIs, student rosters, attendance charts, and schedules will be replaced with historical records for that cycle.
+        </div>
+        <div class="sa-modal-actions">
+          <button type="button" class="sa-btn-secondary" id="cancelSaWarnBtn">Cancel</button>
+          <button type="button" class="sa-btn-danger" id="confirmSaWarnBtn">Revert &amp; Switch Session</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/admin-actions.js"></script>
+    <script>
+      const DASHBOARD_SESSIONS = {
+        '2026-2027': {
+          label: 'Session 2026–2027',
+          eyebrow: 'EXECUTIVE CAMPUS OVERVIEW · SESSION 2026–2027',
+          donutTotal: '125',
+          kpis: [
+            { icon: '♙', label: 'Total Students', val: '125', sub: '4 Active Sections', status: 'Active' },
+            { icon: '♧', label: 'Total Faculty', val: '18', sub: 'Assigned to classes', status: 'Active' },
+            { icon: '⌂', label: 'Parent Accounts', val: '118', sub: 'Mobile OTP verified', status: 'Active' },
+            { icon: '✓', label: 'Present Today', val: '119', sub: '95.2% daily turnout', status: 'Completed' },
+            { icon: '!', label: 'Absent Today', val: '6', sub: 'Parents notified via SMS', status: 'Pending' },
+            { icon: '₹', label: 'Pending Fees', val: '₹25.5K', sub: 'Term 1 collection open', status: 'Pending' },
+            { icon: '★', label: 'Upcoming Exams', val: '2', sub: 'Mid-term assessments', status: 'Active' },
+            { icon: '✉', label: 'Announcements', val: '12', sub: 'Delivered to 600 devices', status: 'Completed' }
+          ],
+          attendanceBars: [
+            { month: 'Jul', present: 91, absent: 9 },
+            { month: 'Aug', present: 93, absent: 7 },
+            { month: 'Sep', present: 95, absent: 5 },
+            { month: 'Oct', present: 92, absent: 8 },
+            { month: 'Nov', present: 95, absent: 5 }
+          ],
+          subjects: [
+            { name: 'Mathematics', avg: 91, grade: 'Grade A+' },
+            { name: 'Science', avg: 88, grade: 'Grade A' },
+            { name: 'English', avg: 86, grade: 'Grade A' },
+            { name: 'Tamil', avg: 93, grade: 'Grade A+' },
+            { name: 'Social Science', avg: 89, grade: 'Grade A' }
+          ],
+          students: [
+            { id: 's1', adm: 'ADM2026-0501', name: 'Aarav Krishnan', cls: 'Class 5-A', att: '95.6%', feeStatus: 'Completed', accStatus: 'Active' },
+            { id: 's2', adm: 'ADM2026-0502', name: 'Diya Krishnan', cls: 'Class 5-B', att: '92.4%', feeStatus: 'Pending', accStatus: 'Active' },
+            { id: 's3', adm: 'ADM2026-0503', name: 'Karthik Senthil', cls: 'Class 5-A', att: '88.5%', feeStatus: 'Completed', accStatus: 'Active' },
+            { id: 's4', adm: 'ADM2026-0601', name: 'Sneha Murugan', cls: 'Class 6-A', att: '96.2%', feeStatus: 'Completed', accStatus: 'Active' },
+            { id: 's5', adm: 'ADM2026-0602', name: 'Varun Chakravarthy', cls: 'Class 6-A', att: '79.0%', feeStatus: 'Pending', accStatus: 'Inactive' }
+          ],
+          notices: [
+            { title: 'Annual Sports Meet 2026 — Registrations Open', meta: '2 days ago · School-wide · Completed' },
+            { title: 'Class 5 Field Trip to Regional Science City', meta: 'Yesterday · Class 5 · Active' },
+            { title: 'Parent-Teacher Meeting (Term 1 Review)', meta: '3 days ago · Classes 1–10 · Active' }
+          ]
+        },
+        '2025-2026': {
+          label: 'Session 2025–2026',
+          eyebrow: 'ARCHIVED CYCLE OVERVIEW · SESSION 2025–2026',
+          donutTotal: '112',
+          kpis: [
+            { icon: '♙', label: 'Total Students', val: '112', sub: '2025–26 Batch', status: 'Completed' },
+            { icon: '♧', label: 'Total Faculty', val: '16', sub: '2025–26 Roster', status: 'Completed' },
+            { icon: '⌂', label: 'Parent Accounts', val: '108', sub: 'Archived profiles', status: 'Completed' },
+            { icon: '✓', label: 'Annual Turnout', val: '93.8%', sub: 'Full year average', status: 'Completed' },
+            { icon: '!', label: 'Detained / Hold', val: '0', sub: '100% pass rate', status: 'Completed' },
+            { icon: '₹', label: 'Fee Ledger', val: '₹0 Due', sub: 'All dues settled', status: 'Completed' },
+            { icon: '★', label: 'Annual Exams', val: '4', sub: 'All terms published', status: 'Completed' },
+            { icon: '✉', label: 'Circulars Sent', val: '38', sub: '2025–26 archive', status: 'Completed' }
+          ],
+          attendanceBars: [
+            { month: 'Jul', present: 89, absent: 11 },
+            { month: 'Aug', present: 91, absent: 9 },
+            { month: 'Sep', present: 94, absent: 6 },
+            { month: 'Oct', present: 93, absent: 7 },
+            { month: 'Nov', present: 92, absent: 8 }
+          ],
+          subjects: [
+            { name: 'Mathematics', avg: 87, grade: 'Grade A' },
+            { name: 'Science', avg: 85, grade: 'Grade A' },
+            { name: 'English', avg: 89, grade: 'Grade A' },
+            { name: 'Tamil', avg: 91, grade: 'Grade A+' },
+            { name: 'Social Science', avg: 86, grade: 'Grade A' }
+          ],
+          students: [
+            { id: 's25-1', adm: 'ADM2025-0401', name: 'Pranav Natarajan', cls: 'Class 5-A', att: '94.1%', feeStatus: 'Completed', accStatus: 'Completed' },
+            { id: 's25-2', adm: 'ADM2025-0402', name: 'Harini Sundaram', cls: 'Class 5-B', att: '96.0%', feeStatus: 'Completed', accStatus: 'Completed' },
+            { id: 's25-3', adm: 'ADM2025-0504', name: 'Kavin Rajendran', cls: 'Class 6-A', att: '90.2%', feeStatus: 'Completed', accStatus: 'Completed' }
+          ],
+          notices: [
+            { title: 'Annual Day 2025 Prize Distribution Results', meta: 'Feb 2026 · School-wide · Completed' },
+            { title: 'Final Term Examination Timetable 2025–26', meta: 'Mar 2026 · All Classes · Completed' }
+          ]
+        },
+        '2024-2025': {
+          label: 'Session 2024–2025',
+          eyebrow: 'HISTORICAL CYCLE OVERVIEW · SESSION 2024–2025',
+          donutTotal: '98',
+          kpis: [
+            { icon: '♙', label: 'Total Students', val: '98', sub: '2024–25 Batch', status: 'Completed' },
+            { icon: '♧', label: 'Total Faculty', val: '14', sub: 'Historical roster', status: 'Completed' },
+            { icon: '⌂', label: 'Parent Accounts', val: '94', sub: 'Historical records', status: 'Completed' },
+            { icon: '✓', label: 'Annual Turnout', val: '91.5%', sub: '2024–25 average', status: 'Completed' },
+            { icon: '!', label: 'Pending Cases', val: '0', sub: 'Closed cycle', status: 'Completed' },
+            { icon: '₹', label: 'Fee Ledger', val: 'Closed', sub: 'Audited ledger', status: 'Completed' },
+            { icon: '★', label: 'Board Exams', val: '3', sub: 'Archived results', status: 'Completed' },
+            { icon: '✉', label: 'Circulars Sent', val: '29', sub: 'Historical archive', status: 'Completed' }
+          ],
+          attendanceBars: [
+            { month: 'Jul', present: 88, absent: 12 },
+            { month: 'Aug', present: 90, absent: 10 },
+            { month: 'Sep', present: 92, absent: 8 },
+            { month: 'Oct', present: 91, absent: 9 },
+            { month: 'Nov', present: 93, absent: 7 }
+          ],
+          subjects: [
+            { name: 'Mathematics', avg: 84, grade: 'Grade A' },
+            { name: 'Science', avg: 86, grade: 'Grade A' },
+            { name: 'English', avg: 88, grade: 'Grade A' },
+            { name: 'Tamil', avg: 90, grade: 'Grade A+' }
+          ],
+          students: [
+            { id: 's24-1', adm: 'ADM2024-0301', name: 'Rohit Venkat', cls: 'Class 5-A', att: '92.0%', feeStatus: 'Completed', accStatus: 'Completed' },
+            { id: 's24-2', adm: 'ADM2024-0309', name: 'Meera Balaji', cls: 'Class 5-B', att: '94.8%', feeStatus: 'Completed', accStatus: 'Completed' }
+          ],
+          notices: [
+            { title: 'Pongal Cultural Week 2025 Highlights', meta: 'Jan 2025 · School-wide · Completed' }
+          ]
+        },
+        '2027-2028': {
+          label: 'Session 2027–2028',
+          eyebrow: 'UPCOMING CYCLE PLANNING · SESSION 2027–2028',
+          donutTotal: '140',
+          kpis: [
+            { icon: '♙', label: 'Pre-Enrolled', val: '140', sub: 'Admissions open', status: 'Pending' },
+            { icon: '♧', label: 'Faculty Planned', val: '20', sub: '2 new hires', status: 'Pending' },
+            { icon: '⌂', label: 'Parent Onboarding', val: '64', sub: 'Invites queued', status: 'Pending' },
+            { icon: '✓', label: 'Term Starts', val: 'Jun 9', sub: '2027–28 calendar', status: 'Pending' },
+            { icon: '!', label: 'Pending Docs', val: '14', sub: 'Transfer certificates', status: 'Pending' },
+            { icon: '₹', label: 'Admission Fees', val: '₹84K', sub: 'Early bird batch', status: 'Active' },
+            { icon: '★', label: 'Planned Exams', val: '4', sub: 'Draft schedule', status: 'Pending' },
+            { icon: '✉', label: 'Welcome Circulars', val: '2', sub: 'Scheduled June 2027', status: 'Pending' }
+          ],
+          attendanceBars: [
+            { month: 'Jul', present: 95, absent: 5 },
+            { month: 'Aug', present: 95, absent: 5 },
+            { month: 'Sep', present: 96, absent: 4 },
+            { month: 'Oct', present: 95, absent: 5 },
+            { month: 'Nov', present: 96, absent: 4 }
+          ],
+          subjects: [
+            { name: 'Mathematics & Logic', avg: 92, grade: 'Target A+' },
+            { name: 'Integrated Science', avg: 90, grade: 'Target A+' }
+          ],
+          students: [
+            { id: 's27-1', adm: 'ADM2027-0601', name: 'Nikhil Raghavan', cls: 'Class 6-A', att: '—', feeStatus: 'Pending', accStatus: 'Pending' }
+          ],
+          notices: [
+            { title: 'Orientation Day for 2027–28 Admissions', meta: 'Scheduled Jun 10, 2027 · Pending' }
+          ]
+        }
+      };
+
+      const savedRole = localStorage.getItem('sunrise-admin-role') || 'Super Admin';
+      document.getElementById('topRoleLabel').textContent = 'Role: ' + savedRole;
+
+      let currentSession = localStorage.getItem('sunrise-academic-session') || '2026-2027';
+      if (!DASHBOARD_SESSIONS[currentSession]) currentSession = '2026-2027';
+      let pendingSession = null;
+
+      const saSessionSelect = document.getElementById('saSessionSelect');
+      const saCycleEyebrow = document.getElementById('saCycleEyebrow');
+      const saKpisGrid = document.getElementById('saKpisGrid');
+      const attendanceBarChart = document.getElementById('attendanceBarChart');
+      const donutTotalVal = document.getElementById('donutTotalVal');
+      const subjectPerfList = document.getElementById('subjectPerfList');
+      const saStudentTableBody = document.getElementById('saStudentTableBody');
+      const saNoticesContainer = document.getElementById('saNoticesContainer');
+
+      const globalSearch = document.getElementById('globalDashboardSearch');
+      const tableSearchInput = document.getElementById('tableSearchInput');
+      const tableClassFilter = document.getElementById('tableClassFilter');
+      const tableStatusFilter = document.getElementById('tableStatusFilter');
+      const saSkeletonLoader = document.getElementById('saSkeletonLoader');
+      const refreshTelemetryBtn = document.getElementById('refreshTelemetryBtn');
+
+      const saSessionWarnModal = document.getElementById('saSessionWarnModal');
+      const saWarnTargetName = document.getElementById('saWarnTargetName');
+      const closeSaWarnBtn = document.getElementById('closeSaWarnBtn');
+      const cancelSaWarnBtn = document.getElementById('cancelSaWarnBtn');
+      const confirmSaWarnBtn = document.getElementById('confirmSaWarnBtn');
+
+      function badgeClass(status) {
+        const s = (status || '').toLowerCase();
+        if (s === 'active') return 'status-active';
+        if (s === 'completed') return 'status-completed';
+        if (s === 'pending') return 'status-pending';
+        return 'status-inactive';
+      }
+
+      function renderDashboard() {
+        const data = DASHBOARD_SESSIONS[currentSession];
+        saCycleEyebrow.textContent = data.eyebrow;
+        donutTotalVal.textContent = data.donutTotal;
+
+        saKpisGrid.innerHTML = data.kpis.map(k => `
+          <article class="sa-kpi">
+            <div class="sa-kpi-top">
+              <i>${k.icon}</i>
+              <span class="status-badge ${badgeClass(k.status)}">${k.status}</span>
+            </div>
+            <p>${k.label}</p>
+            <strong>${k.val}</strong>
+            <small>${k.sub}</small>
+          </article>
+        `).join('');
+
+        attendanceBarChart.innerHTML = data.attendanceBars.map(b => `
+          <div class="bar-col">
             <div class="bar-pair">
-              <i class="bar present">
-            </i>
-            <i class="bar absent">
-          </i>
-        </div>
-        <div class="bar-pair">
-          <i class="bar present">
-        </i>
-        <i class="bar absent">
-      </i>
-    </div>
-    <div class="bar-pair">
-      <i class="bar present">
-    </i>
-    <i class="bar absent">
-  </i>
-</div>
-<div class="bar-pair">
-  <i class="bar present">
-</i>
-<i class="bar absent">
-</i>
-</div>
-<div class="bar-pair">
-  <i class="bar present">
-</i>
-<i class="bar absent">
-</i>
-</div>
-</div>
-<div class="chart-key">
-  <span>
-  <i style="background:#8cbcf3">
-</i>Present</span>
-<span>
-<i style="background:#ff9abf">
-</i>Absent</span>
-</div>
-</article>
-<article class="sa-panel">
-  <h2>Section enrolment</h2>
-  <p>Active students per section</p>
-  <div class="donut-wrap">
-    <div class="donut">
-    </div>
-    <div class="donut-list">
-      <span>
-      <i style="background:#8cbcf3">
-    </i>Class 5-A · 32</span>
-    <span>
-    <i style="background:#c8eca0">
-  </i>Class 5-B · 30</span>
-  <span>
-  <i style="background:#ff9abf">
-</i>Class 6-A · 28</span>
-<span>
-<i style="background:#d9c8ff">
-</i>Class 7-A · 35</span>
-</div>
-</div>
-</article>
-</section>
-<section class="bottom-grid">
-  <article class="sa-panel">
-    <h2>Recent announcements</h2>
-    <p>Published to staff and parent portal</p>
-    <div class="notice">Annual Sports Meet 2026 - Registrations open<small>2 days ago · School-wide</small>
-    </div>
-    <div class="notice">Class 5 field trip to Regional Science City<small>Yesterday · Class 5</small>
-    </div>
-    <div class="notice">Parent-Teacher Meeting (Term 1 feedback)<small>3 days ago · Classes 1–10</small>
-    </div>
-  </article>
-  <article class="sa-panel">
-    <h2>Daily management modules</h2>
-    <p>Quick operational access for Super Admin.</p>
-    <div class="modules">
-      <a href="#students">Student roster</a>
-      <a href="#staff">Faculty staff</a>
-      <a href="#parents">Parents directory</a>
-      <a href="#timetable">Weekly timetable</a>
-      <a href="#exams">Exams &amp; marks</a>
-      <a href="#feedback">Parent feedback</a>
-    </div>
-  </article>
-</section>
-</div>
-</main>
-</div>
-<script src="js/admin-actions.js"></script>
-</body>
+              <i class="bar present" style="height:${b.present}%" title="Present: ${b.present}%"></i>
+              <i class="bar absent" style="height:${Math.max(b.absent * 2.5, 10)}%" title="Absent: ${b.absent}%"></i>
+            </div>
+            <span class="bar-month">${b.month} (${b.present}%)</span>
+          </div>
+        `).join('');
+
+        subjectPerfList.innerHTML = data.subjects.map(sub => `
+          <div class="perf-item">
+            <div class="perf-head">
+              <strong>${sub.name}</strong>
+              <span>${sub.avg}% · <b>${sub.grade}</b></span>
+            </div>
+            <div class="perf-track">
+              <div class="perf-fill" style="width:${sub.avg}%"></div>
+            </div>
+          </div>
+        `).join('');
+
+        saNoticesContainer.innerHTML = data.notices.map(n => `
+          <div class="notice">
+            <strong>${n.title}</strong>
+            <small>${n.meta}</small>
+          </div>
+        `).join('');
+
+        renderStudentTable();
+      }
+
+      function renderStudentTable() {
+        const data = DASHBOARD_SESSIONS[currentSession];
+        const q = (tableSearchInput.value || globalSearch.value || '').trim().toLowerCase();
+        const cls = tableClassFilter.value;
+        const st = tableStatusFilter.value;
+
+        const filtered = data.students.filter(row => {
+          const matchesQuery = !q || row.name.toLowerCase().includes(q) || row.adm.toLowerCase().includes(q);
+          const matchesClass = cls === 'ALL' || row.cls === cls;
+          const matchesStatus = st === 'ALL' || row.accStatus === st || row.feeStatus === st;
+          return matchesQuery && matchesClass && matchesStatus;
+        });
+
+        if (filtered.length === 0) {
+          saStudentTableBody.innerHTML = `
+            <tr>
+              <td colspan="7" class="empty-table-cell">
+                <strong>No matching student records found</strong>
+                <span>Try clearing your search query or switching the status filter above.</span>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        saStudentTableBody.innerHTML = filtered.map(row => `
+          <tr>
+            <td class="mono-id">${row.adm}</td>
+            <td><strong>${row.name}</strong></td>
+            <td>${row.cls}</td>
+            <td><strong>${row.att}</strong></td>
+            <td><span class="status-badge ${badgeClass(row.feeStatus)}">${row.feeStatus}</span></td>
+            <td><span class="status-badge ${badgeClass(row.accStatus)}">${row.accStatus}</span></td>
+            <td class="text-right">
+              <button type="button" class="sa-table-btn" onclick="toggleStudentStatus('${row.id}')">
+                Toggle Status
+              </button>
+              <button type="button" class="sa-table-btn danger" onclick="removeStudentRow('${row.id}')">
+                Archive
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      window.toggleStudentStatus = function(studentId) {
+        const data = DASHBOARD_SESSIONS[currentSession];
+        const row = data.students.find(s => s.id === studentId);
+        if (!row) return;
+        const nextStatus = row.accStatus === 'Active' ? 'Inactive' : 'Active';
+
+        if (window.sunriseConfirm) {
+          window.sunriseConfirm({
+            title: 'Update Student Status?',
+            message: `Change ${row.name} (${row.adm}) account status from "${row.accStatus}" to "${nextStatus}"?`,
+            confirmText: 'Yes, Update Status',
+            onConfirm: () => {
+              row.accStatus = nextStatus;
+              renderStudentTable();
+              if (window.sunriseToast) window.sunriseToast(`Updated ${row.name} status to ${nextStatus}.`);
+            }
+          });
+        }
+      };
+
+      window.removeStudentRow = function(studentId) {
+        const data = DASHBOARD_SESSIONS[currentSession];
+        const row = data.students.find(s => s.id === studentId);
+        if (!row) return;
+
+        if (window.sunriseConfirm) {
+          window.sunriseConfirm({
+            title: 'Archive Student Record?',
+            message: `Are you sure you want to archive ${row.name} (${row.adm}) from the active dashboard view?`,
+            confirmText: 'Archive Record',
+            danger: true,
+            onConfirm: () => {
+              data.students = data.students.filter(s => s.id !== studentId);
+              renderStudentTable();
+              if (window.sunriseToast) window.sunriseToast(`Archived ${row.name} (${row.adm}).`);
+            }
+          });
+        }
+      };
+
+      function triggerSkeletonRefresh(callback) {
+        saSkeletonLoader.classList.add('show');
+        saKpisGrid.style.opacity = '0.35';
+        setTimeout(() => {
+          saSkeletonLoader.classList.remove('show');
+          saKpisGrid.style.opacity = '1';
+          if (callback) callback();
+        }, 420);
+      }
+
+      refreshTelemetryBtn.addEventListener('click', () => {
+        triggerSkeletonRefresh(() => {
+          renderDashboard();
+          if (window.sunriseToast) window.sunriseToast('Live campus telemetry synchronized.');
+        });
+      });
+
+      tableSearchInput.addEventListener('input', renderStudentTable);
+      globalSearch.addEventListener('input', renderStudentTable);
+      tableClassFilter.addEventListener('change', renderStudentTable);
+      tableStatusFilter.addEventListener('change', renderStudentTable);
+
+      saSessionSelect.addEventListener('change', e => {
+        const next = e.target.value;
+        if (next === currentSession) return;
+        pendingSession = next;
+        saSessionSelect.value = currentSession;
+        saWarnTargetName.textContent = DASHBOARD_SESSIONS[pendingSession].label;
+        saSessionWarnModal.classList.add('open');
+      });
+
+      function closeSaWarnModal() {
+        saSessionWarnModal.classList.remove('open');
+        pendingSession = null;
+      }
+
+      closeSaWarnBtn.addEventListener('click', closeSaWarnModal);
+      cancelSaWarnBtn.addEventListener('click', closeSaWarnModal);
+
+      confirmSaWarnBtn.addEventListener('click', () => {
+        if (!pendingSession || !DASHBOARD_SESSIONS[pendingSession]) {
+          closeSaWarnModal();
+          return;
+        }
+        currentSession = pendingSession;
+        saSessionSelect.value = currentSession;
+        localStorage.setItem('sunrise-academic-session', currentSession);
+        closeSaWarnModal();
+        triggerSkeletonRefresh(() => {
+          renderDashboard();
+          if (window.sunriseToast) {
+            window.sunriseToast(`Reverted dashboard to ${DASHBOARD_SESSIONS[currentSession].label}.`);
+          }
+        });
+      });
+
+      saSessionSelect.value = currentSession;
+      renderDashboard();
+    </script>
+  </body>
 </html>

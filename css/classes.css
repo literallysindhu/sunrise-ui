@@ -8,7 +8,7 @@
 .class-list,.class-detail {
   border:4px solid #20242a;
   border-radius:20px;
-  background:#fffdf1;
+  background:#ffffff;
   box-shadow:5px 5px 0 #20242a;
   padding:20px
 }
@@ -53,7 +53,7 @@
   height:39px;
   border:2px solid #20242a;
   border-radius:12px;
-  background:#ffd0ec
+  background:#dbeafe
 }
 
 .detail-top {
@@ -105,7 +105,7 @@
   float:right;
   border:2px solid #20242a;
   border-radius:999px;
-  background:#ffe196;
+  background:#eff6ff;
   padding:4px 7px;
   font-size:10px;
   font-weight:900
@@ -125,7 +125,7 @@
 .subject {
   border:2px solid #20242a;
   border-radius:11px;
-  background:#d9c8ff;
+  background:#dbeafe;
   padding:10px;
   font-size:12px;
   font-weight:900
@@ -151,7 +151,7 @@
   width:min(590px,100%);
   border:4px solid #20242a;
   border-radius:21px;
-  background:#fffdf1;
+  background:#ffffff;
   box-shadow:8px 8px 0 #20242a;
   padding:22px
 }
@@ -200,7 +200,7 @@
 }
 
 .mcard button:last-child {
-  background:#ff92d2
+  background:#1e3a8a
 }
 
 @media(max-width:950px) {

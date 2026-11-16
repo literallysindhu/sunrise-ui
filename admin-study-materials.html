@@ -579,8 +579,21 @@ const LIBRARY_DATA = {
       };
 
       window.deleteMaterial = function(id, title) {
-        if (!confirm(`Are you sure you want to delete "${title}" from the digital library?`)) return;
-
+        if (window.sunriseConfirm) {
+          window.sunriseConfirm({
+            title: 'Delete Study Material?',
+            message: `Are you sure you want to permanently remove "${title}" from the digital library?`,
+            confirmText: 'Delete File',
+            danger: true,
+            onConfirm: () => {
+              const sessionData = LIBRARY_DATA[currentSession];
+              sessionData.materials = sessionData.materials.filter(m => m.id !== id);
+              renderMaterials();
+              showToast(`"${title}" has been deleted.`);
+            }
+          });
+          return;
+        }
         const sessionData = LIBRARY_DATA[currentSession];
         sessionData.materials = sessionData.materials.filter(m => m.id !== id);
         renderMaterials();

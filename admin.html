@@ -1,61 +1,169 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Sunrise School Management</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/admin.css">
-    <link rel="stylesheet" href="css/transitions.css">
-    <link rel="stylesheet" href="css/admin-mature.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Staff &amp; Admin Portal Sign In — Sunrise International School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+    <link rel="stylesheet" href="css/admin-mature.css" />
   </head>
   <body class="admin-login">
     <script>
       if (new URLSearchParams(location.search).has('enter')) {
         document.body.classList.add('portal-splash');
-        try { history.replaceState({}, '', location.pathname); } catch (_) {}
+        try {
+          history.replaceState({}, '', location.pathname);
+        } catch (_) {}
       }
     </script>
+
     <main class="admin-shell">
       <section class="admin-heading">
-        <a class="admin-logo" href="index.html">♢</a>
+        <a class="admin-logo" href="index.html" title="Back to Sunrise School Homepage">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+          </svg>
+        </a>
         <h1>Sunrise School Management</h1>
-        <p>Admin &amp; Teacher Web Portal</p>
+        <p>Staff, Faculty &amp; Administration ERP Portal</p>
       </section>
+
       <section class="admin-card">
-        <form>
-          <label>Official email address<input type="email" value="admin@sunriseschool.edu.in" aria-label="Official email address">
+        <div class="admin-card-top">
+          <span class="erp-badge">🔒 Role-Based Staff Access</span>
+          <a class="back-home-pill" href="index.html">← Homepage</a>
+        </div>
+
+        <form id="staffLoginForm" novalidate>
+          <label for="staffEmail">
+            Official Email Address *
+            <input
+              id="staffEmail"
+              type="email"
+              value="admin@sunriseschool.edu.in"
+              placeholder="name@sunriseschool.edu.in"
+              required
+            />
           </label>
-          <label>Account password<span class="password-wrap">
-            <input type="password" value="Sunrise2026" aria-label="Account password">
-            <button type="button" aria-label="Show password">◉</button>
-          </span>
-        </label>
-        <button class="admin-submit" type="button" onclick="location.href='super-admin.html?enter=1'">Sign in to portal</button>
-      </form>
-      <div class="role-divider">Quick test credentials by role
-      </div>
-      <div class="role-grid" role="group" aria-label="Choose sign-in role">
-        <button class="role active" data-role="Super Admin">Super Admin</button>
-        <button class="role" data-role="School Admin">School<br>Admin</button>
-        <button class="role" data-role="Teacher">Teacher</button>
-        <button class="role" data-role="Accountant">Accountant</button>
-      </div>
-      <a class="parent-access" href="login.html">
-      <span>♙</span>
-      <div>
-        <b>Access Parent Mobile &amp; Web Portal</b>
-        <small>Sign in with registered mobile number &amp; OTP</small>
-      </div>
-      <i>→</i>
-    </a>
-  </section>
-  <p class="admin-footer">⌾ Role-based access protected by school security</p>
-</main>
-<script>
-document.querySelectorAll('.role').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.role').forEach(item=>item.classList.remove('active'));button.classList.add('active');document.querySelector('.admin-submit').textContent='Sign in as '+button.dataset.role;}));
-</script>
-</body>
+
+          <label for="staffPassword">
+            Account Password *
+            <span class="password-wrap">
+              <input
+                id="staffPassword"
+                type="password"
+                value="Sunrise2026"
+                placeholder="Enter your password"
+                required
+              />
+              <button type="button" id="togglePwdBtn" aria-label="Toggle password visibility">Show</button>
+            </span>
+          </label>
+
+          <div class="staff-validation" id="staffFeedback" role="alert" aria-live="polite"></div>
+
+          <button class="admin-submit" id="staffSubmitBtn" type="submit">
+            <span class="btn-text">Sign in as Super Admin →</span>
+            <span class="btn-loader" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <div class="role-divider">Quick Test Credentials by Role</div>
+        <div class="role-grid" role="group" aria-label="Choose sign-in role">
+          <button class="role active" type="button" data-role="Super Admin" data-email="admin@sunriseschool.edu.in">
+            Super Admin
+          </button>
+          <button class="role" type="button" data-role="School Admin" data-email="principal@sunriseschool.edu.in">
+            School<br />Admin
+          </button>
+          <button class="role" type="button" data-role="Teacher" data-email="saravanan.m@sunriseschool.edu.in">
+            Teacher
+          </button>
+          <button class="role" type="button" data-role="Accountant" data-email="accounts@sunriseschool.edu.in">
+            Accountant
+          </button>
+        </div>
+
+        <a class="parent-access" href="login.html?enter=1">
+          <span>🎒</span>
+          <div>
+            <b>Access Parent Mobile &amp; Web Portal</b>
+            <small>Sign in with registered mobile number &amp; 6-digit OTP</small>
+          </div>
+          <i>→</i>
+        </a>
+      </section>
+
+      <p class="admin-footer">✓ Row-Level Security (RLS) &amp; encrypted session protection active</p>
+    </main>
+
+    <script>
+      const emailInput = document.getElementById('staffEmail');
+      const pwdInput = document.getElementById('staffPassword');
+      const togglePwdBtn = document.getElementById('togglePwdBtn');
+      const staffFeedback = document.getElementById('staffFeedback');
+      const staffSubmitBtn = document.getElementById('staffSubmitBtn');
+      const staffForm = document.getElementById('staffLoginForm');
+      let selectedRole = 'Super Admin';
+
+      togglePwdBtn.addEventListener('click', () => {
+        const isPwd = pwdInput.type === 'password';
+        pwdInput.type = isPwd ? 'text' : 'password';
+        togglePwdBtn.textContent = isPwd ? 'Hide' : 'Show';
+      });
+
+      document.querySelectorAll('.role').forEach(button => {
+        button.addEventListener('click', () => {
+          document.querySelectorAll('.role').forEach(item => item.classList.remove('active'));
+          button.classList.add('active');
+          selectedRole = button.dataset.role;
+          emailInput.value = button.dataset.email;
+          staffSubmitBtn.querySelector('.btn-text').textContent = 'Sign in as ' + selectedRole + ' →';
+          staffFeedback.textContent = '✓ Loaded demo credentials for ' + selectedRole + '.';
+          staffFeedback.className = 'staff-validation ok';
+        });
+      });
+
+      staffForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        const pwd = pwdInput.value.trim();
+
+        if (!email || !email.includes('@')) {
+          staffFeedback.textContent = '⚠ Please enter a valid official school email address.';
+          staffFeedback.className = 'staff-validation err';
+          emailInput.focus();
+          return;
+        }
+        if (pwd.length < 4) {
+          staffFeedback.textContent = '⚠ Please enter your account password.';
+          staffFeedback.className = 'staff-validation err';
+          pwdInput.focus();
+          return;
+        }
+
+        try {
+          localStorage.setItem('sunrise-admin-role', selectedRole);
+        } catch (_) {}
+
+        staffFeedback.textContent = '✓ Credentials verified. Initializing workspace...';
+        staffFeedback.className = 'staff-validation ok';
+        staffSubmitBtn.classList.add('loading');
+        staffSubmitBtn.disabled = true;
+        staffSubmitBtn.querySelector('.btn-text').textContent = 'Entering ' + selectedRole + ' Portal...';
+
+        setTimeout(() => {
+          location.href = 'super-admin.html?enter=1';
+        }, 600);
+      });
+    </script>
+  </body>
 </html>

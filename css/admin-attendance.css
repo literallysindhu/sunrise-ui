@@ -1,16 +1,16 @@
 :root {
   --ink:#1c2634;
   --line:#20242a;
-  --cream:#fffdf1;
+  --cream:#ffffff;
   --sky:#b5dffc;
-  --pink:#ffd0ec;
+  --pink:#dbeafe;
   --green:#c8eca0;
-  --yellow:#ffe196
+  --yellow:#eff6ff
 }
 
 .attendance-admin {
   margin:0;
-  background:#fff8bf;
+  background:#eef4ff;
   color:var(--ink);
   font-family:"Nunito Sans",sans-serif
 }
@@ -75,7 +75,7 @@
 
 .att-nav a.active,.att-nav a:hover {
   border-color:var(--line);
-  background:#ff92d2;
+  background:#1e3a8a;
   box-shadow:3px 3px 0 var(--line)
 }
 
@@ -140,7 +140,7 @@
 .save {
   border:4px solid var(--line);
   border-radius:12px;
-  background:#ff92d2;
+  background:#1e3a8a;
   box-shadow:4px 4px 0 var(--line);
   padding:10px 13px;
   font-weight:900
@@ -185,7 +185,7 @@
 }
 
 .att-filters button:last-child {
-  background:#ffd0ec
+  background:#dbeafe
 }
 
 .att-kpis {
@@ -301,7 +301,7 @@
 }
 
 .status-set button.active.late {
-  background:#ffe196
+  background:#eff6ff
 }
 
 .remark {

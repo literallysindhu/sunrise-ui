@@ -1,16 +1,16 @@
 :root {
   --a-ink:#1c2634;
   --a-line:#20242a;
-  --a-cream:#fffdf1;
+  --a-cream:#ffffff;
   --a-sky:#b5dffc;
-  --a-pink:#ffd0ec;
+  --a-pink:#dbeafe;
   --a-green:#c8eca0;
-  --a-lilac:#d9c8ff
+  --a-lilac:#dbeafe
 }
 
 .academic {
   margin:0;
-  background:#fff8bf;
+  background:#eef4ff;
   color:var(--a-ink);
   font-family:"Nunito Sans",sans-serif
 }
@@ -75,7 +75,7 @@
 
 .a-nav a:hover,.a-nav a.active {
   border-color:var(--a-line);
-  background:#ff92d2;
+  background:#1e3a8a;
   box-shadow:3px 3px 0 var(--a-line)
 }
 
@@ -150,7 +150,7 @@
 .add {
   border:4px solid var(--a-line);
   border-radius:12px;
-  background:#ff92d2;
+  background:#1e3a8a;
   box-shadow:4px 4px 0 var(--a-line);
   padding:10px 14px;
   font-weight:900
@@ -173,7 +173,7 @@
 
 .session.active {
   background:var(--a-sky);
-  outline:4px solid #fffdf1;
+  outline:4px solid #ffffff;
   box-shadow:6px 6px 0 var(--a-line)
 }
 
@@ -315,7 +315,7 @@
 }
 
 .form-actions button:last-child {
-  background:#ff92d2;
+  background:#1e3a8a;
   box-shadow:3px 3px 0 var(--a-line)
 }
 
